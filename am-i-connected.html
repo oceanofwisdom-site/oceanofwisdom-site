@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Am I Connected? Unity & Interconnection Across 12 Traditions</title>
+    <meta name="description" content="Explore the profound unity between self and universe. Discover teachings on interconnection from Vedanta, Buddhism, Taoism, Islam, Christianity, and more. Audio in 4 languages.">
+    <meta name="keywords" content="unity consciousness, interconnection, oneness, non-duality, indra's net, tawhid, unity of all things, universal connection, spiritual unity, vedanta interconnection">
+    
+    <link rel="canonical" href="https://oceanofwisdom.site/am-i-connected.html">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Am I Connected? Unity Across Spiritual Traditions">
+    <meta property="og:description" content="The fundamental unity between yourself and the infinite — explored through 12 wisdom traditions.">
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Am I Connected? Exploring Unity and Interconnection",
+      "description": "Comprehensive exploration of unity consciousness across spiritual traditions",
+      "author": {
+        "@type": "Person",
+        "name": "Prashob Rajamohan"
+      }
+    }
+    </script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Spectral:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* === Universal Site Navigation === */
+        .universal-nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(15, 26, 48, 0.96);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(77, 217, 232, 0.2);
+            padding: 0.75rem 1rem;
+        }
+        .universal-nav-inner {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .universal-nav-brand {
+            font-family: 'Cormorant Garamond', 'Georgia', serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #D4A843;
+            text-decoration: none;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+        .universal-nav-brand:hover { color: #4DD9E8; }
+        .universal-nav-links {
+            display: flex;
+            gap: 1.15rem;
+            flex-wrap: wrap;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        .universal-nav-links a {
+            color: #E8E9ED;
+            text-decoration: none;
+            font-family: 'Spectral', 'Georgia', serif;
+            font-size: 0.92rem;
+            transition: color 0.2s;
+            padding: 0.25rem 0;
+            white-space: nowrap;
+        }
+        .universal-nav-links a:hover, .universal-nav-links a.active {
+            color: #4DD9E8;
+        }
+        .universal-nav-links a.active {
+            border-bottom: 1px solid #D4A843;
+        }
+        @media (max-width: 720px) {
+            .universal-nav-inner { gap: 0.5rem; }
+            .universal-nav-links { gap: 0.75rem; }
+            .universal-nav-links a { font-size: 0.82rem; }
+            .universal-nav-brand { font-size: 1rem; }
+        }
+
+        :root {
+            --navy: #1B2A4A;
+            --cyan: #4DD9E8;
+            --gold: #D4A843;
+            --text-light: rgba(255, 255, 255, 0.9);
+            --text-dim: rgba(255, 255, 255, 0.7);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Spectral', serif;
+            background: var(--navy);
+            color: var(--text-light);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+        
+        #stars-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.4;
+        }
+        
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        header {
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(77, 217, 232, 0.2);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-decoration: none;
+        }
+        
+        .breadcrumb {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+        }
+        
+        .breadcrumb a {
+            color: var(--cyan);
+            text-decoration: none;
+        }
+        
+        .lang-switcher {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .lang-btn {
+            background: transparent;
+            border: 1px solid rgba(77, 217, 232, 0.3);
+            color: var(--text-dim);
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .lang-btn:hover {
+            border-color: var(--cyan);
+            color: var(--cyan);
+        }
+        
+        .lang-btn.active {
+            background: var(--cyan);
+            color: var(--navy);
+            border-color: var(--cyan);
+        }
+        
+        .hero {
+            padding: 5rem 0 3rem;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 300;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.3rem;
+            color: var(--text-dim);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .central-teaching {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, rgba(212, 168, 67, 0.1), rgba(77, 217, 232, 0.05));
+            border-radius: 16px;
+            margin: 2rem 0 4rem;
+            text-align: center;
+        }
+        
+        .sanskrit {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: var(--gold);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+        
+        .translation {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--cyan);
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+        
+        .explanation {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            line-height: 2;
+            padding: 0 2rem;
+        }
+        
+        .audio-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(77, 217, 232, 0.15);
+            border: 1px solid var(--cyan);
+            color: var(--cyan);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 2rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .audio-btn:hover {
+            background: var(--cyan);
+            color: var(--navy);
+            transform: scale(1.05);
+        }
+        
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            text-align: center;
+            color: var(--gold);
+            margin-bottom: 3rem;
+        }
+        
+        .traditions-grid {
+            display: grid;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .tradition-card {
+            background: linear-gradient(135deg, rgba(27, 42, 74, 0.8), rgba(27, 42, 74, 0.95));
+            border: 1px solid rgba(212, 168, 67, 0.4);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.4s;
+        }
+        
+        .tradition-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--gold);
+            box-shadow: 0 16px 50px rgba(212, 168, 67, 0.3);
+        }
+        
+        .tradition-label {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--navy);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .tradition-text {
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+        
+        .tradition-desc {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+        
+        .related-pages {
+            background: linear-gradient(135deg, rgba(212, 168, 67, 0.05), rgba(77, 217, 232, 0.05));
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            margin: 4rem 0;
+            text-align: center;
+        }
+        
+        .related-pages h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 2rem;
+        }
+        
+        .related-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .related-link {
+            display: inline-block;
+            background: rgba(77, 217, 232, 0.1);
+            border: 1px solid var(--cyan);
+            color: var(--cyan);
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .related-link:hover {
+            background: var(--cyan);
+            color: var(--navy);
+            transform: translateY(-3px);
+        }
+        
+        footer {
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(77, 217, 232, 0.2);
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container { padding: 0 1rem; }
+            .hero { padding: 3rem 0 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="universal-nav" aria-label="Main navigation">
+        <div class="universal-nav-inner">
+            <a href="index.html" class="universal-nav-brand">🪔 Ocean of Wisdom</a>
+            <ul class="universal-nav-links">
+                <li><a href="index.html">Home</a></li>
+<li><a href="who-am-i.html">Who Am I?</a></li>
+<li><a href="what-is-all-this.html">What Is All This?</a></li>
+<li><a href="am-i-connected.html" class="active">Am I Connected?</a></li>
+<li><a href="i-am-that.html">I Am That</a></li>
+<li><a href="what-is-truth.html">What Is Truth?</a></li>
+<li><a href="what-is-bliss.html">What Is Bliss?</a></li>
+<li><a href="sanatana-dharma.html">Sanatana Dharma</a></li>
+<li><a href="wisdom-feed.html">Wisdom Articles</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <canvas id="stars-canvas"></canvas>
+    
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">OCEAN OF WISDOM</a>
+                <div class="breadcrumb">
+                    <a href="index.html" data-i18n="breadcrumb-home">Cosmos</a> / <span data-i18n="breadcrumb-current">Am I Connected?</span>
+                </div>
+                <div class="lang-switcher">
+                    <button class="lang-btn active" onclick="switchLang('en')">EN</button>
+                    <button class="lang-btn" onclick="switchLang('hi')">हि</button>
+                    <button class="lang-btn" onclick="switchLang('ta')">த</button>
+                    <button class="lang-btn" onclick="switchLang('es')">ES</button>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <div class="container">
+            <section class="hero">
+                <h1 data-i18n="page-title">Am I Connected?</h1>
+                <p class="subtitle" data-i18n="page-subtitle">The fundamental unity between yourself and the infinite</p>
+            </section>
+            
+            <section class="central-teaching">
+                <div class="sanskrit">सर्वं खल्विदं ब्रह्म</div>
+                <div class="translation" data-i18n="teaching-translation">Sarvam Khalvidam Brahma — All This Is Indeed Brahman</div>
+                <p class="explanation" data-i18n="teaching-explanation">
+                    There is no separation. The drop and the ocean are one. Your breath, the stars, the soil beneath your feet — 
+                    all arise from and return to the same infinite source. Unity is not something to achieve; it is what already is.
+                </p>
+                <button class="audio-btn" onclick="playAudio()">
+                    🔊 <span data-i18n="audio-btn">Listen to Unity Teaching</span>
+                </button>
+            </section>
+            
+            <h2 class="section-title" data-i18n="traditions-title">How 8 Traditions Teach Interconnection</h2>
+            
+            <div class="traditions-grid">
+                <div class="tradition-card">
+                    <span class="tradition-label" data-i18n="trad1-label">VEDIC TRADITION</span>
+                    <div class="tradition-text">Vasudhaiva Kutumbakam</div>
+                    <p class="tradition-desc">
+                        "The world is one family." All beings share the same consciousness (Atman). 
+                        The illusion of separation (Maya) dissolves when you realize Brahman is the sole reality.
+                    </p>
+                </div>
+                
+                <div class="tradition-card">
+                    <span class="tradition-label" data-i18n="trad2-label">BUDDHIST TRADITION</span>
+                    <div class="tradition-text">Indra's Net / Pratītyasamutpāda</div>
+                    <p class="tradition-desc">
+                        Dependent origination — everything arises in relation to everything else. 
+                        Like Indra's infinite net where each jewel reflects all others, you contain the universe and the universe contains you.
+                    </p>
+                </div>
+                
+                <div class="tradition-card">
+                    <span class="tradition-label" data-i18n="trad3-label">TAOIST TRADITION</span>
+                    <div class="tradition-text">萬物一體 (All Things Are One Body)</div>
+                    <p class="tradition-desc">
+                        "Heaven and earth were born together with me, and all things are one with me" (Zhuangzi). 
+                        The Tao flows through all existence; to know the Tao is to know your inseparability from nature.
+                    </p>
+                </div>
+                
+                <div class="tradition-card">
+                    <span class="tradition-label" data-i18n="trad4-label">SUFI TRADITION</span>
+                    <div class="tradition-text">Wahdat al-Wujud (Unity of Being)</div>
+                    <p class="tradition-desc">
+                        "Wherever you turn, there is the Face of God" (Quran 2:115). 
+                        All existence is a manifestation of the One Reality. Separation is illusion; unity is truth.
+                    </p>
+                </div>
+                
+                <div class="tradition-card">
+                    <span class="tradition-label" data-i18n="trad5-label">CHRISTIAN TRADITION</span>
+                    <div class="tradition-text">Mystical Body of Christ</div>
+                    <p class="tradition-desc">
+                        "That they all may be one; as thou, Father, art in me, and I in thee" (John 17:21). 
+                        All humanity is interconnected in divine love. As Meister Eckhart taught: "The eye with which I see God is the same eye with which God sees me."
+                    </p>
+                </div>
+                
+                <div class="tradition-card">
+                    <span class="tradition-label" data-i18n="trad6-label">JEWISH TRADITION</span>
+                    <div class="tradition-text">Tikkun Olam (Repair the World)</div>
+                    <p class="tradition-desc">
+                        All souls are sparks of the divine light, interconnected through the Tree of Life. 
+                        Your actions ripple through creation; to heal yourself is to heal the world.
+                    </p>
+                </div>
+                
+                <div class="tradition-card">
+                    <span class="tradition-label" data-i18n="trad7-label">SIKH TRADITION</span>
+                    <div class="tradition-text">Ik Onkar (One Universal Creator)</div>
+                    <p class="tradition-desc">
+                        "Recognize the Divine Light within all, and the Divine Light is in all" (Guru Granth Sahib). 
+                        All beings share the same divine essence; separation is ignorance.
+                    </p>
+                </div>
+                
+                <div class="tradition-card">
+                    <span class="tradition-label" data-i18n="trad8-label">INDIGENOUS WISDOM</span>
+                    <div class="tradition-text">Mitakuye Oyasin (All My Relations)</div>
+                    <p class="tradition-desc">
+                        Everything in creation is related. The trees, the rivers, the animals, the stars — all are family. 
+                        To harm nature is to harm yourself; to honor the earth is to honor the sacred within.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="related-pages">
+                <h3 data-i18n="related-title">Explore Related Wisdom</h3>
+                <div class="related-links">
+                    <a href="what-is-all-this.html" class="related-link" data-i18n="related1">What Is All This?</a>
+                    <a href="i-am-that.html" class="related-link" data-i18n="related2">I Am That</a>
+                    <a href="index.html" class="related-link" data-i18n="related3">← Return to Ocean of Wisdom</a>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p data-i18n="footer-text">© 2026 | A creative brand by Prashob Rajamohan</p>
+        </div>
+    </footer>
+    
+    <script>
+        const canvas = document.getElementById('stars-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+        
+        const stars = [];
+        for (let i = 0; i < 200; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 1.5,
+                speed: Math.random() * 0.3
+            });
+        }
+        
+        function animateStars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            stars.forEach(star => {
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                ctx.fill();
+                star.y += star.speed;
+                if (star.y > canvas.height) {
+                    star.y = 0;
+                    star.x = Math.random() * canvas.width;
+                }
+            });
+            requestAnimationFrame(animateStars);
+        }
+        animateStars();
+        
+        function playAudio() {
+            const audio = new Audio('audio/unity.mp3');
+            audio.play().catch(() => {
+                if ('speechSynthesis' in window) {
+                    const utterance = new SpeechSynthesisUtterance('Sarvam Khalvidam Brahma');
+                    utterance.lang = 'hi-IN';
+                    utterance.rate = 0.75;
+                    window.speechSynthesis.speak(utterance);
+                }
+            });
+        }
+        
+        const translations = {
+            en: {
+                "breadcrumb-home": "Cosmos",
+                "breadcrumb-current": "Am I Connected?",
+                "page-title": "Am I Connected?",
+                "page-subtitle": "The fundamental unity between yourself and the infinite",
+                "teaching-translation": "Sarvam Khalvidam Brahma — All This Is Indeed Brahman",
+                "teaching-explanation": "There is no separation. The drop and the ocean are one. Your breath, the stars, the soil beneath your feet — all arise from and return to the same infinite source. Unity is not something to achieve; it is what already is.",
+                "audio-btn": "Listen to Unity Teaching",
+                "traditions-title": "How 8 Traditions Teach Interconnection",
+                "trad1-label": "VEDIC TRADITION",
+                "trad2-label": "BUDDHIST TRADITION",
+                "trad3-label": "TAOIST TRADITION",
+                "trad4-label": "SUFI TRADITION",
+                "trad5-label": "CHRISTIAN TRADITION",
+                "trad6-label": "JEWISH TRADITION",
+                "trad7-label": "SIKH TRADITION",
+                "trad8-label": "INDIGENOUS WISDOM",
+                "related-title": "Explore Related Wisdom",
+                "related1": "What Is All This?",
+                "related2": "I Am That",
+                "related3": "← Return to Ocean of Wisdom",
+                "footer-text": "© 2026 | A creative brand by Prashob Rajamohan"
+            },
+            hi: {
+                "breadcrumb-home": "ब्रह्मांड",
+                "breadcrumb-current": "क्या मैं जुड़ा हुआ हूं?",
+                "page-title": "क्या मैं जुड़ा हुआ हूं?",
+                "page-subtitle": "अपने और अनंत के बीच मौलिक एकता",
+                "teaching-translation": "सर्वं खल्विदं ब्रह्म — यह सब वास्तव में ब्रह्म है",
+                "teaching-explanation": "कोई अलगाव नहीं है। बूंद और समुद्र एक हैं। आपकी सांस, तारे, आपके पैरों के नीचे की मिट्टी — सभी एक ही अनंत स्रोत से उत्पन्न होते हैं और वापस लौटते हैं।",
+                "audio-btn": "एकता शिक्षण सुनें",
+                "traditions-title": "8 परंपराएं परस्पर संबंध कैसे सिखाती हैं",
+                "trad1-label": "वैदिक परंपरा",
+                "trad2-label": "बौद्ध परंपरा",
+                "trad3-label": "ताओवादी परंपरा",
+                "trad4-label": "सूफी परंपरा",
+                "trad5-label": "ईसाई परंपरा",
+                "trad6-label": "यहूदी परंपरा",
+                "trad7-label": "सिख परंपरा",
+                "trad8-label": "स्वदेशी ज्ञान",
+                "related-title": "संबंधित ज्ञान देखें",
+                "related1": "यह सब क्या है?",
+                "related2": "मैं वही हूँ",
+                "related3": "← ब्रह्मांड पर वापस जाएं",
+                "footer-text": "© 2026 | प्रशोब राजमोहन द्वारा एक रचनात्मक ब्रांड"
+            },
+            ta: {
+                "breadcrumb-home": "காஸ்மாஸ்",
+                "breadcrumb-current": "நான் இணைக்கப்பட்டுள்ளேனா?",
+                "page-title": "நான் இணைக்கப்பட்டுள்ளேனா?",
+                "page-subtitle": "உங்களுக்கும் எல்லையற்றதற்கும் இடையிலான அடிப்படை ஒற்றுமை",
+                "teaching-translation": "சர்வம் கல்விதம் ப்ரஹ்ம — இது அனைத்தும் உண்மையில் ப்ரஹ்மம்",
+                "teaching-explanation": "பிரிவு இல்லை. துளி மற்றும் கடல் ஒன்று. உங்கள் மூச்சு, நட்சத்திரங்கள், உங்கள் கால்களுக்குக் கீழே உள்ள மண் — அனைத்தும் ஒரே எல்லையற்ற மூலத்திலிருந்து எழுகின்றன.",
+                "audio-btn": "ஒற்றுமை போதனையைக் கேளுங்கள்",
+                "traditions-title": "8 பாரம்பரியங்கள் ஒன்றோடொன்று தொடர்பை எப்படி கற்பிக்கின்றன",
+                "trad1-label": "வேத பாரம்பரியம்",
+                "trad2-label": "பௌத்த பாரம்பரியம்",
+                "trad3-label": "தாவோ பாரம்பரியம்",
+                "trad4-label": "சூஃபி பாரம்பரியம்",
+                "trad5-label": "கிறிஸ்தவ பாரம்பரியம்",
+                "trad6-label": "யூத பாரம்பரியம்",
+                "trad7-label": "சீக்கிய பாரம்பரியம்",
+                "trad8-label": "பழங்குடி ஞானம்",
+                "related-title": "தொடர்புடைய ஞானத்தை ஆராயுங்கள்",
+                "related1": "இது என்ன?",
+                "related2": "நான் அதுவே",
+                "related3": "← காஸ்மாஸுக்குத் திரும்பு",
+                "footer-text": "© 2026 | பிரஷோப் ராஜமோகனின் படைப்பு பிராண்ட்"
+            },
+            es: {
+                "breadcrumb-home": "Cosmos",
+                "breadcrumb-current": "¿Estoy conectado?",
+                "page-title": "¿Estoy conectado?",
+                "page-subtitle": "La unidad fundamental entre tú mismo y lo infinito",
+                "teaching-translation": "Sarvam Khalvidam Brahma — Todo esto es Brahman",
+                "teaching-explanation": "No hay separación. La gota y el océano son uno. Tu respiración, las estrellas, el suelo bajo tus pies — todo surge y regresa a la misma fuente infinita.",
+                "audio-btn": "Escuchar Enseñanza de Unidad",
+                "traditions-title": "Cómo 8 tradiciones enseñan la interconexión",
+                "trad1-label": "TRADICIÓN VÉDICA",
+                "trad2-label": "TRADICIÓN BUDISTA",
+                "trad3-label": "TRADICIÓN TAOÍSTA",
+                "trad4-label": "TRADICIÓN SUFÍ",
+                "trad5-label": "TRADICIÓN CRISTIANA",
+                "trad6-label": "TRADICIÓN JUDÍA",
+                "trad7-label": "TRADICIÓN SIKH",
+                "trad8-label": "SABIDURÍA INDÍGENA",
+                "related-title": "Explorar sabiduría relacionada",
+                "related1": "¿Qué es todo esto?",
+                "related2": "Yo soy eso",
+                "related3": "← Regresar al Cosmos",
+                "footer-text": "© 2026 | Una marca creativa de Prashob Rajamohan"
+            }
+        };
+        
+        let currentLang = 'en';
+        
+        function switchLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('[data-i18n]').forEach(elem => {
+                const key = elem.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    elem.textContent = translations[lang][key];
+                }
+            });
+            
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            localStorage.setItem('preferred-lang', lang);
+        }
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('preferred-lang');
+            if (savedLang && translations[savedLang]) {
+                const btn = document.querySelector(`.lang-btn[onclick="switchLang('${savedLang}')"]`);
+                if (btn) btn.click();
+            }
+        });
+    </script>
+</body>
+</html>
