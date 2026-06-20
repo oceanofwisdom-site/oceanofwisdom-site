@@ -167,6 +167,15 @@
             text-decoration: none;
             letter-spacing: 0.5px;
             white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .nav-logo {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            flex-shrink: 0;
         }
         .universal-nav-brand:hover { color: #4DD9E8; }
         .universal-nav-links {
@@ -594,7 +603,10 @@
 <body>
     <nav class="universal-nav" aria-label="Main navigation">
         <div class="universal-nav-inner">
-            <a href="index.html" class="universal-nav-brand">🪔 Ocean of Wisdom</a>
+            <a href="index.html" class="universal-nav-brand">
+                <img src="logo.png" alt="Ocean of Wisdom" class="nav-logo">
+                <span>Ocean of Wisdom</span>
+            </a>
             <ul class="universal-nav-links">
                 <li><a href="index.html" class="active">Home</a></li>
 <li><a href="who-am-i.html">Who Am I?</a></li>
@@ -606,24 +618,16 @@
 <li><a href="sanatana-dharma.html">Sanatana Dharma</a></li>
 <li><a href="wisdom-feed.html">Wisdom Articles</a></li>
             </ul>
+            <div class="lang-switcher">
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="hi">हि</button>
+                <button class="lang-btn" data-lang="ta">த</button>
+                <button class="lang-btn" data-lang="es">ES</button>
+            </div>
         </div>
     </nav>
 
     <canvas id="stars-canvas"></canvas>
-    
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <a href="#" class="logo">OCEAN OF WISDOM</a>
-                <div class="lang-switcher">
-                    <button class="lang-btn active" data-lang="en">EN</button>
-                    <button class="lang-btn" data-lang="hi">हि</button>
-                    <button class="lang-btn" data-lang="ta">த</button>
-                    <button class="lang-btn" data-lang="es">ES</button>
-                </div>
-            </div>
-        </div>
-    </header>
     
     <main>
         <section class="hero">
@@ -913,35 +917,35 @@
                     Articles exploring the eternal questions through different lenses
                 </p>
                 <div class="feed-grid">
-                    <a href="#" class="feed-card">
+                    <a href="who-am-i.html" class="feed-card">
                         <h3 data-i18n="article1-title">Who Am I Beyond My Name?</h3>
                         <p data-i18n="article1-desc">Exploring the concept of self across Vedic, Buddhist, and Sufi traditions</p>
                     </a>
-                    <a href="#" class="feed-card">
+                    <a href="unity-of-all-things.html" class="feed-card">
                         <h3 data-i18n="article2-title">The Unity of All Things</h3>
                         <p data-i18n="article2-desc">How different wisdom traditions describe the interconnected nature of existence</p>
                     </a>
-                    <a href="#" class="feed-card">
+                    <a href="finding-inner-peace.html" class="feed-card">
                         <h3 data-i18n="article3-title">Finding Inner Peace in Modern Life</h3>
                         <p data-i18n="article3-desc">Ancient meditation practices from Christianity, Islam, Buddhism, and Hinduism</p>
                     </a>
-                    <a href="#" class="feed-card">
+                    <a href="question-of-purpose.html" class="feed-card">
                         <h3 data-i18n="article4-title">The Question of Purpose</h3>
                         <p data-i18n="article4-desc">Why are we here? Perspectives from Taoism, Judaism, Sikhism, and Baha'i</p>
                     </a>
-                    <a href="#" class="feed-card">
+                    <a href="compassion-across-traditions.html" class="feed-card">
                         <h3 data-i18n="article5-title">Compassion Across Traditions</h3>
                         <p data-i18n="article5-desc">The universal teaching of love and kindness in every spiritual path</p>
                     </a>
-                    <a href="#" class="feed-card">
+                    <a href="eternal-now.html" class="feed-card">
                         <h3 data-i18n="article6-title">The Eternal Now</h3>
                         <p data-i18n="article6-desc">Living in the present moment — wisdom from Zen, Sufism, and Vedanta</p>
                     </a>
-                    <a href="#" class="feed-card">
+                    <a href="truth-beyond-words.html" class="feed-card">
                         <h3 data-i18n="article7-title">Truth Beyond Words</h3>
                         <p data-i18n="article7-desc">The limits of language in expressing the ultimate reality</p>
                     </a>
-                    <a href="#" class="feed-card">
+                    <a href="path-to-liberation.html" class="feed-card">
                         <h3 data-i18n="article8-title">The Path to Liberation</h3>
                         <p data-i18n="article8-desc">Freedom from suffering — comparative insights from world wisdom traditions</p>
                     </a>
