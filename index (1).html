@@ -599,6 +599,9 @@
                 padding: 4rem 0 3rem;
             }
         }
+    /* Audio play / pause icon */
+        .audio-btn::before { content: "▶"; font-size: 0.8em; line-height: 1; }
+        .audio-btn.playing::before { content: "⏸"; }
     </style>
 </head>
 <body>
@@ -701,8 +704,8 @@
                             We meditate on the divine light of the supreme creator, may that illuminate our minds and guide us toward truth.
                         </p>
                         <p class="reference">Rigveda 3.62.10 | Gayatri Mantra</p>
-                        <button class="audio-btn" onclick="playAudio('gayatri', 'audio/gayatri-mantra.mp3', 'ॐ भूर्भुवः स्वः तत्सवितुर्वरेण्यं भर्गो देवस्य धीमहि धियो यो नः प्रचोदयात्', 'hi-IN')">
-                            🔊 <span data-i18n="listen">Listen</span>
+                        <button class="audio-btn" onclick="playAudio(this, 'gayatri', 'audio/gayatri-mantra.mp3', 'ॐ भूर्भुवः स्वः तत्सवितुर्वरेण्यं भर्गो देवस्य धीमहि धियो यो नः प्रचोदयात्', 'hi-IN')">
+                            <span data-i18n="listen">Listen</span>
                         </button>
                     </div>
                     
@@ -719,8 +722,8 @@
                             In the name of God, the Most Compassionate, the Most Merciful.
                         </p>
                         <p class="reference">Quran 1:1 | Al-Fatiha</p>
-                        <button class="audio-btn" onclick="playAudio('bismillah', 'audio/bismillah.mp3', 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ', 'ar-SA')">
-                            🔊 <span data-i18n="listen">Listen</span>
+                        <button class="audio-btn" onclick="playAudio(this, 'bismillah', 'audio/bismillah.mp3', 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ', 'ar-SA')">
+                            <span data-i18n="listen">Listen</span>
                         </button>
                     </div>
                     
@@ -737,8 +740,8 @@
                             I am the way, the truth, and the life.
                         </p>
                         <p class="reference">Gospel of John 14:6</p>
-                        <button class="audio-btn" onclick="playAudio('john146', 'audio/jesus-i-am-the-way.mp3', 'I am the way, the truth, and the life', 'en-US')">
-                            🔊 <span data-i18n="listen">Listen</span>
+                        <button class="audio-btn" onclick="playAudio(this, 'john146', 'audio/jesus-i-am-the-way.mp3', 'I am the way, the truth, and the life', 'en-US')">
+                            <span data-i18n="listen">Listen</span>
                         </button>
                     </div>
                     
@@ -746,21 +749,16 @@
                     <div class="sacred-card">
                         <span class="tradition-label">BUDDHIST TRADITION</span>
                         <div class="original-text ltr">
-                            सब्बे सङ्खारा अनिच्चा<br>
-                            सब्बे सङ्खारा दुक्खा<br>
-                            सब्बे धम्मा अनत्ता
+                            Sabbe saṅkhārā aniccā<br>
+                            Sabbe saṅkhārā dukkhā<br>
+                            Sabbe dhammā anattā
                         </div>
-                        <p class="transliteration">
-                            Sabbe sankhara anicca<br>
-                            Sabbe sankhara dukkha<br>
-                            Sabbe dhamma anatta
-                        </p>
                         <p class="translation" data-i18n="tripitaka-trans">
                             All formations are impermanent, all formations are suffering, all phenomena are without self.
                         </p>
                         <p class="reference">Dhammapada 277-279 | Three Marks of Existence</p>
-                        <button class="audio-btn" onclick="playAudio('dhammapada', 'audio/sabbe-sankhara-anicca.mp3', 'Sabbe sankhara anicca, Sabbe sankhara dukkha, Sabbe dhamma anatta', 'en-US')">
-                            🔊 <span data-i18n="listen">Listen</span>
+                        <button class="audio-btn" onclick="playAudio(this, 'dhammapada', 'audio/sabbe-sankhara-anicca.mp3', 'Sabbe sankhara anicca, Sabbe sankhara dukkha, Sabbe dhamma anatta', 'en-US')">
+                            <span data-i18n="listen">Listen</span>
                         </button>
                     </div>
                     
@@ -779,8 +777,8 @@
                             One Universal Creator. Truth is His name. Creative being personified. Without fear. Without hatred. Timeless form. Beyond birth. Self-existent. By the Guru's grace.
                         </p>
                         <p class="reference">Guru Granth Sahib | Mool Mantar</p>
-                        <button class="audio-btn" onclick="playAudio('moolmantar', 'audio/sikh-mool-mantar.mp3', 'ੴ ਸਤਿ ਨਾਮੁ ਕਰਤਾ ਪੁਰਖੁ ਨਿਰਭਉ ਨਿਰਵੈਰੁ ਅਕਾਲ ਮੂਰਤਿ ਅਜੂਨੀ ਸੈਭੰ ਗੁਰ ਪ੍ਰਸਾਦਿ', 'pa-IN')">
-                            🔊 <span data-i18n="listen">Listen</span>
+                        <button class="audio-btn" onclick="playAudio(this, 'moolmantar', 'audio/sikh-mool-mantar.mp3', 'ੴ ਸਤਿ ਨਾਮੁ ਕਰਤਾ ਪੁਰਖੁ ਨਿਰਭਉ ਨਿਰਵੈਰੁ ਅਕਾਲ ਮੂਰਤਿ ਅਜੂਨੀ ਸੈਭੰ ਗੁਰ ਪ੍ਰਸਾਦਿ', 'pa-IN')">
+                            <span data-i18n="listen">Listen</span>
                         </button>
                     </div>
                     
@@ -797,8 +795,8 @@
                             Hear, O Israel: the Lord is our God, the Lord is One.
                         </p>
                         <p class="reference">Deuteronomy 6:4 | Shema</p>
-                        <button class="audio-btn" onclick="playAudio('shema', 'audio/shema-yisrael.mp3', 'Shema Yisrael Adonai Eloheinu Adonai Echad', 'he-IL')">
-                            🔊 <span data-i18n="listen">Listen</span>
+                        <button class="audio-btn" onclick="playAudio(this, 'shema', 'audio/shema-yisrael.mp3', 'Shema Yisrael Adonai Eloheinu Adonai Echad', 'he-IL')">
+                            <span data-i18n="listen">Listen</span>
                         </button>
                     </div>
                     
@@ -817,8 +815,8 @@
                             The Tao that can be spoken is not the eternal Tao. The name that can be named is not the eternal name.
                         </p>
                         <p class="reference">Tao Te Ching 1 | Lao Tzu</p>
-                        <button class="audio-btn" onclick="playAudio('tao', 'audio/tao-te-ching.mp3', 'The Tao that can be spoken is not the eternal Tao', 'en-US')">
-                            🔊 <span data-i18n="listen">Listen</span>
+                        <button class="audio-btn" onclick="playAudio(this, 'tao', 'audio/tao-te-ching.mp3', 'The Tao that can be spoken is not the eternal Tao', 'en-US')">
+                            <span data-i18n="listen">Listen</span>
                         </button>
                     </div>
                     
@@ -832,8 +830,8 @@
                             The earth is but one country, and mankind its citizens.
                         </p>
                         <p class="reference">Bahá'u'lláh | Gleanings</p>
-                        <button class="audio-btn" onclick="playAudio('bahai', 'audio/bahai-earth-one-country.mp3', 'The earth is but one country, and mankind its citizens', 'en-US')">
-                            🔊 <span data-i18n="listen">Listen</span>
+                        <button class="audio-btn" onclick="playAudio(this, 'bahai', 'audio/bahai-earth-one-country.mp3', 'The earth is but one country, and mankind its citizens', 'en-US')">
+                            <span data-i18n="listen">Listen</span>
                         </button>
                     </div>
                     
@@ -848,8 +846,8 @@
                             Good Thoughts, Good Words, Good Deeds — the three pillars of righteous living.
                         </p>
                         <p class="reference">Avesta | Zoroastrian Tenet</p>
-                        <button class="audio-btn" onclick="playAudio('zoroastrian', 'audio/humata-hukhta-hvarshta.mp3', 'Humatam, Hukhtam, Hvarshtam. Good Thoughts, Good Words, Good Deeds', 'en-US')">
-                            🔊 <span data-i18n="listen">Listen</span>
+                        <button class="audio-btn" onclick="playAudio(this, 'zoroastrian', 'audio/humata-hukhta-hvarshta.mp3', 'Humatam, Hukhtam, Hvarshtam. Good Thoughts, Good Words, Good Deeds', 'en-US')">
+                            <span data-i18n="listen">Listen</span>
                         </button>
                     </div>
                     
@@ -857,17 +855,17 @@
                     <div class="sacred-card">
                         <span class="tradition-label">JAIN TRADITION</span>
                         <div class="original-text devanagari ltr">
-                            अहिंसा परमो धर्मः
+                            परस्परोपग्रहो जीवानाम्
                         </div>
                         <p class="transliteration">
-                            Ahimsa Paramo Dharmah
+                            Parasparopagraho Jivanam
                         </p>
                         <p class="translation" data-i18n="jain-trans">
-                            Non-violence is the highest dharma — the supreme virtue and guiding principle.
+                            All life is bound together by mutual support and interdependence — souls exist to help one another.
                         </p>
-                        <p class="reference">Jain Sutra | Mahavira's Teaching</p>
-                        <button class="audio-btn" onclick="playAudio('jain', 'audio/ahimsa-paramo-dharma.mp3', 'अहिंसा परमो धर्मः', 'hi-IN')">
-                            🔊 <span data-i18n="listen">Listen</span>
+                        <p class="reference">Tattvartha Sutra 5.21 | Umasvati — The motto of Jainism</p>
+                        <button class="audio-btn" onclick="playAudio(this, 'jain', 'audio/parasparopagraho-jivanam.mp3', 'परस्परोपग्रहो जीवानाम्। Parasparopagraho Jivanam।', 'hi-IN')">
+                            <span data-i18n="listen">Listen</span>
                         </button>
                     </div>
                     
@@ -884,8 +882,8 @@
                             I am the Truth — the mystic realization of unity with the Divine.
                         </p>
                         <p class="reference">Mansur al-Hallaj | Sufi Mystic</p>
-                        <button class="audio-btn" onclick="playAudio('sufi', 'audio/ana-al-haqq.mp3', 'أَنَا ٱلْحَقُّ', 'ar-SA')">
-                            🔊 <span data-i18n="listen">Listen</span>
+                        <button class="audio-btn" onclick="playAudio(this, 'sufi', 'audio/ana-al-haqq.mp3', 'أَنَا ٱلْحَقُّ', 'ar-SA')">
+                            <span data-i18n="listen">Listen</span>
                         </button>
                     </div>
                     
@@ -902,8 +900,8 @@
                             What you do not wish for yourself, do not do to others.
                         </p>
                         <p class="reference">Analects 15:23 | Confucius</p>
-                        <button class="audio-btn" onclick="playAudio('confucian', 'audio/confucius-golden-rule.mp3', 'What you do not wish for yourself, do not do to others', 'en-US')">
-                            🔊 <span data-i18n="listen">Listen</span>
+                        <button class="audio-btn" onclick="playAudio(this, 'confucian', 'audio/confucius-golden-rule.mp3', 'What you do not wish for yourself, do not do to others', 'en-US')">
+                            <span data-i18n="listen">Listen</span>
                         </button>
                     </div>
                     
@@ -1034,7 +1032,7 @@
                 "tao-trans": "The Tao that can be spoken is not the eternal Tao. The name that can be named is not the eternal name.",
                 "bahai-trans": "The earth is but one country, and mankind its citizens.",
                 "zoroastrian-trans": "Good Thoughts, Good Words, Good Deeds — the three pillars of righteous living.",
-                "jain-trans": "Non-violence is the highest dharma — the supreme virtue and guiding principle.",
+                "jain-trans": "All life is bound together by mutual support and interdependence — souls exist to help one another.",
                 "sufi-trans": "I am the Truth — the mystic realization of unity with the Divine.",
                 "confucian-trans": "What you do not wish for yourself, do not do to others.",
                 "listen": "Listen",
@@ -1084,7 +1082,7 @@
                 "tao-trans": "जिस ताओ को कहा जा सकता है, वह शाश्वत ताओ नहीं है। जिस नाम को नामित किया जा सकता है, वह शाश्वत नाम नहीं है।",
                 "bahai-trans": "पृथ्वी केवल एक देश है, और मानवजाति इसके नागरिक हैं।",
                 "zoroastrian-trans": "अच्छे विचार, अच्छे शब्द, अच्छे कर्म — धर्मी जीवन के तीन स्तंभ।",
-                "jain-trans": "अहिंसा परम धर्म है — सर्वोच्च सद्गुण और मार्गदर्शक सिद्धांत।",
+                "jain-trans": "समस्त जीव परस्पर सहयोग और अन्योन्याश्रय से बंधे हैं — जीवों का अस्तित्व एक-दूसरे की सहायता के लिए है।",
                 "sufi-trans": "मैं सत्य हूँ — परमात्मा के साथ एकता की रहस्यमय अनुभूति।",
                 "confucian-trans": "जो आप अपने लिए नहीं चाहते, वह दूसरों के साथ न करें।",
                 "listen": "सुनें",
@@ -1134,7 +1132,7 @@
                 "tao-trans": "பேசக்கூடிய தாவோ நித்திய தாவோ அல்ல. பெயரிடக்கூடிய பெயர் நித்திய பெயர் அல்ல.",
                 "bahai-trans": "பூமி ஒரே நாடு, மனிதகுலம் அதன் குடிமக்கள்.",
                 "zoroastrian-trans": "நல்ல எண்ணங்கள், நல்ல வார்த்தைகள், நல்ல செயல்கள் — நேர்மையான வாழ்வின் மூன்று தூண்கள்.",
-                "jain-trans": "அகிம்சை மிக உயர்ந்த தர்மம் — உச்ச நற்பண்பு மற்றும் வழிகாட்டும் கொள்கை.",
+                "jain-trans": "அனைத்து உயிர்களும் பரஸ்பர உதவியாலும் ஒன்றையொன்று சார்ந்தும் பிணைக்கப்பட்டுள்ளன — உயிர்கள் ஒன்றுக்கொன்று உதவியே வாழ்கின்றன.",
                 "sufi-trans": "நானே உண்மை — தெய்வீகத்துடன் ஒற்றுமையின் மர்ம உணர்தல்.",
                 "confucian-trans": "நீங்கள் உங்களுக்கு விரும்பாததை மற்றவர்களுக்குச் செய்யாதீர்கள்.",
                 "listen": "கேளுங்கள்",
@@ -1184,7 +1182,7 @@
                 "tao-trans": "El Tao que puede ser hablado no es el Tao eterno. El nombre que puede ser nombrado no es el nombre eterno.",
                 "bahai-trans": "La tierra es un solo país, y la humanidad sus ciudadanos.",
                 "zoroastrian-trans": "Buenos Pensamientos, Buenas Palabras, Buenas Acciones — los tres pilares de la vida recta.",
-                "jain-trans": "La no-violencia es el dharma más elevado — la virtud suprema y el principio rector.",
+                "jain-trans": "Toda vida está unida por el apoyo mutuo y la interdependencia — las almas existen para ayudarse unas a otras.",
                 "sufi-trans": "Yo soy la Verdad — la realización mística de la unidad con lo Divino.",
                 "confucian-trans": "Lo que no deseas para ti mismo, no lo hagas a otros.",
                 "listen": "Escuchar",
@@ -1247,44 +1245,56 @@
         // Enhanced Audio System - MP3 + Web Speech API Fallback
         const audioPlayers = {};
         let currentlyPlaying = null;
+        let activeBtn = null;
         
-        function playAudio(audioId, mp3Path, fallbackText, fallbackLang) {
-            // Stop any currently playing audio
-            if (currentlyPlaying && currentlyPlaying !== audioId) {
+        function playAudio(btn, audioId, mp3Path, fallbackText, fallbackLang) {
+            // Toggle pause / resume if this clip is already the active one
+            if (currentlyPlaying === audioId && audioPlayers[audioId]) {
+                if (audioPlayers[audioId].paused) {
+                    audioPlayers[audioId].play();
+                    if (btn) btn.classList.add('playing');
+                } else {
+                    audioPlayers[audioId].pause();
+                    if (btn) btn.classList.remove('playing');
+                }
+                return;
+            }
+
+            // Stop whatever is currently playing and reset its button
+            if (currentlyPlaying) {
                 if (audioPlayers[currentlyPlaying]) {
                     audioPlayers[currentlyPlaying].pause();
                     audioPlayers[currentlyPlaying].currentTime = 0;
                 }
-                if (window.speechSynthesis) {
-                    window.speechSynthesis.cancel();
-                }
+                if (window.speechSynthesis) window.speechSynthesis.cancel();
             }
-            
-            // If MP3 path is provided, try to play it
+            if (activeBtn) activeBtn.classList.remove('playing');
+            activeBtn = btn || null;
+
+            // Start the requested clip
             if (mp3Path) {
                 if (!audioPlayers[audioId]) {
                     audioPlayers[audioId] = new Audio(mp3Path);
                     audioPlayers[audioId].preload = 'metadata';
-                    
-                    // Handle errors (file not found) - fallback to Web Speech
                     audioPlayers[audioId].addEventListener('error', function() {
-                        console.log('MP3 not found, using Web Speech API fallback');
+                        if (activeBtn) activeBtn.classList.remove('playing');
                         useSpeechSynthesis(fallbackText, fallbackLang);
                     });
-                    
-                    // Handle end of playback
                     audioPlayers[audioId].addEventListener('ended', function() {
                         currentlyPlaying = null;
+                        if (activeBtn) activeBtn.classList.remove('playing');
                     });
                 }
-                
                 currentlyPlaying = audioId;
-                audioPlayers[audioId].play().catch(err => {
-                    console.log('MP3 playback failed, using Web Speech API fallback');
+                audioPlayers[audioId].play().then(function() {
+                    if (btn) btn.classList.add('playing');
+                }).catch(function() {
+                    if (btn) btn.classList.remove('playing');
                     useSpeechSynthesis(fallbackText, fallbackLang);
                 });
             } else {
-                // No MP3 path provided, use Web Speech API directly
+                currentlyPlaying = audioId;
+                if (btn) btn.classList.add('playing');
                 useSpeechSynthesis(fallbackText, fallbackLang);
             }
         }
@@ -1302,6 +1312,7 @@
                 
                 utterance.onend = function() {
                     currentlyPlaying = null;
+                    if (activeBtn) activeBtn.classList.remove('playing');
                 };
             } else {
                 alert('Audio playback not supported in your browser. Try Chrome or Safari for best results.');
