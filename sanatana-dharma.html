@@ -241,22 +241,42 @@
         }
         
         .subsection {
-            margin: 3rem 0;
+            margin: 2.2rem 0;
+            background: linear-gradient(180deg, #FBF7EC 0%, #F2ECDC 100%);
+            border: 1px solid rgba(212, 168, 67, 0.5);
+            border-left: 4px solid var(--gold);
+            border-radius: 10px;
+            padding: 1.6rem 1.9rem;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
         }
         
         .subsection-title {
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.8rem;
-            color: var(--cyan);
+            color: #0B5E6B;
             margin-bottom: 1rem;
         }
         
         .subsection p {
             font-size: 1.08rem;
             font-weight: 500;
-            color: var(--cream);
+            color: #23282E;
             line-height: 1.9;
             letter-spacing: 0.01em;
+        }
+        
+        .subsection li {
+            color: #23282E;
+            font-weight: 500;
+            line-height: 1.9;
+        }
+        
+        .subsection strong {
+            color: #8A6410;
+        }
+        
+        .subsection a {
+            color: #0B5E6B;
         }
         
         .rishi-grid {
@@ -406,7 +426,7 @@
             .section-title, .rishi-name, .story-title, .sanskrit-text { color: #7a5c10 !important; }
             .subsection-title, .translation-text, strong { color: #0e6f7d !important; }
             .sd-divider, #stars-canvas { display: none !important; }
-            .rishi-card, .content-box, .mantra-box, .story-box { background: #f6f5f1 !important; border-color: #ccc !important; }
+            .rishi-card, .content-box, .mantra-box, .story-box, .subsection { background: #f6f5f1 !important; border-color: #ccc !important; }
         }
     </style>
     <script src="sd-i18n.js" defer></script>
