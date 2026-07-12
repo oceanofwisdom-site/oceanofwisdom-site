@@ -279,11 +279,35 @@
             color: #0B5E6B;
         }
         
+        /* Dark cards/boxes nested inside parchment subsections keep light text */
+        .subsection .rishi-card p, .subsection .rishi-card li,
+        .subsection .content-box p, .subsection .content-box li,
+        .subsection .mantra-box p, .subsection .mantra-box li,
+        .subsection .story-box p, .subsection .story-box li {
+            color: #FFFFFF;
+            font-weight: 500;
+        }
+        
+        .subsection .rishi-card strong, .subsection .content-box strong,
+        .subsection .mantra-box strong, .subsection .story-box strong {
+            color: var(--gold);
+        }
+        
+        .subsection .rishi-card a, .subsection .content-box a,
+        .subsection .mantra-box a, .subsection .story-box a {
+            color: var(--cyan);
+        }
+        
         .rishi-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
             margin: 2rem 0;
+        }
+        
+        /* A lone card in the last row stretches across the full width */
+        .subsection .rishi-grid > .rishi-card:last-child:nth-child(odd) {
+            grid-column: 1 / -1;
         }
         
         .rishi-card {
