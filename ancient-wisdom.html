@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ancient Wisdom of the World — Philosophy, History &amp; Culture by Continent | Ocean of Wisdom</title>
+    <meta name="description" content="Explore the wisdom of ancient civilizations continent by continent — India, Greece, Egypt, China, Persia, the Maya, Aboriginal Australia and more. History, culture, original texts, and cross-tradition insight.">
+    <link rel="canonical" href="https://www.oceanofwisdom.site/ancient-wisdom.html">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Ancient Wisdom of the World — Philosophy, History &amp; Culture by Continent | Ocean of Wisdom">
+    <meta property="og:description" content="Explore the wisdom of ancient civilizations continent by continent — India, Greece, Egypt, China, Persia, the Maya, Aboriginal Australia and more. History, culture, original texts, and cross-tradition insight.">
+    <meta property="og:url" content="https://www.oceanofwisdom.site/ancient-wisdom.html">
+    <meta name="twitter:card" content="summary">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Spectral:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* === Universal Site Navigation === */
+        .universal-nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(15, 26, 48, 0.96);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(77, 217, 232, 0.2);
+            padding: 0.75rem 1rem;
+        }
+        .universal-nav-inner {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .universal-nav-brand {
+            font-family: 'Cormorant Garamond', 'Georgia', serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #D4A843;
+            text-decoration: none;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+        .universal-nav-brand:hover { color: #4DD9E8; }
+        .universal-nav-links {
+            display: flex;
+            gap: 1.15rem;
+            flex-wrap: wrap;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        .universal-nav-links a {
+            color: #E8E9ED;
+            text-decoration: none;
+            font-family: 'Spectral', 'Georgia', serif;
+            font-size: 0.92rem;
+            transition: color 0.2s;
+            padding: 0.25rem 0;
+            white-space: nowrap;
+        }
+        .universal-nav-links a:hover, .universal-nav-links a.active {
+            color: #4DD9E8;
+        }
+        .universal-nav-links a.active {
+            border-bottom: 1px solid #D4A843;
+        }
+        @media (max-width: 720px) {
+            .universal-nav-inner { gap: 0.5rem; }
+            .universal-nav-links { gap: 0.75rem; }
+            .universal-nav-links a { font-size: 0.82rem; }
+            .universal-nav-brand { font-size: 1rem; }
+        }
+
+        :root {
+            color-scheme: dark;
+            --navy: #1B2A4A;
+            --cyan: #4DD9E8;
+            --gold: #D4A843;
+            --text: #E8E9ED;
+            --text-dim: #B8B9BD;
+            --cream: #FFF8E7;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            background-color: #1B2A4A;
+        }
+        
+        body {
+            font-family: 'Spectral', serif;
+            background: #1B2A4A;
+            background: var(--navy);
+            color: var(--text);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+        
+        #stars-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        header {
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(77, 217, 232, 0.2);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-decoration: none;
+        }
+        
+        .breadcrumb {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+        }
+        
+        .breadcrumb a {
+            color: var(--cyan);
+            text-decoration: none;
+        }
+        
+        .lang-switcher {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .lang-btn {
+            background: transparent;
+            border: 1px solid rgba(77, 217, 232, 0.3);
+            color: var(--text-dim);
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .lang-btn:hover {
+            border-color: var(--cyan);
+            color: var(--cyan);
+        }
+        
+        .lang-btn.active {
+            background: var(--cyan);
+            color: var(--navy);
+            border-color: var(--cyan);
+        }
+        
+        .hero {
+            padding: 5rem 0 3rem;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 300;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.3rem;
+            color: var(--text-dim);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .om-symbol {
+            font-size: 4rem;
+            color: var(--gold);
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .section {
+            padding: 4rem 0;
+            border-bottom: 1px solid rgba(77, 217, 232, 0.1);
+        }
+        
+        .section:last-of-type {
+            border-bottom: none;
+        }
+        
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 600;
+            color: var(--gold);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .section-intro {
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            text-align: center;
+            max-width: 750px;
+            margin: 0 auto 3rem;
+        }
+        
+        .subsection {
+            margin: 2.2rem 0;
+            background: linear-gradient(180deg, #FBF7EC 0%, #F2ECDC 100%);
+            border: 1px solid rgba(212, 168, 67, 0.5);
+            border-left: 4px solid var(--gold);
+            border-radius: 10px;
+            padding: 1.6rem 1.9rem;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+        }
+        
+        .subsection-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: #0B5E6B;
+            margin-bottom: 1rem;
+        }
+        
+        .subsection p {
+            font-size: 1.08rem;
+            font-weight: 500;
+            color: #23282E;
+            line-height: 1.9;
+            letter-spacing: 0.01em;
+        }
+        
+        .subsection li {
+            color: #23282E;
+            font-weight: 500;
+            line-height: 1.9;
+        }
+        
+        .subsection strong {
+            color: #8A6410;
+        }
+        
+        .subsection a {
+            color: #0B5E6B;
+        }
+        
+        /* Dark cards/boxes nested inside parchment subsections keep light text */
+        .subsection .rishi-card p, .subsection .rishi-card li,
+        .subsection .content-box p, .subsection .content-box li,
+        .subsection .mantra-box p, .subsection .mantra-box li,
+        .subsection .story-box p, .subsection .story-box li {
+            color: #FFFFFF;
+            font-weight: 500;
+        }
+        
+        .subsection .rishi-card strong, .subsection .content-box strong,
+        .subsection .mantra-box strong, .subsection .story-box strong {
+            color: var(--gold);
+        }
+        
+        .subsection .rishi-card a, .subsection .content-box a,
+        .subsection .mantra-box a, .subsection .story-box a {
+            color: var(--cyan);
+        }
+        
+        .rishi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        /* A lone card in the last row stretches across the full width */
+        .subsection .rishi-grid > .rishi-card:last-child:nth-child(odd) {
+            grid-column: 1 / -1;
+        }
+        
+        .rishi-card {
+            background: linear-gradient(135deg, rgba(212, 168, 67, 0.12), rgba(77, 217, 232, 0.06)), linear-gradient(#15223A, #15223A);
+            color: var(--text);
+            border: 1px solid rgba(212, 168, 67, 0.3);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .rishi-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            box-shadow: 0 10px 30px rgba(212, 168, 67, 0.2);
+        }
+        
+        .rishi-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+        
+        .rishi-sanskrit {
+            font-size: 0.9rem;
+            color: var(--cyan);
+            margin-bottom: 1rem;
+        }
+        
+        .rishi-desc {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text);
+        }
+        
+        .content-box {
+            background: linear-gradient(rgba(77, 217, 232, 0.06), rgba(77, 217, 232, 0.06)), linear-gradient(#15223A, #15223A);
+            color: var(--text);
+            border-left: 3px solid var(--cyan);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+        }
+        
+        .mantra-box {
+            background: linear-gradient(135deg, rgba(212, 168, 67, 0.12), rgba(77, 217, 232, 0.06)), linear-gradient(#15223A, #15223A);
+            color: var(--text);
+            border: 1px solid rgba(212, 168, 67, 0.3);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .sanskrit-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+        
+        .translation-text {
+            color: var(--cyan);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .story-box {
+            background: linear-gradient(rgba(77, 217, 232, 0.04), rgba(77, 217, 232, 0.04)), linear-gradient(#16253F, #16253F);
+            color: #FFFFFF;
+            border: 1px solid rgba(77, 217, 232, 0.2);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+        
+        .story-box p, .story-box li {
+            color: #FFFFFF;
+            font-weight: 500;
+            line-height: 1.9;
+        }
+        
+        .story-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+        
+        ul, ol {
+            margin-left: 2rem;
+            margin-top: 1rem;
+        }
+        
+        li {
+            margin: 0.5rem 0;
+        }
+        
+        strong {
+            color: var(--cyan);
+        }
+        
+        footer {
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(77, 217, 232, 0.2);
+            margin-top: 4rem;
+        }
+        
+        footer a {
+            color: var(--cyan);
+            text-decoration: none;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .rishi-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    
+        /* Print: browsers strip dark backgrounds, so switch to dark text on white */
+        @media print {
+            html, body { background: #ffffff !important; color: #1a1a1a !important; }
+            .subsection p, .rishi-desc, .section-intro, p, li { color: #1a1a1a !important; }
+            .section-title, .rishi-name, .story-title, .sanskrit-text { color: #7a5c10 !important; }
+            .subsection-title, .translation-text, strong { color: #0e6f7d !important; }
+            .sd-divider, #stars-canvas { display: none !important; }
+            .rishi-card, .content-box, .mantra-box, .story-box, .subsection { background: #f6f5f1 !important; border-color: #ccc !important; }
+        }
+    
+
+        /* Ancient Wisdom section additions */
+        .gold-divider { height: 2px; max-width: 220px; margin: 3.5rem auto; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+        .civ-card-link { text-decoration: none; color: inherit; display: block; height: 100%; }
+        .civ-card-link .rishi-card { height: 100%; }
+        .civ-card-link:hover .rishi-card { border-color: var(--cyan); transform: translateY(-3px); }
+        .coming-soon { display: inline-block; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--navy); background: var(--text-dim); padding: 0.18rem 0.65rem; border-radius: 20px; margin-bottom: 0.8rem; font-weight: 600; }
+        .live-badge { display: inline-block; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--navy); background: var(--gold); padding: 0.18rem 0.65rem; border-radius: 20px; margin-bottom: 0.8rem; font-weight: 700; }
+        .gateway-link { display: inline-block; margin-top: 1rem; color: var(--cyan); font-weight: 600; text-decoration: none; border-bottom: 1px solid rgba(77,217,232,0.5); padding-bottom: 2px; }
+        .gateway-link:hover { color: var(--gold); border-color: var(--gold); }
+        .mantra-box .reference { font-size: 0.9rem; font-style: italic; color: var(--text-dim); margin-top: 0.5rem; }
+    </style>
+</head>
+<body>
+    <nav class="universal-nav" aria-label="Main navigation">
+        <div class="universal-nav-inner">
+            <a href="index.html" class="universal-nav-brand"><img src="logo-nav.png" alt="" style="width:34px;height:34px;border-radius:50%;vertical-align:middle;margin-right:8px;">Ocean of Wisdom</a>
+            <ul class="universal-nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="who-am-i.html">Who Am I?</a></li>
+                <li><a href="what-is-all-this.html">What Is All This?</a></li>
+                <li><a href="am-i-connected.html">Am I Connected?</a></li>
+                <li><a href="i-am-that.html">I Am That</a></li>
+                <li><a href="what-is-truth.html">What Is Truth?</a></li>
+                <li><a href="what-is-bliss.html">What Is Bliss?</a></li>
+                <li><a href="sanatana-dharma.html">Sanatana Dharma</a></li>
+                <li><a href="ancient-wisdom.html" class="active">Ancient Wisdom</a></li>
+                <li><a href="wisdom-feed.html">Wisdom Articles</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <canvas id="stars-canvas"></canvas>
+
+    <div class="container" style="padding-top: 1.5rem;">
+        <div class="breadcrumb">
+            <a href="index.html">Cosmos</a> / <span>Ancient Wisdom</span>
+        </div>
+    </div>
+
+    <main>
+        <div class="container">
+            <section class="hero">
+                <div class="om-symbol">🌏</div>
+                <h1>Ancient Wisdom of the World</h1>
+                <p class="subtitle">
+                    Every people on Earth asked the great questions — Who am I? How should I live?
+                    What endures? — and every continent answered. This section honours those answers,
+                    civilization by civilization: their story, their way of life, and above all,
+                    what they taught.
+                </p>
+            </section>
+
+            <section class="section">
+                <div class="subsection">
+                    <h3 class="subsection-title">How This Section Works</h3>
+                    <p>
+                        Each civilization receives its own page, built the same way: the story of its rise
+                        told as narrative, a look at how its people lived and built, the heart of its
+                        philosophy and its thinkers, its own words in its own script with translation, and
+                        a bridge — where its wisdom meets the traditions explored elsewhere on this site.
+                        Pages open as they are completed; India's gateway is open now, and more doors
+                        will open one at a time.
+                    </p>
+                </div>
+            </section>
+
+            <div class="gold-divider"></div>
+
+            <section class="section">
+                <h2 class="section-title">Asia</h2>
+                <p class="section-intro">The continent where writing, cities, and philosophy first flowered together — home to the world's longest unbroken traditions of inquiry.</p>
+                <div class="subsection">
+                    <div class="rishi-grid">
+                        <a class="civ-card-link" href="wisdom-of-india.html"><div class="rishi-card">
+                            <span class="live-badge">Explore Now</span>
+                            <h3 class="rishi-name">India</h3>
+                            <p class="rishi-sanskrit">भारत</p>
+                            <p class="rishi-desc">The civilization of debate: Vedic seers, the Upanishads, Charvaka skeptics, Jain teachers of non-violence, the Buddha's Middle Way, and the Sikh Gurus. India's gateway page is open — step through.</p>
+                        </div></a>
+                        <div class="rishi-card">
+                            <span class="coming-soon">Coming Soon</span>
+                            <h3 class="rishi-name">China</h3>
+                            <p class="rishi-sanskrit">中国</p>
+                            <p class="rishi-desc">Confucius (551–479 BCE) taught that a good society begins with self-cultivation, ritual, and humaneness. The Tao Te Ching, attributed to the sage Laozi, counsels effortless action and harmony with the Way — two streams that shaped East Asia for over two millennia.</p>
+                        </div>
+                        <div class="rishi-card">
+                            <span class="coming-soon">Coming Soon</span>
+                            <h3 class="rishi-name">Persia</h3>
+                            <p class="rishi-sanskrit">ایران</p>
+                            <p class="rishi-desc">Zoroaster, whose dating scholars still debate — possibly as early as the second millennium BCE — taught in the Gathas that life is a moral choice between truth and the lie, summed up in three words: good thoughts, good words, good deeds.</p>
+                        </div>
+                        <div class="rishi-card">
+                            <span class="coming-soon">Coming Soon</span>
+                            <h3 class="rishi-name">Mesopotamia</h3>
+                            <p class="rishi-sanskrit">𒆠𒂗𒂠</p>
+                            <p class="rishi-desc">Between the Tigris and Euphrates, cuneiform became one of humanity's earliest writing systems — and the Epic of Gilgamesh, among the earliest surviving works of great literature, confronted the question that still keeps us awake: how should mortals live, knowing they must die?</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="gold-divider"></div>
+
+            <section class="section">
+                <h2 class="section-title">Africa</h2>
+                <p class="section-intro">The continent where humanity began also produced some of its oldest recorded wisdom — and centres of scholarship that rivalled any in the world.</p>
+                <div class="subsection">
+                    <div class="rishi-grid">
+                        <div class="rishi-card">
+                            <span class="coming-soon">Coming Soon</span>
+                            <h3 class="rishi-name">Egypt</h3>
+                            <p class="rishi-sanskrit">𓆎𓅓𓏏</p>
+                            <p class="rishi-desc">The principle of Ma'at — truth, order, balance, and justice — governed everything from the pharaoh's rule to the weighing of the heart after death. The Instruction of Ptahhotep, counsel from a vizier to his son, stands among the world's oldest surviving wisdom books.</p>
+                        </div>
+                        <div class="rishi-card">
+                            <span class="coming-soon">Coming Soon</span>
+                            <h3 class="rishi-name">Ethiopia &amp; Aksum</h3>
+                            <p class="rishi-sanskrit">ግዕዝ</p>
+                            <p class="rishi-desc">The ancient kingdom of Aksum was among the earliest states to adopt Christianity, in the fourth century CE, and Ethiopia's Ge'ez language preserved a scriptural and philosophical literature maintained without interruption to this day.</p>
+                        </div>
+                        <div class="rishi-card">
+                            <span class="coming-soon">Coming Soon</span>
+                            <h3 class="rishi-name">Mali &amp; Timbuktu</h3>
+                            <p class="rishi-sanskrit">ⵜⵉⵏⴱⵓⴽⵜⵓ</p>
+                            <p class="rishi-desc">Under the Mali and Songhai empires, Timbuktu's scholars gathered manuscript libraries numbering in the hundreds of thousands — works of law, astronomy, medicine, and ethics — around centres of learning such as the Sankore mosque.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="gold-divider"></div>
+
+            <section class="section">
+                <h2 class="section-title">Europe</h2>
+                <p class="section-intro">From a temple inscription at Delphi to an emperor's private notebook, Europe's ancient wisdom keeps returning to one command: examine your own life.</p>
+                <div class="subsection">
+                    <div class="rishi-grid">
+                        <div class="rishi-card">
+                            <span class="coming-soon">Coming Soon</span>
+                            <h3 class="rishi-name">Greece</h3>
+                            <p class="rishi-sanskrit">Ἑλλάς</p>
+                            <p class="rishi-desc">Above the temple at Delphi stood the maxim Gnothi Seauton — Know Thyself. Socrates made it a way of life, Plato built an academy on it, and Aristotle turned it toward everything from ethics to biology. The examined life begins here.</p>
+                        </div>
+                        <div class="rishi-card">
+                            <span class="coming-soon">Coming Soon</span>
+                            <h3 class="rishi-name">Rome &amp; the Stoics</h3>
+                            <p class="rishi-sanskrit">Roma</p>
+                            <p class="rishi-desc">Stoicism taught that virtue is the only true good and that we suffer chiefly from our judgments, not events. Its Roman voices span a freed slave, Epictetus, and an emperor, Marcus Aurelius — whose Meditations were private notes to himself, never meant for us, and treasured ever since.</p>
+                        </div>
+                        <div class="rishi-card">
+                            <span class="coming-soon">Coming Soon</span>
+                            <h3 class="rishi-name">The Norse</h3>
+                            <p class="rishi-sanskrit">ᚾᛟᚱᚦ</p>
+                            <p class="rishi-desc">The Hávamál — 'Sayings of the High One' — preserved in the Poetic Edda, offers the hard-weather wisdom of the North: on friendship, moderation, reputation, and the one thing that never dies, the judgment passed on each of us.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="gold-divider"></div>
+
+            <section class="section">
+                <h2 class="section-title">The Americas</h2>
+                <p class="section-intro">Across two continents, civilizations built precise astronomy, vast empires, and poetry that still cuts to the heart — largely without contact with the Old World.</p>
+                <div class="subsection">
+                    <div class="rishi-grid">
+                        <div class="rishi-card">
+                            <span class="coming-soon">Coming Soon</span>
+                            <h3 class="rishi-name">The Maya</h3>
+                            <p class="rishi-sanskrit">Popol Vuh</p>
+                            <p class="rishi-desc">The Popol Vuh, the K'iche' Maya narrative of creation, tells how the gods fashioned humans from maize after earlier attempts failed. Maya astronomers tracked Venus and eclipses with remarkable precision, weaving timekeeping into sacred life.</p>
+                        </div>
+                        <div class="rishi-card">
+                            <span class="coming-soon">Coming Soon</span>
+                            <h3 class="rishi-name">The Aztec (Nahua)</h3>
+                            <p class="rishi-sanskrit">Nāhuatl</p>
+                            <p class="rishi-desc">Nezahualcoyotl (1402–1472), the poet-king of Texcoco, composed Nahuatl verses on the impermanence of all things — 'not forever on earth, only a little while here' — meditations that stand beside any wisdom tradition in the world.</p>
+                        </div>
+                        <div class="rishi-card">
+                            <span class="coming-soon">Coming Soon</span>
+                            <h3 class="rishi-name">The Inca</h3>
+                            <p class="rishi-sanskrit">Tawantinsuyu</p>
+                            <p class="rishi-desc">The Inca ran the largest empire of the pre-Columbian Americas on principles of reciprocity — ayni — recording obligations and histories on quipu, knotted-cord devices, while Quechua oral tradition carried law, myth, and memory.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="gold-divider"></div>
+
+            <section class="section">
+                <h2 class="section-title">Oceania</h2>
+                <p class="section-intro">The world's oldest continuous cultures and its greatest ocean navigators — wisdom carried in story, song, and stars rather than in books.</p>
+                <div class="subsection">
+                    <div class="rishi-grid">
+                        <div class="rishi-card">
+                            <span class="coming-soon">Coming Soon</span>
+                            <h3 class="rishi-name">Aboriginal Australia</h3>
+                            <p class="rishi-sanskrit">The Dreaming</p>
+                            <p class="rishi-desc">The Dreaming weaves law, land, kinship, and story into a single fabric: the ancestral beings who shaped the country also gave the rules for living in it. Aboriginal Australians are among the oldest continuous living cultures on Earth.</p>
+                        </div>
+                        <div class="rishi-card">
+                            <span class="coming-soon">Coming Soon</span>
+                            <h3 class="rishi-name">Polynesia</h3>
+                            <p class="rishi-sanskrit">Moana</p>
+                            <p class="rishi-desc">Polynesian navigators crossed thousands of kilometres of open Pacific steering by stars, ocean swells, winds, and birds — a body of knowledge passed master to apprentice — while genealogical chants preserved history across generations without writing.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="gold-divider"></div>
+
+            <section class="section">
+                <div class="story-box">
+                    <h3 class="story-title">One Ocean, Many Rivers</h3>
+                    <p>
+                        Set these traditions side by side and a pattern appears. Delphi's "Know Thyself" and
+                        the Upanishads' inquiry into the Self. Ma'at and Rita and the Tao — order at the heart
+                        of things under three different names. The Stoic's discipline of judgment and the
+                        Buddha's discipline of mind. The rivers rise on different continents, but they seem
+                        to be seeking the same ocean.
+                    </p>
+                    <a class="gateway-link" href="wisdom-of-india.html">Begin with India — the gateway is open →</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 | A creative brand by Prashob Rajamohan</p>
+        </div>
+    </footer>
+
+    <script>
+    (function(){
+        const canvas = document.getElementById('stars-canvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+        function resize(){
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+            stars = Array.from({length: 90}, () => ({
+                x: Math.random()*canvas.width, y: Math.random()*canvas.height,
+                r: Math.random()*1.4+0.3, o: Math.random()
+            }));
+        }
+        window.addEventListener('resize', resize); resize();
+        (function twinkle(){
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            for (const s of stars){
+                s.o += (Math.random()-0.5)*0.06; s.o = Math.max(0.1, Math.min(1, s.o));
+                ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+                ctx.fillStyle = 'rgba(77,217,232,' + (s.o*0.7).toFixed(2) + ')'; ctx.fill();
+            }
+            requestAnimationFrame(twinkle);
+        })();
+    })();
+    </script>
+</body>
+</html>
