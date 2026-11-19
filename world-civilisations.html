@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Explore a comparative, evidence-led timeline of world civilizations, ideas, technologies and cultural exchange.">
+<meta name="theme-color" content="#1B2A4A">
+<title>World Civilisations Timeline | Ocean of Wisdom</title>
+<style>
+:root{--navy:#1B2A4A;--navy2:#24395f;--gold:#d7b56d;--paper:#f5f1e8;--ink:#202b40;--muted:#58657a;--line:#d9deea;--white:#fff}
+*{box-sizing:border-box}
+html{min-height:100%;background:var(--navy)}
+body{margin:0;min-height:100vh;position:relative;isolation:isolate;background:transparent;color:#e9edf5;font:17px/1.65 Georgia,'Times New Roman',serif}
+body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-color:var(--navy);background-image:radial-gradient(2px 2px at 12% 18%,rgba(220,230,255,.45) 45%,transparent 70%),radial-gradient(1.5px 1.5px at 76% 24%,rgba(220,230,255,.4) 45%,transparent 70%),radial-gradient(2px 2px at 42% 62%,rgba(220,230,255,.32) 45%,transparent 70%),radial-gradient(1.5px 1.5px at 88% 78%,rgba(220,230,255,.38) 45%,transparent 70%),radial-gradient(1px 1px at 22% 86%,rgba(220,230,255,.35) 45%,transparent 70%),radial-gradient(ellipse at 50% 48%,rgba(44,65,105,.38),transparent 72%);background-size:230px 260px,310px 330px,270px 290px,350px 370px,290px 310px,100% 100%}
+a{color:#1d5b78}
+.home{display:inline-flex;margin:14px 18px;padding:10px 20px;border:1px solid var(--gold);border-radius:999px;background:#10203a;color:#f5f0e6;text-decoration:none;font:700 14px Arial,sans-serif}
+.hero{padding:22px 18px 34px;text-align:center}
+.hero img{display:block;width:100%;max-width:1050px;height:auto;max-height:280px;object-fit:cover;margin:0 auto 26px;border-radius:15px;border:1px solid rgba(215,181,109,.75);box-shadow:0 12px 34px #0005}
+.eyebrow{color:var(--gold);font:700 12px Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase}
+h1{max-width:900px;margin:12px auto;color:#f7f4ed;font-size:clamp(2.15rem,7vw,4.2rem);line-height:1.08}
+.hero p{max-width:780px;margin:14px auto 0;color:#d6deec;font-size:1.13rem}
+main{max-width:1100px;margin:0 auto;padding:0 18px 60px}
+.intro{max-width:850px;margin:0 auto 22px;color:#e2e7f0}
+.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;padding:16px;background:#fffdf8;border:1px solid #d9deea;border-radius:15px;color:var(--ink)}
+.controls label{display:grid;gap:5px;color:#51483e;font:600 13px Arial,sans-serif}
+.controls input,.controls select{width:100%;min-height:44px;padding:10px;border:1px solid #c9c1b4;border-radius:9px;background:white;color:#29251f;font:16px Arial,sans-serif}
+.count{align-self:end;color:#51483e;font:13px Arial,sans-serif;padding:10px 0}
+.timeline{position:relative;margin:22px 0 34px;padding-left:26px}
+.timeline:before{content:"";position:absolute;left:8px;top:8px;bottom:8px;width:2px;background:linear-gradient(var(--gold),#6f91bf)}
+.event{position:relative;margin:0 0 14px;padding:17px 18px;background:#fffdf8;color:#29251f;border:1px solid #d9deea;border-radius:13px;box-shadow:0 4px 14px #0002}
+.event:before{content:"";position:absolute;left:-24px;top:24px;width:12px;height:12px;border-radius:50%;background:var(--gold);border:2px solid var(--navy)}
+.event-top{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+.date{color:#80501f;font:700 14px Arial,sans-serif;letter-spacing:.02em}
+.region{margin-left:auto;padding:3px 8px;border-radius:999px;background:#e9edf4;color:#34445b;font:700 11px Arial,sans-serif}
+.event h2{margin:6px 0 5px;color:#17243a;font-size:1.25rem;line-height:1.25}
+.event p{margin:0;color:#51483e;font-size:.97rem}
+.event .context{margin-top:8px;color:#6b6257;font:12px/1.5 Arial,sans-serif}
+.note,.sources{margin:18px 0;padding:18px 20px;border:1px solid rgba(215,181,109,.55);border-radius:14px;background:rgba(255,253,248,.97);color:#29251f}
+.note h2,.sources h2{margin:0 0 8px;color:#80501f;font-size:1.25rem}
+.note p,.sources p{margin:6px 0;color:#51483e}
+.sources li{margin:8px 0;color:#51483e}
+.empty{display:none;padding:24px;text-align:center;color:#51483e;background:#fffdf8;border-radius:12px}
+footer{text-align:center;padding:26px;color:#d6deec;font:13px Arial,sans-serif}
+footer a{color:var(--gold)}
+@media(min-width:760px){.timeline{padding-left:38px}.timeline:before{left:12px}.event:before{left:-32px}}
+</style>
+</head>
+<body>
+<a class="home" href="index.html">⌂ HOME</a>
+<header class="hero">
+<img src="banner.png" alt="Ocean of Wisdom — shared human knowledge and wisdom traditions">
+<div class="eyebrow">A comparative history · Evidence-led chronology</div>
+<h1>World Civilisations &amp; the Journey of Knowledge</h1>
+<p>Explore how societies developed, exchanged ideas and transformed the human story — across regions and through time.</p>
+</header>
+<main>
+<p class="intro">History did not unfold in one place or along a single line. While cities and states rose in one region, other communities were developing distinct systems of farming, trade, philosophy, science, art and governance. This timeline places selected milestones alongside one another to encourage comparison, not competition.</p>
+<section class="controls" aria-label="Timeline filters">
+<label>Search events or topics<input id="search" type="search" placeholder="Try: writing, India, trade…"></label>
+<label>Filter by region<select id="region"><option value="">All regions</option><option>South Asia</option><option>West Asia</option><option>Africa</option><option>East Asia</option><option>Mediterranean</option><option>Europe</option><option>Americas</option><option>Global</option></select></label>
+<label>Filter by period<select id="period"><option value="">All periods</option><option value="prehistory">Before 3000 BCE</option><option value="ancient">3000–500 BCE</option><option value="classical">500 BCE–500 CE</option><option value="medieval">500–1500 CE</option><option value="modern">After 1500 CE</option></select></label>
+<div class="count" id="count" aria-live="polite">Showing all milestones</div>
+</section>
+<section class="timeline" id="timeline" aria-label="Historical milestones">
+<article class="event" data-region="Global" data-period="prehistory" data-search="agriculture farming settled communities fertile crescent">
+<div class="event-top"><span class="date">c. 10,000–8,000 BCE</span><span class="region">Global</span></div><h2>Farming communities expand in several regions</h2><p>In parts of Southwest Asia, communities increasingly cultivated plants and managed animals. Independent or partly independent transitions to food production also occurred elsewhere, including China, New Guinea, Africa and the Americas, at different times and under different conditions.</p><div class="context">A long transition, not a single invention or universal timetable.</div></article>
+<article class="event" data-region="South Asia" data-period="prehistory" data-search="mehrgarh agriculture neolithic settlement baluchistan">
+<div class="event-top"><span class="date">From c. 7000 BCE</span><span class="region">South Asia</span></div><h2>Mehrgarh and early settled life</h2><p>Mehrgarh, in present-day Pakistan, provides important archaeological evidence for early farming, herding, craft production and changing settlement patterns in the northwestern subcontinent.</p><div class="context">Dates and phases are archaeological estimates that depend on excavation and dating evidence.</div></article>
+<article class="event" data-region="West Asia" data-period="ancient" data-search="sumer uruk mesopotamia cities writing cuneiform">
+<div class="event-top"><span class="date">c. 3500–3000 BCE</span><span class="region">West Asia</span></div><h2>Urban centres and early writing in Mesopotamia</h2><p>Large urban communities developed in southern Mesopotamia. Administrative record-keeping contributed to the emergence of proto-cuneiform and, later, a writing system used for administration, literature and scholarship.</p><div class="context">The earliest writing developed in stages; it was not initially identical to modern alphabetic writing.</div></article>
+<article class="event" data-region="Africa" data-period="ancient" data-search="egypt nile unification hieroglyphs dynastic egypt">
+<div class="event-top"><span class="date">c. 3100 BCE</span><span class="region">Africa</span></div><h2>Early dynastic Egypt</h2><p>Political consolidation along the Nile marks the conventional beginning of Egypt’s Early Dynastic period. Hieroglyphic writing, royal institutions and monumental traditions developed over time within a much older Nile Valley cultural landscape.</p><div class="context">The chronology of early rulers and the process of unification remain subjects of specialist study.</div></article>
+<article class="event" data-region="South Asia" data-period="ancient" data-search="harappan indus civilization urban cities drainage weights trade">
+<div class="event-top"><span class="date">c. 2600–1900 BCE</span><span class="region">South Asia</span></div><h2>Mature Harappan urban civilisation</h2><p>Major settlements including Harappa, Mohenjo-daro and Dholavira show planned streets, craft specialisation, standardised weights and extensive water-management features. The script remains undeciphered, so claims about language, rulers and religious institutions require caution.</p><div class="context">The dates describe the mature urban phase; earlier and later regional phases extend beyond it.</div></article>
+<article class="event" data-region="East Asia" data-period="ancient" data-search="china shang dynasty oracle bone writing bronze">
+<div class="event-top"><span class="date">c. 1600–1046 BCE</span><span class="region">East Asia</span></div><h2>Shang dynasty China</h2><p>Archaeological sites, bronze vessels and oracle-bone inscriptions provide evidence for Shang political and ritual life. The inscriptions are among the earliest substantial bodies of writing known from China.</p><div class="context">The dates are conventional historical estimates; early Chinese chronology contains debated points.</div></article>
+<article class="event" data-region="West Asia" data-period="ancient" data-search="babylon hammurabi law code">
+<div class="event-top"><span class="date">18th century BCE</span><span class="region">West Asia</span></div><h2>Hammurabi and Babylonian statecraft</h2><p>Hammurabi ruled Babylon in the eighteenth century BCE. The law collection associated with his name is a royal monument that illuminates legal ideals, social distinctions and kingship; it should not be mistaken for a modern, comprehensive legal code applied uniformly in every case.</p><div class="context">The text is a primary source for royal ideology as well as legal history.</div></article>
+<article class="event" data-region="South Asia" data-period="ancient" data-search="vedic texts oral transmission south asia">
+<div class="event-top"><span class="date">2nd–1st millennium BCE</span><span class="region">South Asia</span></div><h2>Vedic traditions and oral transmission</h2><p>Vedic compositions were transmitted through highly disciplined oral practices. Their dating, layers and relationship to changing social worlds are studied through language, textual analysis and comparative evidence; no single date captures the formation of the entire corpus.</p><div class="context">Textual chronology is complex and differs from the date of surviving manuscripts.</div></article>
+<article class="event" data-region="Mediterranean" data-period="ancient" data-search="greece phoenician alphabet mediterranean exchange">
+<div class="event-top"><span class="date">1st millennium BCE</span><span class="region">Mediterranean</span></div><h2>Alphabetic scripts and Mediterranean exchange</h2><p>Alphabetic writing traditions spread and adapted around the Mediterranean. Greek writing adopted and modified a Phoenician consonantal script, including the use of signs for vowels, illustrating how writing systems change through contact.</p><div class="context">Cultural transmission is usually adaptation, not simple one-way copying.</div></article>
+<article class="event" data-region="South Asia" data-period="classical" data-search="buddhism jainism mahajanapadas urban second urbanization">
+<div class="event-top"><span class="date">c. 6th–5th centuries BCE</span><span class="region">South Asia</span></div><h2>New philosophical and religious movements in South Asia</h2><p>In the context of expanding towns and mahājanapadas, śramaṇa traditions including Buddhism and Jainism developed alongside diverse Brahmanical schools and other currents of debate. Their teachings stimulated long-running discussions about ethics, knowledge, suffering, non-violence and liberation.</p><div class="context">The dates of teachers’ lives and early textual layers are debated; traditions preserve different chronologies.</div></article>
+<article class="event" data-region="West Asia" data-period="classical" data-search="achaemenid persian empire roads administration">
+<div class="event-top"><span class="date">c. 550–330 BCE</span><span class="region">West Asia</span></div><h2>Achaemenid Persian Empire</h2><p>The Achaemenid dynasty created a vast imperial system linking regions from the eastern Mediterranean to parts of Central and South Asia. Roads, administrative practices, taxation and local arrangements helped govern a diverse empire.</p><div class="context">Imperial rule varied by region and changed across successive rulers.</div></article>
+<article class="event" data-region="South Asia" data-period="classical" data-search="maurya ashoka dhamma inscriptions">
+<div class="event-top"><span class="date">c. 322–185 BCE</span><span class="region">South Asia</span></div><h2>Mauryan Empire and Ashokan inscriptions</h2><p>The Mauryan state became one of the largest empires in South Asian history. Ashoka’s inscriptions, distributed across the subcontinent and beyond, provide unusually direct evidence for royal communication, ethical policy and imperial presence.</p><div class="context">The inscriptions are primary evidence, but their language and local contexts need careful interpretation.</div></article>
+<article class="event" data-region="East Asia" data-period="classical" data-search="qin unification china standardization">
+<div class="event-top"><span class="date">221 BCE</span><span class="region">East Asia</span></div><h2>Qin unification of China</h2><p>The Qin state unified competing kingdoms and established an imperial structure. Measures, scripts and administrative practices were standardised in important ways, although the Qin dynasty itself was short-lived.</p><div class="context">Unification was a political process, not the disappearance of regional differences.</div></article>
+<article class="event" data-region="Global" data-period="classical" data-search="silk roads indian ocean trade exchange">
+<div class="event-top"><span class="date">1st millennium BCE–1st millennium CE</span><span class="region">Global</span></div><h2>Overland and maritime networks connect distant societies</h2><p>Trade routes across Central Asia and the Indian Ocean linked merchants, ports, caravan towns and courts. Goods moved alongside artistic techniques, religious ideas, languages and technologies. These networks changed over time and were never a single continuous road.</p><div class="context">Exchange involved cooperation, competition, migration and unequal power.</div></article>
+<article class="event" data-region="South Asia" data-period="classical" data-search="gupta empire mathematics astronomy literature">
+<div class="event-top"><span class="date">c. 4th–6th centuries CE</span><span class="region">South Asia</span></div><h2>Gupta-period political and intellectual cultures</h2><p>Several influential works in Sanskrit literature, mathematics and astronomy belong to this broad period, alongside regional developments beyond Gupta political control. The label “Golden Age” is debated because cultural achievement coexisted with social hierarchy and regional variation.</p><div class="context">Cultural history should not be reduced to the boundaries or fortunes of one dynasty.</div></article>
+<article class="event" data-region="Africa" data-period="medieval" data-search="axum aksum east africa red sea trade">
+<div class="event-top"><span class="date">c. 1st–7th centuries CE</span><span class="region">Africa</span></div><h2>Aksum and Red Sea connections</h2><p>The Aksumite kingdom in the Horn of Africa participated in Red Sea and wider commercial networks. Its inscriptions, coinage, monumental architecture and adoption of Christianity provide evidence for a powerful African polity connected to neighbouring regions.</p><div class="context">Aksum’s history is part of African and Indian Ocean history, not a footnote to Mediterranean events.</div></article>
+<article class="event" data-region="East Asia" data-period="medieval" data-search="tang dynasty china buddhism printing">
+<div class="event-top"><span class="date">618–907 CE</span><span class="region">East Asia</span></div><h2>Tang dynasty China</h2><p>The Tang era saw major developments in urban culture, poetry, administration and international exchange. Buddhist institutions and networks connected China with Central Asia and South Asia, while printing technologies developed further in East Asia.</p><div class="context">The Tang world was cosmopolitan in important centres, while also marked by conflict and political change.</div></article>
+<article class="event" data-region="West Asia" data-period="medieval" data-search="abbasid baghdad translation movement scholarship">
+<div class="event-top"><span class="date">From 8th century CE</span><span class="region">West Asia</span></div><h2>Abbasid-era scholarly networks</h2><p>Under Abbasid rule and in wider intellectual networks, scholars translated, criticised and extended works in philosophy, medicine, mathematics and astronomy. Knowledge moved through Arabic, Persian, Syriac, Greek and other languages, with contributions from people of varied backgrounds.</p><div class="context">The so-called translation movement was diverse and extended beyond one institution or city.</div></article>
+<article class="event" data-region="Americas" data-period="medieval" data-search="maya cities astronomy writing mesoamerica">
+<div class="event-top"><span class="date">c. 250–900 CE</span><span class="region">Americas</span></div><h2>Classic Maya cities and knowledge systems</h2><p>Maya city-states developed sophisticated writing, calendrical and astronomical practices, monumental architecture and regional political networks in Mesoamerica. Maya communities continued beyond the Classic period and remain living cultures today.</p><div class="context">The “collapse” of some southern lowland centres did not mean the disappearance of Maya people.</div></article>
+<article class="event" data-region="South Asia" data-period="medieval" data-search="delhi sultanate south asia architecture persianate">
+<div class="event-top"><span class="date">1206–1526 CE</span><span class="region">South Asia</span></div><h2>Delhi Sultanate and changing regional worlds</h2><p>The Delhi Sultanate comprised several dynasties and shifting political territories. Persianate court cultures, regional languages, architecture, trade and religious institutions developed through interaction and contestation across the subcontinent.</p><div class="context">South Asia’s medieval history also includes powerful regional kingdoms and societies beyond Delhi’s reach.</div></article>
+<article class="event" data-region="Global" data-period="modern" data-search="printing movable type knowledge circulation">
+<div class="event-top"><span class="date">From 15th century CE</span><span class="region">Global</span></div><h2>Printing transforms the circulation of knowledge</h2><p>Woodblock printing had a long history in East Asia; movable type was developed in East Asia centuries before Gutenberg’s European press. Printing in Europe expanded rapidly from the mid-fifteenth century, reshaping the scale and speed of textual reproduction in that region.</p><div class="context">Printing history is plural: technologies emerged in different contexts and did not follow one universal path.</div></article>
+<article class="event" data-region="South Asia" data-period="modern" data-search="mughal empire india art architecture administration">
+<div class="event-top"><span class="date">1526–1857 CE</span><span class="region">South Asia</span></div><h2>Mughal Empire and regional transformations</h2><p>The Mughal Empire reshaped political institutions, revenue systems, architecture, painting and courtly culture across much of northern India at different moments. Regional states, communities and cultural traditions remained active participants in this changing landscape.</p><div class="context">The empire’s reach, authority and administrative practices varied considerably over time.</div></article>
+<article class="event" data-region="Global" data-period="modern" data-search="industrial revolution energy manufacturing global change">
+<div class="event-top"><span class="date">From late 18th century CE</span><span class="region">Global</span></div><h2>Industrialisation and a new energy regime</h2><p>Industrialisation began in Britain and spread unevenly to other regions. Fossil-fuel energy, mechanised production, railways and new forms of finance transformed work, cities, environments and global power relations.</p><div class="context">Industrialisation was neither simultaneous nor socially uniform; its environmental costs remain central to modern history.</div></article>
+<article class="event" data-region="Global" data-period="modern" data-search="decolonisation united nations independence india 1947">
+<div class="event-top"><span class="date">1945 onward</span><span class="region">Global</span></div><h2>Decolonisation and new international institutions</h2><p>After the Second World War, anti-colonial movements and political negotiations transformed the international order. India became independent in 1947; many other countries achieved independence across subsequent decades. The United Nations, founded in 1945, became a central forum for international diplomacy.</p><div class="context">Decolonisation was a varied process involving mass movements, negotiations, conflict and continuing struggles over sovereignty.</div></article>
+</section>
+<div class="empty" id="empty">No milestones match these filters. Try another search or choose “All regions”.</div>
+<section class="note"><h2>How to read this timeline</h2><p>Dates marked “c.” are approximate. Broad ranges indicate long processes rather than one-day events. Archaeological periods, textual chronologies and dynastic dates are not always directly comparable. The entries are selected milestones, not a complete list of every society or achievement.</p><p>“Civilisation” is used here as a practical historical label for complex and changing societies; it does not imply that some peoples were more advanced or more valuable than others.</p></section>
+<section class="sources"><h2>Selected academic and reference resources</h2><ol>
+<li><a href="https://openstax.org/books/world-history-volume-1/pages/1-introduction" target="_blank" rel="noopener">OpenStax, <em>World History, Volume 1: to 1500</em></a> — open textbook with maps, timelines and regional chapters.</li>
+<li><a href="https://web.ung.edu/media/university-press/World%20History%20Textbook-082817.pdf" target="_blank" rel="noopener">University of North Georgia Press, <em>World History: Cultures, States, and Societies to 1500</em></a> — open university textbook.</li>
+<li><a href="https://www.metmuseum.org/toah/" target="_blank" rel="noopener">The Metropolitan Museum of Art, Heilbrunn Timeline of Art History</a> — essays and object-based timelines across regions.</li>
+<li><a href="https://whc.unesco.org/en/list/" target="_blank" rel="noopener">UNESCO World Heritage List</a> — site records and heritage documentation.</li>
+<li><a href="https://www.britishmuseum.org/collection" target="_blank" rel="noopener">The British Museum Collection</a> — collection records for material culture across periods and regions.</li>
+</ol><p>For further research, use the linked resources to check dates and regional interpretations. This page is an original educational synthesis, not a substitute for specialist monographs or primary-source editions.</p></section>
+</main>
+<footer>Ocean of Wisdom · <a href="index.html">HOME</a> · <a href="library/">Knowledge Library</a></footer>
+<script>
+(function(){
+ const search=document.getElementById('search'),region=document.getElementById('region'),period=document.getElementById('period'),events=[...document.querySelectorAll('.event')],count=document.getElementById('count'),empty=document.getElementById('empty');
+ function apply(){
+  const q=search.value.trim().toLowerCase(),r=region.value,p=period.value;let shown=0;
+  events.forEach(e=>{const ok=(!q||(e.innerText+' '+e.dataset.search).toLowerCase().includes(q))&&(!r||e.dataset.region===r)&&(!p||e.dataset.period===p);e.hidden=!ok;if(ok)shown++;});
+  count.textContent='Showing '+shown+' of '+events.length+' milestones';empty.style.display=shown?'none':'block';
+ }
+ [search,region,period].forEach(el=>el.addEventListener('input',apply));apply();
+})();
+</script>
+</body></html>
