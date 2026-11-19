@@ -19,10 +19,10 @@ a{color:inherit}.top{background:var(--navy);color:#f8f5ed;padding:18px max(20px,
 .note{background:#e9eef4;border-left:4px solid var(--cyan);padding:16px 18px;border-radius:8px;margin:28px 0 42px;color:#34445b}.footer{background:var(--navy);color:#dce4ef;padding:28px 20px;text-align:center;font:13px Arial,sans-serif}.footer a{color:var(--gold)}
 @media(max-width:850px){.pillgrid{grid-template-columns:repeat(2,1fr)}.cards{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.cards{grid-template-columns:1fr}.hero{padding:40px 16px}.toolbar>*{width:100%}.brand nav{gap:10px}}
 </style>
-<style id="oow-rights-review-style">.oow-rights-review{margin:18px auto;max-width:1100px;padding:12px 16px;border:1px solid rgba(212,168,67,.55);border-radius:10px;background:rgba(212,168,67,.08);color:inherit;font:14px/1.6 Arial,sans-serif}.oow-rights-review a{color:#4dd9e8}.oow-rights-review strong{color:#d4a843}@media(max-width:600px){.oow-rights-review{margin:12px;padding:12px;font-size:13px}}</style>
 </head>
 <body>
-<aside class="oow-rights-review" role="note"><strong>Editorial & rights review:</strong> Ocean of Wisdom is reviewing historical quotations, translations, recordings, images and attributions across the site. This page's explanations are editorial summaries; linked sources are references, not reuse permissions. Audio playback and unverified third-party media are temporarily unavailable while rights and provenance are checked. <a href="../editorial-policy.html">Read our editorial and rights policy</a>.</aside>
+<a class="oow-home-button" href="../index.html">⌂ HOME</a><style>.oow-home-button{display:inline-flex;margin:12px 16px;padding:10px 20px;border:1px solid #d4a843;border-radius:999px;background:#10203a;color:#f5f0e6;text-decoration:none;font:600 14px Arial,sans-serif}</style>
+
 <header class="top"><div class="brand wrap"><a href="../index.html">◈ Ocean of Wisdom</a><nav><a href="../index.html">Home</a><a href="../calendar/">Astronomical Calendar</a><a href="../wisdom-feed.html">Wisdom Articles</a></nav></div></header>
 <section class="hero"><div class="wrap"><div class="eyebrow" id="eyebrow">A living research collection</div><h1 id="heroTitle">The Global Knowledge Atlas</h1><p id="heroText">Explore humanity's ideas, discoveries and cultural heritage across time and place. Search a subject, follow its history and examine the sources.</p></div></section>
 <main class="wrap">
@@ -112,5 +112,4 @@ const found=records.filter(r=>(cat.value==='all'||r.cat===cat.value)&&(period.va
 document.getElementById('count').textContent=found.length+' records';results.innerHTML=found.length?found.map(r=>'<article class="card"><div class="tag">'+catNames[r.cat]+'</div><h3>'+r.title+'</h3><p>'+r.desc+'</p><div class="meta"><span>'+periodNames[r.period]+'</span><a href="'+r.source+'" target="_blank" rel="noopener">Consult research reference ↗</a></div></article>').join(''):'<div class="empty">'+t.empty+'</div>';}
 [cat,period,lang].forEach(el=>el.addEventListener('change',render));document.querySelectorAll('.pill').forEach(b=>b.addEventListener('click',()=>{cat.value=b.dataset.cat;render();document.getElementById('resultsTitle').scrollIntoView({behavior:'smooth'});}));render();
 </script>
-<style>.audio-btn, audio{display:none!important}</style>
 </body></html>
