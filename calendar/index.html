@@ -1,1 +1,478 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Surya Siddhanta — Modern Astronomical Calendar</title>
+<style>
+:root{--bg:#f4f0e7;--panel:#fffdf8;--ink:#29251f;--muted:#716b60;--accent:#9b5b1b;--line:#ded5c7;--warn:#fff0d6}
+@media(prefers-color-scheme:dark){:root{--bg:#171715;--panel:#23221f;--ink:#f2eee6;--muted:#b9b1a4;--accent:#e5a65e;--line:#45413a;--warn:#40311c}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,"Noto Sans Tamil","Noto Sans Malayalam","Noto Sans Devanagari",sans-serif}
+header{padding:25px 16px 18px;text-align:center;background:linear-gradient(135deg,#3d2918,#89521f);color:#fff}
+header h1{font-family:Georgia,serif;letter-spacing:.08em;font-size:clamp(1.4rem,5vw,2.3rem);margin:0}
+header p{margin:7px 0 0;color:#f2dfc7}
+main{max-width:980px;margin:auto;padding:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px;margin:12px 0;box-shadow:0 2px 8px #00000008}
+h2{font-size:1.1rem;margin:0 0 12px;color:var(--accent)}
+.row{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+input,select,button{font:inherit;border:1px solid var(--line);border-radius:9px;padding:10px;background:var(--panel);color:var(--ink)}
+button{background:var(--accent);color:white;border:0;font-weight:650;cursor:pointer}
+button.secondary{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+input[type=text]{min-width:170px}
+input[type=number]{width:105px}
+label{display:grid;gap:4px;font-size:.9rem;color:var(--muted)}
+.bigdate{font-size:1.6rem;font-weight:750;letter-spacing:.01em}
+.sub{color:var(--muted);font-size:.9rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:10px}
+.metric{padding:11px;border:1px solid var(--line);border-radius:10px}
+.metric b{display:block;color:var(--muted);font-size:.78rem;font-weight:650;text-transform:uppercase;letter-spacing:.05em}
+.metric span{display:block;font-size:1.03rem;margin-top:3px}
+.warning{background:var(--warn);border-radius:10px;padding:12px;font-size:.9rem}
+table{width:100%;border-collapse:collapse}td,th{text-align:left;padding:9px 5px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--muted);font-size:.82rem}
+footer{padding:20px;text-align:center;color:var(--muted);font-size:.82rem}
+.small{font-size:.82rem;color:var(--muted)}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<header>
+<h1>SURYA SIDDHANTA</h1>
+<p>Vedic-era to future research calendar · Panchang · Moon & Planetary Sky</p>
+<p>தமிழ் · മലയാളം · हिन्दी · English</p>
+</header>
+<main>
+<div class="warning" id="engineStatus">Loading Swiss Ephemeris and browser astronomy engine… Internet connection is required for calculations.</div>
+<div class="small"><b>Historical research note:</b> 10 January 5114 BCE (astronomical year -5113), 12:30 PM, Ayodhya is one published proposed astronomical reconstruction of Rama’s birth, not a historically established or universally accepted date. This calendar tests the sky against that candidate; it does not assume the candidate is correct. Published sources also differ in BCE/astronomical-year and Julian/Gregorian notation, and the historical date remains disputed.</div>
+<div class="warning"><b>Extended research range:</b> 13,000 BCE–2526 CE. This is an astronomical exploration window, not a claim that the Vedic texts date to 13,000 BCE. Swiss Ephemeris is designed for long-range calculations, but the available browser build and individual calculations have different limits. Historical sunrise/sunset and visibility are estimates where Earth-rotation or model uncertainty is significant.</div>
+<section class="card">
+<h2>Select a date</h2>
+<div class="row">
+<label>Choose date <input id="dateInput" type="text" inputmode="text" value="-5113-01-10" placeholder="5114 BCE-01-19 or 2026-11-19"></label>
+<button id="searchDateBtn">OK</button>
+</div>
+<div class="row" style="margin-top:12px">
+ <span class="small" style="align-self:center">Jump 100 years:</span>
+ <button type="button" class="secondary" id="jumpBack100">−100 years</button>
+ <button type="button" class="secondary" id="jumpForward100">+100 years</button>
+ <span class="small" style="align-self:center">Jump 1,000 years:</span>
+ <button type="button" class="secondary" id="jumpBack1000">−1,000 years</button>
+ <button type="button" class="secondary" id="jumpForward1000">+1,000 years</button>
+</div>
+<p class="small">Enter YYYY-MM-DD for CE, or YYYY BCE-MM-DD for BCE (example: 5114 BCE-01-19), then press OK. Supported research dates: -12999-08-11 (13,000 BCE) through 2526-12-31. Year 0 = 1 BCE; year -12999 = 13,000 BCE. Dates use the proleptic Gregorian calendar.</p>
+<div id="dateHeading" class="bigdate"></div>
+<div id="dateAlt" class="sub"></div>
+</section>
 
+<section class="card">
+<h2>Observer location & local time</h2>
+<div class="grid">
+<label>Country <select id="countrySelect"><option value="India">India</option></select></label>
+<label>Place / city <input id="place" value="Ayodhya, India"></label>
+<label>Birth / observation time (local) <input id="birthTime" type="time" value="12:30"></label>
+<label>Latitude (north +) <input id="lat" type="number" step="0.0001" value="26.7922"></label>
+<label>Longitude (east +) <input id="lon" type="number" step="0.0001" value="82.1998"></label>
+<label>UTC offset (hours) <input id="tz" type="number" step="0.25" value="5.5"></label>
+</div>
+<p class="small">Select a country, then enter the city and its coordinates if needed. Enter the local birth time to identify the Nakshatra and its exact transition window. Historical and far-future clock times have uncertainty because Earth's rotation changes. Ancient local clock times are reconstructions, not recorded civil times.</p>
+</section>
+
+<section class="card">
+<h2>Daily Panchang — calculated estimate</h2>
+<div class="grid" id="panchang"></div>
+<p id="panchangNote" class="small"></p>
+</section>
+
+<section class="card">
+<h2>Moon phase on the selected date</h2><div id="moonPhase" class="row" style="align-items:center;gap:18px"></div></section>
+<section class="card"><h2>Planet positions & visibility</h2><div id="planetVisibility" class="grid"></div></section>
+<section class="card"><h2>Sunrise, Rahu Kaal & traditional day periods</h2>
+<div class="grid" id="daytimes"></div>
+<p class="small">Rahu Kaal is a traditional weekday division of daylight, not an astronomical force or a scientifically demonstrated bad-time interval. Yamagandam and Gulikai are shown by the same traditional eight-part method. Timings depend on local sunrise and sunset. Sunrise/sunset use Astronomy Engine when its library loads, with a NOAA approximation as fallback.</p>
+</section>
+
+
+
+
+
+
+
+<section class="card" id="eclipses"><h2>Solar & lunar eclipse on this date</h2>
+<div id="eclipseToday" class="grid"><div class="metric">Select a date and press OK.</div></div>
+<p class="small">Global eclipse search; local solar visibility and Moon-above-horizon status are checked for the selected location. Eclipse predictions remain limited to the supported range of the loaded astronomy engine (currently 1800–2200).</p></section>
+
+
+
+
+<footer>SSMC research prototype · Extended-range model: Swiss Ephemeris (DE431-derived) plus Astronomy Engine 2.1.19 by Don Cross (MIT License): <a href="https://github.com/cosinekitty/astronomy" target="_blank" rel="noopener">source & methodology</a> · <a href="https://github.com/cosinekitty/astronomy/blob/master/LICENSE" target="_blank" rel="noopener">MIT licence</a></footer>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/astronomy-engine@2.1.19/astronomy.browser.min.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+window.addEventListener("load",()=>{$("engineStatus").textContent=astroReady()?"Astronomy Engine loaded · daily sky calculations ready.":"Astronomy Engine did not load. Connect to the internet and reload."; if(astroReady())render();});
+const monthsEn=["January","February","March","April","May","June","July","August","September","October","November","December"];
+const tithiNames=["Pratipada","Dvitiya","Tritiya","Chaturthi","Panchami","Shashthi","Saptami","Ashtami","Navami","Dashami","Ekadashi","Dwadashi","Trayodashi","Chaturdashi","Purnima"];
+const nak=[
+["Ashwini","அசுவினி","അശ്വതി","अश्विनी"],["Bharani","பரணி","ഭരണി","भरणी"],["Krittika","கார்த்திகை","കാർത്തിക","कृत्तिका"],
+["Rohini","ரோகிணி","രോഹിണി","रोहिणी"],["Mrigashira","மிருகசீரிடம்","മകയിരം","मृगशिरा"],["Ardra","திருவாதிரை","തിരുവാതിര","आर्द्रा"],
+["Punarvasu","புனர்பூசம்","പുണർതം","पुनर्वसु"],["Pushya","பூசம்","പൂയം","पुष्य"],["Ashlesha","ஆயில்யம்","ആയില്യം","आश्लेषा"],
+["Magha","மகம்","മകം","मघा"],["Purva Phalguni","பூரம்","പൂരം","पूर्वाफाल्गुनी"],["Uttara Phalguni","உத்திரம்","ഉത്രം","उत्तराफाल्गुनी"],
+["Hasta","அஸ்தம்","അത്തം","हस्त"],["Chitra","சித்திரை","ചിത്തിര","चित्रा"],["Swati","சுவாதி","ചോതി","स्वाति"],
+["Vishakha","விசாகம்","വിശാഖം","विशाखा"],["Anuradha","அனுஷம்","അനിഴം","अनुराधा"],["Jyeshtha","கேட்டை","തൃക്കേട്ട","ज्येष्ठा"],
+["Mula","மூலம்","മൂലം","मूल"],["Purva Ashadha","பூராடம்","പൂരാടം","पूर्वाषाढ़ा"],["Uttara Ashadha","உத்திராடம்","ഉത്രാടം","उत्तराषाढ़ा"],
+["Shravana","திருவோணம்","തിരുവോണം","श्रवण"],["Dhanishta","அவிட்டம்","അവിട്ടം","धनिष्ठा"],["Shatabhisha","சதயம்","ചതയം","शतभिषा"],
+["Purva Bhadrapada","பூரட்டாதி","പൂരുരുട്ടാതി","पूर्वभाद्रपदा"],["Uttara Bhadrapada","உத்திரட்டாதி","ഉത്രട്ടാതി","उत्तरभाद्रपदा"],["Revati","ரேவதி","രേവതി","रेवती"]];
+const yogas=["Vishkambha","Priti","Ayushman","Saubhagya","Shobhana","Atiganda","Sukarma","Dhriti","Shula","Ganda","Vriddhi","Dhruva","Vyaghata","Harshana","Vajra","Siddhi","Vyatipata","Variyana","Parigha","Shiva","Siddha","Sadhya","Shubha","Shukla","Brahma","Indra","Vaidhriti"];
+const rahu=[7,1,6,4,5,3,2], yama=[4,3,2,1,0,6,5], gulika=[6,5,4,3,2,1,0]; // Mon..Sun
+function fmtYear(y){return y<=0?`${1-y} BCE`:`${y} CE`}
+function dateParts(s){
+ s=(s||"").trim();
+ let m=s.match(/^(\d+)\s*BCE[- ](\d\d)-(\d\d)$/i);
+ if(m)return {y:1-(+m[1]),mo:+m[2],d:+m[3]};
+ m=s.match(/^(\d{1,2})\s+([A-Za-z]+)\s+(\d+)\s*BCE$/i);
+ if(m){const mi=monthsEn.findIndex(x=>x.toLowerCase().startsWith(m[2].toLowerCase()));if(mi>=0)return {y:1-(+m[3]),mo:mi+1,d:+m[1]};}
+ m=s.match(/^(\d+)-(\d\d)-(\d\d)\s*BCE$/i);
+ if(m)return {y:1-(+m[1]),mo:+m[2],d:+m[3]};
+ m=s.match(/^([+-]?\d+)-(\d\d)-(\d\d)$/);
+ return m?{y:+m[1],mo:+m[2],d:+m[3]}:null;
+}
+function iso(y,m,d){return `${y<0?"-"+String(-y).padStart(4,"0"):String(y).padStart(4,"0")}-${String(m).padStart(2,"0")}-${String(d).padStart(2,"0")}`}
+function leap(y){return y%4===0&&(y%100!==0||y%400===0)}
+function daysInMonth(y,m){return [31,leap(y)?29:28,31,30,31,30,31,31,30,31,30,31][m-1]}
+function addYears(y,m,d,n){let ny=y+n;return iso(ny,m,Math.min(d,daysInMonth(ny,m)))}
+function parseDateInput(){let v=$("dateInput").value.trim(); if(v) {let a=dateParts(v); if(a && (a.y>-12999 || (a.y===-12999 && (a.mo>8 || (a.mo===8 && a.d>=11)))) && a.y<=2526 && a.mo>=1 && a.mo<=12 && a.d>=1 && a.d<=daysInMonth(a.y,a.mo)) return a;} return null}
+function jd(y,m,d){if(m<=2){y--;m+=12}let a=Math.floor(y/100),b=2-a+Math.floor(a/4);return Math.floor(365.25*(y+4716))+Math.floor(30.6001*(m+1))+d+b-1524.5}
+function norm(x){return ((x%360)+360)%360}
+function sunMoon(j){
+ let T=(j-2451545)/36525;
+ let L0=norm(280.46646+36000.76983*T+0.0003032*T*T);
+ let M=norm(357.52911+35999.05029*T-0.0001537*T*T);
+ let C=(1.914602-0.004817*T-0.000014*T*T)*Math.sin(M*Math.PI/180)+(0.019993-0.000101*T)*Math.sin(2*M*Math.PI/180)+0.000289*Math.sin(3*M*Math.PI/180);
+ let sun=norm(L0+C);
+ let Lp=norm(218.3164477+481267.88123421*T-0.0015786*T*T);
+ let D=norm(297.8501921+445267.1114034*T-0.0018819*T*T);
+ let Ms=norm(357.5291092+35999.0502909*T-0.0001536*T*T);
+ let Mm=norm(134.9633964+477198.8675055*T+0.0087414*T*T);
+ let F=norm(93.272095+483202.0175233*T-0.0036539*T*T);
+ let moon=Lp+6.289*Math.sin(Mm*Math.PI/180)+1.274*Math.sin((2*D-Mm)*Math.PI/180)+0.658*Math.sin(2*D*Math.PI/180)+0.214*Math.sin(2*Mm*Math.PI/180)-0.186*Math.sin(Ms*Math.PI/180)-0.114*Math.sin(2*F*Math.PI/180);
+ return {sun:norm(sun-24),moon:norm(moon-24)}; // approximate Lahiri-like offset only; labelled clearly
+}
+function timeStr(hours){if(!isFinite(hours))return "—";hours=(hours+24)%24;let h=Math.floor(hours),m=Math.round((hours-h)*60);if(m===60){h=(h+1)%24;m=0}return `${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}`}
+function sunTimes(y,m,d,lat,lon,tz){
+ // Prefer Astronomy Engine's apparent sunrise/sunset search. The search begins
+ // at local midnight converted to UTC, so the selected civil date is respected.
+ if(window.Astronomy && Astronomy.SearchRiseSet && Astronomy.Observer){
+  try{
+   const observer=new Astronomy.Observer(lat,lon,0);
+   const localMidnightUTC=new Date(Date.UTC(y,m-1,d)-tz*3600000);
+   const rise=Astronomy.SearchRiseSet(Astronomy.Body.Sun,observer,+1,localMidnightUTC,1,0);
+   const set=Astronomy.SearchRiseSet(Astronomy.Body.Sun,observer,-1,localMidnightUTC,1,0);
+   const localHours=event=>{
+    if(!event)return NaN;
+    const eventDate=event.date instanceof Date?event.date:(typeof event.ToDate==='function'?event.ToDate():null);
+    if(!eventDate || !isFinite(eventDate.getTime()))return NaN;
+    const local=new Date(eventDate.getTime()+tz*3600000);
+    // Guard against an event returned from an adjacent civil date.
+    if(local.getUTCFullYear()!==y || local.getUTCMonth()!==m-1 || local.getUTCDate()!==d)return NaN;
+    return local.getUTCHours()+local.getUTCMinutes()/60+local.getUTCSeconds()/3600;
+   };
+   return {rise:localHours(rise),set:localHours(set),method:'Astronomy Engine'};
+  }catch(err){console.warn('Astronomy Engine rise/set failed; using NOAA fallback.',err);}
+ }
+ // NOAA approximation fallback when the astronomy library is unavailable.
+ let day=Math.floor((jd(y,m,d)-jd(y,1,1)))+1;
+ let lngHour=lon/15;
+ function calc(rise){
+  let t=day+((rise?6:18)-lngHour)/24;
+  let M=0.9856*t-3.289;
+  let L=norm(M+1.916*Math.sin(M*Math.PI/180)+0.020*Math.sin(2*M*Math.PI/180)+282.634);
+  let RA=norm(Math.atan(0.91764*Math.tan(L*Math.PI/180))*180/Math.PI);
+  RA+=(Math.floor(L/90)*90-Math.floor(RA/90)*90);RA/=15;
+  let sinDec=0.39782*Math.sin(L*Math.PI/180),cosDec=Math.cos(Math.asin(sinDec));
+  let cosH=(Math.cos(90.833*Math.PI/180)-sinDec*Math.sin(lat*Math.PI/180))/(cosDec*Math.cos(lat*Math.PI/180));
+  if(cosH>1||cosH< -1)return NaN;
+  let H=(rise?360-Math.acos(cosH)*180/Math.PI:Math.acos(cosH)*180/Math.PI)/15;
+  let UT=(H+RA-0.06571*t-6.622-lngHour);
+  return (UT+tz+24)%24;
+ }
+ return {rise:calc(true),set:calc(false),method:'NOAA approximation'};
+}
+function dateDay(y,m,d){let z=Math.floor(jd(y,m,d)+1.5);return ((z%7)+7)%7} // normalize modulo for negative Julian dates // 0 Sunday
+const zodiacSigns=["Aries","Taurus","Gemini","Cancer","Leo","Virgo","Libra","Scorpio","Sagittarius","Capricorn","Aquarius","Pisces"];
+const zodiacMulti=[["மேஷம்","മേടം","मेष"],["ரிஷபம்","ഇടവം","वृषभ"],["மிதுனம்","മിഥുനം","मिथुन"],["கடகம்","കർക്കടകം","कर्क"],["சிம்மம்","ചിങ്ങം","सिंह"],["கன்னி","കന്നി","कन्या"],["துலாம்","തുലാം","तुला"],["விருச்சிகம்","വൃശ്ചികം","वृश्चिक"],["தனுசு","ധനു","धनु"],["மகரம்","മകരം","मकर"],["கும்பம்","കുംഭം","कुम्भ"],["மீனம்","മീനം","मीन"]];
+const planetMulti={Mercury:"புதன் · ബുധൻ · बुध",Venus:"சுக்கிரன் · ശുക്രൻ · शुक्र",Mars:"செவ்வாய் · ചൊവ്വ · मंगल",Jupiter:"குரு · വ്യാഴം · गुरु",Saturn:"சனி · ശനി · शनि"};
+const worldCities=[["Amsterdam, Netherlands",52.3676,4.9041,1],["Athens, Greece",37.9838,23.7275,2],["Auckland, New Zealand",-36.8485,174.7633,12],["Bangkok, Thailand",13.7563,100.5018,7],["Beijing, China",39.9042,116.4074,8],["Berlin, Germany",52.52,13.405,1],["Cairo, Egypt",30.0444,31.2357,2],["Cape Town, South Africa",-33.9249,18.4241,2],["Chicago, USA",41.8781,-87.6298,-6],["Delhi, India",28.6139,77.209,5.5],["Dubai, UAE",25.2048,55.2708,4],["Hong Kong, China",22.3193,114.1694,8],["Honolulu, USA",21.3069,-157.8583,-10],["Istanbul, Türkiye",41.0082,28.9784,3],["Jakarta, Indonesia",-6.2088,106.8456,7],["Johannesburg, South Africa",-26.2041,28.0473,2],["Karachi, Pakistan",24.8607,67.0011,5],["Kathmandu, Nepal",27.7172,85.324,5.75],["Kolkata, India",22.5726,88.3639,5.5],["Kuala Lumpur, Malaysia",3.139,101.6869,8],["Lagos, Nigeria",6.5244,3.3792,1],["London, United Kingdom",51.5072,-0.1276,0],["Los Angeles, USA",34.0522,-118.2437,-8],["Madrid, Spain",40.4168,-3.7038,1],["Mexico City, Mexico",19.4326,-99.1332,-6],["Mumbai, India",19.076,72.8777,5.5],["Nairobi, Kenya",-1.2921,36.8219,3],["New York, USA",40.7128,-74.006,-5],["Oslo, Norway",59.9139,10.7522,1],["Paris, France",48.8566,2.3522,1],["Perth, Australia",-31.9505,115.8605,8],["Riyadh, Saudi Arabia",24.7136,46.6753,3],["Rome, Italy",41.9028,12.4964,1],["San Francisco, USA",37.7749,-122.4194,-8],["Seoul, South Korea",37.5665,126.978,9],["Singapore",1.3521,103.8198,8],["Sydney, Australia",-33.8688,151.2093,10],["Tokyo, Japan",35.6762,139.6503,9],["Toronto, Canada",43.6532,-79.3832,-5],["Vancouver, Canada",49.2827,-123.1207,-8],["Vienna, Austria",48.2082,16.3738,1],["Warsaw, Poland",52.2297,21.0122,1]];
+// Astronomy Engine is a compact, validated browser astronomy library.
+// Lahiri ayanamsha here is a transparent linear approximation, not Swiss Ephemeris' full sidereal implementation.
+function lahiriAyan(date){return 23.85675 + (date.getUTCFullYear()-2000)*50.290966/3600;}
+function localToUTC(dt,time,tz){const [hh,mm]=(time||"12:00").split(":").map(Number);return new Date(Date.UTC(dt.y,dt.mo-1,dt.d,hh,mm)-tz*3600000);}
+function fmtLocal(date,tz){const x=new Date(date.getTime()+tz*3600000);return `${String(x.getUTCFullYear()).padStart(4,'0')}-${String(x.getUTCMonth()+1).padStart(2,'0')}-${String(x.getUTCDate()).padStart(2,'0')} ${String(x.getUTCHours()).padStart(2,'0')}:${String(x.getUTCMinutes()).padStart(2,'0')}:${String(x.getUTCSeconds()).padStart(2,'0')}`;}
+function astroReady(){return !!(window.Astronomy && Astronomy.EclipticGeoMoon && Astronomy.GeoVector && Astronomy.Observer);}
+function astroLongitudes(date){
+ const moon= Astronomy.EclipticGeoMoon(date).elon;
+ const sun= Astronomy.Ecliptic(Astronomy.GeoVector(Astronomy.Body.Sun,date,true)).elon;
+ const ay=lahiriAyan(date);
+ return {moon:norm(moon-ay),sun:norm(sun-ay),tropicalMoon:moon,tropicalSun:sun,ayan:ay};
+}
+function ascendantSidereal(date,lat,lon){
+ const st=norm((Astronomy.SiderealTime(date)*15)+lon);
+ const T=(date.getTime()/86400000+2440587.5-2451545)/36525;
+ const eps=(23.439291111-0.013004167*T-1.64e-7*T*T+5.04e-7*T*T*T)*Math.PI/180;
+ const th=st*Math.PI/180, ph=lat*Math.PI/180;
+ const tropical=norm(Math.atan2(Math.cos(th),-(Math.sin(th)*Math.cos(eps)+Math.tan(ph)*Math.sin(eps)))*180/Math.PI);
+ return norm(tropical-lahiriAyan(date));
+}
+function refineIndexTransition(indexFn,start,stepMinutes,direction,maxHours){
+ const t0=start.getTime(),step=stepMinutes*60000,idx0=indexFn(new Date(t0));let prev=t0;
+ for(let k=1;k<=Math.ceil(maxHours*60/stepMinutes);k++){
+  const cur=t0+direction*k*step,idx=indexFn(new Date(cur));
+  if(idx!==idx0){let lo=Math.min(prev,cur),hi=Math.max(prev,cur);const leftIdx=indexFn(new Date(lo));
+   while(hi-lo>1000){const mid=Math.floor((lo+hi)/2),mi=indexFn(new Date(mid));if(mi===leftIdx)lo=mid;else hi=mid;}
+   return new Date(hi);
+  }
+  prev=cur;
+ }
+ return null;
+}
+function langRows(term){return term;}
+const tr={
+ nak:['Nakshatra / நட்சத்திரம் / നക്ഷത്രം / नक्षत्र'],tithi:['Tithi / திதி / തിഥി / तिथि'],yoga:['Yoga / யோகம் / യോഗം / योग'],karana:['Karana / கரணம் / കരണം / करण'],lagna:['Lagna / லக்னம் / ലഗ്നം / लग्न'],moon:['Moon / சந்திரன் / ചന്ദ്രൻ / चन्द्रमा'],sun:['Sun / சூரியன் / സൂര്യൻ / सूर्य'],ayan:['Ayanamsha / அயனாம்சம் / അയനാംശം / अयनांश'],transition:['Transition / மாற்ற நேரம் / മാറ്റ സമയം / परिवर्तन समय'],planet:['Planet / கோள் / ഗ്രഹം / ग्रह'],alt:['Altitude / உயரம் / ഉയരം / ऊँचाई'],az:['Azimuth / திசைக்கோணம் / ദിശാകോണം / दिगंश']
+};
+
+// Swiss Ephemeris WebAssembly integration. The wrapper exposes the native Swiss Ephemeris API.
+function swissReady(){return !!(window.swissEngine && window.swissLoaded);}
+function utcJulian(date){
+ const y=date.getUTCFullYear(),m=date.getUTCMonth()+1,d=date.getUTCDate();
+ const h=date.getUTCHours()+date.getUTCMinutes()/60+date.getUTCSeconds()/3600+date.getUTCMilliseconds()/3600000;
+ return window.swissEngine.swe_julday(y,m,d,h,1);
+}
+function swissFlags(){
+ const s=window.swissEngine;
+ // Use the loaded Swiss Ephemeris DE431 segment for the selected epoch.
+ // Do not silently fall back to Moshier for deep-time dates.
+ return s.SEFLG_SWIEPH | s.SEFLG_SIDEREAL | s.SEFLG_SPEED;
+}
+function swissSiderealPosition(jd,id){
+ const s=window.swissEngine;
+ const r=s.swe_calc_ut(jd,id,swissFlags());
+ if(!r || !Number.isFinite(r[0])) throw new Error("Swiss Ephemeris returned an invalid position for body "+id);
+ return {lon:norm(r[0]),lat:r[1],dist:r[2],speed:r[3]};
+}
+function swissAyanamsa(jd){return window.swissEngine.swe_get_ayanamsa_ut(jd);}
+function nakIndexAt(date){const j=utcJulian(date),moon=swissSiderealPosition(j,1).lon;return Math.floor(norm(moon)/(360/27));}
+function nakWindowAt(date){
+ const current=nakIndexAt(date),step=10*60000,t=date.getTime();
+ let left=t,right=t,prev=current;
+ // Find the previous boundary (up to 36 hours back).
+ for(let x=t-step;x>=t-36*3600000;x-=step){const idx=nakIndexAt(new Date(x));if(idx!==current){let lo=x,hi=left;while(hi-lo>1000){const mid=Math.floor((lo+hi)/2);if(nakIndexAt(new Date(mid))===idx)lo=mid;else hi=mid;}left=hi;break;}left=x;}
+ // Find the next boundary (up to 36 hours ahead).
+ for(let x=t+step;x<=t+36*3600000;x+=step){const idx=nakIndexAt(new Date(x));if(idx!==current){let lo=right,hi=x;while(hi-lo>1000){const mid=Math.floor((lo+hi)/2);if(nakIndexAt(new Date(mid))===current)lo=mid;else hi=mid;}right=hi;break;}right=x;}
+ return {index:current,start:new Date(left),end:new Date(right)};
+}
+function localStamp(date,tz){const d=new Date(date.getTime()+tz*3600000);return `${String(d.getUTCHours()).padStart(2,'0')}:${String(d.getUTCMinutes()).padStart(2,'0')}`;}
+function localDateLabel(date,tz){const d=new Date(date.getTime()+tz*3600000);return `${String(d.getUTCDate()).padStart(2,'0')} ${monthsEn[d.getUTCMonth()]} ${fmtYear(d.getUTCFullYear())}`;}
+function dateKeyLocal(date,tz){const x=new Date(date.getTime()+tz*3600000);return `${x.getUTCFullYear()}-${String(x.getUTCMonth()+1).padStart(2,"0")}-${String(x.getUTCDate()).padStart(2,"0")}`;}
+function localDateTime(dt,hh,mm,tz){return new Date(Date.UTC(dt.y,dt.mo-1,dt.d,hh,mm)-tz*3600000);}
+function moonPhaseName(a){return ["New Moon","Waxing Crescent","First Quarter","Waxing Gibbous","Full Moon","Waning Gibbous","Last Quarter","Waning Crescent"][Math.floor((a+22.5)/45)%8];}
+function renderMoon(date,tz){
+ const host=$("moonPhase");
+ let a,illum;
+ if(swissReady()){
+  try{const j=utcJulian(date),sun=swissSiderealPosition(j,0).lon,moon=swissSiderealPosition(j,1).lon;a=norm(moon-sun);illum=(1-Math.cos(a*Math.PI/180))/2;}
+  catch(e){host.innerHTML='<div class="warning">Swiss Ephemeris could not calculate the Moon phase for this date.</div>';return;}
+ }else if(astroReady()&&date.getUTCFullYear()>=1800&&date.getUTCFullYear()<=2200){a=((Astronomy.MoonPhase(date)%360)+360)%360;illum=(1-Math.cos(a*Math.PI/180))/2;}
+ else {host.innerHTML='<div class="warning">Moon phase needs the Swiss Ephemeris engine. Connect to the internet and reload.</div>';return;}
+ const rad=a*Math.PI/180,wax=a<180;
+ // The illuminated limb is on the right while waxing and on the left while waning
+ // (standard Northern Hemisphere presentation). The terminator's bulge is
+ // derived from the phase angle, not from a hand-picked crescent shape.
+ const r=43,termX=wax?50+Math.cos(rad)*r:50-Math.cos(rad)*r;
+ const outerSweep=wax?1:0;
+ const litPath=`M 50 7 A ${r} ${r} 0 0 ${outerSweep} 50 93 C ${termX.toFixed(3)} 78 ${termX.toFixed(3)} 22 50 7 Z`;
+ const key=`moon${Math.abs(Math.round(date.getTime()/60000))}`;
+ const dateLabel=dateKeyLocal(date,tz),pct=(illum*100).toFixed(1),phase=moonPhaseName(a);
+ const astroBinSince=new Date(Date.UTC(2011,0,1));
+ const astroBinQuery=encodeURIComponent(`site:astrobin.com Moon "${dateLabel}"`);
+ const astroBinUrl=`https://www.google.com/search?q=${astroBinQuery}`;
+ const astroBinInfo=date.getTime()<astroBinSince.getTime()
+  ? `<div class="small">AstroBin did not exist on this date (it launched in 2011), so an actual AstroBin photograph from this date cannot exist.</div>`
+  : `<div class="small">Public AstroBin search for this date. Open a result and verify its <b>acquisition date</b>; upload dates are not sufficient.</div><a href="${astroBinUrl}" target="_blank" rel="noopener noreferrer">Search public AstroBin photographs for ${dateLabel} ↗</a>`;
+ host.innerHTML=`<div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap"><svg viewBox="0 0 100 100" width="min(220px,42vw)" height="min(220px,42vw)" role="img" aria-label="Calculated ${phase}, ${pct}% illuminated" style="flex:0 0 auto"><defs>
+ <clipPath id="${key}clip"><circle cx="50" cy="50" r="43"/></clipPath>
+ <radialGradient id="${key}lit" cx="35%" cy="28%" r="75%"><stop offset="0" stop-color="#fff9df"/><stop offset=".62" stop-color="#e8dfbd"/><stop offset="1" stop-color="#b9ad8a"/></radialGradient>
+ <radialGradient id="${key}shade" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#343b4d"/><stop offset="1" stop-color="#111725"/></radialGradient>
+ <filter id="${key}soft"><feGaussianBlur stdDeviation=".55"/></filter>
+ </defs>
+ <circle cx="50" cy="50" r="43" fill="url(#${key}shade)"/>
+ <path d="${litPath}" fill="url(#${key}lit)"/>
+ <g clip-path="url(#${key}clip)">
+ <path d="${litPath}" fill="none"/>
+ <g clip-path="url(#${key}clip)">
+ <g opacity=".18" fill="#82785f">
+ <path d="M25 29 Q31 19 39 27 Q42 35 33 39 Q24 37 25 29Z"/><path d="M57 22 Q67 16 72 25 Q71 34 61 33 Q54 29 57 22Z"/><path d="M29 58 Q37 49 44 57 Q47 67 37 71 Q28 68 29 58Z"/><path d="M58 57 Q66 48 75 56 Q79 66 68 71 Q58 68 58 57Z"/><path d="M44 78 Q51 70 58 77 Q60 85 51 88 Q43 86 44 78Z"/>
+ </g>
+ <g fill="none" stroke="#8b8066" stroke-width=".8" opacity=".48">
+ <circle cx="33" cy="31" r="5"/><circle cx="33" cy="31" r="3.1"/><circle cx="64" cy="27" r="4.2"/><circle cx="64" cy="27" r="2.5"/><circle cx="43" cy="57" r="6"/><circle cx="43" cy="57" r="4"/><circle cx="70" cy="62" r="5"/><circle cx="70" cy="62" r="3"/><circle cx="54" cy="79" r="3.5"/>
+ </g>
+ <g fill="#fff9e5" opacity=".22" filter="url(#${key}soft)"><circle cx="31" cy="29" r="1.4"/><circle cx="61" cy="25" r="1.2"/><circle cx="40" cy="54" r="1.8"/><circle cx="67" cy="59" r="1.4"/></g>
+ </g></g>
+ <circle cx="50" cy="50" r="43" fill="none" stroke="#b7a77f" stroke-width="1.1"/></svg>
+ <div><b>${phase}</b><div>${pct}% illuminated</div><div class="small">${wax?"Waxing":"Waning"} Moon · local date ${dateLabel}</div><div class="small">Calculated phase graphic · not an actual photograph</div></div></div>
+ <div style="margin-top:14px">${astroBinInfo}</div>`;
+}
+function renderPlanets(y,m,d,lat,lon,tz,st){
+ const host=$("planetVisibility");
+ if(swissReady()){
+  try{
+   const sample=localDateTime({y,mo:m,d},12,30,tz),j=utcJulian(sample);
+   const signs=["Aries","Taurus","Gemini","Cancer","Leo","Virgo","Libra","Scorpio","Sagittarius","Capricorn","Aquarius","Pisces"];
+   const bodies=[["Sun",0],["Moon",1],["Mercury",2],["Venus",3],["Mars",4],["Jupiter",5],["Saturn",6]];
+   const rows=bodies.map(([name,id])=>{const p=swissSiderealPosition(j,id),sg=Math.floor(p.lon/30),deg=p.lon%30;return `<div class="metric"><b>${name}</b><span>${signs[sg]} ${deg.toFixed(3)}° · sidereal longitude ${p.lon.toFixed(4)}°</span></div>`;});
+   host.innerHTML=rows.join("")+'<div class="small">DE431 geocentric sidereal positions at 12:30 local time. These are calculated celestial positions, not a guarantee of naked-eye visibility. Ancient local horizon visibility needs a separate Earth-rotation and observer model.</div>';
+   return;
+  }catch(e){host.innerHTML=`<div class="warning">Historical planetary positions unavailable: ${String(e)}</div>`;return;}
+ }
+ if(!astroReady()||y<1800||y>2200){host.innerHTML='<div class="warning">Planet visibility is not yet validated for this deep-time date. Historical ephemeris data are needed for planetary positions.</div>';return;}
+ const sunset=isFinite(st.set)?st.set:18.5,mins=Math.round((sunset+1)*60),obsTime=localDateTime({y,mo:m,d},Math.floor(mins/60)%24,mins%60,tz),observer=new Astronomy.Observer(lat,lon,0),sun=Astronomy.GeoVector(Astronomy.Body.Sun,obsTime,true),arr=[];
+ for(const name of ["Mercury","Venus","Mars","Jupiter","Saturn"]){try{
+  const eq=Astronomy.Equator(Astronomy.Body[name],obsTime,observer,true,true),h=Astronomy.Horizon(obsTime,observer,eq.ra,eq.dec,"normal"),sep=Astronomy.AngleBetween(Astronomy.GeoVector(Astronomy.Body[name],obsTime,true),sun),mag=Astronomy.Illumination(Astronomy.Body[name],obsTime).mag;
+  arr.push({name,alt:h.altitude,az:h.azimuth,sep,mag});
+ }catch(e){}}
+ const good=arr.filter(x=>x.alt>10&&x.sep>10).sort((a,b)=>a.mag-b.mag),clock=`${String(Math.floor(mins/60)%24).padStart(2,"0")}:${String(mins%60).padStart(2,"0")}`;
+ if(!good.length){host.innerHTML=`<div class="metric"><b>No planet well placed</b><span>At about ${clock} local time, no listed planet is both above 10° altitude and more than 10° from the Sun.</span></div>`;return;}
+ const b=good[0];host.innerHTML=`<div class="metric"><b>Best candidate · ${b.name}</b><span>Visual magnitude ${b.mag.toFixed(1)} · altitude ${b.alt.toFixed(1)}° · azimuth ${b.az.toFixed(0)}°</span><span class="small">Estimated about one hour after sunset (${clock} local time).</span></div><div class="metric"><b>Other candidates</b><span>${good.slice(1).map(x=>`${x.name} (${x.mag.toFixed(1)} mag; ${x.alt.toFixed(0)}° high)`).join(" · ")||"None pass the screening thresholds."}</span></div><p class="small">Ranked by computed apparent visual magnitude, screened for altitude and solar separation. Weather, haze, twilight and obstructions affect actual visibility.</p>`;
+}
+function peakDate(e){const p=e&&e.peak;if(!p)return null;if(p.date instanceof Date)return p.date;if(p instanceof Date)return p;if(typeof p.toDate==="function")return p.toDate();return null;}
+function findEclipse(searchFn,nextFn,start,key,tz){
+ let e=null;try{e=searchFn(start);}catch(x){return null;}
+ for(let i=0;i<6&&e;i++){const d=peakDate(e);if(!d)return null;const k=dateKeyLocal(d,tz);if(k===key)return e;if(k>key)return null;try{e=nextFn(e.peak);}catch(x){return null;}}
+ return null;
+}
+function renderEclipses(dt,lat,lon,tz){
+ const host=$("eclipseToday");
+ if(!astroReady()||dt.y<1800||dt.y>2200){host.innerHTML='<div class="warning">Eclipse details are limited to 1800–2200 CE in this browser engine. No eclipse claim is made outside that interval.</div>';return;}
+ const start=localDateTime(dt,0,0,tz),key=iso(dt.y,dt.mo,dt.d),from=new Date(start.getTime()-86400000);
+ const solar=findEclipse(Astronomy.SearchGlobalSolarEclipse,Astronomy.NextGlobalSolarEclipse,from,key,tz),lunar=findEclipse(Astronomy.SearchLunarEclipse,Astronomy.NextLunarEclipse,from,key,tz),out=[];
+ if(solar){let local="Global eclipse; local visibility not confirmed.";try{const le=Astronomy.SearchLocalSolarEclipse(from,new Astronomy.Observer(lat,lon,0)),lp=peakDate(le);local=lp&&dateKeyLocal(lp,tz)===key?"Local solar eclipse predicted at this location.":"Not visible from selected location.";}catch(e){}
+  out.push(`<div class="metric"><b>${["Partial solar","Annular solar","Total solar"][solar.kind]||"Solar eclipse"}</b><span>Peak ${peakDate(solar)?.toISOString()||"time unavailable"} UTC</span><span class="small">${local}</span></div>`);
+ }else out.push('<div class="metric"><b>No solar eclipse</b><span>No global solar-eclipse peak falls on this date.</span></div>');
+ if(lunar){const peak=peakDate(lunar);let local="Global lunar eclipse.";try{const o=new Astronomy.Observer(lat,lon,0),eq=Astronomy.Equator(Astronomy.Body.Moon,peak,o,true,true),h=Astronomy.Horizon(peak,o,eq.ra,eq.dec,"normal");local=h.altitude>0?"Moon above horizon at peak; potentially locally visible.":"Moon below horizon at peak; not locally visible then.";}catch(e){}
+  out.push(`<div class="metric"><b>${["Penumbral lunar","Partial lunar","Total lunar"][lunar.kind]||"Lunar eclipse"}</b><span>Peak ${peak?.toISOString()||"time unavailable"} UTC</span><span class="small">${local}</span></div>`);
+ }else out.push('<div class="metric"><b>No lunar eclipse</b><span>No global lunar-eclipse peak falls on this date.</span></div>');
+ host.innerHTML=out.join("");
+}
+async function render(){
+ const dt=parseDateInput();if(!dt)return;
+ const {y,mo,d}=dt;
+ if(window.ensureSwissForYear){try{await window.ensureSwissForYear(y);}catch(e){const st=document.getElementById("engineStatus");if(st){st.className="warning";st.textContent="Historical ephemeris files could not be loaded: "+String(e);}}}
+ const lat=+$("lat").value,lon=+$("lon").value,tz=+$("tz").value;
+ const weekdays=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],wd=dateDay(y,mo,d);
+ $("dateHeading").textContent=`${weekdays[wd]} · ${d} ${monthsEn[mo-1]} ${fmtYear(y)}`;
+ $("dateAlt").textContent=`${y<=0?`${1-y} BCE-${String(mo).padStart(2,"0")}-${String(d).padStart(2,"0")}`:iso(y,mo,d)} · ${$("place").value}`;
+ const st=sunTimes(y,mo,d,lat,lon,tz);
+ if(!isFinite(st.rise)||!isFinite(st.set))$("daytimes").innerHTML='<div class="warning">Sunrise or sunset does not occur here on this date (polar day/night), or this approximation is outside its useful range.</div>';
+ else{const daylight=(st.set-st.rise+24)%24,seg=daylight/8,r=st.rise+rahu[wd]*seg,g=st.rise+gulika[wd]*seg,ym=st.rise+yama[wd]*seg;
+ $("daytimes").innerHTML=[["Sunrise",timeStr(st.rise)],["Sunset",timeStr(st.set)],["Rahu Kaal",`${timeStr(r)} – ${timeStr(r+seg)}`],["Gulikai",`${timeStr(g)} – ${timeStr(g+seg)}`],["Yamagandam",`${timeStr(ym)} – ${timeStr(ym+seg)}`]].map(x=>`<div class="metric"><b>${x[0]}</b><span>${x[1]}</span></div>`).join("")+ (y<1800||y>2200?'<div class="warning">Deep-time estimate: sunrise/sunset and derived periods have substantial uncertainty because ancient/future Earth rotation (ΔT/UT1) is not known precisely.</div>':'<div class="small">Modern-era sunrise/sunset estimate. Local horizon and atmospheric refraction can change observed times.</div>');}
+ const p=$("panchang");
+ if(swissReady()){try{
+  const timeValue=$("birthTime").value||"12:00",[bh,bm]=timeValue.split(":").map(Number),sample=localDateTime(dt,bh,bm,tz),j=utcJulian(sample),s=window.swissEngine;s.swe_set_sid_mode(s.SE_SIDM_LAHIRI,0,0);
+  const moon=swissSiderealPosition(j,1).lon,sun=swissSiderealPosition(j,0).lon,ayan=swissAyanamsa(j),el=norm(moon-sun),ti=Math.floor(el/12),ni=Math.floor(moon/(360/27)),yi=Math.floor(norm(sun+moon)/(360/27)),ki=Math.floor(el/6),nw=nakWindowAt(sample);
+  const tname=ti<15?tithiNames[ti]:(ti===29?"Amavasya":tithiNames[ti-15]),pak=ti<15?"Shukla Paksha":"Krishna Paksha";
+  p.innerHTML=[["Janma Nakshatra at entered time / பிறந்த நேர நட்சத்திரம்",nak[ni].join(" · ")],["Nakshatra time slot",`${localStamp(nw.start,tz)} (${localDateLabel(nw.start,tz)}) – ${localStamp(nw.end,tz)} (${localDateLabel(nw.end,tz)})`],["Tithi / திதி / തിഥி / तिथि",`${tname} · ${pak}`],["Yoga",yogas[yi]],["Karana",ki===0?"Kimstughna":ki===57?"Shakuni":ki===58?"Chatushpada":ki===59?"Naga":["Bava","Balava","Kaulava","Taitila","Garaja","Vanija","Vishti"][(ki-1)%7]],["Moon sidereal longitude",`${moon.toFixed(4)}°`],["Sun sidereal longitude",`${sun.toFixed(4)}°`],["Lahiri ayanāṃśa",`${ayan.toFixed(5)}°`]].map(x=>`<div class="metric"><b>${x[0]}</b><span>${x[1]}</span></div>`).join("");
+  $("panchangNote").textContent=`Astronomical reconstruction for the selected date and entered local time ${timeValue} using Swiss Ephemeris (Lahiri sidereal mode). Nakshatra transition times are model-derived. Deep-time uncertainty grows away from the modern era; regional conventions and ayanāṃśa choices can differ.`;
+ }catch(e){p.innerHTML=`<div class="warning">Swiss Ephemeris error: ${String(e)}</div>`;}}
+ else {p.innerHTML='<div class="warning">Waiting for Swiss Ephemeris. Reload with an internet connection if this remains.</div>';$("panchangNote").textContent="Enter the local birth time; Nakshatra and its transition slot are calculated using Swiss Ephemeris in Lahiri sidereal mode."; }
+ renderMoon(localDateTime(dt,12,0,tz),tz);renderPlanets(y,mo,d,lat,lon,tz,st);renderEclipses(dt,lat,lon,tz);
+}
+function showSelectedDate(){const dt=parseDateInput();if(!dt){$("dateAlt").textContent="Invalid date. For BCE, enter e.g. 5114 BCE-01-19; for CE, enter YYYY-MM-DD.";return;}render();}
+$("searchDateBtn").onclick=showSelectedDate;
+function jumpSelectedDate(years){
+ const dt=parseDateInput();
+ if(!dt){$("dateAlt").textContent="Enter a valid date within 13,000 BCE–2526 CE (BCE example: 5114 BCE-01-19) before using the jump buttons.";return;}
+ const next=addYears(dt.y,dt.mo,dt.d,years), parts=dateParts(next);
+ if(!parts || parts.y>2526 || parts.y< -12999 || (parts.y===-12999 && (parts.mo<8 || (parts.mo===8 && parts.d<11)))){$("dateAlt").textContent="That jump would go outside the supported date range (13,000 BCE–2526 CE).";return;}
+ $("dateInput").value=next;
+ render();
+}
+$("jumpBack100").onclick=()=>jumpSelectedDate(-100);
+$("jumpForward100").onclick=()=>jumpSelectedDate(100);
+$("jumpBack1000").onclick=()=>jumpSelectedDate(-1000);
+$("jumpForward1000").onclick=()=>jumpSelectedDate(1000);
+$("dateInput").addEventListener("keydown",e=>{if(e.key==="Enter")showSelectedDate()});
+["place","lat","lon","tz","birthTime"].forEach(id=>$(id).addEventListener("change",render));
+const countrySelect=$("countrySelect");
+const countryCities=new Map();
+for(const c of worldCities){const country=c[0].split(",").slice(-1)[0].trim();if(!countryCities.has(country))countryCities.set(country,[]);countryCities.get(country).push(c);}
+countrySelect.innerHTML="";
+[...countryCities.keys()].sort((a,b)=>a.localeCompare(b)).forEach(country=>{const o=document.createElement("option");o.value=country;o.textContent=country;countrySelect.appendChild(o);});
+countrySelect.value="India";
+countrySelect.addEventListener("change",()=>{const list=countryCities.get(countrySelect.value)||[];const c=list[0];if(c){$("place").value=c[0];$("lat").value=c[1];$("lon").value=c[2];$("tz").value=c[3];render();}});
+window.render=render;render();
+</script>
+
+<script type="module">
+(async()=>{
+ const status=document.getElementById("engineStatus");
+ try{
+  const mod=await import("https://esm.sh/astrosk-wasm@0.3.1");
+  const Astrosk=mod.Astrosk||mod.default?.Astrosk;
+  const SE=mod.SE||mod.default?.SE;
+  if(!Astrosk||!SE) throw new Error("Swiss Ephemeris wrapper did not expose Astrosk and SE.");
+  const engine=await Astrosk.init();
+  engine.setSidMode(SE.SIDM.LAHIRI);
+  let loadedKey="",loadPromise=null;
+  function filesForYear(y){
+   if(y<=0){
+    const bce=1-y;
+    if(bce===1) return ["sepl_00.se1","semo_00.se1"];
+    const n=Math.ceil(bce/600)*6, suffix=String(n).padStart(2,"0");
+    return [`seplm${suffix}.se1`,`semom${suffix}.se1`];
+   }
+   const n=y<=599?0:Math.ceil(y/600)*6, suffix=String(n).padStart(2,"0");
+   return [`sepl_${suffix}.se1`,`semo_${suffix}.se1`];
+  }
+  window.ensureSwissForYear=async(y)=>{
+   const files=filesForYear(y),key=files.join("|");
+   if(key===loadedKey) return;
+   if(loadPromise){await loadPromise;if(key===loadedKey)return;}
+   loadPromise=(async()=>{
+    status.className="metric";
+    status.textContent="Downloading historical Swiss Ephemeris DE431 files: "+files.join(", ");
+    await engine.setEphePath("https://raw.githubusercontent.com/aloistr/swisseph/master/ephe",{files,optional:false});
+    const jd=engine.julday(y,1,10,12.5);
+    const flags=SE.FLG.SWIEPH|SE.FLG.SPEED;
+    const checkMoon=engine.calcUt(jd,SE.MOON,flags);
+    const checkSun=engine.calcUt(jd,SE.SUN,flags);
+    if(!checkMoon||!Number.isFinite(checkMoon.longitude)||!checkSun||!Number.isFinite(checkSun.longitude)) throw new Error("DE431 verification failed for "+files.join(" + "));
+    loadedKey=key;
+    status.className="metric";
+    status.textContent="DE431 verified for Sun and Moon: "+files.join(" + ");
+   })();
+   try{await loadPromise;}finally{loadPromise=null;}
+  };
+  const adapter={
+   SEFLG_SWIEPH:SE.FLG.SWIEPH,SEFLG_SIDEREAL:SE.FLG.SIDEREAL,SEFLG_SPEED:SE.FLG.SPEED,
+   SE_SIDM_LAHIRI:SE.SIDM.LAHIRI,
+   swe_set_sid_mode:(mode)=>engine.setSidMode(mode),
+   swe_julday:(y,m,d,h)=>engine.julday(y,m,d,h),
+   swe_get_ayanamsa_ut:(jd)=>engine.getAyanamsaUt(jd),
+   swe_calc_ut:(jd,id,flags)=>{
+    const r=engine.calcUt(jd,id,flags);
+    return r?[r.longitude,r.latitude,r.distance,r.longitudeSpeed??r.speed??0]:null;
+   }
+  };
+  window.swissEngine=adapter;window.swissLoaded=true;
+  status.className="metric";
+  status.textContent="Swiss Ephemeris ready. DE431 data files load automatically for the selected date.";
+  const input=document.getElementById("dateInput").value;
+  const m=input.match(/^([+-]?\\d+)-/);
+  await window.ensureSwissForYear(m?Number(m[1]):2026);
+  if(typeof window.render==="function") await window.render();
+ }catch(e){
+  status.className="warning";
+  status.textContent="Astronomical engine could not initialize: "+String(e)+". Check internet access and reload.";
+ }
+})();
+</script>
+
+</body></html>
