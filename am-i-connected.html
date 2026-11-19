@@ -691,9 +691,8 @@
             });
             
             document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.remove('active');
+                btn.classList.toggle('active', btn.getAttribute('onclick') === "switchLang('" + lang + "')");
             });
-            event.target.classList.add('active');
             
             localStorage.setItem('preferred-lang', lang);
         }
