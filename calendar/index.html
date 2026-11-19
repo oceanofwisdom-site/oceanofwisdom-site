@@ -33,6 +33,38 @@ table{width:100%;border-collapse:collapse}td,th{text-align:left;padding:9px 5px;
 footer{padding:20px;text-align:center;color:var(--muted);font-size:.82rem}
 .small{font-size:.82rem;color:var(--muted)}
 .hidden{display:none}
+/* Ocean of Wisdom shared deep-navy, star-field page background */
+html {
+  min-height: 100%;
+  background: #1B2A4A !important;
+  background-color: #1B2A4A !important;
+}
+body {
+  min-height: 100vh;
+  position: relative;
+  isolation: isolate;
+  color: #E8E9ED;
+  background: transparent !important;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-color: #1B2A4A;
+  background-image:
+    radial-gradient(2px 2px at 12% 18%, rgba(220,230,255,.48) 45%, transparent 70%),
+    radial-gradient(1.5px 1.5px at 76% 24%, rgba(220,230,255,.42) 45%, transparent 70%),
+    radial-gradient(2px 2px at 42% 62%, rgba(220,230,255,.34) 45%, transparent 70%),
+    radial-gradient(1.5px 1.5px at 88% 78%, rgba(220,230,255,.4) 45%, transparent 70%),
+    radial-gradient(1px 1px at 22% 86%, rgba(220,230,255,.38) 45%, transparent 70%),
+    radial-gradient(ellipse at 50% 48%, rgba(44,65,105,.38), transparent 72%);
+  background-size: 230px 260px, 310px 330px, 270px 290px, 350px 370px, 290px 310px, 100% 100%;
+}
+.small, footer { color: #D5D9E5; }
+.warning { color: #29251f; }
+.card { color: var(--ink); }
 </style>
 </head>
 <body>
