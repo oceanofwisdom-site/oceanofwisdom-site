@@ -470,6 +470,33 @@
             color: #E8E9ED;
         }
     </style>
+    <style id="oow-full-page-background">
+        /* Persistent page-wide backdrop: prevents white gaps around content and canvas. */
+        html {
+            min-height: 100%;
+            background: #1B2A4A !important;
+            background-color: #1B2A4A !important;
+        }
+        body {
+            min-height: 100vh;
+            position: relative;
+            isolation: isolate;
+            background: transparent !important;
+            background-color: transparent !important;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background: #1B2A4A;
+        }
+        #stars-canvas {
+            background: transparent !important;
+            pointer-events: none;
+        }
+    </style>
     <script src="sd-i18n.js" defer></script>
 </head>
 <body>
