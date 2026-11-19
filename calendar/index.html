@@ -467,7 +467,7 @@ window.render=render;render();
   status.className="metric";
   status.textContent="Swiss Ephemeris ready. DE431 data files load automatically for the selected date.";
   const input=document.getElementById("dateInput").value;
-  const m=input.match(/^([+-]?\\d+)-/);
+  const m=input.match(/^([+-]?\d+)-/);
   await window.ensureSwissForYear(m?Number(m[1]):2026);
   if(typeof window.render==="function") await window.render();
  }catch(e){
