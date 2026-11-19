@@ -40,6 +40,15 @@ th{background:#eee5d5;color:#493d2e}
 footer{text-align:center;padding:25px;color:#d6deec;font:13px Arial,sans-serif}
 footer a{color:var(--gold)}
 @media(max-width:600px){article,.panel{padding:18px 17px}table{font-size:.84rem}th,td{padding:7px}}
+.evidence-collage{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:18px 0 10px}
+.evidence-card{display:flex;gap:13px;align-items:flex-start;min-width:0;padding:17px;border:1px solid #ded5c8;border-radius:13px;background:linear-gradient(145deg,#fffdf8,#f7f0e3);box-shadow:0 4px 13px #38271412}
+.evidence-icon{flex:0 0 42px;width:42px;height:42px;display:grid;place-items:center;border-radius:11px;background:#eee3ce;font-size:23px}
+.evidence-copy{min-width:0}
+.evidence-copy h3{margin:0 0 5px;color:#80501f;font-size:1.12rem;line-height:1.25}
+.evidence-copy p{margin:8px 0;color:#51483e;font-size:.94rem;line-height:1.55;overflow-wrap:anywhere}
+.evidence-copy .evidence-lead{margin:0;color:#8a602d;font:700 .72rem/1.4 Arial,sans-serif;letter-spacing:.055em;text-transform:uppercase}
+.evidence-copy .evidence-caution{padding:9px 10px;border-left:3px solid #c89c55;border-radius:5px;background:#f2e9d9}
+@media(max-width:640px){.evidence-collage{grid-template-columns:1fr;gap:11px}.evidence-card{padding:15px}.evidence-copy p{font-size:.93rem}}
 </style>
 </head>
 <body>
@@ -104,26 +113,24 @@ footer a{color:var(--gold)}
 <h2>Six principles visible in ancient water systems</h2>
 <div class="two">
 <div class="mini"><h3>1. Capture runoff</h3><p>Collect water when rainfall or seasonal streams are available instead of allowing all runoff to escape quickly.</p></div>
-<div class="mini"><h3>2. Slow the flow</h3><p>Bunds, check structures and channels can reduce flow velocity and help manage sediment, depending on site conditions.</p></div>
-<div class="mini"><h3>3. Store at several scales</h3><p>Household wells, neighbourhood reservoirs and larger tanks serve different needs and reduce dependence on one source.</p></div>
-<div class="mini"><h3>4. Fit the landscape</h3><p>Good design responds to slope, soil, rock, catchment boundaries, groundwater and the local rainfall regime.</p></div>
-<div class="mini"><h3>5. Separate clean and used water</h3><p>Urban wells, bathing areas and drains show the importance of managing different water uses and flows.</p></div>
-<div class="mini"><h3>6. Maintain institutions</h3><p>Desilting, bund repair, outlet management and fair allocation are as important as the original construction.</p></div>
+<div class="mini"><h3>2. Slow the flow</h3><p>Bunds, check structures and channels can reduce flow velocity and help manage sediment, depending on site conditions.</p></div<div class="evidence-collage" aria-label="Evidence types, what they reveal and how to interpret them">
+<div class="evidence-card">
+<div class="evidence-icon" aria-hidden="true">🏺</div>
+<div class="evidence-copy"><h3>Archaeological remains</h3><p class="evidence-lead">Reservoirs · Wells · Drains</p><p><strong>What they reveal</strong><br>Physical design, materials, location and construction phases.</p><p class="evidence-caution"><strong>Interpret with care</strong><br>Exact operating rules, ownership and everyday maintenance may remain uncertain.</p></div>
 </div>
-<p>These are analytical principles, not a claim that every ancient structure followed a single formal design code. Modern projects must also meet contemporary public-health, engineering and environmental standards.</p>
-</article>
-<article id="evidence">
-<div class="kicker">How historians and engineers know</div>
-<h2>Evidence, interpretation and limits</h2>
-<table>
-<thead><tr><th>Evidence type</th><th>What it can show</th><th>What needs caution</th></tr></thead>
-<tbody>
-<tr><td>Excavated reservoirs, wells and drains</td><td>Physical design, materials, location and construction phases.</td><td>Exact operating rules, ownership and everyday maintenance may remain uncertain.</td></tr>
-<tr><td>Inscriptions</td><td>Named donors, rulers, repairs, grants and commemorated works.</td><td>Public praise and royal claims are not neutral descriptions.</td></tr>
-<tr><td>Literary and technical texts</td><td>Concepts, prescriptions, terminology and intellectual traditions.</td><td>A prescription does not prove universal implementation; dating and textual layers matter.</td></tr>
-<tr><td>Hydrology and landscape studies</td><td>Catchments, rainfall patterns, sediment, geology and plausible system performance.</td><td>Modern reconstructions depend on assumptions and surviving environmental evidence.</td></tr>
-</tbody>
-</table>
+<div class="evidence-card">
+<div class="evidence-icon" aria-hidden="true">🪨</div>
+<div class="evidence-copy"><h3>Inscriptions</h3><p class="evidence-lead">Donors · Rulers · Repairs · Grants</p><p><strong>What they reveal</strong><br>Named patrons, rulers, repairs, grants and commemorated works.</p><p class="evidence-caution"><strong>Interpret with care</strong><br>Public praise and royal claims are not neutral descriptions.</p></div>
+</div>
+<div class="evidence-card">
+<div class="evidence-icon" aria-hidden="true">📜</div>
+<div class="evidence-copy"><h3>Literary & technical texts</h3><p class="evidence-lead">Concepts · Prescriptions · Terminology</p><p><strong>What they reveal</strong><br>Intellectual traditions, technical vocabulary and ideas about water management.</p><p class="evidence-caution"><strong>Interpret with care</strong><br>A prescription does not prove universal implementation; dating and textual layers matter.</p></div>
+</div>
+<div class="evidence-card">
+<div class="evidence-icon" aria-hidden="true">🌧️</div>
+<div class="evidence-copy"><h3>Hydrology & landscape studies</h3><p class="evidence-lead">Catchments · Rainfall · Geology</p><p><strong>What they reveal</strong><br>Catchments, rainfall patterns, sediment, geology and plausible system performance.</p><p class="evidence-caution"><strong>Interpret with care</strong><br>Modern reconstructions depend on assumptions and surviving environmental evidence.</p></div>
+</div>
+</div>
 <p>Historical water systems were ingenious responses to specific conditions, but they were not uniformly sustainable or equitable. Some failed, silted up, changed purpose or were abandoned. Access could be unequal, and water control could reinforce social and political power. A serious history studies successes, limits and social consequences together.</p>
 </article>
 <section class="panel" id="sources">
