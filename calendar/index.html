@@ -65,6 +65,23 @@ body::before {
 .small, footer { color: #D5D9E5; }
 .warning { color: #29251f; }
 .card { color: var(--ink); }
+/* Darken muted copy inside light calendar panels for readable contrast. */
+.card .small,
+.card .sub,
+.card label,
+.card .metric b,
+.card th {
+  color: #51483e !important;
+}
+.card p,
+.card li,
+.card td {
+  color: #29251f;
+}
+.card input::placeholder {
+  color: #71685e;
+  opacity: 1;
+}
 </style>
 </head>
 <body>
