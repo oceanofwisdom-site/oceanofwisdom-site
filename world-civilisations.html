@@ -24,6 +24,13 @@ main{max-width:1100px;margin:0 auto;padding:0 18px 60px}
 .controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;padding:16px;background:#fffdf8;border:1px solid #d9deea;border-radius:15px;color:var(--ink)}
 .controls label{display:grid;gap:5px;color:#51483e;font:600 13px Arial,sans-serif}
 .controls input,.controls select{width:100%;min-height:44px;padding:10px;border:1px solid #c9c1b4;border-radius:9px;background:white;color:#29251f;font:16px Arial,sans-serif}
+.search-field{display:grid;gap:5px;align-content:start}
+.search-field>label{color:#51483e;font:600 13px Arial,sans-serif}
+.search-actions{display:flex;gap:8px;flex-wrap:wrap}
+.search-actions button{min-height:42px;padding:9px 18px;border:1px solid #8b5a25;border-radius:9px;background:#8b5a25;color:#fff;font:700 14px Arial,sans-serif;cursor:pointer}
+.search-actions button.secondary{background:#fff;color:#51483e;border-color:#c9c1b4}
+.search-actions button:focus-visible,.controls input:focus-visible,.controls select:focus-visible{outline:3px solid #d7b56d;outline-offset:2px}
+
 .count{align-self:end;color:#51483e;font:13px Arial,sans-serif;padding:10px 0}
 .timeline{position:relative;margin:22px 0 34px;padding-left:26px}
 .timeline:before{content:"";position:absolute;left:8px;top:8px;bottom:8px;width:2px;background:linear-gradient(var(--gold),#6f91bf)}
@@ -56,7 +63,7 @@ footer a{color:var(--gold)}
 <main>
 <p class="intro">History did not unfold in one place or along a single line. While cities and states rose in one region, other communities were developing distinct systems of farming, trade, philosophy, science, art and governance. This timeline places selected milestones alongside one another to encourage comparison, not competition.</p>
 <section class="controls" aria-label="Timeline filters">
-<label>Search events or topics<input id="search" type="search" placeholder="Try: writing, India, trade…"></label>
+<div class="search-field"><label for="search">Search events or topics</label><input id="search" type="search" placeholder="Try: Ramayana, writing, India, trade…" autocomplete="off"><div class="search-actions"><button type="button" id="searchBtn">Search</button><button type="button" id="clearBtn" class="secondary">Clear filters</button></div></div>
 <label>Filter by region<select id="region"><option value="">All regions</option><option>South Asia</option><option>West Asia</option><option>Africa</option><option>East Asia</option><option>Mediterranean</option><option>Europe</option><option>Americas</option><option>Global</option></select></label>
 <label>Filter by period<select id="period"><option value="">All periods</option><option value="prehistory">Before 3000 BCE</option><option value="ancient">3000–500 BCE</option><option value="classical">500 BCE–500 CE</option><option value="medieval">500–1500 CE</option><option value="modern">After 1500 CE</option></select></label>
 <div class="count" id="count" aria-live="polite">Showing all milestones</div>
@@ -78,6 +85,8 @@ footer a{color:var(--gold)}
 <div class="event-top"><span class="date">18th century BCE</span><span class="region">West Asia</span></div><h2>Hammurabi and Babylonian statecraft</h2><p>Hammurabi ruled Babylon in the eighteenth century BCE. The law collection associated with his name is a royal monument that illuminates legal ideals, social distinctions and kingship; it should not be mistaken for a modern, comprehensive legal code applied uniformly in every case.</p><div class="context">The text is a primary source for royal ideology as well as legal history.</div></article>
 <article class="event" data-region="South Asia" data-period="ancient" data-search="vedic texts oral transmission south asia">
 <div class="event-top"><span class="date">2nd–1st millennium BCE</span><span class="region">South Asia</span></div><h2>Vedic traditions and oral transmission</h2><p>Vedic compositions were transmitted through highly disciplined oral practices. Their dating, layers and relationship to changing social worlds are studied through language, textual analysis and comparative evidence; no single date captures the formation of the entire corpus.</p><div class="context">Textual chronology is complex and differs from the date of surviving manuscripts.</div></article>
+<article class="event" data-region="South Asia" data-period="classical" data-search="ramayana ramayan valmiki epic itihasa rama sita ayodhya oral tradition sanskrit literature">
+<div class="event-top"><span class="date">1st millennium BCE onward · chronology debated</span><span class="region">South Asia</span></div><h2>Ramayana traditions and the growth of an epic</h2><p>The Ramayana is a major South Asian epic with a complex history of composition, oral performance, textual transmission and regional retellings. The Sanskrit text commonly associated with Valmiki contains layers that developed over time; scholars do not treat it as a contemporary chronicle with one securely established date. Its many versions across South and Southeast Asia show how stories, ethical ideals and literary forms travelled and were reinterpreted.</p><div class="context">Literary and cultural significance is well documented; the epic’s narrative events and proposed historical dates require separate evidence and should not be presented as settled chronology.</div></article>
 <article class="event" data-region="Mediterranean" data-period="ancient" data-search="greece phoenician alphabet mediterranean exchange">
 <div class="event-top"><span class="date">1st millennium BCE</span><span class="region">Mediterranean</span></div><h2>Alphabetic scripts and Mediterranean exchange</h2><p>Alphabetic writing traditions spread and adapted around the Mediterranean. Greek writing adopted and modified a Phoenician consonantal script, including the use of signs for vowels, illustrating how writing systems change through contact.</p><div class="context">Cultural transmission is usually adaptation, not simple one-way copying.</div></article>
 <article class="event" data-region="South Asia" data-period="classical" data-search="buddhism jainism mahajanapadas urban second urbanization">
@@ -124,13 +133,29 @@ footer a{color:var(--gold)}
 <footer>Ocean of Wisdom · <a href="index.html">HOME</a> · <a href="library/">Knowledge Library</a></footer>
 <script>
 (function(){
- const search=document.getElementById('search'),region=document.getElementById('region'),period=document.getElementById('period'),events=[...document.querySelectorAll('.event')],count=document.getElementById('count'),empty=document.getElementById('empty');
+ const search=document.getElementById('search'),searchBtn=document.getElementById('searchBtn'),clearBtn=document.getElementById('clearBtn'),region=document.getElementById('region'),period=document.getElementById('period'),events=[...document.querySelectorAll('.event')],count=document.getElementById('count'),empty=document.getElementById('empty');
  function apply(){
-  const q=search.value.trim().toLowerCase(),r=region.value,p=period.value;let shown=0;
-  events.forEach(e=>{const ok=(!q||(e.innerText+' '+e.dataset.search).toLowerCase().includes(q))&&(!r||e.dataset.region===r)&&(!p||e.dataset.period===p);e.hidden=!ok;if(ok)shown++;});
-  count.textContent='Showing '+shown+' of '+events.length+' milestones';empty.style.display=shown?'none':'block';
+  const q=search.value.trim().toLocaleLowerCase(),r=region.value,p=period.value;let shown=0;
+  events.forEach(e=>{
+   const haystack=(e.innerText+' '+(e.dataset.search||'')).toLocaleLowerCase();
+   const terms=q.split(/\\s+/).filter(Boolean);
+   const textMatch=!terms.length||terms.every(term=>haystack.includes(term));
+   const ok=textMatch&&(!r||e.dataset.region===r)&&(!p||e.dataset.period===p);
+   e.hidden=!ok;if(ok)shown++;
+  });
+  count.textContent='Showing '+shown+' of '+events.length+' milestones';
+  empty.style.display=shown?'none':'block';
+  empty.textContent=shown?'':'No milestones match these filters. Try a different search or clear the filters.';
  }
- [search,region,period].forEach(el=>el.addEventListener('input',apply));apply();
+ function runSearch(){
+  // A keyword search starts across the complete timeline; filters can then narrow it.
+  region.value='';period.value='';apply();
+ }
+ searchBtn.addEventListener('click',runSearch);
+ search.addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();runSearch();}});
+ clearBtn.addEventListener('click',()=>{search.value='';region.value='';period.value='';apply();search.focus();});
+ [region,period].forEach(el=>el.addEventListener('change',apply));
+ apply();
 })();
 </script>
 </body></html>
