@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     
     <!-- Primary Meta Tags -->
     <title>The Ocean of Wisdom | Interfaith Philosophy & Sacred Teachings from 12 Traditions</title>
@@ -602,6 +602,58 @@
     /* Audio play / pause icon */
         .audio-btn::before { content: "▶"; font-size: 0.8em; line-height: 1; }
         .audio-btn.playing::before { content: "⏸"; }
+    
+/* Mobile-first navigation and responsive refinements for Android and iOS */
+.mobile-nav-toggle{display:none}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-behavior:smooth}
+body{min-width:320px}
+button,a{-webkit-tap-highlight-color:transparent}
+button{touch-action:manipulation}
+img,video,canvas,svg{max-width:100%}
+@media(max-width:820px){
+ .universal-nav{padding:calc(env(safe-area-inset-top,0px) + 10px) 16px 12px}
+ .universal-nav-inner{display:grid;grid-template-columns:minmax(0,1fr) 46px;gap:10px;align-items:center}
+ .universal-nav-brand{font-size:1.18rem;gap:10px;min-height:46px}
+ .nav-logo{width:42px;height:42px}
+ .mobile-nav-toggle{display:flex;grid-column:2;grid-row:1;width:46px;height:46px;border:1px solid rgba(77,217,232,.65);border-radius:12px;background:rgba(77,217,232,.08);align-items:center;justify-content:center;flex-direction:column;gap:5px;cursor:pointer}
+ .mobile-nav-toggle span{display:block;width:20px;height:2px;border-radius:2px;background:var(--cyan);transition:transform .2s,opacity .2s}
+ .mobile-nav-toggle[aria-expanded="true"] span:first-child{transform:translateY(7px) rotate(45deg)}
+ .mobile-nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+ .mobile-nav-toggle[aria-expanded="true"] span:last-child{transform:translateY(-7px) rotate(-45deg)}
+ .universal-nav-links{display:none;grid-column:1/-1;grid-row:2;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:0;width:100%;padding:8px 0;border-top:1px solid rgba(77,217,232,.18)}
+ .universal-nav-links.is-open{display:flex}
+ .universal-nav-links li{width:100%}
+ .universal-nav-links a{display:flex;align-items:center;min-height:46px;padding:10px 12px;font-size:1rem;border-radius:8px;white-space:normal}
+ .universal-nav-links a.active{border-bottom:0;background:rgba(77,217,232,.09)}
+ .universal-nav .lang-switcher{grid-column:1/-1;grid-row:3;display:flex;gap:9px;padding-top:8px}
+ .lang-btn{min-width:54px;min-height:44px;padding:8px 14px;border-radius:9px;font-size:1rem}
+ .container{padding-left:18px;padding-right:18px}
+ .hero{padding:clamp(2.2rem,8vw,3.5rem) 0 2.5rem}
+ .hero-banner{width:100%;height:auto;margin-bottom:1.8rem;border-radius:12px}
+ .hero h1{font-size:clamp(2.15rem,8vw,3.2rem);line-height:1.12;margin-bottom:1rem}
+ .hero .subtitle{font-size:clamp(1.05rem,4.2vw,1.35rem);line-height:1.55;margin-bottom:1.8rem}
+ .pillars-section,.sacred-texts,.wisdom-feed{padding:2.8rem 0}
+ .section-title{font-size:clamp(1.8rem,7vw,2.5rem);margin-bottom:1.8rem}
+ .pillars-grid,.feed-grid{grid-template-columns:1fr;gap:1rem;margin-bottom:2rem}
+ .pillar-card,.sacred-card,.feed-card{padding:1.25rem;border-radius:12px}
+ .pillar-question{font-size:1.35rem}
+ .texts-grid{gap:1.25rem;margin-top:1.5rem}
+ .original-text{font-size:clamp(1.3rem,5vw,1.8rem)}
+ .translation{font-size:1.05rem}
+ footer{padding:2.2rem 0 calc(2.2rem + env(safe-area-inset-bottom,0px))}
+}
+@media(max-width:420px){
+ .container{padding-left:15px;padding-right:15px}
+ .hero{padding-top:2rem}
+ .hero-banner{margin-bottom:1.35rem}
+ .pillar-card,.sacred-card,.feed-card{padding:1.1rem}
+ .lang-btn{flex:1;min-width:0}
+}
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}
+ *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+
     </style>
 </head>
 <body>
@@ -611,7 +663,8 @@
                 <img src="logo-nav.png" alt="Ocean of Wisdom" class="nav-logo">
                 <span>Ocean of Wisdom</span>
             </a>
-            <ul class="universal-nav-links">
+            <button class="mobile-nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation"><span></span><span></span><span></span></button>
+            <ul class="universal-nav-links" id="primary-navigation">
                 <li><a href="index.html" class="active">Home</a></li>
 <li><a href="who-am-i.html">Who Am I?</a></li>
 <li><a href="what-is-all-this.html">What Is All This?</a></li>
@@ -1322,5 +1375,19 @@
             }
         }
     </script>
+
+<script>
+(function(){
+ const toggle=document.querySelector('.mobile-nav-toggle');
+ const menu=document.querySelector('#primary-navigation');
+ if(!toggle||!menu)return;
+ function closeMenu(){toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-label','Open navigation');menu.classList.remove('is-open')}
+ toggle.addEventListener('click',function(){const open=toggle.getAttribute('aria-expanded')!=='true';toggle.setAttribute('aria-expanded',String(open));toggle.setAttribute('aria-label',open?'Close navigation':'Open navigation');menu.classList.toggle('is-open',open)});
+ menu.querySelectorAll('a').forEach(function(link){link.addEventListener('click',closeMenu)});
+ document.addEventListener('keydown',function(event){if(event.key==='Escape')closeMenu()});
+ window.addEventListener('resize',function(){if(window.innerWidth>820)closeMenu()});
+})();
+</script>
+
 </body>
 </html>
