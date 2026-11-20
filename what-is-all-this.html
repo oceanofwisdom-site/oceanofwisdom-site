@@ -173,7 +173,7 @@
             text-decoration: none;
         }
         
-        .lang-switcher {
+        .lang-switcher { position: relative; z-index: 1000; pointer-events: auto;
             display: flex;
             gap: 0.5rem;
         }
@@ -699,6 +699,60 @@ document.querySelectorAll('.lang-switcher .lang-btn').forEach(function(btn) {
     applyOowLanguage(saved);
 })();
     </script>
+<script id="oow-language-fallback">
+/* Independent language controller; deliberately separate from page scripts. */
+(function () {
+  var DATA = {"en":{"breadcrumb-home":"Cosmos","breadcrumb-current":"What Is All This?","page-title":"What Is All This?","page-subtitle":"The universe, existence, reality — the one ground behind all that is","teaching-translation":"Brahma Satyam — Brahman Alone Is Real","teaching-explanation":"Look at the sheer multiplicity of the world — galaxies and grains of sand, joy and grief, ten thousand things arising and passing. Is this the final reality, or does something single and unchanging lie beneath it? The seers of the Upanishads answered with one of the boldest claims in philosophy: Brahma satyam jagat mithya — Brahman alone is real; the world is appearance. Behind every form, they held, is one infinite, formless reality — Being, Consciousness, Bliss — and all this is verily Brahman (Chandogya Upanishad 3.14.1), as waves are nothing but the ocean. Each tradition below reaches for that one ground and names it differently. But they do not all agree on its nature — and those disagreements, set out honestly, are among the deepest questions a human being can ask.","traditions-title":"How 12 Traditions Describe Ultimate Reality","synthesis-title":"The One and the Many","trad1-label":"VEDIC TRADITION","trad2-label":"ISLAMIC TRADITION","trad3-label":"CHRISTIAN TRADITION","trad4-label":"BUDDHIST TRADITION","trad5-label":"SIKH TRADITION","trad6-label":"JEWISH TRADITION","trad7-label":"TAOIST TRADITION","trad8-label":"BAHA'I TRADITION","trad9-label":"ZOROASTRIAN TRADITION","trad10-label":"JAIN TRADITION","trad11-label":"SUFI TRADITION","trad12-label":"CONFUCIAN TRADITION","related-title":"Explore Related Wisdom","related1":"What Is Truth?","related2":"What Is Bliss?","related3":"← Return to Ocean of Wisdom","footer-text":"© 2026 | A creative brand by Prashob Rajamohan"},"hi":{"breadcrumb-home":"ब्रह्मांड","breadcrumb-current":"यह सब क्या है?","page-title":"यह सब क्या है?","page-subtitle":"ब्रह्मांड, अस्तित्व, वास्तविकता — सबके पीछे एक आधार","teaching-translation":"ब्रह्म सत्यम् — केवल ब्रह्म ही सत्य है","teaching-explanation":"संसार की अनंत विविधता देखें — आकाशगंगाएं और रेत के कण, सुख और दुःख, असंख्य रूप उत्पन्न होते और मिटते हुए। क्या यही अंतिम वास्तविकता है, या इसके नीचे कुछ एक और अपरिवर्तनीय है? उपनिषदों के ऋषियों ने दर्शन के सबसे साहसी कथनों में से एक दिया: ब्रह्म सत्यं जगन्मिथ्या — केवल ब्रह्म सत्य है; जगत मिथ्या है। हर रूप के पीछे एक अनंत, निराकार वास्तविकता है — सत्, चित्, आनंद — और सर्वं खल्विदं ब्रह्म, यह सब ब्रह्म ही है (छांदोग्य उपनिषद 3.14.1), जैसे लहरें सागर के सिवा कुछ नहीं। नीचे हर परंपरा उस एक आधार तक पहुंचती है और उसे अलग नाम देती है। परंतु वे उसके स्वरूप पर एकमत नहीं — और वे मतभेद, ईमानदारी से रखे जाएं तो, मनुष्य के सबसे गहरे प्रश्नों में हैं।","traditions-title":"12 परंपराएं परम वास्तविकता का वर्णन कैसे करती हैं","synthesis-title":"एक और अनेक","trad1-label":"वैदिक परंपरा","trad2-label":"इस्लामी परंपरा","trad3-label":"ईसाई परंपरा","trad4-label":"बौद्ध परंपरा","trad5-label":"सिख परंपरा","trad6-label":"यहूदी परंपरा","trad7-label":"ताओवादी परंपरा","trad8-label":"बहाई परंपरा","trad9-label":"पारसी परंपरा","trad10-label":"जैन परंपरा","trad11-label":"सूफ़ी परंपरा","trad12-label":"कन्फ़्यूशियस परंपरा","related-title":"संबंधित ज्ञान देखें","related1":"सत्य क्या है?","related2":"आनंद क्या है?","related3":"← ब्रह्मांड पर वापस जाएं","footer-text":"© 2026 | प्रशोब राजमोहन द्वारा एक रचनात्मक ब्रांड"},"ta":{"breadcrumb-home":"காஸ்மாஸ்","breadcrumb-current":"இது எல்லாம் என்ன?","page-title":"இது எல்லாம் என்ன?","page-subtitle":"பிரபஞ்சம், இருப்பு, யதார்த்தம் — அனைத்திற்கும் பின்னால் ஒரே அடித்தளம்","teaching-translation":"பிரம்ம சத்யம் — பிரம்மம் மட்டுமே உண்மை","teaching-explanation":"உலகின் எண்ணற்ற பன்மையைப் பாருங்கள் — விண்மீன் திரள்களும் மணல் துகள்களும், மகிழ்ச்சியும் துயரமும், தோன்றி மறையும் பல்லாயிரம் வடிவங்கள். இதுவே இறுதி யதார்த்தமா, அல்லது இதற்கு அடியில் ஒரே மாறாத ஒன்று உள்ளதா? உபநிடத முனிவர்கள் தத்துவத்தின் மிகத் துணிச்சலான கூற்றுகளில் ஒன்றை அளித்தனர்: பிரம்ம சத்யம் ஜகன்மித்யா — பிரம்மம் மட்டுமே உண்மை; உலகம் தோற்றமே. ஒவ்வொரு வடிவத்திற்கும் பின்னால் ஒரே எல்லையற்ற, உருவற்ற யதார்த்தம் உள்ளது — சத், சித், ஆனந்தம் — சர்வம் கல்விதம் பிரம்ம, இவை அனைத்தும் பிரம்மமே (சாந்தோக்ய உபநிடதம் 3.14.1), அலைகள் கடலைத் தவிர வேறில்லாதது போல. கீழே ஒவ்வொரு பாரம்பரியமும் அந்த ஒரே அடித்தளத்தை அடைந்து வெவ்வேறு பெயரிடுகிறது. ஆனால் அதன் இயல்பு குறித்து அவை ஒன்றுபடவில்லை — அந்த வேறுபாடுகள், நேர்மையாக வைக்கப்பட்டால், மனிதனின் ஆழமான கேள்விகளில் உள்ளன.","traditions-title":"12 பாரம்பரியங்கள் பரம யதார்த்தத்தை எப்படி விவரிக்கின்றன","synthesis-title":"ஒன்றும் பலவும்","trad1-label":"வேத பாரம்பரியம்","trad2-label":"இஸ்லாமிய பாரம்பரியம்","trad3-label":"கிறிஸ்தவ பாரம்பரியம்","trad4-label":"பௌத்த பாரம்பரியம்","trad5-label":"சீக்கிய பாரம்பரியம்","trad6-label":"யூத பாரம்பரியம்","trad7-label":"தாவோ பாரம்பரியம்","trad8-label":"பஹாய் பாரம்பரியம்","trad9-label":"ஜொராஸ்ட்ரிய பாரம்பரியம்","trad10-label":"சமண பாரம்பரியம்","trad11-label":"சூஃபி பாரம்பரியம்","trad12-label":"கன்ஃபூசிய பாரம்பரியம்","related-title":"தொடர்புடைய ஞானத்தை ஆராயுங்கள்","related1":"உண்மை என்றால் என்ன?","related2":"பேரின்பம் என்றால் என்ன?","related3":"← காஸ்மாஸுக்குத் திரும்பு","footer-text":"© 2026 | பிரஷோப் ராஜமோகனின் படைப்பு பிராண்ட்"},"es":{"breadcrumb-home":"Cosmos","breadcrumb-current":"¿Qué es todo esto?","page-title":"¿Qué es todo esto?","page-subtitle":"El universo, la existencia, la realidad — el único fundamento detrás de todo lo que es","teaching-translation":"Brahma Satyam — Solo Brahman es real","teaching-explanation":"Mira la inmensa multiplicidad del mundo — galaxias y granos de arena, alegría y dolor, diez mil cosas que surgen y pasan. ¿Es esta la realidad última, o hay algo único e inmutable bajo ella? Los videntes de los Upanishads respondieron con una de las afirmaciones más audaces de la filosofía: Brahma satyam jagat mithya — solo Brahman es real; el mundo es apariencia. Detrás de cada forma, sostuvieron, hay una sola realidad infinita y sin forma — Ser, Conciencia, Dicha — y todo esto es verdaderamente Brahman (Chandogya Upanishad 3.14.1), como las olas no son más que el océano. Cada tradición a continuación alcanza ese único fundamento y lo nombra de modo distinto. Pero no coinciden sobre su naturaleza — y esos desacuerdos, expuestos con honestidad, están entre las preguntas más profundas que un ser humano puede plantear.","traditions-title":"Cómo 12 tradiciones describen la realidad última","synthesis-title":"Lo Uno y lo Múltiple","trad1-label":"TRADICIÓN VÉDICA","trad2-label":"TRADICIÓN ISLÁMICA","trad3-label":"TRADICIÓN CRISTIANA","trad4-label":"TRADICIÓN BUDISTA","trad5-label":"TRADICIÓN SIKH","trad6-label":"TRADICIÓN JUDÍA","trad7-label":"TRADICIÓN TAOÍSTA","trad8-label":"TRADICIÓN BAHÁ'Í","trad9-label":"TRADICIÓN ZOROÁSTRICA","trad10-label":"TRADICIÓN JAINISTA","trad11-label":"TRADICIÓN SUFÍ","trad12-label":"TRADICIÓN CONFUCIANA","related-title":"Explorar sabiduría relacionada","related1":"¿Qué es la verdad?","related2":"¿Qué es la dicha?","related3":"← Regresar al Cosmos","footer-text":"© 2026 | Una marca creativa de Prashob Rajamohan"}};
+  function applyLanguage(lang) {
+    var dict = DATA[lang];
+    if (!dict) return false;
+    document.querySelectorAll('[data-i18n]').forEach(function (node) {
+      var key = node.getAttribute('data-i18n');
+      if (Object.prototype.hasOwnProperty.call(dict, key)) node.textContent = dict[key];
+    });
+    document.querySelectorAll('.lang-switcher .lang-btn[data-lang]').forEach(function (button) {
+      var active = button.getAttribute('data-lang') === lang;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+    document.documentElement.setAttribute('lang', lang);
+    window.OOW_CURRENT_LANGUAGE = lang;
+    try {
+      localStorage.setItem('oow-language', lang);
+      localStorage.setItem('preferred-lang', lang);
+    } catch (e) {}
+    return true;
+  }
+  window.oowSetLanguage = applyLanguage;
+  window.switchLang = applyLanguage;
+  window.setLanguage = applyLanguage;
+  document.addEventListener('click', function (event) {
+    var button = event.target && event.target.closest
+      ? event.target.closest('.lang-switcher .lang-btn[data-lang]') : null;
+    if (!button) return;
+    event.preventDefault();
+    applyLanguage(button.getAttribute('data-lang'));
+  }, true);
+  function init() {
+    var preferred = 'en';
+    try {
+      var saved = localStorage.getItem('oow-language') || localStorage.getItem('preferred-lang');
+      if (DATA[saved]) preferred = saved;
+    } catch (e) {}
+    applyLanguage(preferred);
+    document.querySelectorAll('.lang-switcher .lang-btn[data-lang]').forEach(function (button) {
+      button.setAttribute('onclick', "window.oowSetLanguage('" + button.getAttribute('data-lang') + "'); return false;");
+      button.style.pointerEvents = 'auto';
+      button.style.touchAction = 'manipulation';
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init, { once: true });
+  } else {
+    init();
+  }
+})();
+</script>
 
 </body>
 </html>

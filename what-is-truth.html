@@ -174,7 +174,7 @@
             text-decoration: none;
         }
         
-        .lang-switcher {
+        .lang-switcher { position: relative; z-index: 1000; pointer-events: auto;
             display: flex;
             gap: 0.5rem;
         }
@@ -716,6 +716,60 @@ document.querySelectorAll('.lang-switcher .lang-btn').forEach(function(btn) {
     applyOowLanguage(saved);
 })();
     </script>
+<script id="oow-language-fallback">
+/* Independent language controller; deliberately separate from page scripts. */
+(function () {
+  var DATA = {"en":{"breadcrumb-home":"Cosmos","breadcrumb-current":"What Is Truth?","page-title":"What Is Truth?","page-subtitle":"Beyond opinions and beliefs — the unchanging, absolute reality","teaching-translation":"Satyameva Jayate — Truth Alone Triumphs","teaching-explanation":"Truth is not what we believe, nor what we hope, nor what is convenient. Truth — Sat — is what is: the reality that stays unchanged across past, present and future, when every illusion has dissolved. The seers distinguished the truth of our words from the Truth of existence itself — the first asks only that we not deceive; the second is the very ground of being on which the cosmos rests. Each tradition below reaches toward that same horizon, and each insists that ultimate truth is finally lived and realized, never merely spoken.","audio-btn":"Listen to Sat","traditions-title":"How 12 Traditions Describe Absolute Truth","synthesis-title":"The Two Levels of Truth","trad1-label":"VEDIC TRADITION","trad2-label":"ISLAMIC TRADITION","trad3-label":"CHRISTIAN TRADITION","trad4-label":"BUDDHIST TRADITION","trad5-label":"SIKH TRADITION","trad6-label":"JEWISH TRADITION","trad7-label":"TAOIST TRADITION","trad8-label":"BAHA'I TRADITION","trad9-label":"ZOROASTRIAN TRADITION","trad10-label":"JAIN TRADITION","trad11-label":"SUFI TRADITION","trad12-label":"CONFUCIAN TRADITION","related-title":"Explore Related Wisdom","related1":"What Is All This?","related2":"What Is Bliss?","related3":"← Return to Ocean of Wisdom","footer-text":"© 2026 | A creative brand by Prashob Rajamohan"},"hi":{"breadcrumb-home":"ब्रह्मांड","breadcrumb-current":"सत्य क्या है?","page-title":"सत्य क्या है?","page-subtitle":"राय और विश्वास से परे — अपरिवर्तनीय, पूर्ण वास्तविकता","teaching-translation":"सत्यमेव जयते — केवल सत्य की विजय होती है","teaching-explanation":"सत्य वह नहीं है जो हम मानते हैं, जो हम आशा करते हैं, जो सुविधाजनक है। सत्य (सत्) वह है जो है — अपरिवर्तनीय वास्तविकता जो सभी भ्रमों के विघटन के बाद बची रहती है।","audio-btn":"सत् सुनें","traditions-title":"12 परंपराएं पूर्ण सत्य का वर्णन कैसे करती हैं","synthesis-title":"सत्य के दो स्तर","trad1-label":"वैदिक परंपरा","trad2-label":"इस्लामी परंपरा","trad3-label":"ईसाई परंपरा","trad4-label":"बौद्ध परंपरा","trad5-label":"सिख परंपरा","trad6-label":"यहूदी परंपरा","trad7-label":"ताओवादी परंपरा","trad8-label":"बहाई परंपरा","trad9-label":"पारसी परंपरा","trad10-label":"जैन परंपरा","trad11-label":"सूफ़ी परंपरा","trad12-label":"कन्फ़्यूशियस परंपरा","related-title":"संबंधित ज्ञान देखें","related1":"यह सब क्या है?","related2":"आनंद क्या है?","related3":"← ब्रह्मांड पर वापस जाएं","footer-text":"© 2026 | प्रशोब राजमोहन द्वारा एक रचनात्मक ब्रांड"},"ta":{"breadcrumb-home":"காஸ்மாஸ்","breadcrumb-current":"உண்மை என்றால் என்ன?","page-title":"உண்மை என்றால் என்ன?","page-subtitle":"கருத்துகள் மற்றும் நம்பிக்கைகளுக்கு அப்பால் — மாறாத, முழுமையான உண்மை","teaching-translation":"சத்யமேவ ஜயதே — உண்மை மட்டுமே வெற்றி பெறுகிறது","teaching-explanation":"உண்மை என்பது நாம் நம்புவது அல்ல, நாம் எதிர்பார்ப்பது அல்ல, வசதியானது அல்ல. உண்மை (சத்) என்பது இருப்பது — எல்லா மாயைகளும் கரைந்த பிறகு எஞ்சியிருக்கும் மாறாத உண்மை.","audio-btn":"சத் கேளுங்கள்","traditions-title":"12 பாரம்பரியங்கள் முழுமையான உண்மையை எப்படி விவரிக்கின்றன","synthesis-title":"உண்மையின் இரண்டு நிலைகள்","trad1-label":"வேத பாரம்பரியம்","trad2-label":"இஸ்லாமிய பாரம்பரியம்","trad3-label":"கிறிஸ்தவ பாரம்பரியம்","trad4-label":"பௌத்த பாரம்பரியம்","trad5-label":"சீக்கிய பாரம்பரியம்","trad6-label":"யூத பாரம்பரியம்","trad7-label":"தாவோ பாரம்பரியம்","trad8-label":"பஹாய் பாரம்பரியம்","trad9-label":"ஜொராஸ்ட்ரிய பாரம்பரியம்","trad10-label":"சமண பாரம்பரியம்","trad11-label":"சூஃபி பாரம்பரியம்","trad12-label":"கன்ஃபூசிய பாரம்பரியம்","related-title":"தொடர்புடைய ஞானத்தை ஆராயுங்கள்","related1":"இது என்ன?","related2":"பேரின்பம் என்றால் என்ன?","related3":"← காஸ்மாஸுக்குத் திரும்பு","footer-text":"© 2026 | பிரஷோப் ராஜமோகனின் படைப்பு பிராண்ட்"},"es":{"breadcrumb-home":"Cosmos","breadcrumb-current":"¿Qué es la verdad?","page-title":"¿Qué es la verdad?","page-subtitle":"Más allá de opiniones y creencias — la realidad inmutable y absoluta","teaching-translation":"Satyameva Jayate — Solo la verdad triunfa","teaching-explanation":"La verdad no es lo que creemos, ni lo que esperamos, ni lo que es conveniente. La verdad (Sat) es lo que ES — la realidad inmutable que permanece cuando todas las ilusiones se disuelven.","audio-btn":"Escuchar Sat","traditions-title":"Cómo 12 tradiciones describen la verdad absoluta","synthesis-title":"Los dos niveles de la verdad","trad1-label":"TRADICIÓN VÉDICA","trad2-label":"TRADICIÓN ISLÁMICA","trad3-label":"TRADICIÓN CRISTIANA","trad4-label":"TRADICIÓN BUDISTA","trad5-label":"TRADICIÓN SIKH","trad6-label":"TRADICIÓN JUDÍA","trad7-label":"TRADICIÓN TAOÍSTA","trad8-label":"TRADICIÓN BAHÁ'Í","trad9-label":"TRADICIÓN ZOROÁSTRICA","trad10-label":"TRADICIÓN JAINISTA","trad11-label":"TRADICIÓN SUFÍ","trad12-label":"TRADICIÓN CONFUCIANA","related-title":"Explorar sabiduría relacionada","related1":"¿Qué es todo esto?","related2":"¿Qué es la dicha?","related3":"← Regresar al Cosmos","footer-text":"© 2026 | Una marca creativa de Prashob Rajamohan"}};
+  function applyLanguage(lang) {
+    var dict = DATA[lang];
+    if (!dict) return false;
+    document.querySelectorAll('[data-i18n]').forEach(function (node) {
+      var key = node.getAttribute('data-i18n');
+      if (Object.prototype.hasOwnProperty.call(dict, key)) node.textContent = dict[key];
+    });
+    document.querySelectorAll('.lang-switcher .lang-btn[data-lang]').forEach(function (button) {
+      var active = button.getAttribute('data-lang') === lang;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+    document.documentElement.setAttribute('lang', lang);
+    window.OOW_CURRENT_LANGUAGE = lang;
+    try {
+      localStorage.setItem('oow-language', lang);
+      localStorage.setItem('preferred-lang', lang);
+    } catch (e) {}
+    return true;
+  }
+  window.oowSetLanguage = applyLanguage;
+  window.switchLang = applyLanguage;
+  window.setLanguage = applyLanguage;
+  document.addEventListener('click', function (event) {
+    var button = event.target && event.target.closest
+      ? event.target.closest('.lang-switcher .lang-btn[data-lang]') : null;
+    if (!button) return;
+    event.preventDefault();
+    applyLanguage(button.getAttribute('data-lang'));
+  }, true);
+  function init() {
+    var preferred = 'en';
+    try {
+      var saved = localStorage.getItem('oow-language') || localStorage.getItem('preferred-lang');
+      if (DATA[saved]) preferred = saved;
+    } catch (e) {}
+    applyLanguage(preferred);
+    document.querySelectorAll('.lang-switcher .lang-btn[data-lang]').forEach(function (button) {
+      button.setAttribute('onclick', "window.oowSetLanguage('" + button.getAttribute('data-lang') + "'); return false;");
+      button.style.pointerEvents = 'auto';
+      button.style.touchAction = 'manipulation';
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init, { once: true });
+  } else {
+    init();
+  }
+})();
+</script>
 
 </body>
 </html>
