@@ -695,46 +695,6 @@ document.querySelectorAll('.lang-switcher .lang-btn').forEach(function(btn) {
     applyOowLanguage(saved);
 })();
     </script>
-<script>
-/* Independent language controller: does not depend on the page's animation or legacy handlers. */
-(function () {
-  const OOW_LANG_DATA = {"en":{"breadcrumb-home":"Cosmos","breadcrumb-current":"What Is Bliss?","page-title":"What Is Bliss?","page-subtitle":"Beyond pleasure and achievement — the joy that is your own nature","teaching-translation":"Sat-Chit-Ananda — Existence, Consciousness, Bliss","teaching-explanation":"Bliss is not a feeling we chase, nor a reward we earn, nor something the world finally hands us. Ananda — bliss — is the third face of the Absolute itself: Sat-Chit-Ananda, Being, Consciousness, Bliss. The Taittiriya Upanishad declares it — Raso vai sah, He is verily bliss (2.7) — and the sage Bhrigu, inquiring into the real, at last knew Bliss as Brahman (3.6). The joy we glimpse in love, in beauty, in a moment of stillness is not produced by the object; it is a reflection of the bliss that is already our own nature, briefly uncovered when desire goes quiet. Each tradition below names that joy differently — and each insists it is finally realized within, never acquired from without.","traditions-title":"How 12 Traditions Describe the Highest Bliss","synthesis-title":"The Bliss That Was Never Absent","trad1-label":"VEDIC TRADITION","trad2-label":"ISLAMIC TRADITION","trad3-label":"CHRISTIAN TRADITION","trad4-label":"BUDDHIST TRADITION","trad5-label":"SIKH TRADITION","trad6-label":"JEWISH TRADITION","trad7-label":"TAOIST TRADITION","trad8-label":"BAHA'I TRADITION","trad9-label":"ZOROASTRIAN TRADITION","trad10-label":"JAIN TRADITION","trad11-label":"SUFI TRADITION","trad12-label":"CONFUCIAN TRADITION","related-title":"Explore Related Wisdom","related1":"What Is All This?","related2":"What Is Truth?","related3":"← Return to Ocean of Wisdom","footer-text":"© 2026 | A creative brand by Prashob Rajamohan"},"hi":{"breadcrumb-home":"ब्रह्मांड","breadcrumb-current":"आनंद क्या है?","page-title":"आनंद क्या है?","page-subtitle":"सुख और उपलब्धि से परे — वह आनंद जो आपका अपना स्वरूप है","teaching-translation":"सच्चिदानंद — सत्, चित्, आनंद","teaching-explanation":"आनंद वह भावना नहीं जिसका हम पीछा करते हैं, न कोई पुरस्कार जिसे हम अर्जित करते हैं, न कुछ जो संसार अंततः हमें देता है। आनंद परब्रह्म का तीसरा स्वरूप है — सच्चिदानंद: सत्, चित्, आनंद। तैत्तिरीय उपनिषद घोषित करता है — रसो वै सः, वही आनंद है (2.7) — और ऋषि भृगु ने अंततः आनंद को ब्रह्म के रूप में जाना (3.6)। प्रेम में, सौंदर्य में, ठहराव के क्षण में जो आनंद हम पाते हैं वह वस्तु से उत्पन्न नहीं होता; वह उस आनंद का प्रतिबिंब है जो पहले से ही हमारा स्वरूप है, जो इच्छा के शांत होने पर क्षण भर प्रकट होता है। नीचे हर परंपरा उस आनंद को अलग नाम देती है — और हर एक कहती है कि वह भीतर ही पाया जाता है, बाहर से कभी अर्जित नहीं।","traditions-title":"12 परंपराएं परम आनंद का वर्णन कैसे करती हैं","synthesis-title":"वह आनंद जो कभी अनुपस्थित नहीं था","trad1-label":"वैदिक परंपरा","trad2-label":"इस्लामी परंपरा","trad3-label":"ईसाई परंपरा","trad4-label":"बौद्ध परंपरा","trad5-label":"सिख परंपरा","trad6-label":"यहूदी परंपरा","trad7-label":"ताओवादी परंपरा","trad8-label":"बहाई परंपरा","trad9-label":"पारसी परंपरा","trad10-label":"जैन परंपरा","trad11-label":"सूफ़ी परंपरा","trad12-label":"कन्फ़्यूशियस परंपरा","related-title":"संबंधित ज्ञान देखें","related1":"यह सब क्या है?","related2":"सत्य क्या है?","related3":"← ब्रह्मांड पर वापस जाएं","footer-text":"© 2026 | प्रशोब राजमोहन द्वारा एक रचनात्मक ब्रांड"},"ta":{"breadcrumb-home":"காஸ்மாஸ்","breadcrumb-current":"பேரின்பம் என்றால் என்ன?","page-title":"பேரின்பம் என்றால் என்ன?","page-subtitle":"இன்பம் மற்றும் சாதனைக்கு அப்பால் — உங்கள் சொந்த இயல்பாகிய ஆனந்தம்","teaching-translation":"சச்சிதானந்தம் — சத், சித், ஆனந்தம்","teaching-explanation":"பேரின்பம் நாம் துரத்தும் உணர்வு அல்ல, நாம் சம்பாதிக்கும் வெகுமதி அல்ல, உலகம் இறுதியில் நமக்குத் தரும் ஒன்றும் அல்ல. ஆனந்தம் என்பது பரம்பொருளின் மூன்றாம் முகம் — சச்சிதானந்தம்: சத், சித், ஆனந்தம். தைத்திரிய உபநிடதம் அறிவிக்கிறது — ரஸோ வை ஸஃ, அவரே ஆனந்தம் (2.7) — பிருகு முனிவர் இறுதியில் ஆனந்தத்தையே பிரம்மமாக அறிந்தார் (3.6). காதலில், அழகில், அமைதியின் கணத்தில் நாம் காணும் மகிழ்ச்சி பொருளால் உருவாவதில்லை; அது ஏற்கனவே நம் இயல்பாகவே உள்ள ஆனந்தத்தின் பிரதிபலிப்பே, ஆசை அமைதியாகும்போது சிறிது நேரம் வெளிப்படுகிறது. கீழே ஒவ்வொரு பாரம்பரியமும் அந்த மகிழ்ச்சியை வெவ்வேறு பெயரிட்டு அழைக்கிறது — ஒவ்வொன்றும் அது உள்ளேயே உணரப்படுகிறது, வெளியில் இருந்து ஒருபோதும் பெறப்படுவதில்லை என்கிறது.","traditions-title":"12 பாரம்பரியங்கள் பேரின்பத்தை எப்படி விவரிக்கின்றன","synthesis-title":"ஒருபோதும் மறையாத ஆனந்தம்","trad1-label":"வேத பாரம்பரியம்","trad2-label":"இஸ்லாமிய பாரம்பரியம்","trad3-label":"கிறிஸ்தவ பாரம்பரியம்","trad4-label":"பௌத்த பாரம்பரியம்","trad5-label":"சீக்கிய பாரம்பரியம்","trad6-label":"யூத பாரம்பரியம்","trad7-label":"தாவோ பாரம்பரியம்","trad8-label":"பஹாய் பாரம்பரியம்","trad9-label":"ஜொராஸ்ட்ரிய பாரம்பரியம்","trad10-label":"சமண பாரம்பரியம்","trad11-label":"சூஃபி பாரம்பரியம்","trad12-label":"கன்ஃபூசிய பாரம்பரியம்","related-title":"தொடர்புடைய ஞானத்தை ஆராயுங்கள்","related1":"இது என்ன?","related2":"உண்மை என்றால் என்ன?","related3":"← காஸ்மாஸுக்குத் திரும்பு","footer-text":"© 2026 | பிரஷோப் ராஜமோகனின் படைப்பு பிராண்ட்"},"es":{"breadcrumb-home":"Cosmos","breadcrumb-current":"¿Qué es la dicha?","page-title":"¿Qué es la dicha?","page-subtitle":"Más allá del placer y el logro — la dicha que es tu propia naturaleza","teaching-translation":"Sat-Chit-Ananda — Ser, Conciencia, Dicha","teaching-explanation":"La dicha no es un sentimiento que perseguimos, ni una recompensa que ganamos, ni algo que el mundo finalmente nos entrega. Ananda — la dicha — es el tercer rostro del Absoluto: Sat-Chit-Ananda, Ser, Conciencia, Dicha. El Taittiriya Upanishad lo declara — Raso vai sah, Él es verdaderamente dicha (2.7) — y el sabio Bhrigu, indagando en lo real, al fin conoció la Dicha como Brahman (3.6). La alegría que vislumbramos en el amor, en la belleza, en un momento de quietud no la produce el objeto; es un reflejo de la dicha que ya es nuestra propia naturaleza, brevemente descubierta cuando el deseo se aquieta. Cada tradición a continuación nombra esa alegría de un modo distinto — y cada una insiste en que se realiza dentro, nunca se adquiere desde fuera.","traditions-title":"Cómo 12 tradiciones describen la dicha suprema","synthesis-title":"La dicha que nunca estuvo ausente","trad1-label":"TRADICIÓN VÉDICA","trad2-label":"TRADICIÓN ISLÁMICA","trad3-label":"TRADICIÓN CRISTIANA","trad4-label":"TRADICIÓN BUDISTA","trad5-label":"TRADICIÓN SIKH","trad6-label":"TRADICIÓN JUDÍA","trad7-label":"TRADICIÓN TAOÍSTA","trad8-label":"TRADICIÓN BAHÁ'Í","trad9-label":"TRADICIÓN ZOROÁSTRICA","trad10-label":"TRADICIÓN JAINISTA","trad11-label":"TRADICIÓN SUFÍ","trad12-label":"TRADICIÓN CONFUCIANA","related-title":"Explorar sabiduría relacionada","related1":"¿Qué es todo esto?","related2":"¿Qué es la verdad?","related3":"← Regresar al Cosmos","footer-text":"© 2026 | Una marca creativa de Prashob Rajamohan"}};
-  function applyLanguage(lang) {
-    const dict = OOW_LANG_DATA[lang];
-    if (!dict) return;
-    document.querySelectorAll('[data-i18n]').forEach(function (node) {
-      const key = node.getAttribute('data-i18n');
-      if (Object.prototype.hasOwnProperty.call(dict, key)) node.textContent = dict[key];
-    });
-    document.querySelectorAll('.lang-switcher .lang-btn').forEach(function (button) {
-      const active = button.getAttribute('data-lang') === lang;
-      button.classList.toggle('active', active);
-      button.setAttribute('aria-pressed', active ? 'true' : 'false');
-      button.removeAttribute('onclick');
-    });
-    document.documentElement.setAttribute('lang', lang);
-    try { localStorage.setItem('oow-language', lang); localStorage.setItem('preferred-lang', lang); } catch (e) {}
-    window.OOW_CURRENT_LANGUAGE = lang;
-  }
-  window.switchLang = applyLanguage;
-  window.setLanguage = applyLanguage;
-  document.addEventListener('click', function (event) {
-    const button = event.target && event.target.closest ? event.target.closest('.lang-switcher .lang-btn') : null;
-    if (!button) return;
-    event.preventDefault();
-    applyLanguage(button.getAttribute('data-lang'));
-  }, true);
-  function init() {
-    let preferred = 'en';
-    try {
-      const saved = localStorage.getItem('oow-language') || localStorage.getItem('preferred-lang');
-      if (OOW_LANG_DATA[saved]) preferred = saved;
-    } catch (e) {}
-    applyLanguage(preferred);
-  }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
-  else init();
-})();
-</script>
+
 </body>
 </html>
