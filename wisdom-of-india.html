@@ -875,9 +875,10 @@
                 el.innerHTML = (t[k] !== undefined) ? t[k] : I18N.en[k];
             });
             document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === l));
-            document.documentElement.setAttribute('lang', l);
+            document.documentElement.setAttribute('lang', l); try{localStorage.setItem('oow-language',l)}catch(e){}
         }
         document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+        try{const saved=localStorage.getItem('oow-language');if(saved&&I18N[saved])setLang(saved)}catch(e){}
     })();
     </script>
 </body>
