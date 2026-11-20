@@ -1,0 +1,47 @@
+/* Ocean of Wisdom — site-wide language selector standard */
+:where(.lang-switcher,.langs,.page-language,.lang-sw){
+  display:grid !important;
+  grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+  align-items:stretch !important;
+  gap:clamp(8px,2.5vw,38px) !important;
+  width:94% !important;
+  max-width:1400px !important;
+  margin:2rem auto 3rem !important;
+  box-sizing:border-box !important;
+}
+:where(.lang-switcher .lang-btn,.langs a,.page-language button,.lang-sw .lb){
+  display:flex !important;
+  justify-content:center !important;
+  align-items:center !important;
+  box-sizing:border-box !important;
+  width:100% !important;
+  min-width:0 !important;
+  min-height:clamp(64px,12.2vw,188px) !important;
+  padding:10px 6px !important;
+  border:3px solid #55d5e2 !important;
+  border-radius:clamp(18px,2.5vw,38px) !important;
+  background:transparent !important;
+  color:#55d5e2 !important;
+  font-family:'Noto Sans Devanagari','Noto Sans Tamil',Arial,sans-serif !important;
+  font-size:clamp(1.1rem,3.6vw,3.2rem) !important;
+  font-weight:700 !important;
+  line-height:1.1 !important;
+  text-align:center !important;
+  text-decoration:none !important;
+  cursor:pointer !important;
+  transition:background .2s ease,color .2s ease,border-color .2s ease,transform .2s ease !important;
+}
+:where(.lang-switcher .lang-btn:hover,.langs a:hover,.page-language button:hover,.lang-sw .lb:hover){
+  background:#55d5e2 !important;
+  border-color:#55d5e2 !important;
+  color:#101d35 !important;
+}
+:where(.lang-switcher .lang-btn.active,.langs a.active,.page-language button[aria-pressed="true"],.lang-sw .lb.active){
+  background:#d8ad43 !important;
+  border-color:#d8ad43 !important;
+  color:#14213a !important;
+}
+@media(max-width:480px){
+  :where(.lang-switcher,.langs,.page-language,.lang-sw){width:96% !important;gap:8px !important;margin:1.25rem auto 2rem !important}
+  :where(.lang-switcher .lang-btn,.langs a,.page-language button,.lang-sw .lb){min-height:64px !important;border-width:2px !important;border-radius:16px !important;font-size:clamp(1rem,4vw,1.35rem) !important}
+}
