@@ -660,29 +660,40 @@
 
         let currentLang = 'en';
         
-        function switchLang(lang) {
-            currentLang = lang;
-            document.querySelectorAll('[data-i18n]').forEach(elem => {
+        window.switchLang = function(lang) {
+            if (!Object.prototype.hasOwnProperty.call(translations, lang)) return;
+            const dictionary = translations[lang];
+            document.querySelectorAll('[data-i18n]').forEach(function(elem) {
                 const key = elem.getAttribute('data-i18n');
-                if (translations[lang] && translations[lang][key]) {
-                    elem.textContent = translations[lang][key];
+                if (Object.prototype.hasOwnProperty.call(dictionary, key)) {
+                    elem.textContent = dictionary[key];
                 }
             });
-            
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('onclick') === "switchLang('" + lang + "')");
+            document.querySelectorAll('.lang-btn').forEach(function(btn) {
+                btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+                btn.setAttribute('aria-pressed', btn.getAttribute('data-lang') === lang ? 'true' : 'false');
             });
-            
-            localStorage.setItem('preferred-lang', lang); localStorage.setItem('oow-language', lang);
-        }
-        
-        window.addEventListener('DOMContentLoaded', () => {
-            const savedLang = (localStorage.getItem('oow-language') || localStorage.getItem('preferred-lang'));
-            if (savedLang && translations[savedLang]) {
-                const btn = document.querySelector(`.lang-btn[onclick="switchLang('${savedLang}')"]`);
-                if (btn) btn.click();
-            }
+            document.documentElement.lang = lang;
+            try {
+                localStorage.setItem('preferred-lang', lang);
+                localStorage.setItem('oow-language', lang);
+            } catch (e) {}
+        };
+
+        document.querySelectorAll('.lang-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                window.switchLang(btn.getAttribute('data-lang'));
+            });
         });
+
+        (function restoreLanguage() {
+            let savedLang = 'en';
+            try {
+                savedLang = localStorage.getItem('oow-language') ||
+                            localStorage.getItem('preferred-lang') || 'en';
+            } catch (e) {}
+            window.switchLang(savedLang);
+        })();
     </script>
 </body>
 </html>
