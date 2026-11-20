@@ -678,7 +678,7 @@
         let currentLang = 'en';
         
         window.switchLang = function(lang) {
-            if (!Object.prototype.hasOwnProperty.call(translations, lang)) return;
+            if (!translations || !Object.prototype.hasOwnProperty.call(translations, lang)) return false;
             const dictionary = translations[lang];
             document.querySelectorAll('[data-i18n]').forEach(function(elem) {
                 const key = elem.getAttribute('data-i18n');
@@ -686,30 +686,43 @@
                     elem.textContent = dictionary[key];
                 }
             });
-            document.querySelectorAll('.lang-btn').forEach(function(btn) {
-                btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
-                btn.setAttribute('aria-pressed', btn.getAttribute('data-lang') === lang ? 'true' : 'false');
+            document.querySelectorAll('.lang-switcher .lang-btn').forEach(function(btn) {
+                const selected = btn.getAttribute('data-lang') === lang;
+                btn.classList.toggle('active', selected);
+                btn.setAttribute('aria-pressed', selected ? 'true' : 'false');
             });
-            document.documentElement.lang = lang;
+            document.documentElement.setAttribute('lang', lang);
             try {
                 localStorage.setItem('preferred-lang', lang);
                 localStorage.setItem('oow-language', lang);
             } catch (e) {}
+            return true;
         };
 
-        document.querySelectorAll('.lang-btn').forEach(function(btn) {
-            btn.addEventListener('click', function() {
-                window.switchLang(btn.getAttribute('data-lang'));
-            });
+        // Delegated click handling works even if a browser does not run inline onclick attributes.
+        document.addEventListener('click', function(event) {
+            const button = event.target && event.target.closest
+                ? event.target.closest('.lang-switcher .lang-btn') : null;
+            if (!button) return;
+            event.preventDefault();
+            window.switchLang(button.getAttribute('data-lang'));
+        }, true);
+
+        // Keep the handler callable from the buttons' inline fallback as well.
+        document.querySelectorAll('.lang-switcher .lang-btn').forEach(function(button) {
+            const lang = button.getAttribute('data-lang');
+            button.setAttribute('onclick', "window.switchLang('" + lang + "')");
+            button.setAttribute('type', 'button');
         });
 
         (function restoreLanguage() {
-            let savedLang = 'en';
+            let saved = 'en';
             try {
-                savedLang = localStorage.getItem('oow-language') ||
-                            localStorage.getItem('preferred-lang') || 'en';
+                const candidate = localStorage.getItem('oow-language') ||
+                                  localStorage.getItem('preferred-lang') || 'en';
+                if (Object.prototype.hasOwnProperty.call(translations, candidate)) saved = candidate;
             } catch (e) {}
-            window.switchLang(savedLang);
+            window.switchLang(saved);
         })();
     </script>
 </body>
