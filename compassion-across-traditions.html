@@ -369,5 +369,6 @@ window.setLang=function(l){apply(l)};
 buttons.forEach(b=>{b.onclick=()=>apply(({EN:"en","हि":"hi","த":"ta",ES:"es"})[b.textContent.trim()]||"en")});
 let current="en";try{current=localStorage.getItem("oow-language")||"en"}catch(e){}apply(current);
 })();
+</script>
 </body>
 </html>
