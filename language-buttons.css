@@ -45,20 +45,20 @@
   :where(.lang-switcher,.langs,.page-language,.lang-sw){width:96% !important;gap:8px !important;margin:1.25rem auto 2rem !important}
   :where(.lang-switcher .lang-btn,.langs a,.page-language button,.lang-sw .lb){min-height:64px !important;border-width:2px !important;border-radius:16px !important;font-size:clamp(1rem,4vw,1.35rem) !important}
 }
-/* Keep the compact language labels identical to the homepage */
-:where(.langs,.page-language) > :where(a,button,.lb){font-size:0 !important}
-:where(.langs,.page-language) > :where(a,button,.lb)::after{
+
+/* Ensure all four language labels remain visible and match homepage */
+.langs a,.page-language button,.lang-switcher .lang-btn,.lang-sw .lb{
   font-size:clamp(1.1rem,3.6vw,3.2rem) !important;
   line-height:1.1 !important;
 }
-:where(.langs,.page-language) > :where(a,button,.lb)[lang="en"]::after,
-:where(.langs,.page-language) > :where(a,button,.lb)[data-lang="en"]::after{content:"EN"}
-:where(.langs,.page-language) > :where(a,button,.lb)[lang="hi"]::after,
-:where(.langs,.page-language) > :where(a,button,.lb)[data-lang="hi"]::after{content:"हि"}
-:where(.langs,.page-language) > :where(a,button,.lb)[lang="ta"]::after,
-:where(.langs,.page-language) > :where(a,button,.lb)[data-lang="ta"]::after{content:"த"}
-:where(.langs,.page-language) > :where(a,button,.lb)[lang="es"]::after,
-:where(.langs,.page-language) > :where(a,button,.lb)[data-lang="es"]::after{content:"ES"}
+.langs a.active,.langs a[aria-current="page"],
+.page-language button[aria-pressed="true"],
+.lang-switcher .lang-btn.active,.lang-sw .lb.active{
+  background:#d8ad43 !important;border-color:#d8ad43 !important;color:#14213a !important;
+}
 @media(max-width:480px){
- :where(.langs,.page-language) > :where(a,button,.lb)::after{font-size:clamp(1rem,4vw,1.35rem) !important}
+  .langs a,.page-language button,.lang-switcher .lang-btn,.lang-sw .lb{
+    font-size:clamp(1rem,4vw,1.35rem) !important;
+    min-height:64px !important;
+  }
 }
