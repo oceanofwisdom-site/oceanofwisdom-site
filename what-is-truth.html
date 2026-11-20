@@ -690,17 +690,22 @@
         btn.setAttribute('aria-pressed', active ? 'true' : 'false');
     });
     document.documentElement.lang = lang;
+    window.OOW_CURRENT_LANGUAGE = lang;
     try { localStorage.setItem('oow-language', lang); localStorage.setItem('preferred-lang', lang); } catch(e) {}
 }
 window.switchLang = applyOowLanguage;
 window.setLanguage = applyOowLanguage;
+/* Delegated capture-phase handler: works even when page controls are re-rendered. */
+document.addEventListener('click', function(e) {
+    const btn = e.target && e.target.closest ? e.target.closest('.lang-switcher .lang-btn[data-lang]') : null;
+    if (!btn) return;
+    e.preventDefault();
+    e.stopPropagation();
+    applyOowLanguage(btn.getAttribute('data-lang'));
+}, true);
 document.querySelectorAll('.lang-switcher .lang-btn').forEach(function(btn) {
     btn.type = 'button';
     btn.removeAttribute('onclick');
-    btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        applyOowLanguage(btn.getAttribute('data-lang'));
-    });
 });
 (function() {
     let saved = 'en';
