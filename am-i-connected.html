@@ -654,31 +654,39 @@
             }
         };
 
-        let currentLang = 'en';
-        
-        function switchLang(lang) {
-            currentLang = lang;
-            document.querySelectorAll('[data-i18n]').forEach(elem => {
-                const key = elem.getAttribute('data-i18n');
-                if (translations[lang] && translations[lang][key]) {
-                    elem.textContent = translations[lang][key];
-                }
-            });
-            
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('onclick') === "switchLang('" + lang + "')");
-            });
-            
-            localStorage.setItem('preferred-lang', lang); localStorage.setItem('oow-language', lang);localStorage.setItem('oow-language',lang);
-        }
-        
-        window.addEventListener('DOMContentLoaded', () => {
-            const savedLang = (localStorage.getItem('oow-language') || localStorage.getItem('preferred-lang'));
-            if (savedLang && translations[savedLang]) {
-                const btn = document.querySelector(`.lang-btn[onclick="switchLang('${savedLang}')"]`);
-                if (btn) btn.click();
-            }
-        });
+        function applyOowLanguage(lang) {
+    if (!Object.prototype.hasOwnProperty.call(translations, lang)) return;
+    const dict = translations[lang];
+    document.querySelectorAll('[data-i18n]').forEach(function(el) {
+        const key = el.getAttribute('data-i18n');
+        if (Object.prototype.hasOwnProperty.call(dict, key)) el.textContent = dict[key];
+    });
+    document.querySelectorAll('.lang-switcher .lang-btn').forEach(function(btn) {
+        const active = btn.getAttribute('data-lang') === lang;
+        btn.classList.toggle('active', active);
+        btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+    document.documentElement.lang = lang;
+    try { localStorage.setItem('oow-language', lang); localStorage.setItem('preferred-lang', lang); } catch(e) {}
+}
+window.switchLang = applyOowLanguage;
+window.setLanguage = applyOowLanguage;
+document.querySelectorAll('.lang-switcher .lang-btn').forEach(function(btn) {
+    btn.type = 'button';
+    btn.removeAttribute('onclick');
+    btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        applyOowLanguage(btn.getAttribute('data-lang'));
+    });
+});
+(function() {
+    let saved = 'en';
+    try {
+        const v = localStorage.getItem('oow-language') || localStorage.getItem('preferred-lang') || 'en';
+        if (Object.prototype.hasOwnProperty.call(translations, v)) saved = v;
+    } catch(e) {}
+    applyOowLanguage(saved);
+})();
     </script>
 </body>
 </html>
