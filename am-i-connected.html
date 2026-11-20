@@ -688,5 +688,46 @@ document.querySelectorAll('.lang-switcher .lang-btn').forEach(function(btn) {
     applyOowLanguage(saved);
 })();
     </script>
+<script>
+/* Independent language controller: does not depend on the page's animation or legacy handlers. */
+(function () {
+  const OOW_LANG_DATA = {"en":{"breadcrumb-home":"Cosmos","breadcrumb-current":"Am I Connected?","page-title":"Am I Connected?","page-subtitle":"Separate self, or joined to all — the unity beneath every being","teaching-translation":"Sarvam Khalvidam Brahma — All This Is Verily Brahman","teaching-explanation":"Am I a separate self, sealed inside my own skin — or joined, at some deep level, to everything else? The Upanishads gave the most radical answer: there is no final separation at all. Sarvam khalvidam brahma — all this is verily Brahman (Chandogya Upanishad 3.14.1); and Tat tvam asi — That thou art (Chandogya 6.8.7). The boundary you feel between yourself and the world is real enough to live by, but it is not the deepest truth of what you are. The one who sees all beings in the Self, and the Self in all beings, shrinks from nothing (Isha Upanishad 6). Each tradition below traces that connection in its own way — and from it, almost without exception, draws the same conclusion: care.","traditions-title":"How 12 Traditions See Our Connection","synthesis-title":"The Illusion of Separateness","trad1-label":"VEDIC TRADITION","trad2-label":"ISLAMIC TRADITION","trad3-label":"CHRISTIAN TRADITION","trad4-label":"BUDDHIST TRADITION","trad5-label":"SIKH TRADITION","trad6-label":"JEWISH TRADITION","trad7-label":"TAOIST TRADITION","trad8-label":"BAHA'I TRADITION","trad9-label":"ZOROASTRIAN TRADITION","trad10-label":"JAIN TRADITION","trad11-label":"SUFI TRADITION","trad12-label":"CONFUCIAN TRADITION","related-title":"Explore Related Wisdom","related1":"What Is Truth?","related2":"What Is Bliss?","related3":"← Return to Ocean of Wisdom","footer-text":"© 2026 | A creative brand by Prashob Rajamohan"},"hi":{"breadcrumb-home":"ब्रह्मांड","breadcrumb-current":"क्या मैं जुड़ा हुआ हूँ?","page-title":"क्या मैं जुड़ा हुआ हूँ?","page-subtitle":"अलग सत्ता, या सबसे जुड़ा हुआ — हर प्राणी के नीचे की एकता","teaching-translation":"सर्वं खल्विदं ब्रह्म — यह सब कुछ ब्रह्म ही है","teaching-explanation":"क्या मैं एक अलग, स्वतंत्र सत्ता हूँ, अपनी ही त्वचा में बंद — या किसी गहरे स्तर पर हर चीज़ से जुड़ा हुआ? उपनिषदों ने सबसे क्रांतिकारी उत्तर दिया: कोई अंतिम अलगाव है ही नहीं। सर्वं खल्विदं ब्रह्म — यह सब कुछ ब्रह्म ही है (छांदोग्य उपनिषद 3.14.1); और तत्त्वमसि — वह तू ही है (छांदोग्य 6.8.7)। अपने और संसार के बीच जो सीमा आप अनुभव करते हैं वह जीने के लिए पर्याप्त वास्तविक है, पर वह आपके होने का गहनतम सत्य नहीं। जो सभी प्राणियों में स्वयं को और स्वयं में सभी प्राणियों को देखता है, वह किसी से नहीं डरता (ईशावास्य उपनिषद 6)। नीचे हर परंपरा उस संबंध को अपने ढंग से दर्शाती है — और लगभग हर एक उससे वही निष्कर्ष निकालती है: करुणा।","traditions-title":"12 परंपराएं हमारे संबंध को कैसे देखती हैं","synthesis-title":"अलगाव का भ्रम","trad1-label":"वैदिक परंपरा","trad2-label":"इस्लामी परंपरा","trad3-label":"ईसाई परंपरा","trad4-label":"बौद्ध परंपरा","trad5-label":"सिख परंपरा","trad6-label":"यहूदी परंपरा","trad7-label":"ताओवादी परंपरा","trad8-label":"बहाई परंपरा","trad9-label":"पारसी परंपरा","trad10-label":"जैन परंपरा","trad11-label":"सूफ़ी परंपरा","trad12-label":"कन्फ़्यूशियस परंपरा","related-title":"संबंधित ज्ञान देखें","related1":"सत्य क्या है?","related2":"आनंद क्या है?","related3":"← ब्रह्मांड पर वापस जाएं","footer-text":"© 2026 | प्रशोब राजमोहन द्वारा एक रचनात्मक ब्रांड"},"ta":{"breadcrumb-home":"காஸ்மாஸ்","breadcrumb-current":"நான் இணைந்திருக்கிறேனா?","page-title":"நான் இணைந்திருக்கிறேனா?","page-subtitle":"தனிச் சுயமா, அல்லது அனைத்துடனும் இணைந்ததா — ஒவ்வொரு உயிருக்கும் அடியில் ஒருமை","teaching-translation":"சர்வம் கல்விதம் பிரம்ம — இவை அனைத்தும் பிரம்மமே","teaching-explanation":"நான் என் தோலுக்குள் அடைபட்ட தனிச் சுயமா — அல்லது ஏதோ ஆழமான மட்டத்தில் அனைத்துடனும் இணைந்தவனா? உபநிடதங்கள் மிகத் தீவிரமான பதிலை அளித்தன: இறுதியான பிரிவு என்பதே இல்லை. சர்வம் கல்விதம் பிரம்ம — இவை அனைத்தும் பிரம்மமே (சாந்தோக்ய உபநிடதம் 3.14.1); தத்துவமசி — அது நீயே (சாந்தோக்ய 6.8.7). உனக்கும் உலகிற்கும் இடையே நீ உணரும் எல்லை வாழ்வதற்குப் போதுமான அளவு உண்மை, ஆனால் நீ யார் என்பதன் ஆழமான உண்மை அல்ல. அனைத்து உயிர்களிலும் தன்னையும், தன்னில் அனைத்து உயிர்களையும் காண்பவன் எதற்கும் அஞ்சுவதில்லை (ஈசாவாஸ்ய உபநிடதம் 6). கீழே ஒவ்வொரு பாரம்பரியமும் அந்த இணைப்பை அதன் சொந்த வழியில் விளக்குகிறது — கிட்டத்தட்ட ஒவ்வொன்றும் அதிலிருந்து ஒரே முடிவை எடுக்கிறது: கருணை.","traditions-title":"12 பாரம்பரியங்கள் நமது இணைப்பை எப்படிப் பார்க்கின்றன","synthesis-title":"தனிமையின் மாயை","trad1-label":"வேத பாரம்பரியம்","trad2-label":"இஸ்லாமிய பாரம்பரியம்","trad3-label":"கிறிஸ்தவ பாரம்பரியம்","trad4-label":"பௌத்த பாரம்பரியம்","trad5-label":"சீக்கிய பாரம்பரியம்","trad6-label":"யூத பாரம்பரியம்","trad7-label":"தாவோ பாரம்பரியம்","trad8-label":"பஹாய் பாரம்பரியம்","trad9-label":"ஜொராஸ்ட்ரிய பாரம்பரியம்","trad10-label":"சமண பாரம்பரியம்","trad11-label":"சூஃபி பாரம்பரியம்","trad12-label":"கன்ஃபூசிய பாரம்பரியம்","related-title":"தொடர்புடைய ஞானத்தை ஆராயுங்கள்","related1":"உண்மை என்றால் என்ன?","related2":"பேரின்பம் என்றால் என்ன?","related3":"← காஸ்மாஸுக்குத் திரும்பு","footer-text":"© 2026 | பிரஷோப் ராஜமோகனின் படைப்பு பிராண்ட்"},"es":{"breadcrumb-home":"Cosmos","breadcrumb-current":"¿Estoy conectado?","page-title":"¿Estoy conectado?","page-subtitle":"Un yo separado, o unido a todo — la unidad bajo cada ser","teaching-translation":"Sarvam Khalvidam Brahma — Todo esto es verdaderamente Brahman","teaching-explanation":"¿Soy un yo separado, sellado dentro de mi propia piel — o estoy unido, en algún nivel profundo, a todo lo demás? Los Upanishads dieron la respuesta más radical: no hay separación última alguna. Sarvam khalvidam brahma — todo esto es verdaderamente Brahman (Chandogya Upanishad 3.14.1); y Tat tvam asi — Eso eres tú (Chandogya 6.8.7). La frontera que sientes entre tú y el mundo es bastante real para vivir, pero no es la verdad más profunda de lo que eres. Quien ve todos los seres en el Sí mismo, y el Sí mismo en todos los seres, no teme a nada (Isha Upanishad 6). Cada tradición a continuación traza esa conexión a su manera — y de ella, casi sin excepción, extrae la misma conclusión: el cuidado.","traditions-title":"Cómo 12 tradiciones ven nuestra conexión","synthesis-title":"La ilusión de la separación","trad1-label":"TRADICIÓN VÉDICA","trad2-label":"TRADICIÓN ISLÁMICA","trad3-label":"TRADICIÓN CRISTIANA","trad4-label":"TRADICIÓN BUDISTA","trad5-label":"TRADICIÓN SIKH","trad6-label":"TRADICIÓN JUDÍA","trad7-label":"TRADICIÓN TAOÍSTA","trad8-label":"TRADICIÓN BAHÁ'Í","trad9-label":"TRADICIÓN ZOROÁSTRICA","trad10-label":"TRADICIÓN JAINISTA","trad11-label":"TRADICIÓN SUFÍ","trad12-label":"TRADICIÓN CONFUCIANA","related-title":"Explorar sabiduría relacionada","related1":"¿Qué es la verdad?","related2":"¿Qué es la dicha?","related3":"← Regresar al Cosmos","footer-text":"© 2026 | Una marca creativa de Prashob Rajamohan"}};
+  function applyLanguage(lang) {
+    const dict = OOW_LANG_DATA[lang];
+    if (!dict) return;
+    document.querySelectorAll('[data-i18n]').forEach(function (node) {
+      const key = node.getAttribute('data-i18n');
+      if (Object.prototype.hasOwnProperty.call(dict, key)) node.textContent = dict[key];
+    });
+    document.querySelectorAll('.lang-switcher .lang-btn').forEach(function (button) {
+      const active = button.getAttribute('data-lang') === lang;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', active ? 'true' : 'false');
+      button.removeAttribute('onclick');
+    });
+    document.documentElement.setAttribute('lang', lang);
+    try { localStorage.setItem('oow-language', lang); localStorage.setItem('preferred-lang', lang); } catch (e) {}
+    window.OOW_CURRENT_LANGUAGE = lang;
+  }
+  window.switchLang = applyLanguage;
+  window.setLanguage = applyLanguage;
+  document.addEventListener('click', function (event) {
+    const button = event.target && event.target.closest ? event.target.closest('.lang-switcher .lang-btn') : null;
+    if (!button) return;
+    event.preventDefault();
+    applyLanguage(button.getAttribute('data-lang'));
+  }, true);
+  function init() {
+    let preferred = 'en';
+    try {
+      const saved = localStorage.getItem('oow-language') || localStorage.getItem('preferred-lang');
+      if (OOW_LANG_DATA[saved]) preferred = saved;
+    } catch (e) {}
+    applyLanguage(preferred);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
+  else init();
+})();
+</script>
 </body>
 </html>
