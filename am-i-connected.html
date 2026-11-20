@@ -669,11 +669,11 @@
                 btn.classList.toggle('active', btn.getAttribute('onclick') === "switchLang('" + lang + "')");
             });
             
-            localStorage.setItem('preferred-lang', lang);localStorage.setItem('oow-language',lang);
+            localStorage.setItem('preferred-lang', lang); localStorage.setItem('oow-language', lang);localStorage.setItem('oow-language',lang);
         }
         
         window.addEventListener('DOMContentLoaded', () => {
-            const savedLang = localStorage.getItem('preferred-lang');
+            const savedLang = (localStorage.getItem('oow-language') || localStorage.getItem('preferred-lang'));
             if (savedLang && translations[savedLang]) {
                 const btn = document.querySelector(`.lang-btn[onclick="switchLang('${savedLang}')"]`);
                 if (btn) btn.click();
