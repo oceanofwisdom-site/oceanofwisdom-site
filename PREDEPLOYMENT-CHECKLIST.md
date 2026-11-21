@@ -8,7 +8,7 @@ Status: **Not deployed. Browser/device QA and the remaining blockers below must 
 ## Repository scope
 
 - 125 tracked files in the working branch, including 104 HTML pages.
-- 53 files differ from `main`; branch is 80 commits ahead and 0 commits behind at the audit checkpoint.
+- 54 files differ from `main`; branch is 91 commits ahead and 0 commits behind at the audit checkpoint.
 - All changes remain isolated on this working branch. No merge or production deployment was performed.
 
 ## Work implemented
@@ -19,7 +19,7 @@ Status: **Not deployed. Browser/device QA and the remaining blockers below must 
 - Added contextual “Explore related topics in depth” links to 37 core content pages.
 - Added a detailed-topic destination mapping for all 50 Knowledge Library records.
 - Added the record-level source title/type panel to the Knowledge Library and refined source destinations. Fourteen record references were corrected or improved during the source review.
-- Removed the global `!important` dark-background override from `ocean-global.css`. Page-specific foreground/background pairs can now take precedence; the Indian Classic Wisdom page and its Arthashastra section explicitly use light text on dark panels.
+- Removed the global `!important` dark-background override from `ocean-global.css`. Page-specific foreground/background pairs can now take precedence; the Indian Classic Wisdom and Ancient Indian Knowledge pages explicitly use high-contrast light text on dark panels. The Chanakya/Kautilya Arthaśāstra discussion now lives in a dedicated, readable statecraft section.
 - Added accessible, explicitly labelled Google Translate reading links to selected English research pages that do not have authored translation siblings. These are machine translations, not editorially reviewed translations.
 
 ## Translation audit
