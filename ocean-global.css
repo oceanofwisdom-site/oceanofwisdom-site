@@ -33,3 +33,16 @@ body>*{position:relative;z-index:1}
 #oow-intro p{margin:0 auto 6px!important;max-width:850px;color:#e0e7f0!important;font-size:clamp(13px,1.55vw,17px)!important;line-height:1.5!important}
 #oow-intro .oow-intro-motto{color:#63d5df;font-size:clamp(11px,1.3vw,14px);letter-spacing:.08em;line-height:1.4}
 @media(max-width:600px){#oow-intro{padding:13px 16px 12px}#oow-intro h2{font-size:19px!important;margin-bottom:4px!important}#oow-intro p{font-size:13px!important;line-height:1.42!important}#oow-intro .oow-intro-motto{font-size:11px}}
+
+/* Shared cinematic opening: banner, original artwork, star pause, then page controls */
+#oow-intro{display:none!important}
+#oow-cinematic-hero{position:relative;z-index:2;width:100%;margin:0 auto;background:transparent}
+#oow-cinematic-hero>img{display:block;width:100%;height:auto;aspect-ratio:1600/760;object-fit:cover;object-position:center;margin:0 auto}
+#oow-cinematic-hero .oow-star-gap{height:clamp(74px,11vw,140px);width:100%;background:transparent}
+body.oow-homepage>.hero{display:none!important}
+body.oow-homepage #oow-cinematic-hero .oow-star-gap{height:clamp(90px,13vw,155px)}
+@media(max-width:600px){
+ #oow-cinematic-hero>img{aspect-ratio:1.25/1;object-fit:cover;object-position:center}
+ #oow-cinematic-hero .oow-star-gap{height:88px}
+ body.oow-homepage #oow-cinematic-hero .oow-star-gap{height:96px}
+}
