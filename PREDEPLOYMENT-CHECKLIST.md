@@ -2,7 +2,7 @@
 
 Working branch: `ocean-wisdom-complete-pending-work-nov-2026`  
 Base branch: `main`  
-Latest audited commit: `7447ea074584e5e1382527586b248d53a1514855`  
+Latest functional change reviewed: `b6a1857354914563e509f24b54b0e572a369049a`  
 Status: **Not deployed. Browser/device QA and the remaining blockers below must be completed before production release.**
 
 ## Repository scope
