@@ -2,7 +2,7 @@
 
 Working branch: `ocean-wisdom-complete-pending-work-nov-2026`  
 Base branch: `main`  
-Latest functional change reviewed: `b6a1857354914563e509f24b54b0e572a369049a`  
+Latest functional change reviewed: `f7e2700257a125be2c14e3cc7c426ea8a6e8d316`  
 Status: **Not deployed. Browser/device QA and the remaining blockers below must be completed before production release.**
 
 ## Repository scope
@@ -14,6 +14,7 @@ Status: **Not deployed. Browser/device QA and the remaining blockers below must 
 ## Work implemented
 
 - Created `indian-classic-wisdom-literature.html`, a dedicated Indian literary collection, and added it to the homepage, Explore navigation, World Literature cross-link and sitemap.
+- Refocused `ancient-indian-wisdom.html` on applied knowledge and technical traditions to avoid duplicating the new literature collection. Added a detailed, high-contrast Chanakya/Kautilya Arthaśāstra section and linked it from the new literature page.
 - Added `vedic-rishis.html` and repaired seven pages that previously pointed to a missing Vedic sages destination.
 - Added contextual “Explore related topics in depth” links to 37 core content pages.
 - Added a detailed-topic destination mapping for all 50 Knowledge Library records.
@@ -29,7 +30,7 @@ Status: **Not deployed. Browser/device QA and the remaining blockers below must 
 - Checked language data and controls on Who Am I?, Sanatana Dharma, both interactive tool laboratories and Wisdom of India.
 - The homepage has EN/HI/TA/ES controls; Hindi and Spanish use Google Translate, Tamil has a separate page.
 - The Knowledge Library has its own four-language UI and translated record metadata.
-- Eight research/article pages use a clearly labelled machine-translation fallback where authored sibling pages are not present.
+- The eight detailed Knowledge Library essays use a clearly labelled machine-translation fallback; additional English-only pages also use this fallback where no authored translated sibling page exists. These machine translations are not editorially reviewed.
 
 ### Translation blocker
 
