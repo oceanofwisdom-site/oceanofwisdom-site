@@ -1,3 +1,4 @@
+@import url('/ocean-global.css');
 /* Ocean of Wisdom — site-wide language selector standard */
 :where(.lang-switcher,.langs,.page-language,.lang-sw){
   display:grid !important;
