@@ -100,3 +100,21 @@ body.oow-homepage #oow-cinematic-hero .oow-star-gap{height:clamp(90px,13vw,155px
 @media(prefers-reduced-motion:reduce){
   :where(.lang-switcher .lang-btn,.langs a,.page-language button,.lang-sw .lb,.language-switcher button,.language-buttons button,.lang-buttons button,button[data-lang],a[data-lang]){transition:none!important}
 }
+
+
+/* Fit the longer Spanish label inside the same four-button grid cell */
+:where(.lang-switcher .lang-btn[data-lang="es"],.page-language button[data-lang="es"],.language-switcher button[data-lang="es"],.language-buttons button[data-lang="es"],.lang-buttons button[data-lang="es"],button[data-lang="es"]){
+  font-size:clamp(1rem,3vw,2.45rem)!important;
+  letter-spacing:-.045em!important;
+  padding-left:2px!important;padding-right:2px!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:clip!important;
+  min-width:0!important;
+}
+@media(max-width:600px){
+  :where(.lang-switcher .lang-btn[data-lang="es"],.page-language button[data-lang="es"],.language-switcher button[data-lang="es"],.language-buttons button[data-lang="es"],.lang-buttons button[data-lang="es"],button[data-lang="es"]){
+    font-size:clamp(.82rem,3.3vw,1.25rem)!important;
+    letter-spacing:-.055em!important;
+  }
+}
