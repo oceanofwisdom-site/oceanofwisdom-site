@@ -5,6 +5,20 @@ const canvas=document.createElement('canvas');canvas.id='oow-starfield';canvas.s
 const header=document.createElement('div');header.id='oow-global-brand';
 header.innerHTML='<div class="oow-site-banner"><a href="/" aria-label="Ocean of Wisdom home"><img src="/banner.png" alt="Ocean of Wisdom — timeless wisdom across traditions"></a></div>';
 document.body.insertBefore(header,canvas.nextSibling);
+const intro=document.createElement('section');intro.id='oow-intro';
+intro.setAttribute('aria-label','Introduction');
+intro.innerHTML='<div class="oow-intro-inner"><h2 data-oow-copy="title">Where Wisdom Meets Wonder</h2><p data-oow-copy="description">Explore the mysteries of existence, the depth of human thought, and the knowledge of ancient civilisations.</p><div class="oow-intro-motto" data-oow-copy="motto">ज्ञान • அறிவு • Sabiduría • Wisdom</div></div>';
+header.insertAdjacentElement('afterend',intro);
+const introCopy={
+en:{title:'Where Wisdom Meets Wonder',description:'Explore the mysteries of existence, the depth of human thought, and the knowledge of ancient civilisations.',motto:'ज्ञान • அறிவு • Sabiduría • Wisdom'},
+hi:{title:'जहाँ ज्ञान और जिज्ञासा मिलते हैं',description:'अस्तित्व के रहस्यों, मानव विचारों की गहराई और प्राचीन सभ्यताओं के ज्ञान का अन्वेषण करें।',motto:'ज्ञान • அறிவு • Sabiduría • Wisdom'},
+ta:{title:'அறிவும் வியப்பும் சங்கமிக்கும் இடம்',description:'இருப்பின் மர்மங்கள், மனித சிந்தனையின் ஆழம், பண்டைய நாகரிகங்களின் அறிவு ஆகியவற்றை ஆராயுங்கள்.',motto:'ज्ञान • அறிவு • Sabiduría • Wisdom'},
+es:{title:'Donde la sabiduría encuentra el asombro',description:'Explora los misterios de la existencia, la profundidad del pensamiento humano y el conocimiento de las civilizaciones antiguas.',motto:'ज्ञान • அறிவு • Sabiduría • Wisdom'}
+};
+function setIntroLanguage(lang){const copy=introCopy[lang]||introCopy.en;intro.querySelectorAll('[data-oow-copy]').forEach(el=>el.textContent=copy[el.dataset.oowCopy]);}
+function detectIntroLanguage(){const active=document.querySelector('.lang-btn.active[data-lang],.lang-btn[aria-pressed="true"][data-lang]');if(active)setIntroLanguage(active.dataset.lang);}
+document.addEventListener('click',e=>{const b=e.target.closest('.lang-btn[data-lang]');if(b)setTimeout(()=>setIntroLanguage(b.dataset.lang),0);});
+const langObserver=new MutationObserver(detectIntroLanguage);langObserver.observe(document.body,{subtree:true,attributes:true,attributeFilter:['class','aria-pressed']});detectIntroLanguage();
 const ctx=canvas.getContext('2d');if(!ctx)return;
 const reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 let w=0,h=0,dpr=1,stars=[],raf=0;
