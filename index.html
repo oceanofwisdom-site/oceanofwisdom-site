@@ -24,8 +24,20 @@ h2{text-align:center;color:#f0d58d;font-size:clamp(26px,4vw,36px);margin:45px 0 
 .card{display:block;text-decoration:none;color:#f6f1e7;background:#172b49dd;border:1px solid #d8ad4377;border-radius:15px;padding:22px;transition:.2s}
 .card:hover{transform:translateY(-3px);border-color:#f0d58d}.card .icon{font-size:26px}.card h3{color:#73d9df;font-size:20px;margin:8px 0}.card p{color:#d2dce9;margin:0;font-size:15px}
 @media(max-width:600px){.grid.dice-tools-grid{grid-template-columns:1fr;grid-template-rows:none;max-width:none}.grid.dice-tools-grid>.card:nth-child(n){grid-column:1;grid-row:auto}.hero{min-height:0;padding:32px 16px 26px}.grid,.questions-grid{grid-template-columns:1fr}main{padding:16px 15px 50px}}
+
+.home-language-switch{max-width:920px;margin:26px auto 30px;padding:0 22px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.home-language-switch a{min-height:104px;display:flex;align-items:center;justify-content:center;border:3px solid #55d4df;border-radius:28px;color:#55d4df;text-decoration:none;font-size:clamp(22px,3vw,34px);font-weight:800;line-height:1.1;background:#101d35;transition:background .2s,color .2s,transform .2s}
+.home-language-switch a:hover,.home-language-switch a:focus-visible{background:#d9ad43;color:#101d35;transform:translateY(-2px);outline:3px solid #f0d58d;outline-offset:3px}
+.home-language-switch a[aria-current="page"]{background:#d9ad43;color:#101d35;border-color:#d9ad43}
+@media(max-width:600px){.home-language-switch{gap:9px;padding:0 14px;margin:18px auto 22px}.home-language-switch a{min-height:76px;border-radius:20px;border-width:2px;font-size:clamp(17px,4vw,23px)}}
 </style></head><body>
 <section class="hero"><div><div style="letter-spacing:.24em;color:#f0d58d;font-size:12px;font-weight:700">A JOURNEY THROUGH KNOWLEDGE</div><h1>Explore Ocean<br>of Wisdom</h1><p>Questions, philosophies, literature, tools and the living knowledge of civilisations.</p></div></section>
+<nav class="home-language-switch" aria-label="Choose homepage language">
+<a href="/" lang="en" aria-current="page">EN</a>
+<a href="https://translate.google.com/translate?sl=en&tl=hi&u=https%3A%2F%2Fwww.oceanofwisdom.site%2F" lang="hi" target="_blank" rel="noopener" aria-label="हिन्दी — machine translation">हिन्दी</a>
+<a href="https://translate.google.com/translate?sl=en&tl=ta&u=https%3A%2F%2Fwww.oceanofwisdom.site%2F" lang="ta" target="_blank" rel="noopener" aria-label="தமிழ் — machine translation">தமிழ்</a>
+<a href="https://translate.google.com/translate?sl=en&tl=es&u=https%3A%2F%2Fwww.oceanofwisdom.site%2F" lang="es" target="_blank" rel="noopener" aria-label="Español — machine translation">ES</a>
+</nav>
 <main><p class="intro">A meeting place for timeless questions and the many ways humanity has explored existence. Discover original explanations, historical sources, philosophical traditions and practical tools with curiosity, care and respect for evidence.</p>
 <h2>The Six Questions</h2><div class="grid questions-grid">
 <a class="card" href="/who-am-i.html"><div class="icon">🔍</div><h3>Who Am I?</h3><p>Beyond name, body and mind — what is the self?</p></a>
