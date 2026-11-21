@@ -5,7 +5,7 @@ const canvas=document.createElement('canvas');canvas.id='oow-starfield';canvas.s
 const header=document.createElement('div');header.id='oow-global-brand';
 header.innerHTML='<div class="oow-site-banner"><a href="/" aria-label="Ocean of Wisdom home"><img src="/banner.png" alt="Ocean of Wisdom — timeless wisdom across traditions"></a></div>';
 document.body.insertBefore(header,canvas.nextSibling);
-const hero=document.createElement('section');hero.id='oow-cinematic-hero';hero.innerHTML='<img src="/ocean-wisdom-hero.svg" alt="A meditator overlooking a luminous cosmic ocean at sunrise, with the words Explore the Ocean of Wisdom"><div class="oow-star-gap" aria-hidden="true"></div>';
+const hero=document.createElement('section');hero.id='oow-cinematic-hero';hero.innerHTML='<img src="/ocean-wisdom-hero.webp" alt="A meditator overlooking a luminous cosmic ocean at sunrise, with the words Explore the Ocean of Wisdom"><div class="oow-star-gap" aria-hidden="true"></div>';
 header.insertAdjacentElement('afterend',hero);
 if(location.pathname==='/'||location.pathname.endsWith('/index.html'))document.body.classList.add('oow-homepage');
 const ctx=canvas.getContext('2d');if(!ctx)return;
