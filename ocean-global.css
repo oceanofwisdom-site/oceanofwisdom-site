@@ -25,3 +25,11 @@ body:has(#oow-global-brand)::before{display:none}
 body>*{position:relative;z-index:1}
 @keyframes oow-stars-drift{from{background-position:0 0,0 0,0 0,0 0,0 0}to{background-position:390px 240px,390px 240px,390px 240px,390px 240px,390px 240px}}
 @media(prefers-reduced-motion:reduce){body::before{animation:none}}
+
+/* Compact universal introduction between the masthead and page controls */
+#oow-intro{position:relative;z-index:2;margin:0 auto;width:100%;padding:clamp(14px,2.4vw,25px) 18px clamp(12px,2vw,20px);text-align:center;background:linear-gradient(180deg,rgba(19,39,67,.92),rgba(16,29,53,.72));border-bottom:1px solid rgba(216,173,67,.22)}
+#oow-intro .oow-intro-inner{max-width:980px;margin:0 auto}
+#oow-intro h2{margin:0 0 5px!important;color:#e4bd5c!important;font-size:clamp(19px,2.5vw,27px)!important;line-height:1.25!important;letter-spacing:.035em;font-weight:700!important}
+#oow-intro p{margin:0 auto 6px!important;max-width:850px;color:#e0e7f0!important;font-size:clamp(13px,1.55vw,17px)!important;line-height:1.5!important}
+#oow-intro .oow-intro-motto{color:#63d5df;font-size:clamp(11px,1.3vw,14px);letter-spacing:.08em;line-height:1.4}
+@media(max-width:600px){#oow-intro{padding:13px 16px 12px}#oow-intro h2{font-size:19px!important;margin-bottom:4px!important}#oow-intro p{font-size:13px!important;line-height:1.42!important}#oow-intro .oow-intro-motto{font-size:11px}}
