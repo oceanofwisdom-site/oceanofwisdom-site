@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 760" role="img" aria-labelledby="title desc">
+<title id="title">Ocean of Wisdom — A Journey Through Knowledge</title>
+<desc id="desc">A deep blue ocean beneath a star-filled sky and golden sunrise, with delicate celestial orbit lines.</desc>
+<defs>
+ <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#07172f"/><stop offset=".55" stop-color="#18385c"/><stop offset="1" stop-color="#d58b4d"/></linearGradient>
+ <linearGradient id="sea" x2="0" y2="1"><stop stop-color="#164a67"/><stop offset="1" stop-color="#06172b"/></linearGradient>
+ <radialGradient id="glow"><stop stop-color="#ffe5a0" stop-opacity=".95"/><stop offset=".28" stop-color="#f4b96c" stop-opacity=".55"/><stop offset="1" stop-color="#f4b96c" stop-opacity="0"/></radialGradient>
+ <linearGradient id="gold"><stop stop-color="#a87936"/><stop offset=".5" stop-color="#ffe4a0"/><stop offset="1" stop-color="#bd8a45"/></linearGradient>
+</defs>
+<rect width="1800" height="760" fill="url(#sky)"/>
+<circle cx="900" cy="575" r="350" fill="url(#glow)"/>
+<g fill="#fff4d8" opacity=".85">
+ <circle cx="140" cy="116" r="2"/><circle cx="245" cy="72" r="2.5"/><circle cx="410" cy="154" r="1.7"/><circle cx="565" cy="66" r="2"/><circle cx="690" cy="120" r="1.5"/><circle cx="1090" cy="92" r="2"/><circle cx="1260" cy="150" r="1.6"/><circle cx="1430" cy="72" r="2.3"/><circle cx="1630" cy="145" r="2"/><circle cx="1720" cy="80" r="1.4"/><circle cx="320" cy="240" r="1.4"/><circle cx="1510" cy="265" r="1.6"/>
+</g>
+<g fill="none" stroke="url(#gold)" opacity=".42">
+ <circle cx="900" cy="350" r="470" stroke-width="1.5"/><circle cx="900" cy="350" r="510" stroke-width="1"/><path d="M0 250 Q900 -120 1800 250M0 330 Q900 -40 1800 330"/>
+ <circle cx="245" cy="72" r="80"/><circle cx="245" cy="72" r="112"/><circle cx="1530" cy="160" r="92"/><circle cx="1530" cy="160" r="126"/>
+</g>
+<path d="M0 580 Q160 560 300 586T600 580T900 582T1200 580T1500 585T1800 578V760H0Z" fill="url(#sea)"/>
+<g fill="none" stroke="#e9bd78" stroke-opacity=".38" stroke-width="3">
+ <path d="M0 615 Q180 600 360 620T720 615T1080 618T1440 612T1800 616"/>
+ <path d="M0 660 Q180 642 360 663T720 657T1080 661T1440 655T1800 660"/>
+ <path d="M0 708 Q180 694 360 710T720 704T1080 708T1440 702T1800 706"/>
+</g>
+<path d="M770 580 Q900 565 1030 580" stroke="#ffe6ac" stroke-width="8" opacity=".7" fill="none"/>
+</svg>
