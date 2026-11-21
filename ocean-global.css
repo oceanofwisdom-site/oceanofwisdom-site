@@ -10,10 +10,10 @@ body>*:not(#oow-starfield):not(#oow-global-brand){position:relative;z-index:1}
 #oow-global-brand .oow-site-banner{width:100%;height:clamp(92px,15vw,190px);overflow:hidden;background:#101d35;display:flex;align-items:center;justify-content:center}
 #oow-global-brand .oow-site-banner a{display:block;width:100%;height:100%}#oow-global-brand .oow-site-banner img{display:block;width:100%;height:100%;max-height:none;object-fit:cover;object-position:center;margin:0 auto}
 #oow-global-brand .oow-brandbar{display:flex!important;align-items:center;justify-content:space-between;gap:16px;padding:10px clamp(16px,4vw,42px);min-height:78px;background:#0b192e;border-bottom:1px solid rgba(216,173,67,.24)}
-#oow-global-brand .oow-brand-home{display:flex;align-items:center;gap:14px;text-decoration:none;color:#f0d58d;font-weight:700;letter-spacing:.12em;font-size:clamp(14px,2vw,22px)}
-#oow-global-brand .oow-brand-home img{width:clamp(48px,6vw,68px);height:clamp(48px,6vw,68px);object-fit:contain;border-radius:50%;display:block}
+#oow-global-brand .oow-brand-home{display:flex;align-items:center;gap:14px;text-decoration:none;color:#f0d58d;font-weight:700;letter-spacing:.12em;font-size:clamp(14px,2vw,22px);min-width:0}
+#oow-global-brand .oow-brand-home img{width:clamp(150px,20vw,230px);height:clamp(48px,6vw,68px);object-fit:contain;object-position:left center;border-radius:0;display:block}
 #oow-global-brand .oow-brand-homebtn{display:inline-flex;align-items:center;justify-content:center;border:1px solid #b9964d;border-radius:30px;padding:10px 20px;color:#f0d58d;text-decoration:none;font-size:13px;font-weight:700;letter-spacing:.08em;white-space:nowrap}
-@media(max-width:600px){#oow-global-brand .oow-brandbar{min-height:64px;padding:8px 14px;gap:8px}#oow-global-brand .oow-brand-home{gap:9px;letter-spacing:.08em;font-size:14px}#oow-global-brand .oow-brand-home img{width:44px;height:44px}#oow-global-brand .oow-brand-homebtn{padding:8px 12px;font-size:11px}}
+@media(max-width:600px){#oow-global-brand .oow-brandbar{min-height:64px;padding:8px 14px;gap:8px}#oow-global-brand .oow-brand-home{gap:9px;letter-spacing:.08em;font-size:14px}#oow-global-brand .oow-brand-home img{width:clamp(132px,42vw,180px);height:44px}#oow-global-brand .oow-brand-homebtn{padding:8px 12px;font-size:11px}}
 body img[src*="banner.png"]:not(#oow-global-brand img),body .oow-page-banner,body .library-banner,body .hero-banner{display:none!important}
 body .oow-home-button{display:none!important}
 body header .logo{display:none!important}
@@ -50,3 +50,8 @@ body.oow-homepage #oow-cinematic-hero .oow-star-gap{height:clamp(90px,13vw,155px
  #oow-cinematic-hero .oow-star-gap{height:88px}
  body.oow-homepage #oow-cinematic-hero .oow-star-gap{height:96px}
 }
+
+/* The cinematic hero replaces the former panoramic masthead banner */
+#oow-global-brand .oow-site-banner{display:none!important}
+#oow-global-brand .oow-brand-home img{max-width:62vw}
+#oow-cinematic-hero{margin-top:0!important}
