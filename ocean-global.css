@@ -41,14 +41,16 @@ body>*{position:relative;z-index:1}
 /* Shared cinematic opening: banner, original artwork, star pause, then page controls */
 #oow-intro{display:none!important}
 #oow-cinematic-hero{position:relative;z-index:2;width:100%;margin:0 auto;background:transparent}
-#oow-cinematic-hero>img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;object-position:center;margin:0 auto}
-#oow-cinematic-hero .oow-star-gap{height:clamp(74px,11vw,140px);width:100%;background:transparent}
+#oow-cinematic-hero>img{display:block;width:100%;height:clamp(250px,25vw,420px);aspect-ratio:auto;object-fit:cover;object-position:center 48%;margin:0 auto}
+#oow-cinematic-hero .oow-star-gap{height:clamp(38px,4vw,64px);width:100%;background:transparent}
 body.oow-homepage>.hero{display:none!important}
-body.oow-homepage #oow-cinematic-hero .oow-star-gap{height:clamp(90px,13vw,155px)}
+body.oow-homepage #oow-cinematic-hero .oow-star-gap{height:clamp(34px,3.5vw,52px)}
+body.oow-homepage .home-language-switch{position:relative;z-index:3;margin:14px auto 22px!important}
 @media(max-width:600px){
- #oow-cinematic-hero>img{width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;object-position:center}
- #oow-cinematic-hero .oow-star-gap{height:88px}
- body.oow-homepage #oow-cinematic-hero .oow-star-gap{height:96px}
+ #oow-cinematic-hero>img{width:100%;height:clamp(190px,58vw,260px);aspect-ratio:auto;object-fit:cover;object-position:center 48%}
+ #oow-cinematic-hero .oow-star-gap{height:32px}
+ body.oow-homepage #oow-cinematic-hero .oow-star-gap{height:30px}
+ body.oow-homepage .home-language-switch{margin:10px auto 18px!important}
 }
 
 /* The cinematic hero replaces the former panoramic masthead banner */
