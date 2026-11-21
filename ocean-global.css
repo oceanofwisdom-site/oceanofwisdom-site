@@ -37,12 +37,12 @@ body>*{position:relative;z-index:1}
 /* Shared cinematic opening: banner, original artwork, star pause, then page controls */
 #oow-intro{display:none!important}
 #oow-cinematic-hero{position:relative;z-index:2;width:100%;margin:0 auto;background:transparent}
-#oow-cinematic-hero>img{display:block;width:100%;height:auto;aspect-ratio:1600/760;object-fit:cover;object-position:center;margin:0 auto}
+#oow-cinematic-hero>img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;object-position:center;margin:0 auto}
 #oow-cinematic-hero .oow-star-gap{height:clamp(74px,11vw,140px);width:100%;background:transparent}
 body.oow-homepage>.hero{display:none!important}
 body.oow-homepage #oow-cinematic-hero .oow-star-gap{height:clamp(90px,13vw,155px)}
 @media(max-width:600px){
- #oow-cinematic-hero>img{aspect-ratio:1.25/1;object-fit:cover;object-position:center}
+ #oow-cinematic-hero>img{width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;object-position:center}
  #oow-cinematic-hero .oow-star-gap{height:88px}
  body.oow-homepage #oow-cinematic-hero .oow-star-gap{height:96px}
 }
