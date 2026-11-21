@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 650" role="img" aria-labelledby="title desc">
+<title id="title">Ocean of Wisdom — celestial horizon</title><desc id="desc">A golden dawn over a calm ocean, with a celestial map and silhouettes inspired by world architecture.</desc>
+<defs>
+ <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#07172f"/><stop offset=".58" stop-color="#173b60"/><stop offset="1" stop-color="#d08a50"/></linearGradient>
+ <linearGradient id="sea" x2="0" y2="1"><stop stop-color="#16465b"/><stop offset="1" stop-color="#071b31"/></linearGradient>
+ <linearGradient id="sun" x2="0" y2="1"><stop stop-color="#fff0b8"/><stop offset="1" stop-color="#d7a34f"/></linearGradient>
+ <radialGradient id="glow"><stop stop-color="#f4c879" stop-opacity=".75"/><stop offset="1" stop-color="#f4c879" stop-opacity="0"/></radialGradient>
+ <filter id="blur"><feGaussianBlur stdDeviation="24"/></filter>
+</defs>
+<rect width="1800" height="650" fill="url(#sky)"/>
+<circle cx="900" cy="405" r="250" fill="url(#glow)" filter="url(#blur)"/>
+<g fill="#f8e8c0" opacity=".85">
+ <circle cx="95" cy="90" r="2"/><circle cx="210" cy="165" r="2"/><circle cx="330" cy="72" r="2"/><circle cx="470" cy="130" r="2"/><circle cx="610" cy="48" r="2"/><circle cx="720" cy="115" r="2"/><circle cx="1060" cy="74" r="2"/><circle cx="1200" cy="132" r="2"/><circle cx="1350" cy="60" r="2"/><circle cx="1490" cy="155" r="2"/><circle cx="1660" cy="75" r="2"/><circle cx="1730" cy="185" r="2"/>
+</g>
+<g fill="none" stroke="#d9b66e" stroke-width="2" opacity=".65"><path d="M900 20V280M620 180A280 280 0 0 1 1180 180"/><circle cx="900" cy="180" r="130"/><circle cx="900" cy="180" r="205" stroke-dasharray="3 12"/><path d="M900 40l18 140-18 140-18-140z" opacity=".45"/></g>
+<g fill="#e7bd72"><path d="M890 68a19 19 0 1 0 25 25 22 22 0 1 1-25-25" opacity=".8"/><circle cx="900" cy="180" r="6"/></g>
+<path d="M0 430 Q230 395 440 430T900 425T1360 420T1800 430V650H0Z" fill="url(#sea)"/>
+<circle cx="900" cy="410" r="42" fill="url(#sun)"/>
+<path d="M870 445h60M840 465h120M810 488h180M780 515h240M740 545h320M700 580h400" stroke="#d9aa62" stroke-width="4" opacity=".38"/>
+<path d="M0 430 Q120 410 240 430L280 390 320 430 365 402 420 432 510 420 560 438 0 470Z" fill="#0b2034"/>
+<g fill="#0a1b2d">
+ <path d="M100 430V315h20v-25h25v25h18v115z"/><path d="M82 320h100l-18-18H100z"/><path d="M145 285l-10-24-10 24z"/>
+ <path d="M310 430V350h20v-30h12v30h18v80z"/><path d="M290 350h90l-15-16h-60z"/>
+ <path d="M1380 430V350h90v80z"/><path d="M1365 350l60-70 60 70z"/><path d="M1405 430v-48a18 18 0 0 1 36 0v48z"/>
+ <path d="M1540 430V325h18v-24h25v24h18v105z"/><path d="M1528 325h85l-42-45z"/>
+ <path d="M1650 430V345h18v-26h24v26h18v85z"/><path d="M1638 345h90l-45-38z"/>
+</g>
+<g fill="none" stroke="#d7b56d" stroke-width="2" opacity=".5"><path d="M0 435Q450 455 900 435T1800 435"/><path d="M0 455Q450 475 900 455T1800 455"/></g>
+</svg>
