@@ -3,7 +3,7 @@
 if(document.getElementById('oow-global-brand'))return;
 const canvas=document.createElement('canvas');canvas.id='oow-starfield';canvas.setAttribute('aria-hidden','true');document.body.prepend(canvas);
 const header=document.createElement('div');header.id='oow-global-brand';
-header.innerHTML='<div class="oow-brandbar"><a class="oow-brandmark" href="/"><img src="/logo-nav.png" alt=""><span>OCEAN OF WISDOM</span></a><a class="oow-home-link" href="/">⌂ HOME</a></div><div class="oow-site-banner"><img src="/banner.png" alt="Ocean of Wisdom — timeless wisdom across traditions"></div>';
+header.innerHTML='<div class="oow-site-banner"><a href="/" aria-label="Ocean of Wisdom home"><img src="/banner.png" alt="Ocean of Wisdom — timeless wisdom across traditions"></a></div>';
 document.body.insertBefore(header,canvas.nextSibling);
 const ctx=canvas.getContext('2d');if(!ctx)return;
 const reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
