@@ -37,9 +37,9 @@
       link.href = location.href.split('#')[0];
       link.setAttribute('aria-current', 'page');
     } else {
-      link.href = 'https://translate.google.com/translate?sl=en&tl=' + code + '&u=' + encodeURIComponent(location.href.split('#')[0]);
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
+      link.href = 'https://translate.google.com/translate?sl=auto&tl=' + code + '&u=' + encodeURIComponent(location.href.split('#')[0]);
+      link.target = '_self';
+      link.rel = 'noopener';
       link.setAttribute('aria-label', text + ' machine translation, opens in a new tab');
     }
     bar.appendChild(link);
