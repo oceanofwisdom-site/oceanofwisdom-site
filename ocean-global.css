@@ -55,3 +55,48 @@ body.oow-homepage #oow-cinematic-hero .oow-star-gap{height:clamp(90px,13vw,155px
 #oow-global-brand .oow-site-banner{display:none!important}
 #oow-global-brand .oow-brand-home img{max-width:62vw}
 #oow-cinematic-hero{margin-top:0!important}
+
+
+/* UNIVERSAL LANGUAGE BUTTON SYSTEM — consistent across every Ocean of Wisdom page */
+:where(.lang-switcher,.langs,.page-language,.lang-sw,.language-switcher,.language-buttons,.lang-buttons){
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  align-items:stretch!important;
+  gap:clamp(10px,4vw,48px)!important;
+  width:min(94%,1400px)!important;
+  max-width:1400px!important;
+  margin:clamp(22px,4vw,48px) auto!important;
+  padding:0!important;
+  box-sizing:border-box!important;
+}
+:where(.lang-switcher .lang-btn,.langs a,.page-language button,.lang-sw .lb,.language-switcher button,.language-buttons button,.lang-buttons button){
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  width:100%!important;min-width:0!important;min-height:clamp(110px,21.7vw,234px)!important;
+  box-sizing:border-box!important;padding:10px 5px!important;
+  border:3px solid #55d5e2!important;border-radius:clamp(22px,4vw,48px)!important;
+  background:transparent!important;color:#55d5e2!important;
+  font-family:'Noto Sans','Noto Sans Devanagari','Noto Sans Tamil',Arial,sans-serif!important;
+  font-size:clamp(1.35rem,4.2vw,3.15rem)!important;font-weight:700!important;
+  line-height:1.08!important;text-align:center!important;text-decoration:none!important;
+  white-space:normal!important;cursor:pointer!important;
+  transition:background .2s ease,color .2s ease,border-color .2s ease,transform .2s ease!important;
+}
+:where(.lang-switcher .lang-btn:hover,.langs a:hover,.page-language button:hover,.lang-sw .lb:hover,.language-switcher button:hover,.language-buttons button:hover,.lang-buttons button:hover){
+  background:#55d5e2!important;border-color:#55d5e2!important;color:#101d35!important;
+}
+:where(.lang-switcher .lang-btn.active,.langs a.active,.langs a[aria-current="page"],.page-language button[aria-pressed="true"],.page-language button.active,.lang-sw .lb.active,.language-switcher button.active,.language-buttons button.active,.lang-buttons button.active){
+  background:#d8ad43!important;border-color:#d8ad43!important;color:#14213a!important;
+}
+@media(max-width:600px){
+  :where(.lang-switcher,.langs,.page-language,.lang-sw,.language-switcher,.language-buttons,.lang-buttons){
+    width:94%!important;gap:8px!important;margin:22px auto!important;
+  }
+  :where(.lang-switcher .lang-btn,.langs a,.page-language button,.lang-sw .lb,.language-switcher button,.language-buttons button,.lang-buttons button){
+    min-height:clamp(76px,22vw,116px)!important;border-width:2px!important;
+    border-radius:clamp(16px,5vw,26px)!important;padding:8px 3px!important;
+    font-size:clamp(1rem,4.4vw,1.65rem)!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  :where(.lang-switcher .lang-btn,.langs a,.page-language button,.lang-sw .lb,.language-switcher button,.language-buttons button,.lang-buttons button){transition:none!important}
+}
