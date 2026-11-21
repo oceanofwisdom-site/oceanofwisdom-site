@@ -63,3 +63,19 @@
     min-height:64px !important;
   }
 }
+
+/* Final override: keep the Spanish label fully inside its fixed-width button */
+.langs a[href$="-es.html"]{
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  box-sizing:border-box!important;width:100%!important;min-width:0!important;
+  padding-left:3px!important;padding-right:3px!important;
+  font-size:clamp(1rem,2.55vw,2rem)!important;
+  letter-spacing:-.045em!important;white-space:nowrap!important;
+  overflow:hidden!important;text-overflow:clip!important;
+}
+@media(max-width:600px){
+ .langs a[href$="-es.html"]{
+   font-size:clamp(.82rem,3.1vw,1.15rem)!important;
+   letter-spacing:-.055em!important;
+ }
+}
