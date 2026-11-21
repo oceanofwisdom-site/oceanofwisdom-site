@@ -69,7 +69,7 @@ body.oow-homepage #oow-cinematic-hero .oow-star-gap{height:clamp(90px,13vw,155px
   padding:0!important;
   box-sizing:border-box!important;
 }
-:where(.lang-switcher .lang-btn,.langs a,.page-language button,.lang-sw .lb,.language-switcher button,.language-buttons button,.lang-buttons button){
+:where(.lang-switcher .lang-btn,.langs a,.page-language button,.lang-sw .lb,.language-switcher button,.language-buttons button,.lang-buttons button,button[data-lang],a[data-lang]){
   display:flex!important;align-items:center!important;justify-content:center!important;
   width:100%!important;min-width:0!important;min-height:clamp(110px,21.7vw,234px)!important;
   box-sizing:border-box!important;padding:10px 5px!important;
@@ -81,22 +81,22 @@ body.oow-homepage #oow-cinematic-hero .oow-star-gap{height:clamp(90px,13vw,155px
   white-space:normal!important;cursor:pointer!important;
   transition:background .2s ease,color .2s ease,border-color .2s ease,transform .2s ease!important;
 }
-:where(.lang-switcher .lang-btn:hover,.langs a:hover,.page-language button:hover,.lang-sw .lb:hover,.language-switcher button:hover,.language-buttons button:hover,.lang-buttons button:hover){
+:where(.lang-switcher .lang-btn:hover,.langs a:hover,.page-language button:hover,.lang-sw .lb:hover,.language-switcher button:hover,.language-buttons button:hover,.lang-buttons button:hover,button[data-lang]:hover,a[data-lang]:hover){
   background:#55d5e2!important;border-color:#55d5e2!important;color:#101d35!important;
 }
-:where(.lang-switcher .lang-btn.active,.langs a.active,.langs a[aria-current="page"],.page-language button[aria-pressed="true"],.page-language button.active,.lang-sw .lb.active,.language-switcher button.active,.language-buttons button.active,.lang-buttons button.active){
+:where(.lang-switcher .lang-btn.active,.langs a.active,.langs a[aria-current="page"],.page-language button[aria-pressed="true"],.page-language button.active,.lang-sw .lb.active,.language-switcher button.active,.language-buttons button.active,.lang-buttons button.active,button[data-lang][aria-pressed="true"],button[data-lang].active,a[data-lang].active){
   background:#d8ad43!important;border-color:#d8ad43!important;color:#14213a!important;
 }
 @media(max-width:600px){
   :where(.lang-switcher,.langs,.page-language,.lang-sw,.language-switcher,.language-buttons,.lang-buttons){
     width:94%!important;gap:8px!important;margin:22px auto!important;
   }
-  :where(.lang-switcher .lang-btn,.langs a,.page-language button,.lang-sw .lb,.language-switcher button,.language-buttons button,.lang-buttons button){
+  :where(.lang-switcher .lang-btn,.langs a,.page-language button,.lang-sw .lb,.language-switcher button,.language-buttons button,.lang-buttons button,button[data-lang],a[data-lang]){
     min-height:clamp(76px,22vw,116px)!important;border-width:2px!important;
     border-radius:clamp(16px,5vw,26px)!important;padding:8px 3px!important;
     font-size:clamp(1rem,4.4vw,1.65rem)!important;
   }
 }
 @media(prefers-reduced-motion:reduce){
-  :where(.lang-switcher .lang-btn,.langs a,.page-language button,.lang-sw .lb,.language-switcher button,.language-buttons button,.lang-buttons button){transition:none!important}
+  :where(.lang-switcher .lang-btn,.langs a,.page-language button,.lang-sw .lb,.language-switcher button,.language-buttons button,.lang-buttons button,button[data-lang],a[data-lang]){transition:none!important}
 }
