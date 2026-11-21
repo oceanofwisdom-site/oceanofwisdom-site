@@ -6,6 +6,13 @@ body{margin:0;color:#f6f1e7;background:#101d35;font:17px/1.65 'Noto Sans',sans-s
 main{max-width:1200px;margin:auto;padding:30px 22px 65px}.intro{text-align:center;color:#d2dce9;max-width:800px;margin:12px auto 45px}
 h2{text-align:center;color:#f0d58d;font-size:clamp(26px,4vw,36px);margin:45px 0 22px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:16px}
+/* Five-card dice layout: override the generic auto-fit grid on desktop */
+.grid.dice-tools-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(3,minmax(170px,auto));gap:20px;max-width:1180px;margin:0 auto}
+.grid.dice-tools-grid>.card:nth-child(1){grid-column:1;grid-row:1}
+.grid.dice-tools-grid>.card:nth-child(2){grid-column:3;grid-row:1}
+.grid.dice-tools-grid>.card:nth-child(3){grid-column:2;grid-row:2}
+.grid.dice-tools-grid>.card:nth-child(4){grid-column:1;grid-row:3}
+.grid.dice-tools-grid>.card:nth-child(5){grid-column:3;grid-row:3}
 .questions-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
 .dice-tools-grid{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(3,minmax(170px,auto));gap:20px;max-width:1120px;margin:0 auto}
 .dice-tools-grid>.card:nth-child(1){grid-column:1;grid-row:1}
@@ -16,7 +23,7 @@ h2{text-align:center;color:#f0d58d;font-size:clamp(26px,4vw,36px);margin:45px 0 
 @media(max-width:900px){.questions-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .card{display:block;text-decoration:none;color:#f6f1e7;background:#172b49dd;border:1px solid #d8ad4377;border-radius:15px;padding:22px;transition:.2s}
 .card:hover{transform:translateY(-3px);border-color:#f0d58d}.card .icon{font-size:26px}.card h3{color:#73d9df;font-size:20px;margin:8px 0}.card p{color:#d2dce9;margin:0;font-size:15px}
-@media(max-width:600px){.dice-tools-grid{grid-template-columns:1fr;grid-template-rows:none}.dice-tools-grid>.card:nth-child(n){grid-column:1;grid-row:auto}.hero{min-height:0;padding:32px 16px 26px}.grid,.questions-grid{grid-template-columns:1fr}main{padding:16px 15px 50px}}
+@media(max-width:600px){.grid.dice-tools-grid{grid-template-columns:1fr;grid-template-rows:none;max-width:none}.grid.dice-tools-grid>.card:nth-child(n){grid-column:1;grid-row:auto}.hero{min-height:0;padding:32px 16px 26px}.grid,.questions-grid{grid-template-columns:1fr}main{padding:16px 15px 50px}}
 </style></head><body>
 <section class="hero"><div><div style="letter-spacing:.24em;color:#f0d58d;font-size:12px;font-weight:700">A JOURNEY THROUGH KNOWLEDGE</div><h1>Explore Ocean<br>of Wisdom</h1><p>Questions, philosophies, literature, tools and the living knowledge of civilisations.</p></div></section>
 <main><p class="intro">A meeting place for timeless questions and the many ways humanity has explored existence. Discover original explanations, historical sources, philosophical traditions and practical tools with curiosity, care and respect for evidence.</p>
