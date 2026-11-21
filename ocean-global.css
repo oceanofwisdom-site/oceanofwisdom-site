@@ -3,7 +3,7 @@
 :root{--oow-navy:#101d35;--oow-gold:#d8ad43;--oow-cyan:#55d5e2}
 html{background:var(--oow-navy)!important}
 body{background-color:var(--oow-navy)!important;color-scheme:dark}
-body,body *{font-family:'Noto Sans','Noto Sans Devanagari','Noto Sans Tamil','Noto Sans Arabic','Noto Sans Hebrew',sans-serif!important}
+body,body p,body li,body a,body button,body input,body textarea,body select,body label,body h1,body h2,body h3,body h4,body h5,body h6,body table,body td,body th{font-family:'Noto Sans','Noto Sans Devanagari','Noto Sans Tamil','Noto Sans Arabic','Noto Sans Hebrew',sans-serif!important}
 #oow-starfield{position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;z-index:0!important;pointer-events:none!important;opacity:.46!important}
 body>*:not(#oow-starfield):not(#oow-global-brand){position:relative;z-index:1}
 #oow-global-brand{position:relative;z-index:1000;background:rgba(10,24,44,.96);border-bottom:1px solid rgba(216,173,67,.45);box-shadow:0 5px 24px rgba(0,0,0,.22)}
@@ -17,9 +17,10 @@ body>*:not(#oow-starfield):not(#oow-global-brand){position:relative;z-index:1}
 @media(max-width:600px){#oow-global-brand .oow-brandbar{min-height:46px;padding:6px 12px}#oow-global-brand .oow-brandmark img{width:34px;height:34px}#oow-global-brand .oow-brandmark span{font-size:13px}#oow-global-brand .oow-home-link{font-size:10px;padding:6px 11px}#oow-global-brand .oow-site-banner{height:66px}}
 @media(prefers-reduced-motion:reduce){#oow-starfield{display:none!important}}
 
-/* CSS starfield fallback for pages that do not load the canvas script */
-body{position:relative}
-body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.3;background-image:radial-gradient(2px 2px at 18px 32px,#fff 98%,transparent),radial-gradient(1px 1px at 90px 120px,#fff 98%,transparent),radial-gradient(1.5px 1.5px at 180px 70px,#fff 98%,transparent),radial-gradient(1px 1px at 260px 190px,#fff 98%,transparent),radial-gradient(1.5px 1.5px at 340px 35px,#fff 98%,transparent);background-size:390px 240px;animation:oow-stars-drift 95s linear infinite}
+/* CSS fallback: star field and shared branded banner for legacy pages */
+body{position:relative;background-image:radial-gradient(1.5px 1.5px at 18px 32px,#fff 98%,transparent),radial-gradient(1px 1px at 90px 120px,#fff 98%,transparent),radial-gradient(1.5px 1.5px at 180px 70px,#fff 98%,transparent),radial-gradient(1px 1px at 260px 190px,#fff 98%,transparent),radial-gradient(1.5px 1.5px at 340px 35px,#fff 98%,transparent)!important;background-size:390px 240px!important;animation:oow-stars-drift 95s linear infinite}
+body::before{content:"";display:block;height:clamp(64px,10vw,118px);width:100%;background-image:url('/logo-nav.png'),url('/banner.png');background-repeat:no-repeat,no-repeat;background-position:18px center,center 48%;background-size:54px 54px,cover;border-bottom:1px solid rgba(216,173,67,.4);box-shadow:0 5px 22px rgba(0,0,0,.22)}
+body:has(#oow-global-brand)::before{display:none}
 body>*{position:relative;z-index:1}
-@keyframes oow-stars-drift{from{background-position:0 0}to{background-position:390px 240px}}
+@keyframes oow-stars-drift{from{background-position:0 0,0 0,0 0,0 0,0 0}to{background-position:390px 240px,390px 240px,390px 240px,390px 240px,390px 240px}}
 @media(prefers-reduced-motion:reduce){body::before{animation:none}}
