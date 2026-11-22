@@ -4,7 +4,7 @@ on:
   pull_request:
     branches: [main]
   push:
-    branches: [main]
+    branches: [main, bharata-bhasha-atlas-nov-2026]
   workflow_dispatch:
 
 permissions:
