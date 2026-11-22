@@ -2,7 +2,7 @@
 
 Working branch: `bharata-bhasha-atlas-nov-2026`  
 Base branch: `main`  
-Latest functional change reviewed: verified research-tool links and automated link checks through `19257d880d350c22491644ab249e5775033f9878`  
+Latest functional change reviewed: solar-eclipse peak map link through `4d286a460d26b275f61b08e1060d1dfd856ee258`  
 Status: **Not deployed. Browser/device QA and the remaining blockers below must be completed before production release.**
 
 ## Repository scope
