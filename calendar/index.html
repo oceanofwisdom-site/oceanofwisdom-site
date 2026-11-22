@@ -405,15 +405,15 @@ function renderPlanets(y,m,d,lat,lon,tz,st){
  if(swissReady()){
   try{
    const sample=localDateTime({y,mo:m,d},12,30,tz),j=utcJulian(sample);
-   const signs=["Aries","Taurus","Gemini","Cancer","Leo","Virgo","Libra","Scorpio","Sagittarius","Capricorn","Aquarius","Pisces"];
+   const signs=window.calLang==="hi"?["मेष","वृषभ","मिथुन","कर्क","सिंह","कन्या","तुला","वृश्चिक","धनु","मकर","कुंभ","मीन"]:window.calLang==="ta"?["மேஷம்","ரிஷபம்","மிதுனம்","கடகம்","சிம்மம்","கன்னி","துலாம்","விருச்சிகம்","தனுசு","மகரம்","கும்பம்","மீனம்"]:window.calLang==="ml"?["മേടം","ഇടവം","മിഥുനം","കർക്കടകം","ചിങ്ങം","കന്നി","തുലാം","വൃശ്ചികം","ധനു","മകരം","കുംഭം","മീനം"]:["Aries","Taurus","Gemini","Cancer","Leo","Virgo","Libra","Scorpio","Sagittarius","Capricorn","Aquarius","Pisces"];
    const bodies=[["Sun",0],["Moon",1],["Mercury",2],["Venus",3],["Mars",4],["Jupiter",5],["Saturn",6]];
    const rows=bodies.map(([name,id])=>{const p=swissSiderealPosition(j,id),sg=Math.floor(p.lon/30),deg=p.lon%30;return `<div class="metric"><b>${name}</b><span>${signs[sg]} ${deg.toFixed(3)}° · sidereal longitude ${p.lon.toFixed(4)}°</span></div>`;});
    parts.push(...rows);
-   parts.push('<p class="small">DE431 geocentric sidereal positions at 12:30 local time. These are calculated celestial positions, not a guarantee of naked-eye visibility.</p>');
+   parts.push(`<p class="small">${window.calLang==="hi"?"12:30 स्थानीय समय पर DE431 भूकेन्द्रीय निरयन ग्रह-स्थितियाँ। ये गणितीय आकाशीय स्थितियाँ हैं, नग्न आँखों से दिखाई देने की गारंटी नहीं।":window.calLang==="ta"?"உள்ளூர் நேரம் 12:30-இல் DE431 புவிமைய நிரயன கோள் நிலைகள். இவை கணக்கிடப்பட்ட வானியல் நிலைகள்; வெறும் கண்ணால் காணப்படும் என்பதற்கான உத்தரவாதம் அல்ல.":window.calLang==="ml"?"പ്രാദേശിക സമയം 12:30-ലെ DE431 ഭൂകേന്ദ്ര നിരയന ഗ്രഹനിലകൾ. ഇവ കണക്കാക്കിയ ആകാശസ്ഥാനങ്ങളാണ്; നഗ്നനേത്രത്തിൽ കാണാമെന്ന ഉറപ്പല്ല.":"DE431 geocentric sidereal positions at 12:30 local time. These are calculated celestial positions, not a guarantee of naked-eye visibility."}</p>`);
   }catch(e){parts.push(`<div class="warning">Historical planetary positions unavailable: ${String(e)}</div>`);}
  }
  if(!astroReady()||y<1800||y>2200){
-  parts.push('<div class="warning">Local naked-eye visibility estimates are limited to 1800–2200 CE in the browser sky engine. Outside that interval, sidereal planetary positions may still be shown, but local visibility is not claimed.</div>');
+  parts.push(`<div class="warning">${window.calLang==="hi"?"ब्राउज़र आकाश इंजन में स्थानीय दृश्यता का अनुमान केवल 1800–2200 ईस्वी के लिए उपलब्ध है। इसके बाहर स्थानीय दृश्यता का दावा नहीं किया जाता।":window.calLang==="ta"?"உள்ளூர் தெரிவுத்தன்மை மதிப்பீடு கி.பி. 1800–2200 வரையிலேயே கிடைக்கும். அதற்கு வெளியே உள்ளூர் தெரிவுத்தன்மை உறுதி செய்யப்படாது.":window.calLang==="ml"?"പ്രാദേശിക ദൃശ്യതാ കണക്കുകൾ ക്രി.വ. 1800–2200 കാലയളവിൽ മാത്രമാണ് ലഭ്യം. അതിന് പുറത്തുള്ള തീയതികളിൽ ദൃശ്യത അവകാശപ്പെടുന്നില്ല.":"Local naked-eye visibility estimates are limited to 1800–2200 CE in the browser sky engine. Outside that interval, local visibility is not claimed."}</div>`);
   host.innerHTML=parts.join("");
   return;
  }
