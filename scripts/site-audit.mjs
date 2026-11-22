@@ -168,6 +168,57 @@ for (const file of ["ancient-indian-tools.html","ancient-world-tools.html"]) {
   }
 }
 
+const coreQuestionPages = [
+  "what-is-all-this.html",
+  "am-i-connected.html",
+  "i-am-that.html",
+  "what-is-truth.html",
+  "what-is-bliss.html"
+];
+for (const file of coreQuestionPages) {
+  const html = read(file);
+  if (!html) continue;
+  const script = (html.match(/<script[^>]*id=["']oow-language-fallback["'][^>]*>([\s\S]*?)<\/script>/i) || [])[1];
+  if (!script) { fail(file + ": missing language fallback script"); continue; }
+  const dataMatch = script.match(/var DATA = (\{[\s\S]*?\});\s*function applyLanguage/);
+  if (!dataMatch) { fail(file + ": missing language dictionary"); continue; }
+  let data;
+  try { data = new Function("return (" + dataMatch[1] + ");")(); }
+  catch (e) { fail(file + ": language dictionary parse error: " + e.message); continue; }
+  const keys = [...new Set([...html.matchAll(/data-i18n=["']([^"']+)["']/g)].map((m) => m[1]))];
+  for (const lang of ["en","hi","ta","es"]) {
+    if (!data[lang]) fail(file + ": missing " + lang + " dictionary");
+    else {
+      const missing = keys.filter((key) => !(key in data[lang]));
+      if (missing.length) fail(file + ": " + lang + " missing translations: " + missing.join(", "));
+    }
+  }
+  const nodes = keys.map((key) => ({ key, textContent: "", getAttribute(name) { return name === "data-i18n" ? this.key : null; } }));
+  const buttons = ["en","hi","ta","es"].map((lang) => ({
+    lang, style: {}, classList: { toggle() {} },
+    getAttribute(name) { return name === "data-lang" ? this.lang : null; },
+    setAttribute() {}
+  }));
+  const doc = {
+    readyState: "complete",
+    documentElement: { lang: "en", setAttribute(name, value) { if (name === "lang") this.lang = value; } },
+    querySelectorAll(selector) { return selector === "[data-i18n]" ? nodes : buttons; },
+    addEventListener() {}
+  };
+  const store = { getItem() { return null; }, setItem() {} };
+  const win = {};
+  try {
+    new Function("window","document","localStorage",script)(win,doc,store);
+    for (const lang of ["hi","ta","es"]) {
+      const switched = win.switchLang(lang);
+      if (!switched || doc.documentElement.lang !== lang || !nodes.every((node) => node.textContent === data[lang][node.key])) {
+        fail(file + ": " + lang + " language switch did not update all translated text");
+      }
+    }
+  } catch (e) { fail(file + ": language-switch harness error: " + e.message); }
+}
+if (errors.length === 0) ok("five core question pages: EN/HI/TA/ES dictionaries and live switch handlers");
+
 const researchTools = read("ancient-indian-tools.html");
 if (researchTools) {
   const expectedTools = [
