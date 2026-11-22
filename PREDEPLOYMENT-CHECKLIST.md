@@ -2,7 +2,7 @@
 
 Working branch: `bharata-bhasha-atlas-nov-2026`  
 Base branch: `main`  
-Latest functional change reviewed: automated document-structure and responsive-metadata audit through `709b9919d6d8db6af88a7b78a788b12320e979d7`  
+Latest functional change reviewed: global solar-eclipse peak shadow coordinates through `d207dd578f1f778fc3bcdc2aaafa02d6a42313a6`  
 Status: **Not deployed. Browser/device QA and the remaining blockers below must be completed before production release.**
 
 ## Repository scope
