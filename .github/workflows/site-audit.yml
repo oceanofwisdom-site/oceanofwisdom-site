@@ -1,0 +1,24 @@
+name: Ocean of Wisdom site audit
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main, bharata-bhasha-atlas-nov-2026]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  site-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Run Atlas, tools and Knowledge Library audit
+        run: node scripts/site-audit.mjs
