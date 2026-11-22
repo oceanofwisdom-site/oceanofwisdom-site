@@ -45,7 +45,7 @@ Status: **Not deployed. Browser/device QA and the remaining blockers below must 
 
 ## Automated audit infrastructure
 
-- Added `scripts/site-audit.mjs` to enforce the 56 Atlas route checks, sitemap coverage, inline-script syntax, four-language dictionary completeness and 50-record Knowledge Library integrity.
+- Added `scripts/site-audit.mjs` to enforce the 56 Atlas route checks, document structure and responsive CSS references, sitemap coverage, inline-script syntax, calendar selector/translation-target integrity, four-language tool dictionaries, external tool URLs and 50-record Knowledge Library integrity.
 - Added `.github/workflows/site-audit.yml` to run the audit on the development branch, pull requests and `main`.
 - The script and workflow are committed to the draft branch. No GitHub Actions run result is currently available in the audit evidence; manual harness and static checks are recorded above.
 
