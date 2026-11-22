@@ -2,7 +2,7 @@
 
 Working branch: `bharata-bhasha-atlas-nov-2026`  
 Base branch: `main`  
-Latest functional change reviewed: calendar selector and translation-target audit through `a62999236e0dbc42b1c4f88c2bc29d74e58f7bc7`
+Latest functional change reviewed: multilingual Knowledge Library rights notice and audit check through `568c5333e7ccaece6ce0b00644b48876c9ef2308`
 Status: **Not deployed. Browser/device QA and the remaining blockers below must be completed before production release.**
 
 ## Repository scope
@@ -60,6 +60,7 @@ Status: **Not deployed. Browser/device QA and the remaining blockers below must 
 ## Knowledge Library source review
 
 - Confirmed 50 records, each with a specific source URL, descriptive source title and source type.
+- Added an English, Hindi, Tamil and Spanish access-and-rights notice explaining that free-to-read access does not automatically grant reuse rights, that provider registration/download limits may apply, and that source texts and images remain with their rights holders. The automated audit checks the notice in all four languages.
 - Opened/reviewed the 50 destinations using source-page content where available; corrected wrong-topic, stale, generic or unsuitable links.
 - Examples of corrected destinations include the Indus/Harappa open-access Cambridge article (CC BY), the Ministry of Jal Shakti stepwell explainer, the Tikal UNESCO dossier, the Rani-ki-Vav UNESCO dossier, the MIT Internet Classics Analects text, Project Gutenberg's Tao Teh King, the complete Ganguli Mahabharata reading edition, the Chinese Ming astronomical records paper, and the Ptolemy Almagest scholarly record.
 - The Indus article explicitly states that it is open access under CC BY 4.0; the UNESCO pages state CC BY-SA IGO 3.0; the Maya astronomy article is labelled CC BY-NC 4.0.
