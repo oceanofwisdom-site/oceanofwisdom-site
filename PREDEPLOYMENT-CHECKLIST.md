@@ -27,6 +27,7 @@ Status: **Not deployed. Browser/device QA and the remaining blockers below must 
 - Checked 15 translated page families (60 English/Hindi/Tamil/Spanish pages). Each family has four language destinations; translated pages have the correct `lang` attribute and a route back to English.
 - Corrected missing/inconsistent language navigation on the Indian Philosophies, World Philosophies and Ancient Solutions families.
 - Checked the five core question pages: What Is All This?, Am I Connected?, I Am That, What Is Truth? and What Is Bliss? Each has four language controls, language data for EN/HI/TA/ES and click-handler logic.
+- Executed the actual fallback scripts for all five pages in a DOM harness. Hindi, Tamil and Spanish switching passed on every page; all 25–28 `data-i18n` keys per page had entries in all four language dictionaries, and each switch updated the document language and visible text.
 - Checked language data and controls on Who Am I?, Sanatana Dharma, both interactive tool laboratories and Wisdom of India.
 - The homepage has EN/HI/TA/ES controls; Hindi and Spanish use Google Translate, Tamil has a separate page.
 - The Knowledge Library has its own four-language UI and translated record metadata.
