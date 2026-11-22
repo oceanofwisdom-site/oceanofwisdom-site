@@ -2,7 +2,7 @@
 
 Working branch: `bharata-bhasha-atlas-nov-2026`  
 Base branch: `main`  
-Latest functional change reviewed: global solar-eclipse peak shadow coordinates through `d207dd578f1f778fc3bcdc2aaafa02d6a42313a6`  
+Latest functional change reviewed: verified research-tool links and automated link checks through `19257d880d350c22491644ab249e5775033f9878`  
 Status: **Not deployed. Browser/device QA and the remaining blockers below must be completed before production release.**
 
 ## Repository scope
@@ -79,6 +79,7 @@ Status: **Not deployed. Browser/device QA and the remaining blockers below must 
 - All 56 routes also passed the structural check: one HTML5 doctype, one opening/closing html, head and body element, and a responsive viewport meta tag. Each route links the shared language-button stylesheet and Atlas stylesheet; the shared Atlas CSS includes a 600px mobile breakpoint.
 - Expanded the Indian tools page with three institution-maintained Indian research resources (NDLI, GRETIL and Cologne Digital Sanskrit Dictionaries) and four international astronomy/science tools (NASA Eyes, NASA/JPL Horizons, Stellarium Web and ViewSpace). The homepage card now describes the combined Indian and global research-tools section.
 - Verified the seven external destinations against their official institutional or project pages. The page has four complete language dictionaries (68 keys each), no duplicate IDs, and its inline script parses. A simulated Spanish language switch updated the new tool headings and links.
+- Corrected the NDLI search destination to its current Search & Discovery endpoint and corrected the Cologne dictionary count to 43, matching the university directory. The repeatable site-audit script now checks all seven external tool URLs and the expected 11 total tool cards.
 - Exercised the four Indian calculators in a lightweight DOM harness: Kuttaka example 26x ≡ 1 (mod 7) returns x = 3 with verification; 3–4 right-triangle input returns diagonal 5, area 6 and perimeter 12; the rainwater example returns 8,000 L potential harvest, 5,000 L stored, 3,000 L overflow and 25 days of demand; invalid runoff coefficients are rejected.
 - Exercised the four world-history calculators: 3661.5 converts to base-60 1;1;1,30; 15 October 1582 Julian converts to 25 October 1582 Gregorian; Maya Long Count 13.0.0.0.0 with GMT 584283 converts to 21 December 2012; the sample lever calculation balances 25 N.
 - The five core question pages were checked for four language keys and click-handler code.
