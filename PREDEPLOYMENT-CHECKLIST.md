@@ -1,8 +1,8 @@
 # Ocean of Wisdom — pre-deployment audit and handoff
 
-Working branch: `ocean-wisdom-complete-pending-work-nov-2026`  
+Working branch: `bharata-bhasha-atlas-nov-2026`  
 Base branch: `main`  
-Latest functional change reviewed: `f7e2700257a125be2c14e3cc7c426ea8a6e8d316`  
+Latest functional change reviewed: calendar language-interface and output-localisation commits through `361ec6d81aed694b7b858353cf0dc246681af9fb`  
 Status: **Not deployed. Browser/device QA and the remaining blockers below must be completed before production release.**
 
 ## Repository scope
@@ -32,9 +32,14 @@ Status: **Not deployed. Browser/device QA and the remaining blockers below must 
 - The Knowledge Library has its own four-language UI and translated record metadata.
 - The eight detailed Knowledge Library essays use a clearly labelled machine-translation fallback; additional English-only pages also use this fallback where no authored translated sibling page exists. These machine translations are not editorially reviewed.
 
-### Translation blocker
+### Calendar localisation and astronomy QA
 
-- The Surya Siddhanta calendar page currently has no visible language selector/localised interface in the audited source. Its calculations and English UI were left untouched. Proper calendar localisation (including the requested Indian-language support) remains a release blocker; Google Translate is not a safe substitute for a calculation interface.
+- Added a visible four-option language selector (English, Hindi, Tamil and Malayalam) to the Surya Siddhanta calendar.
+- Localised the main interface, historical/range notes, date controls, location labels, date help, section headings, engine status, weekday/month labels, BCE/CE labels, Moon phase names, Panchang field labels, tithi names, Rahu Kaal/Gulikai/Yamagandam labels and Panchang explanatory note.
+- Verified all four language dictionaries contain the same 56 keys; exercised the selector in a lightweight DOM harness and confirmed it changes the document language, updates visible labels and calls the calendar render function.
+- Repaired a control-flow defect in the planetary panel: when Swiss Ephemeris was available, the previous function returned immediately after showing sidereal positions, preventing the local-visibility calculation from running. The panel now keeps DE431 sidereal positions and separately calculates local naked-eye visibility for 1800–2200 CE; outside that interval it explicitly withholds local-visibility claims.
+- Parsed all three inline calendar scripts after the changes. This is a static syntax check and a selector harness check, not a real-browser calculation test.
+- Remaining calendar localisation work: detailed planetary visibility notes and eclipse-result messages still contain English text; country names and some technical labels also remain English. Full language parity is not yet achieved.
 
 ## Internal link audit
 
@@ -69,7 +74,7 @@ Status: **Not deployed. Browser/device QA and the remaining blockers below must 
 
 ## Required before deployment
 
-1. Add and verify proper language localisation for the calendar interface and output labels.
+1. Finish localisation of remaining dynamic planet-visibility and eclipse outputs; verify all four language modes in real browsers.
 2. Open the working branch in real desktop and Android/iOS browsers. Test all native language buttons and all Google Translate fallbacks.
 3. Run all interactive calculators with normal, boundary and invalid inputs; independently verify numerical outputs.
 4. Validate the calendar against agreed independent ephemeris/Panchang cases and its supported date/location limits.
