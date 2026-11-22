@@ -204,7 +204,7 @@ const nak=[
 ["Purva Bhadrapada","பூரட்டாதி","പൂരുരുട്ടാതി","पूर्वभाद्रपदा"],["Uttara Bhadrapada","உத்திரட்டாதி","ഉത്രട്ടാതി","उत्तरभाद्रपदा"],["Revati","ரேவதி","രേവതി","रेवती"]];
 const yogas=["Vishkambha","Priti","Ayushman","Saubhagya","Shobhana","Atiganda","Sukarma","Dhriti","Shula","Ganda","Vriddhi","Dhruva","Vyaghata","Harshana","Vajra","Siddhi","Vyatipata","Variyana","Parigha","Shiva","Siddha","Sadhya","Shubha","Shukla","Brahma","Indra","Vaidhriti"];
 const rahu=[7,1,6,4,5,3,2], yama=[4,3,2,1,0,6,5], gulika=[6,5,4,3,2,1,0]; // Mon..Sun
-function fmtYear(y){return y<=0?`${1-y} BCE`:`${y} CE`}
+function fmtYear(y){return y<=0?`${1-y} ${calT("bce")}`:`${y} ${calT("ce")}`}
 function dateParts(s){
  s=(s||"").trim();
  let m=s.match(/^(\d+)\s*BCE[- ](\d\d)-(\d\d)$/i);
@@ -353,7 +353,7 @@ function localStamp(date,tz){const d=new Date(date.getTime()+tz*3600000);return 
 function localDateLabel(date,tz){const d=new Date(date.getTime()+tz*3600000);return `${String(d.getUTCDate()).padStart(2,'0')} ${monthsEn[d.getUTCMonth()]} ${fmtYear(d.getUTCFullYear())}`;}
 function dateKeyLocal(date,tz){const x=new Date(date.getTime()+tz*3600000);return `${x.getUTCFullYear()}-${String(x.getUTCMonth()+1).padStart(2,"0")}-${String(x.getUTCDate()).padStart(2,"0")}`;}
 function localDateTime(dt,hh,mm,tz){return new Date(Date.UTC(dt.y,dt.mo-1,dt.d,hh,mm)-tz*3600000);}
-function moonPhaseName(a){return ["New Moon","Waxing Crescent","First Quarter","Waxing Gibbous","Full Moon","Waning Gibbous","Last Quarter","Waning Crescent"][Math.floor((a+22.5)/45)%8];}
+function moonPhaseName(a){return calT("phases")[Math.floor((a+22.5)/45)%8];}
 function renderMoon(date,tz){
  const host=$("moonPhase");
  let a,illum;
@@ -397,7 +397,7 @@ function renderMoon(date,tz){
  <g fill="#fff9e5" opacity=".22" filter="url(#${key}soft)"><circle cx="31" cy="29" r="1.4"/><circle cx="61" cy="25" r="1.2"/><circle cx="40" cy="54" r="1.8"/><circle cx="67" cy="59" r="1.4"/></g>
  </g></g>
  <circle cx="50" cy="50" r="43" fill="none" stroke="#b7a77f" stroke-width="1.1"/></svg>
- <div><b>${phase}</b><div>${pct}% illuminated</div><div class="small">${wax?"Waxing":"Waning"} Moon · local date ${dateLabel}</div><div class="small">Calculated phase graphic · not an actual photograph</div></div></div>
+ <div><b>${phase}</b><div>${pct}% ${window.calLang==="hi"?"प्रकाशित":window.calLang==="ta"?"ஒளிர்வு":window.calLang==="ml"?"പ്രകാശിതம்":"illuminated"}</div><div class="small">${wax?calT("waxing"):calT("waning")} Moon · local date ${dateLabel}</div><div class="small">${window.calLang==="hi"?"गणना-आधारित चंद्र चित्र · वास्तविक तस्वीर नहीं":window.calLang==="ta"?"கணக்கிடப்பட்ட நிலா வரைபடம் · உண்மையான புகைப்படம் அல்ல":window.calLang==="ml"?"കണക്കാക്കിയ ചന്ദ്രരൂപം · യഥാർത്ഥ ഫോട്ടോയല്ല":"Calculated phase graphic · not an actual photograph"}</div></div></div>
  <div style="margin-top:14px">${astroBinInfo}</div>`;
 }
 function renderPlanets(y,m,d,lat,lon,tz,st){
@@ -454,19 +454,19 @@ async function render(){
  const {y,mo,d}=dt;
  if(window.ensureSwissForYear){try{await window.ensureSwissForYear(y);}catch(e){const st=document.getElementById("engineStatus");if(st){st.className="warning";st.textContent="Historical ephemeris files could not be loaded: "+String(e);}}}
  const lat=+$("lat").value,lon=+$("lon").value,tz=+$("tz").value;
- const weekdays=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],wd=dateDay(y,mo,d);
- $("dateHeading").textContent=`${weekdays[wd]} · ${d} ${monthsEn[mo-1]} ${fmtYear(y)}`;
+ const weekdays=CAL_I18N[window.calLang].weekdays,months=CAL_I18N[window.calLang].months,wd=dateDay(y,mo,d);
+ $("dateHeading").textContent=`${weekdays[wd]} · ${d} ${months[mo-1]} ${fmtYear(y)}`;
  $("dateAlt").textContent=`${y<=0?`${1-y} BCE-${String(mo).padStart(2,"0")}-${String(d).padStart(2,"0")}`:iso(y,mo,d)} · ${$("place").value}`;
  const st=sunTimes(y,mo,d,lat,lon,tz);
  if(!isFinite(st.rise)||!isFinite(st.set))$("daytimes").innerHTML='<div class="warning">Sunrise or sunset does not occur here on this date (polar day/night), or this approximation is outside its useful range.</div>';
  else{const daylight=(st.set-st.rise+24)%24,seg=daylight/8,r=st.rise+rahu[wd]*seg,g=st.rise+gulika[wd]*seg,ym=st.rise+yama[wd]*seg;
- $("daytimes").innerHTML=[["Sunrise",timeStr(st.rise)],["Sunset",timeStr(st.set)],["Rahu Kaal",`${timeStr(r)} – ${timeStr(r+seg)}`],["Gulikai",`${timeStr(g)} – ${timeStr(g+seg)}`],["Yamagandam",`${timeStr(ym)} – ${timeStr(ym+seg)}`]].map(x=>`<div class="metric"><b>${x[0]}</b><span>${x[1]}</span></div>`).join("")+ (y<1800||y>2200?'<div class="warning">Deep-time estimate: sunrise/sunset and derived periods have substantial uncertainty because ancient/future Earth rotation (ΔT/UT1) is not known precisely.</div>':'<div class="small">Modern-era sunrise/sunset estimate. Local horizon and atmospheric refraction can change observed times.</div>');}
+ $("daytimes").innerHTML=[[calT("sunrise"),timeStr(st.rise)],[calT("sunset"),timeStr(st.set)],[calT("rahu"),`${timeStr(r)} – ${timeStr(r+seg)}`],[calT("gulika"),`${timeStr(g)} – ${timeStr(g+seg)}`],[calT("yamagandam"),`${timeStr(ym)} – ${timeStr(ym+seg)}`]].map(x=>`<div class="metric"><b>${x[0]}</b><span>${x[1]}</span></div>`).join("")+ (y<1800||y>2200?'<div class="warning">Deep-time estimate: sunrise/sunset and derived periods have substantial uncertainty because ancient/future Earth rotation (ΔT/UT1) is not known precisely.</div>':'<div class="small">Modern-era sunrise/sunset estimate. Local horizon and atmospheric refraction can change observed times.</div>');}
  const p=$("panchang");
  if(swissReady()){try{
   const timeValue=$("birthTime").value||"12:00",[bh,bm]=timeValue.split(":").map(Number),sample=localDateTime(dt,bh,bm,tz),j=utcJulian(sample),s=window.swissEngine;s.swe_set_sid_mode(s.SE_SIDM_LAHIRI,0,0);
   const moon=swissSiderealPosition(j,1).lon,sun=swissSiderealPosition(j,0).lon,ayan=swissAyanamsa(j),el=norm(moon-sun),ti=Math.floor(el/12),ni=Math.floor(moon/(360/27)),yi=Math.floor(norm(sun+moon)/(360/27)),ki=Math.floor(el/6),nw=nakWindowAt(sample);
-  const tname=ti<15?tithiNames[ti]:(ti===29?"Amavasya":tithiNames[ti-15]),pak=ti<15?"Shukla Paksha":"Krishna Paksha";
-  p.innerHTML=[["Janma Nakshatra at entered time / பிறந்த நேர நட்சத்திரம்",nak[ni].join(" · ")],["Nakshatra time slot",`${localStamp(nw.start,tz)} (${localDateLabel(nw.start,tz)}) – ${localStamp(nw.end,tz)} (${localDateLabel(nw.end,tz)})`],["Tithi / திதி / തിഥி / तिथि",`${tname} · ${pak}`],["Yoga",yogas[yi]],["Karana",ki===0?"Kimstughna":ki===57?"Shakuni":ki===58?"Chatushpada":ki===59?"Naga":["Bava","Balava","Kaulava","Taitila","Garaja","Vanija","Vishti"][(ki-1)%7]],["Moon sidereal longitude",`${moon.toFixed(4)}°`],["Sun sidereal longitude",`${sun.toFixed(4)}°`],["Lahiri ayanāṃśa",`${ayan.toFixed(5)}°`]].map(x=>`<div class="metric"><b>${x[0]}</b><span>${x[1]}</span></div>`).join("");
+  const tithis=CAL_I18N[window.calLang].tithis,tname=ti<15?tithis[ti]:(ti===29?calT("phases")[0]:tithis[ti-15]),pak=ti<15?calT("waxing"):calT("waning");
+  p.innerHTML=[[calT("janma"),nak[ni].join(" · ")],[calT("nakSlot"),`${localStamp(nw.start,tz)} (${localDateLabel(nw.start,tz)}) – ${localStamp(nw.end,tz)} (${localDateLabel(nw.end,tz)})`],[calT("tithi"),திதி / തിഥி / तिथि",`${tname} · ${pak}`],[calT("yoga"),yogas[yi]],[calT("karana"),ki===0?"Kimstughna":ki===57?"Shakuni":ki===58?"Chatushpada":ki===59?"Naga":["Bava","Balava","Kaulava","Taitila","Garaja","Vanija","Vishti"][(ki-1)%7]],[calT("moonLong"),`${moon.toFixed(4)}°`],[calT("sunLong"),`${sun.toFixed(4)}°`],[calT("ayan"),`${ayan.toFixed(5)}°`]].map(x=>`<div class="metric"><b>${x[0]}</b><span>${x[1]}</span></div>`).join("");
   $("panchangNote").textContent=`Astronomical reconstruction for the selected date and entered local time ${timeValue} using Swiss Ephemeris (Lahiri sidereal mode). Nakshatra transition times are model-derived. Deep-time uncertainty grows away from the modern era; regional conventions and ayanāṃśa choices can differ.`;
  }catch(e){p.innerHTML=`<div class="warning">Swiss Ephemeris error: ${String(e)}</div>`;}}
  else {p.innerHTML='<div class="warning">Waiting for Swiss Ephemeris. Reload with an internet connection if this remains.</div>';$("panchangNote").textContent="Enter the local birth time; Nakshatra and its transition slot are calculated using Swiss Ephemeris in Lahiri sidereal mode."; }
