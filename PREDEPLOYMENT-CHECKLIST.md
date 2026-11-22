@@ -2,7 +2,7 @@
 
 Working branch: `bharata-bhasha-atlas-nov-2026`  
 Base branch: `main`  
-Latest functional change reviewed: Indian/global research-tools expansion and audit workflow through `e3687784df1c2be8668e53cf2f5a8c8f0ef83746`  
+Latest functional change reviewed: automated document-structure and responsive-metadata audit through `709b9919d6d8db6af88a7b78a788b12320e979d7`  
 Status: **Not deployed. Browser/device QA and the remaining blockers below must be completed before production release.**
 
 ## Repository scope
@@ -76,6 +76,7 @@ Status: **Not deployed. Browser/device QA and the remaining blockers below must 
 
 - The 15 translated families were checked for four navigation links and English return links.
 - The 56 Bharata Bhasha Atlas routes were individually checked: four language-switcher links per route, all four destinations resolve to existing Atlas files, exactly one active language state, and exactly one HOME link per route. The 56-route audit includes the portal, eleven language families, comparative connections and translator pages.
+- All 56 routes also passed the structural check: one HTML5 doctype, one opening/closing html, head and body element, and a responsive viewport meta tag. Each route links the shared language-button stylesheet and Atlas stylesheet; the shared Atlas CSS includes a 600px mobile breakpoint.
 - Expanded the Indian tools page with three institution-maintained Indian research resources (NDLI, GRETIL and Cologne Digital Sanskrit Dictionaries) and four international astronomy/science tools (NASA Eyes, NASA/JPL Horizons, Stellarium Web and ViewSpace). The homepage card now describes the combined Indian and global research-tools section.
 - Verified the seven external destinations against their official institutional or project pages. The page has four complete language dictionaries (68 keys each), no duplicate IDs, and its inline script parses. A simulated Spanish language switch updated the new tool headings and links.
 - Exercised the four Indian calculators in a lightweight DOM harness: Kuttaka example 26x ≡ 1 (mod 7) returns x = 3 with verification; 3–4 right-triangle input returns diagonal 5, area 6 and perimeter 12; the rainwater example returns 8,000 L potential harvest, 5,000 L stored, 3,000 L overflow and 25 days of demand; invalid runoff coefficients are rejected.
