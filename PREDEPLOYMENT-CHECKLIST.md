@@ -7,7 +7,7 @@ Status: **Not deployed. Browser/device QA and the remaining blockers below must 
 
 ## Repository scope
 
-- The current Atlas draft branch is 364 commits ahead of `main` and 0 commits behind at the latest comparison.
+- The current Atlas draft branch is ahead of `main` and 0 commits behind at the latest comparison; the exact ahead count is not repeated because audit commits continue to be added.
 - The latest branch comparison reports 69 changed files. The Atlas adds 56 four-language routes to the existing website work.
 - The earlier tracked-file count from the pending-work branch is stale and is not repeated here. All changes remain isolated on this working branch. No merge or production deployment was performed.
 
