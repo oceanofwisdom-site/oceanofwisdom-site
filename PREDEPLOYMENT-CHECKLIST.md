@@ -48,7 +48,7 @@ Status: **Not deployed. Browser/device QA and the remaining blockers below must 
 
 - Added `scripts/site-audit.mjs` to enforce the 56 Atlas route checks, document structure and responsive CSS references, all local Atlas href/src targets, sitemap coverage, inline-script syntax, calendar selector/translation-target integrity, four-language tool dictionaries, five core-page language-switch harnesses, external tool URLs and 50-record Knowledge Library integrity.
 - Added `.github/workflows/site-audit.yml` to run the audit on the development branch, pull requests and `main`.
-- The script and workflow are committed to the draft branch. No GitHub Actions run result is currently available in the audit evidence; manual harness and static checks are recorded above.
+- The script and workflow are committed to the draft branch. During continued review, I found over-escaped regular expressions in the Atlas stylesheet/local-link extraction and calendar ID scan; corrected them and added a guard that fails if a route yields unexpectedly few local href/src references. The updated audit script passes a JavaScript syntax check. No GitHub Actions run result is currently available in the audit evidence; manual harness and static checks are recorded above.
 
 ## Internal link audit
 
