@@ -208,6 +208,20 @@ if (library) {
   }
 }
 
+if (library) {
+  const uiMatch = library.match(/const translations=(\{[\s\S]*?\});\s*const catNames/);
+  if (!uiMatch) fail("Knowledge Library: UI translations not found");
+  else {
+    try {
+      const ui = new Function("return (" + uiMatch[1] + ");")();
+      for (const lang of ["en","hi","ta","es"]) {
+        if (!ui[lang] || !ui[lang].rightsNotice) fail("Knowledge Library: missing source-rights notice translation for " + lang);
+      }
+      if (errors.length === 0) ok("Knowledge Library: source-access and rights notice available in four languages");
+    } catch (e) { fail("Knowledge Library: UI translation parse error: " + e.message); }
+  }
+}
+
 if (errors.length) {
   console.error("\nAUDIT FAILED");
   for (const error of errors) console.error(" - " + error);
