@@ -63,6 +63,14 @@ for (const file of atlasPages) {
   if (!styles.some((href) => resolveLocal(file, href) === "classical-languages/atlas.css")) fail(file + ": missing shared Atlas responsive stylesheet");
 
   const anchors = [...html.matchAll(/<a\b([^>]*)>/gi)];
+  const localRefs = [...html.matchAll(/\\b(?:href|src)=["']([^"']+)["']/gi)].map((m) => m[1]);
+  for (const href of localRefs) {
+    const target = resolveLocal(file, href);
+    if (target && !existsSync(path.join(root, target)) && !existsSync(path.join(root, target, "index.html"))) {
+      fail(`${file}: broken local href/src: ${href} -> ${target}`);
+    }
+  }
+
   const languageLinks = anchors.map((m) => {
     const attrs = m[1];
     const cls = (attrs.match(/\bclass=["']([^"']*)["']/i) || [])[1] || "";
