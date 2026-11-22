@@ -2,7 +2,7 @@
 
 Working branch: `bharata-bhasha-atlas-nov-2026`  
 Base branch: `main`  
-Latest functional change reviewed: multilingual Knowledge Library rights notice and audit check through `568c5333e7ccaece6ce0b00644b48876c9ef2308`
+Latest functional change reviewed: automated core-page language-switch regression tests through `2382c07f9aa745b0e9ef2dcf7f5bbd18ff55c7c7`
 Status: **Not deployed. Browser/device QA and the remaining blockers below must be completed before production release.**
 
 ## Repository scope
@@ -46,7 +46,7 @@ Status: **Not deployed. Browser/device QA and the remaining blockers below must 
 
 ## Automated audit infrastructure
 
-- Added `scripts/site-audit.mjs` to enforce the 56 Atlas route checks, document structure and responsive CSS references, sitemap coverage, inline-script syntax, calendar selector/translation-target integrity, four-language tool dictionaries, external tool URLs and 50-record Knowledge Library integrity.
+- Added `scripts/site-audit.mjs` to enforce the 56 Atlas route checks, document structure and responsive CSS references, sitemap coverage, inline-script syntax, calendar selector/translation-target integrity, four-language tool dictionaries, five core-page language-switch harnesses, external tool URLs and 50-record Knowledge Library integrity.
 - Added `.github/workflows/site-audit.yml` to run the audit on the development branch, pull requests and `main`.
 - The script and workflow are committed to the draft branch. No GitHub Actions run result is currently available in the audit evidence; manual harness and static checks are recorded above.
 
