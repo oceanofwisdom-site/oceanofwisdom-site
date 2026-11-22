@@ -2,13 +2,13 @@
 
 Working branch: `bharata-bhasha-atlas-nov-2026`  
 Base branch: `main`  
-Latest functional change reviewed: Tamil homepage tools-card localisation through `5fbc5258be75c65a74fec58c573636cd756768fb`  
+Latest functional change reviewed: calendar selector and translation-target audit through `a62999236e0dbc42b1c4f88c2bc29d74e58f7bc7`
 Status: **Not deployed. Browser/device QA and the remaining blockers below must be completed before production release.**
 
 ## Repository scope
 
-- The current Atlas draft branch is 348 commits ahead of `main` and 0 commits behind at the latest comparison.
-- Draft PR #15 currently reports 68 changed files. The Atlas adds 56 four-language routes to the existing website work.
+- The current Atlas draft branch is 364 commits ahead of `main` and 0 commits behind at the latest comparison.
+- The latest branch comparison reports 69 changed files. The Atlas adds 56 four-language routes to the existing website work.
 - The earlier tracked-file count from the pending-work branch is stale and is not repeated here. All changes remain isolated on this working branch. No merge or production deployment was performed.
 
 ## Work implemented
