@@ -2,14 +2,14 @@
 
 Working branch: `bharata-bhasha-atlas-nov-2026`  
 Base branch: `main`  
-Latest functional change reviewed: calendar language-interface, Panchang output and planet-panel updates through `e8192c883a6eaf510468a72a61d7a28c80506974`  
+Latest functional change reviewed: Indian/global research-tools expansion and audit workflow through `e3687784df1c2be8668e53cf2f5a8c8f0ef83746`  
 Status: **Not deployed. Browser/device QA and the remaining blockers below must be completed before production release.**
 
 ## Repository scope
 
-- 125 tracked files in the working branch, including 104 HTML pages.
-- 54 files differ from `main`; branch is 91 commits ahead and 0 commits behind at the audit checkpoint.
-- All changes remain isolated on this working branch. No merge or production deployment was performed.
+- The current Atlas draft branch is 348 commits ahead of `main` and 0 commits behind at the latest comparison.
+- Draft PR #15 currently reports 68 changed files. The Atlas adds 56 four-language routes to the existing website work.
+- The earlier tracked-file count from the pending-work branch is stale and is not repeated here. All changes remain isolated on this working branch. No merge or production deployment was performed.
 
 ## Work implemented
 
@@ -42,6 +42,12 @@ Status: **Not deployed. Browser/device QA and the remaining blockers below must 
 - Re-ran the calendar checks after the localisation changes: all three inline scripts parse; all four dictionaries contain the same 57 keys; every localisation target ID exists; a simulated Malayalam selection updated the page language and labels and invoked the render callback.
 - Remaining calendar localisation work: detailed planetary visibility result strings and eclipse-result messages still contain English text; country names and some technical labels also remain English. Full language parity is not yet achieved.
 - Remaining calendar feature gaps: a distinct lunar/Nakshatra-month (māsa) label is not yet displayed. Eclipse output gives the global event and selected-location visibility, but does not yet map the worldwide visibility path or identify all regions affected. The currently available browser eclipse engine remains limited to 1800–2200 CE.
+
+## Automated audit infrastructure
+
+- Added `scripts/site-audit.mjs` to enforce the 56 Atlas route checks, sitemap coverage, inline-script syntax, four-language dictionary completeness and 50-record Knowledge Library integrity.
+- Added `.github/workflows/site-audit.yml` to run the audit on the development branch, pull requests and `main`.
+- The script and workflow are committed to the draft branch. No GitHub Actions run result is currently available in the audit evidence; manual harness and static checks are recorded above.
 
 ## Internal link audit
 
