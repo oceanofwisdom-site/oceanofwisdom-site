@@ -70,6 +70,10 @@ Status: **Not deployed. Browser/device QA and the remaining blockers below must 
 
 - The 15 translated families were checked for four navigation links and English return links.
 - The 56 Bharata Bhasha Atlas routes were individually checked: four language-switcher links per route, all four destinations resolve to existing Atlas files, exactly one active language state, and exactly one HOME link per route. The 56-route audit includes the portal, eleven language families, comparative connections and translator pages.
+- Expanded the Indian tools page with three institution-maintained Indian research resources (NDLI, GRETIL and Cologne Digital Sanskrit Dictionaries) and four international astronomy/science tools (NASA Eyes, NASA/JPL Horizons, Stellarium Web and ViewSpace). The homepage card now describes the combined Indian and global research-tools section.
+- Verified the seven external destinations against their official institutional or project pages. The page has four complete language dictionaries (68 keys each), no duplicate IDs, and its inline script parses. A simulated Spanish language switch updated the new tool headings and links.
+- Exercised the four Indian calculators in a lightweight DOM harness: Kuttaka example 26x ≡ 1 (mod 7) returns x = 3 with verification; 3–4 right-triangle input returns diagonal 5, area 6 and perimeter 12; the rainwater example returns 8,000 L potential harvest, 5,000 L stored, 3,000 L overflow and 25 days of demand; invalid runoff coefficients are rejected.
+- Exercised the four world-history calculators: 3661.5 converts to base-60 1;1;1,30; 15 October 1582 Julian converts to 25 October 1582 Gregorian; Maya Long Count 13.0.0.0.0 with GMT 584283 converts to 21 December 2012; the sample lever calculation balances 25 N.
 - The five core question pages were checked for four language keys and click-handler code.
 - Ten representative changed pages were checked for a single DOCTYPE, one opening/closing html/head/body pair and no duplicate HTML IDs.
 - The new Indian literature and Vedic sages pages were checked for one HOME control, page structure and local references.
