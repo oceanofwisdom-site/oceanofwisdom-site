@@ -58,8 +58,9 @@ for (const file of atlasPages) {
     if (opens !== 1 || closes !== 1) fail(`${file}: expected one opening and closing ${tag} tag; got ${opens}/${closes}`);
   }
   if (!/<meta[^>]+name=["']viewport["']/i.test(html)) fail(file + ": missing responsive viewport meta");
-  if (!/href=["']\/language-buttons\.css["']/i.test(html)) fail(file + ": missing shared language-button stylesheet");
-  if (!/href=["']\/classical-languages\/atlas\.css["']/i.test(html)) fail(file + ": missing shared Atlas responsive stylesheet");
+  const styles = [...html.matchAll(/<link\\b([^>]*)>/gi)].map((m) => (m[1].match(/\\bhref=["']([^"']+)["']/i) || [])[1]).filter(Boolean);
+  if (!styles.some((href) => resolveLocal(file, href) === "language-buttons.css")) fail(file + ": missing shared language-button stylesheet");
+  if (!styles.some((href) => resolveLocal(file, href) === "classical-languages/atlas.css")) fail(file + ": missing shared Atlas responsive stylesheet");
 
   const anchors = [...html.matchAll(/<a\b([^>]*)>/gi)];
   const languageLinks = anchors.map((m) => {
