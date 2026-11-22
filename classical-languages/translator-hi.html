@@ -11,9 +11,9 @@ light:{sanskrit:["प्रकाश","prakāśa","light; illumination"],tamil:[
 };
 const aliases={knowledge:["knowledge","jñāna","jnana","அறிவு"],water:["water","நீர்","నీరు","ನೀರು"],fire:["fire","அக்னி","ಅಗ್ನಿ"],sun:["sun","சூரியன்","সূর্য"],moon:["moon","நிலா","চাঁদ"],mother:["mother","அம்மா","അമ്മ"],light:["light","ஒளி","प्रकाश"]};
 const input=document.getElementById("text"),source=document.getElementById("source"),out=document.getElementById("results"),status=document.getElementById("status");
-function keyFor(v){v=v.trim().toLocaleLowerCase();return Object.keys(aliases).find(k=>aliases[k].some(a=>a.toLocaleLowerCase()===v))||null}
+function keyFor(v){v=v.trim().toLocaleLowerCase();for(const k of Object.keys(DATA)){if(aliases[k]?.some(a=>a.toLocaleLowerCase()===v))return k;for(const lang of L){const entry=DATA[k][lang.key];if(entry&&entry.slice(0,2).some(a=>a.toLocaleLowerCase()===v))return k}}return null}
 document.getElementById("go").addEventListener("click",()=>{const raw=input.value.trim();out.innerHTML="";if(!raw){status.textContent="पहले कोई शब्द लिखें।";return}const key=keyFor(raw);if(!key){status.textContent="कोई सटीक चयनित प्रविष्टि नहीं मिली। अनुवाद गढ़ा नहीं गया। आज़माएँ: knowledge, water, fire, sun, moon, mother या light।";return}
-const detected=source.value==="auto"?"Not reliably inferred from this single word":L.find(x=>x.key===source.value)?.name;
+const detected=source.value==="auto"?"शब्द से भाषा की विश्वसनीय पहचान संभव नहीं":"स्रोत भाषा चुनी गई";
 status.textContent="मिलान की गई अवधारणा: "+key+". स्रोत चयन: "+detected+". संकलित समकक्ष दिखाए जा रहे हैं, स्वतः निर्मित वाक्य-अनुवाद नहीं।";
 L.forEach(l=>{const d=DATA[key][l.key];const card=document.createElement("article");card.className="card";if(d){card.innerHTML='<h3>'+l.name+' · '+l.native+'</h3><div class="script"></div><p class="small"></p><span class="tag">चयनित शब्द-सूची से मेल</span><p class="small">अर्थगत समकक्ष; यह समान मूल का दावा नहीं है।</p>';card.querySelector(".script").textContent=d[0];card.querySelector("p.small").textContent="लिप्यंतरण: "+d[1]+" · अर्थ: "+d[2]}else{card.innerHTML='<h3>'+l.name+' · '+l.native+'</h3><p class="small">इस प्रारंभिक संस्करण में सत्यापित प्रविष्टि उपलब्ध नहीं है।</p><span class="tag">उपलब्ध नहीं</span>'}out.appendChild(card)})});
 </script></body></html>
