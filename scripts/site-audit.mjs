@@ -64,6 +64,7 @@ for (const file of atlasPages) {
 
   const anchors = [...html.matchAll(/<a\b([^>]*)>/gi)];
   const localRefs = [...html.matchAll(/\b(?:href|src)=["']([^"']+)["']/gi)].map((m) => m[1]);
+  if (localRefs.length < 3) fail(file + ": local href/src extraction returned unexpectedly few references (" + localRefs.length + ")");
   for (const href of localRefs) {
     const target = resolveLocal(file, href);
     if (target && !existsSync(path.join(root, target)) && !existsSync(path.join(root, target, "index.html"))) {
