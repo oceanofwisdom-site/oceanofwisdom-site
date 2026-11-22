@@ -2,7 +2,7 @@
 
 Working branch: `bharata-bhasha-atlas-nov-2026`  
 Base branch: `main`  
-Latest functional change reviewed: calendar language-interface and output-localisation commits through `361ec6d81aed694b7b858353cf0dc246681af9fb`  
+Latest functional change reviewed: calendar language-interface, Panchang output and planet-panel updates through `e8192c883a6eaf510468a72a61d7a28c80506974`  
 Status: **Not deployed. Browser/device QA and the remaining blockers below must be completed before production release.**
 
 ## Repository scope
@@ -40,7 +40,8 @@ Status: **Not deployed. Browser/device QA and the remaining blockers below must 
 - Repaired a control-flow defect in the planetary panel: when Swiss Ephemeris was available, the previous function returned immediately after showing sidereal positions, preventing the local-visibility calculation from running. The panel now keeps DE431 sidereal positions and separately calculates local naked-eye visibility for 1800–2200 CE; outside that interval it explicitly withholds local-visibility claims.
 - Parsed all three inline calendar scripts after the changes. This is a static syntax check and a selector harness check, not a real-browser calculation test.
 - Re-ran the calendar checks after the localisation changes: all three inline scripts parse; all four dictionaries contain the same 57 keys; every localisation target ID exists; a simulated Malayalam selection updated the page language and labels and invoked the render callback.
-- Remaining calendar localisation work: detailed planetary visibility notes and eclipse-result messages still contain English text; country names and some technical labels also remain English. Full language parity is not yet achieved.
+- Remaining calendar localisation work: detailed planetary visibility result strings and eclipse-result messages still contain English text; country names and some technical labels also remain English. Full language parity is not yet achieved.
+- Remaining calendar feature gaps: a distinct lunar/Nakshatra-month (māsa) label is not yet displayed. Eclipse output gives the global event and selected-location visibility, but does not yet map the worldwide visibility path or identify all regions affected. The currently available browser eclipse engine remains limited to 1800–2200 CE.
 
 ## Internal link audit
 
@@ -76,7 +77,7 @@ Status: **Not deployed. Browser/device QA and the remaining blockers below must 
 
 ## Required before deployment
 
-1. Finish localisation of remaining dynamic planet-visibility and eclipse outputs; verify all four language modes in real browsers.
+1. Finish localisation of remaining dynamic planet-visibility and eclipse outputs; implement and validate the requested māsa display and worldwide eclipse-region information; verify all four language modes in real browsers.
 2. Open the working branch in real desktop and Android/iOS browsers. Test all native language buttons and all Google Translate fallbacks.
 3. Run all interactive calculators with normal, boundary and invalid inputs; independently verify numerical outputs.
 4. Validate the calendar against agreed independent ephemeris/Panchang cases and its supported date/location limits.
