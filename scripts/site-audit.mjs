@@ -163,6 +163,23 @@ for (const file of ["ancient-indian-tools.html","ancient-world-tools.html"]) {
   }
 }
 
+const researchTools = read("ancient-indian-tools.html");
+if (researchTools) {
+  const expectedTools = [
+    "https://www.ndl.iitkgp.ac.in/re_search",
+    "https://gretil.sub.uni-goettingen.de/gretil.html",
+    "https://www.sanskrit-lexicon.uni-koeln.de/",
+    "https://science.nasa.gov/eyes/",
+    "https://ssd.jpl.nasa.gov/horizons/",
+    "https://stellarium-web.org/",
+    "https://viewspace.org/en/"
+  ];
+  for (const url of expectedTools) if (!researchTools.includes(url)) fail("Research tools page: missing external destination " + url);
+  if ((researchTools.match(/class="tool"/g) || []).length !== 11) fail("Research tools page: expected 4 Indian calculators plus 7 curated digital resources");
+  if (!/43 digitised dictionaries/.test(researchTools)) fail("Research tools page: Cologne dictionary count should be 43");
+  if (errors.length === 0) ok("Research tools page: seven curated external destinations and 11 total tool cards");
+}
+
 const library = read("library/index.html");
 if (library) {
   const recordBlock = (library.match(/const records=\[([\s\S]*?)\];/) || [])[1] || "";
