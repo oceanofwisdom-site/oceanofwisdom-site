@@ -376,26 +376,34 @@ function renderMoon(date,tz){
  <div style="margin-top:14px">${astroBinInfo}</div>`;
 }
 function renderPlanets(y,m,d,lat,lon,tz,st){
- const host=$("planetVisibility");
+ const host=$("planetVisibility"),parts=[];
  if(swissReady()){
   try{
    const sample=localDateTime({y,mo:m,d},12,30,tz),j=utcJulian(sample);
    const signs=["Aries","Taurus","Gemini","Cancer","Leo","Virgo","Libra","Scorpio","Sagittarius","Capricorn","Aquarius","Pisces"];
    const bodies=[["Sun",0],["Moon",1],["Mercury",2],["Venus",3],["Mars",4],["Jupiter",5],["Saturn",6]];
    const rows=bodies.map(([name,id])=>{const p=swissSiderealPosition(j,id),sg=Math.floor(p.lon/30),deg=p.lon%30;return `<div class="metric"><b>${name}</b><span>${signs[sg]} ${deg.toFixed(3)}° · sidereal longitude ${p.lon.toFixed(4)}°</span></div>`;});
-   host.innerHTML=rows.join("")+'<div class="small">DE431 geocentric sidereal positions at 12:30 local time. These are calculated celestial positions, not a guarantee of naked-eye visibility. Ancient local horizon visibility needs a separate Earth-rotation and observer model.</div>';
-   return;
-  }catch(e){host.innerHTML=`<div class="warning">Historical planetary positions unavailable: ${String(e)}</div>`;return;}
+   parts.push(...rows);
+   parts.push('<p class="small">DE431 geocentric sidereal positions at 12:30 local time. These are calculated celestial positions, not a guarantee of naked-eye visibility.</p>');
+  }catch(e){parts.push(`<div class="warning">Historical planetary positions unavailable: ${String(e)}</div>`);}
  }
- if(!astroReady()||y<1800||y>2200){host.innerHTML='<div class="warning">Planet visibility is not yet validated for this deep-time date. Historical ephemeris data are needed for planetary positions.</div>';return;}
+ if(!astroReady()||y<1800||y>2200){
+  parts.push('<div class="warning">Local naked-eye visibility estimates are limited to 1800–2200 CE in the browser sky engine. Outside that interval, sidereal planetary positions may still be shown, but local visibility is not claimed.</div>');
+  host.innerHTML=parts.join("");
+  return;
+ }
  const sunset=isFinite(st.set)?st.set:18.5,mins=Math.round((sunset+1)*60),obsTime=localDateTime({y,mo:m,d},Math.floor(mins/60)%24,mins%60,tz),observer=new Astronomy.Observer(lat,lon,0),sun=Astronomy.GeoVector(Astronomy.Body.Sun,obsTime,true),arr=[];
  for(const name of ["Mercury","Venus","Mars","Jupiter","Saturn"]){try{
   const eq=Astronomy.Equator(Astronomy.Body[name],obsTime,observer,true,true),h=Astronomy.Horizon(obsTime,observer,eq.ra,eq.dec,"normal"),sep=Astronomy.AngleBetween(Astronomy.GeoVector(Astronomy.Body[name],obsTime,true),sun),mag=Astronomy.Illumination(Astronomy.Body[name],obsTime).mag;
   arr.push({name,alt:h.altitude,az:h.azimuth,sep,mag});
  }catch(e){}}
  const good=arr.filter(x=>x.alt>10&&x.sep>10).sort((a,b)=>a.mag-b.mag),clock=`${String(Math.floor(mins/60)%24).padStart(2,"0")}:${String(mins%60).padStart(2,"0")}`;
- if(!good.length){host.innerHTML=`<div class="metric"><b>No planet well placed</b><span>At about ${clock} local time, no listed planet is both above 10° altitude and more than 10° from the Sun.</span></div>`;return;}
- const b=good[0];host.innerHTML=`<div class="metric"><b>Best candidate · ${b.name}</b><span>Visual magnitude ${b.mag.toFixed(1)} · altitude ${b.alt.toFixed(1)}° · azimuth ${b.az.toFixed(0)}°</span><span class="small">Estimated about one hour after sunset (${clock} local time).</span></div><div class="metric"><b>Other candidates</b><span>${good.slice(1).map(x=>`${x.name} (${x.mag.toFixed(1)} mag; ${x.alt.toFixed(0)}° high)`).join(" · ")||"None pass the screening thresholds."}</span></div><p class="small">Ranked by computed apparent visual magnitude, screened for altitude and solar separation. Weather, haze, twilight and obstructions affect actual visibility.</p>`;
+ if(!good.length)parts.push(`<div class="metric"><b>No planet well placed</b><span>At about ${clock} local time, no listed planet is both above 10° altitude and more than 10° from the Sun.</span></div>`);
+ else{
+  const b=good[0];
+  parts.push(`<div class="metric"><b>Best candidate · ${b.name}</b><span>Visual magnitude ${b.mag.toFixed(1)} · altitude ${b.alt.toFixed(1)}° · azimuth ${b.az.toFixed(0)}°</span><span class="small">Estimated about one hour after sunset (${clock} local time).</span></div><div class="metric"><b>Other candidates</b><span>${good.slice(1).map(x=>`${x.name} (${x.mag.toFixed(1)} mag; ${x.alt.toFixed(0)}° high)`).join(" · ")||"None pass the screening thresholds."}</span></div><p class="small">Ranked by computed apparent visual magnitude, screened for altitude and solar separation. Weather, haze, twilight and obstructions affect actual visibility.</p>`);
+ }
+ host.innerHTML=parts.join("");
 }
 function peakDate(e){const p=e&&e.peak;if(!p)return null;if(p.date instanceof Date)return p.date;if(p instanceof Date)return p;if(typeof p.toDate==="function")return p.toDate();return null;}
 function findEclipse(searchFn,nextFn,start,key,tz){
