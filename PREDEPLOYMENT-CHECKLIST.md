@@ -39,6 +39,7 @@ Status: **Not deployed. Browser/device QA and the remaining blockers below must 
 - Verified all four language dictionaries contain the same 56 keys; exercised the selector in a lightweight DOM harness and confirmed it changes the document language, updates visible labels and calls the calendar render function.
 - Repaired a control-flow defect in the planetary panel: when Swiss Ephemeris was available, the previous function returned immediately after showing sidereal positions, preventing the local-visibility calculation from running. The panel now keeps DE431 sidereal positions and separately calculates local naked-eye visibility for 1800–2200 CE; outside that interval it explicitly withholds local-visibility claims.
 - Parsed all three inline calendar scripts after the changes. This is a static syntax check and a selector harness check, not a real-browser calculation test.
+- Re-ran the calendar checks after the localisation changes: all three inline scripts parse; all four dictionaries contain the same 57 keys; every localisation target ID exists; a simulated Malayalam selection updated the page language and labels and invoked the render callback.
 - Remaining calendar localisation work: detailed planetary visibility notes and eclipse-result messages still contain English text; country names and some technical labels also remain English. Full language parity is not yet achieved.
 
 ## Internal link audit
@@ -67,6 +68,7 @@ Status: **Not deployed. Browser/device QA and the remaining blockers below must 
 ## Static checks performed
 
 - The 15 translated families were checked for four navigation links and English return links.
+- The 56 Bharata Bhasha Atlas routes were individually checked: four language-switcher links per route, all four destinations resolve to existing Atlas files, exactly one active language state, and exactly one HOME link per route. The 56-route audit includes the portal, eleven language families, comparative connections and translator pages.
 - The five core question pages were checked for four language keys and click-handler code.
 - Ten representative changed pages were checked for a single DOCTYPE, one opening/closing html/head/body pair and no duplicate HTML IDs.
 - The new Indian literature and Vedic sages pages were checked for one HOME control, page structure and local references.
