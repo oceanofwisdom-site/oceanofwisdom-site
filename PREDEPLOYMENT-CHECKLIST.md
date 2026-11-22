@@ -42,7 +42,7 @@ Status: **Not deployed. Browser/device QA and the remaining blockers below must 
 - Parsed all three inline calendar scripts after the changes. This is a static syntax check and a selector harness check, not a real-browser calculation test.
 - Re-ran the calendar checks after the localisation changes: all three inline scripts parse; all four dictionaries contain the same 57 keys; every localisation target ID exists; a simulated Malayalam selection updated the page language and labels and invoked the render callback.
 - Remaining calendar localisation work: detailed planetary visibility result strings and eclipse-result messages still contain English text; country names and some technical labels also remain English. Full language parity is not yet achieved.
-- Remaining calendar feature gaps: a distinct lunar/Nakshatra-month (māsa) label is not yet displayed. Eclipse output gives the global event and selected-location visibility, but does not yet map the worldwide visibility path or identify all regions affected. The currently available browser eclipse engine remains limited to 1800–2200 CE.
+- Remaining calendar feature gaps: a distinct Hindu lunar-month (māsa) label is not yet displayed. The Gregorian month and Nakshatra are already localised; a reliable māsa calculation still needs an explicit Amanta/Purnimanta convention and a decision on regional Tamil/Malayalam month-name rendering. Eclipse output gives the global event and selected-location visibility, but does not yet map the worldwide visibility path or identify all regions affected. The currently available browser eclipse engine remains limited to 1800–2200 CE.
 
 ## Automated audit infrastructure
 
