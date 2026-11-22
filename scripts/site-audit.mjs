@@ -144,7 +144,11 @@ if (calendar) {
     const langs = Object.keys(dict);
     const counts = langs.map((lang) => Object.keys(dict[lang]).length);
     if (langs.length !== 4 || new Set(counts).size !== 1) fail("calendar: expected four complete language dictionaries with matching keys");
-    else ok("calendar: four matching language dictionaries");
+    for (const lang of ["en","hi","ta","ml"]) if (!calendar.includes(`data-cal-lang="${lang}"`)) fail("calendar: missing language selector " + lang);
+    const calendarIds = new Set([...calendar.matchAll(/\\bid=["']([^"']+)["']/gi)].map((m) => m[1]));
+    const targets = [...calendarScript.matchAll(/set\("([^"]+)"/g)].map((m) => m[1]);
+    for (const id of targets) if (!calendarIds.has(id)) fail("calendar: translation target ID is missing: " + id);
+    if (errors.length === 0) ok("calendar: four matching language dictionaries, selector buttons and translation targets");
   } catch (e) { fail("calendar: dictionary harness failed: " + e.message); }
 }
 
