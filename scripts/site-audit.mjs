@@ -30,7 +30,7 @@ if (atlasPages.length !== 56) fail("Expected 56 Atlas routes; got " + atlasPages
 const atlasSet = new Set(atlasPages);
 
 function resolveLocal(fromFile, href) {
-  if (!href || /^(?:https?:|mailto:|tel:|data:|javascript:|#)/i.test(href)) return null;
+  if (!href || /\$\{|^(?:https?:|mailto:|tel:|data:|javascript:|#)/i.test(href)) return null;
   const raw = href.split(/[?#]/, 1)[0];
   if (!raw) return null;
   let rel = raw.startsWith("/")
@@ -115,7 +115,7 @@ function parseInlineScripts(file) {
   const html = read(file);
   if (!html) return;
   const blocks = [...html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/gi)]
-    .filter((m) => m[2].trim());
+    .filter((m) => m[2].trim() && !/type=["']application\/ld\+json["']/i.test(m[1]));
   for (let i = 0; i < blocks.length; i++) {
     try { new Function(blocks[i][2]); }
     catch (e) { fail(`${file}: inline script ${i + 1} syntax error: ${e.message}`); }
@@ -131,7 +131,7 @@ parseInlineScripts("classical-languages/translator.html");
 
 function readTranslationDictionary(file, marker, endMarker) {
   const html = read(file);
-  const script = [...html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/gi)].filter((m) => m[2].trim())[0]?.[2] || "";
+  const script = [...html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/gi)].filter((m) => m[2].trim() && !/type=["']application\/ld\+json["']/i.test(m[1]))[0]?.[2] || "";
   const start = script.indexOf(marker);
   const end = script.indexOf(endMarker, start);
   if (start < 0 || end < 0) {
@@ -145,7 +145,7 @@ function readTranslationDictionary(file, marker, endMarker) {
 
 const calendar = read("calendar/index.html");
 if (calendar) {
-  const calendarScript = [...calendar.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/gi)].filter((m) => m[2].trim())[0]?.[2] || "";
+  const calendarScript = [...calendar.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/gi)].filter((m) => m[2].trim() && !/type=["']application\/ld\+json["']/i.test(m[1]))[0]?.[2] || "";
   try {
     const dict = new Function("window","document",calendarScript + ";return CAL_I18N;")(
       {}, { addEventListener(){}, querySelectorAll(){return []}, documentElement:{}, getElementById(){return null;} }
@@ -163,7 +163,7 @@ if (calendar) {
 
 for (const file of ["ancient-indian-tools.html","ancient-world-tools.html"]) {
   const html = read(file);
-  const script = [...html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/gi)].filter((m) => m[2].trim())[0]?.[2] || "";
+  const script = [...html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/gi)].filter((m) => m[2].trim() && !/type=["']application\/ld\+json["']/i.test(m[1]))[0]?.[2] || "";
   const dict = readTranslationDictionary(file, "const D=", ";\nlet L=");
   if (dict) {
     const langs = Object.keys(dict);
