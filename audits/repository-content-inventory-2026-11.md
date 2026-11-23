@@ -254,3 +254,42 @@ Mobile and desktop remain **STATIC CHECK ONLY / NOT PASSED** until real browser/
 - Added all nine routes to `sitemap.xml`; each page has reciprocal four-language navigation, self-canonical metadata, hreflang alternates and localized Article JSON-LD.
 - GitHub Actions site audit passed on commit `0f1195fa39c2a87724ee019b279f7d9b59c0e2b2` (Run #130).
 - Remaining release evidence: independent native-language review, complete external-link/full-text access review, and real desktop/mobile browser interaction testing. Automated source checks do not certify these items.
+
+
+## 8. Evidence review — 23 November 2026 (PR #20 follow-up)
+
+### Automated checks
+- GitHub Actions Run #131 completed successfully on PR head commit `d262b804ad70528c8b7b73348811d8ab2611cc9c`.
+- The workflow executes `node scripts/site-audit.mjs` on Node.js 20. It is a repository/source audit; it does not launch a browser, render pages, exercise touch/keyboard interactions, or verify external URLs.
+- Nine added Hindi/Tamil/Spanish pages were inspected in source: each has a language attribute, title, viewport meta, canonical URL and four-language navigation. The nine routes are present in the sitemap.
+
+### External-reference spot-check (not a full-site link certification)
+Confirmed readable/open on 23 Nov 2026:
+- UCF Open Educational Resources for the Ancient Near East collection — its page states CC BY-SA 4.0.
+- NASA Universe overview.
+- Internet Encyclopedia of Philosophy, Ancient Greek Philosophy.
+- UNESCO Nalanda and Sanchi World Heritage pages.
+- MDPI Hemakuta pilgrimage paper — article page labels it Open Access.
+- Copernicus HESS, “Hydrology and water resources management in ancient India” — article page states CC BY 4.0 and provides article/PDF/full-text XML.
+- INFLIBNET chapter “Water Management in Ancient India”.
+- Stanford Encyclopedia of Philosophy, Daoism.
+- Quranic Arabic Corpus documentation.
+- Encyclopaedia Iranica entries on Zoroastrianism, the Avesta, the Gathas and Zoroaster.
+- PMC article PMC3866234 rendered full text during this check.
+
+Could not certify in this check (crawler restrictions, timeouts or gateway errors; these are not proof the destination is broken):
+- Oregon State Ancient Civilizations OER (403 to this checker).
+- Oxford ETCSL (timeout).
+- Perseus Digital Library (robots restriction).
+- Chinese Text Project (403).
+- Project Gutenberg (timeout).
+- VedaWeb (403).
+- PMC article PMC7665814 (anti-bot interstitial).
+- Durham repository record and SOAS PDF (not accessible/502 to checker).
+- DRDO PDF and Taylor & Francis article (502/403 to checker).
+- Sacred-Texts Mahabharata URL redirects to a category/collection page; it is not a direct individual text page. Treat as a weak destination and replace with a direct parva/text URL if retained as a primary-source link.
+
+### Editorial and browser sign-off
+- Hindi, Tamil and Spanish content has not been independently reviewed by native-language editors. The pages are substantive first drafts, not signed-off translations.
+- No real-browser test evidence is attached to this PR. The workflow above is static Node.js source auditing only. Desktop, Android and iOS visual rendering, broken-image checks, responsive overflow, keyboard/touch navigation, and search interaction remain unverified.
+- Therefore the editorial, full reference-audit and browser-test release gates remain OPEN. Do not describe this PR as fully release-ready until the above evidence is supplied and recorded.
