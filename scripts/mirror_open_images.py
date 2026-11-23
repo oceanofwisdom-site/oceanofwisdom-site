@@ -39,7 +39,7 @@ def mirror(source_url: str):
         filename = unquote(parsed.path.split("/Special:FilePath/", 1)[-1])
     else:
         filename = unquote(parsed.path.rsplit("/", 1)[-1])
-        filename = re.sub(r"^\\d+px-", "", filename)
+        filename = re.sub(r"^\d+px-", "", filename)
     title = "File:" + filename
     api = "https://commons.wikimedia.org/w/api.php?" + urlencode({
         "action":"query","format":"json","titles":title,"prop":"imageinfo",
