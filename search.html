@@ -37,7 +37,7 @@ async function loadIndex(){
   status.textContent='Preparing the site search index…';
   const sitemap=await fetch('/sitemap.xml',{cache:'no-cache'});if(!sitemap.ok)throw new Error('The site map could not be loaded.');
   const xml=new DOMParser().parseFromString(await sitemap.text(),'application/xml');
-  const urls=[...xml.querySelectorAll('loc')].map(n=>n.textContent.trim()).map(value=>{try{const source=new URL(value,location.origin);const allowedHosts=new Set([location.hostname,'www.oceanofwisdom.site','oceanofwisdom.site']);if(!allowedHosts.has(source.hostname))return null;return new URL(source.pathname+source.search,location.origin).href}catch{return null}}).filter(u=>u&&!/\/search\.html$|googlefc697bcb5c73cf72\.html$/.test(new URL(u).pathname));
+  const parserError=xml.querySelector('parsererror');if(parserError)throw new Error('The site map is not valid XML.');const sitemapLocations=Array.from(xml.getElementsByTagNameNS('*','loc'));const urls=sitemapLocations.map(n=>n.textContent.trim()).map(value=>{try{const source=new URL(value,location.origin);const allowedHosts=new Set([location.hostname,'www.oceanofwisdom.site','oceanofwisdom.site']);if(!allowedHosts.has(source.hostname))return null;return new URL(source.pathname+source.search,location.origin).href}catch{return null}}).filter(u=>u&&!/\/search\.html$|googlefc697bcb5c73cf72\.html$/.test(new URL(u).pathname));
   const docs=[];
   for(let i=0;i<urls.length;i+=8){
    const batch=urls.slice(i,i+8);
