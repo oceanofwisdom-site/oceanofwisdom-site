@@ -283,6 +283,27 @@ if (library) {
 }
 
 
+
+const toolPages = [
+  "calendar/index.html", "ancient-indian-tools.html", "ancient-world-tools.html",
+  "ancient-water-engineering.html", "lapis-lazuli.html", "wisdom-feed.html"
+];
+for (const file of toolPages) {
+  const html = read(file);
+  if (!html) continue;
+  if (/<footer\\b[^>]*>\\s*undefined\\s*<\\/footer>/i.test(html) || /<footer\\b[^>]*>[^<]*\\bundefined\\b/i.test(html)) {
+    fail(file + ": literal undefined footer text remains");
+  }
+  const refs = [...html.matchAll(/\\b(?:href|src)=["']([^"']+)["']/gi)].map((m) => m[1]);
+  for (const href of refs) {
+    const target = resolveLocal(file, href);
+    if (target && !existsSync(path.join(root, target)) && !existsSync(path.join(root, target, "index.html"))) {
+      fail(file + ": broken local href/src: " + href + " -> " + target);
+    }
+  }
+}
+if (errors.length === 0) ok("calendar, tools and featured research pages: no undefined footer or broken local href/src");
+
 function collectHtml(dir = root, prefix = "") {
   const files = [];
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
