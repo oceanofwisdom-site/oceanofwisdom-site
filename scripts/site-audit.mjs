@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 
 const root = process.cwd();
@@ -30,7 +30,8 @@ if (atlasPages.length !== 56) fail("Expected 56 Atlas routes; got " + atlasPages
 const atlasSet = new Set(atlasPages);
 
 function resolveLocal(fromFile, href) {
-  if (!href || /^(?:https?:|mailto:|tel:|data:|javascript:|#)/i.test(href)) return null;
+  if (!href || /\$\{|^(?:https?:|mailto:|tel:|data:|javascript:|#)/i.test(href)) return null;
+  if (/\$\{[^}]+\}/.test(href)) return null;
   const raw = href.split(/[?#]/, 1)[0];
   if (!raw) return null;
   let rel = raw.startsWith("/")
@@ -115,7 +116,7 @@ function parseInlineScripts(file) {
   const html = read(file);
   if (!html) return;
   const blocks = [...html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/gi)]
-    .filter((m) => m[2].trim());
+    .filter((m) => m[2].trim() && !/type=["']application\/ld\+json["']/i.test(m[1]));
   for (let i = 0; i < blocks.length; i++) {
     try { new Function(blocks[i][2]); }
     catch (e) { fail(`${file}: inline script ${i + 1} syntax error: ${e.message}`); }
@@ -131,7 +132,7 @@ parseInlineScripts("classical-languages/translator.html");
 
 function readTranslationDictionary(file, marker, endMarker) {
   const html = read(file);
-  const script = [...html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/gi)].filter((m) => m[2].trim())[0]?.[2] || "";
+  const script = [...html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/gi)].filter((m) => m[2].trim() && !/type=["']application\/ld\+json["']/i.test(m[1]))[0]?.[2] || "";
   const start = script.indexOf(marker);
   const end = script.indexOf(endMarker, start);
   if (start < 0 || end < 0) {
@@ -145,7 +146,7 @@ function readTranslationDictionary(file, marker, endMarker) {
 
 const calendar = read("calendar/index.html");
 if (calendar) {
-  const calendarScript = [...calendar.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/gi)].filter((m) => m[2].trim())[0]?.[2] || "";
+  const calendarScript = [...calendar.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/gi)].filter((m) => m[2].trim() && !/type=["']application\/ld\+json["']/i.test(m[1]))[0]?.[2] || "";
   try {
     const dict = new Function("window","document",calendarScript + ";return CAL_I18N;")(
       {}, { addEventListener(){}, querySelectorAll(){return []}, documentElement:{}, getElementById(){return null;} }
@@ -163,7 +164,7 @@ if (calendar) {
 
 for (const file of ["ancient-indian-tools.html","ancient-world-tools.html"]) {
   const html = read(file);
-  const script = [...html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/gi)].filter((m) => m[2].trim())[0]?.[2] || "";
+  const script = [...html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/gi)].filter((m) => m[2].trim() && !/type=["']application\/ld\+json["']/i.test(m[1]))[0]?.[2] || "";
   const dict = readTranslationDictionary(file, "const D=", ";\nlet L=");
   if (dict) {
     const langs = Object.keys(dict);
@@ -280,6 +281,64 @@ if (library) {
       if (errors.length === 0) ok("Knowledge Library: source-access and rights notice available in four languages");
     } catch (e) { fail("Knowledge Library: UI translation parse error: " + e.message); }
   }
+}
+
+
+
+const toolPages = [
+  "calendar/index.html", "ancient-indian-tools.html", "ancient-world-tools.html",
+  "ancient-water-engineering.html", "lapis-lazuli.html", "wisdom-feed.html"
+];
+for (const file of toolPages) {
+  const html = read(file);
+  if (!html) continue;
+  if (/<footer\b[^>]*>\s*undefined\s*<\/footer>/i.test(html) || /<footer\b[^>]*>[^<]*\bundefined\b/i.test(html)) {
+    fail(file + ": literal undefined footer text remains");
+  }
+  const refs = [...html.matchAll(/\b(?:href|src)=["']([^"']+)["']/gi)].map((m) => m[1]);
+  for (const href of refs) {
+    const target = resolveLocal(file, href);
+    if (target && !existsSync(path.join(root, target)) && !existsSync(path.join(root, target, "index.html"))) {
+      fail(file + ": broken local href/src: " + href + " -> " + target);
+    }
+  }
+}
+if (errors.length === 0) ok("calendar, tools and featured research pages: no undefined footer or broken local href/src");
+
+function collectHtml(dir = root, prefix = "") {
+  const files = [];
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    if (entry.name === ".git" || entry.name === "node_modules") continue;
+    const rel = path.posix.join(prefix, entry.name);
+    if (entry.isDirectory()) files.push(...collectHtml(path.join(dir, entry.name), rel));
+    else if (entry.isFile() && entry.name.toLowerCase().endsWith(".html")) files.push(rel);
+  }
+  return files;
+}
+
+// Repository-wide technical SEO gate.
+// Batch 3: keep the metadata contract enforced on every content route. Google Search Console's verification
+// document is a token endpoint, not an indexable content page, so it is excluded.
+const seoPages = collectHtml().filter((file) => file !== "googlefc697bcb5c73cf72.html");
+let missingTitle = 0, missingDescription = 0, missingCanonical = 0, missingJsonLd = 0;
+for (const file of seoPages) {
+  const html = readFileSync(path.join(root, file), "utf8");
+  const title = (html.match(/<title\b[^>]*>([\s\S]*?)<\/title>/i) || [])[1] || "";
+  const description = (html.match(/<meta\b[^>]*name=["']description["'][^>]*content=["']([^"']*)["'][^>]*>/i) || [])[1] || "";
+  const canonical = (html.match(/<link\b[^>]*rel=["']canonical["'][^>]*href=["']([^"']*)["'][^>]*>/i) || [])[1] || "";
+  const expectedCanonical = "https://www.oceanofwisdom.site/" + file;
+  const jsonBlocks = [...html.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)];
+  if (!title.trim()) { missingTitle++; fail(file + ": missing title"); }
+  if (!description.trim()) { missingDescription++; fail(file + ": missing meta description"); }
+  if (canonical !== expectedCanonical) { missingCanonical++; fail(file + ": canonical missing or not self-referencing (expected " + expectedCanonical + ", got " + (canonical || "none") + ")"); }
+  if (!jsonBlocks.length) { missingJsonLd++; fail(file + ": missing JSON-LD block"); }
+  else for (const block of jsonBlocks) {
+    try { JSON.parse(block[1]); }
+    catch (e) { fail(file + ": invalid JSON-LD: " + e.message); }
+  }
+}
+if (missingTitle + missingDescription + missingCanonical + missingJsonLd === 0) {
+  ok("repository-wide SEO: " + seoPages.length + " active HTML pages have title, description, self-canonical and parseable JSON-LD (0 missing)");
 }
 
 if (errors.length) {
