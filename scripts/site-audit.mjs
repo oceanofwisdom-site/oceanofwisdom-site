@@ -291,10 +291,10 @@ const toolPages = [
 for (const file of toolPages) {
   const html = read(file);
   if (!html) continue;
-  if (/<footer\\b[^>]*>\\s*undefined\\s*<\\/footer>/i.test(html) || /<footer\\b[^>]*>[^<]*\\bundefined\\b/i.test(html)) {
+  if (/<footer\b[^>]*>\s*undefined\s*<\/footer>/i.test(html) || /<footer\b[^>]*>[^<]*\bundefined\b/i.test(html)) {
     fail(file + ": literal undefined footer text remains");
   }
-  const refs = [...html.matchAll(/\\b(?:href|src)=["']([^"']+)["']/gi)].map((m) => m[1]);
+  const refs = [...html.matchAll(/\b(?:href|src)=["']([^"']+)["']/gi)].map((m) => m[1]);
   for (const href of refs) {
     const target = resolveLocal(file, href);
     if (target && !existsSync(path.join(root, target)) && !existsSync(path.join(root, target, "index.html"))) {
@@ -321,11 +321,11 @@ const seoPages = collectHtml().filter((file) => file !== "googlefc697bcb5c73cf72
 let missingTitle = 0, missingDescription = 0, missingCanonical = 0, missingJsonLd = 0;
 for (const file of seoPages) {
   const html = readFileSync(path.join(root, file), "utf8");
-  const title = (html.match(/<title\\b[^>]*>([\\s\\S]*?)<\\/title>/i) || [])[1] || "";
-  const description = (html.match(/<meta\\b[^>]*name=["']description["'][^>]*content=["']([^"']*)["'][^>]*>/i) || [])[1] || "";
-  const canonical = (html.match(/<link\\b[^>]*rel=["']canonical["'][^>]*href=["']([^"']*)["'][^>]*>/i) || [])[1] || "";
+  const title = (html.match(/<title\b[^>]*>([\s\S]*?)<\/title>/i) || [])[1] || "";
+  const description = (html.match(/<meta\b[^>]*name=["']description["'][^>]*content=["']([^"']*)["'][^>]*>/i) || [])[1] || "";
+  const canonical = (html.match(/<link\b[^>]*rel=["']canonical["'][^>]*href=["']([^"']*)["'][^>]*>/i) || [])[1] || "";
   const expectedCanonical = "https://www.oceanofwisdom.site/" + file;
-  const jsonBlocks = [...html.matchAll(/<script\\b[^>]*type=["']application\\/ld\\+json["'][^>]*>([\\s\\S]*?)<\\/script>/gi)];
+  const jsonBlocks = [...html.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)];
   if (!title.trim()) { missingTitle++; fail(file + ": missing title"); }
   if (!description.trim()) { missingDescription++; fail(file + ": missing meta description"); }
   if (canonical !== expectedCanonical) { missingCanonical++; fail(file + ": canonical missing or not self-referencing (expected " + expectedCanonical + ", got " + (canonical || "none") + ")"); }
