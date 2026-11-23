@@ -1,0 +1,38 @@
+name: Ocean of Wisdom browser tests
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  playwright:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install test dependencies
+        run: npm install
+      - name: Install Chromium and WebKit
+        run: npx playwright install --with-deps chromium webkit
+      - name: Run desktop, laptop, Android and iOS-emulation tests
+        run: npm run test:browser
+      - name: Upload Playwright report and diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ocean-of-wisdom-playwright-report
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: ignore
+          retention-days: 14
