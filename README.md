@@ -12,6 +12,7 @@ Ocean of Wisdom is a gradually expanding, multilingual knowledge and philosophy 
 - Seven standalone article pages at the repository root
 - `library/index.html` — Global Knowledge Atlas
 - `calendar/index.html` — astronomical calendar research prototype
+- `about.html`, `methodology.html`, `contact.html`, `search.html` — project context, research standards, public correction channel and site search
 - `editorial-policy.html` — editorial, source and rights policy
 - `banner.png`, `logo.png`, `logo-nav.png`, `favicon.png` — site graphics (ownership/licence review remains necessary)
 - `CNAME`, `robots.txt`, `sitemap.xml` — site configuration
