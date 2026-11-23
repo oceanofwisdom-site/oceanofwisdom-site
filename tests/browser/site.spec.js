@@ -1,0 +1,146 @@
+const { test, expect } = require('@playwright/test');
+
+const routes = [
+  '/',
+  '/explore.html',
+  '/search.html',
+  '/what-is-all-this.html',
+  '/am-i-connected.html',
+  '/i-am-that.html',
+  '/what-is-truth.html',
+  '/what-is-bliss.html',
+  '/classical-languages.html',
+  '/classical-languages/translator.html',
+  '/ancient-indian-tools.html',
+  '/ancient-world-tools.html',
+  '/library/index.html',
+  '/calendar/'
+];
+
+test('homepage renders without horizontal overflow or failed local assets', async ({ page }) => {
+  const pageErrors = [];
+  page.on('pageerror', error => pageErrors.push(error.message));
+  await page.goto('/');
+  await expect(page.locator('body')).toBeVisible();
+  const dimensions = await page.evaluate(() => ({
+    viewport: document.documentElement.clientWidth,
+    document: document.documentElement.scrollWidth
+  }));
+  expect(dimensions.document, 'horizontal overflow on homepage').toBeLessThanOrEqual(dimensions.viewport + 1);
+  const brokenImages = await page.locator('img').evaluateAll(images =>
+    images.filter(img => img.getAttribute('src') && img.complete && img.naturalWidth === 0)
+      .map(img => img.currentSrc || img.src)
+  );
+  expect(brokenImages, 'broken or unloaded homepage images').toEqual([]);
+  expect(pageErrors, 'uncaught JavaScript errors').toEqual([]);
+});
+
+for (const route of routes) {
+  test(`route loads: ${route}`, async ({ page }) => {
+    const response = await page.goto(route);
+    expect(response, `no document response for ${route}`).not.toBeNull();
+    expect(response.status(), `HTTP status for ${route}`).toBeLessThan(400);
+    await expect(page.locator('body')).toBeVisible();
+    const overflow = await page.evaluate(() =>
+      document.documentElement.scrollWidth - document.documentElement.clientWidth
+    );
+    expect(overflow, `horizontal overflow on ${route}`).toBeLessThanOrEqual(1);
+  });
+}
+
+const KEY_PAGES = ['/', '/ancient-indian-tools.html', '/ancient-world-tools.html', '/classical-languages.html'];
+
+test('all local image elements on key pages resolve', async ({ page }) => {
+  for (const route of KEY_PAGES) {
+    await page.goto(route, { waitUntil: 'load' });
+    await page.evaluate(async () => {
+      const images = Array.from(document.images);
+      for (const image of images) {
+        image.loading = 'eager';
+        image.scrollIntoView({ block: 'end' });
+      }
+      await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    });
+    await expect.poll(
+      () => page.evaluate(() => Array.from(document.images)
+        .filter(img => new URL(img.currentSrc || img.src, location.href).origin === location.origin)
+        .filter(img => !img.complete || img.naturalWidth === 0)
+        .map(img => img.currentSrc || img.src)),
+      { message: `broken local images on ${route}`, timeout: 10000 }
+    ).toEqual([]);
+  }
+});
+
+test('no broken Wikimedia hotlink remains on the Bengali atlas page', async ({ page }) => {
+  await page.goto('/classical-languages.html', { waitUntil: 'load' });
+  const matches = await page.locator('img[src*="upload.wikimedia.org"]').evaluateAll(images =>
+    images.map(img => img.getAttribute('src')).filter(src => /Durga_puja_pandal_in_West_Bengal/i.test(src))
+  );
+  expect(matches, 'obsolete nonexistent Durga Puja Commons filename is still referenced').toEqual([]);
+});
+
+
+const atlasRoutes = [
+  '/classical-languages.html',
+  '/classical-languages-hi.html',
+  '/classical-languages-ta.html',
+  '/classical-languages-es.html',
+  ...['assamese','bengali','kannada','malayalam','marathi','odia','pali','prakrit','sanskrit','tamil','telugu']
+    .flatMap(name => ['', '-hi', '-ta', '-es'].map(suffix => `/classical-languages/${name}${suffix}.html`)),
+  ...['', '-hi', '-ta', '-es'].map(suffix => `/classical-languages/connections${suffix}.html`),
+  ...['', '-hi', '-ta', '-es'].map(suffix => `/classical-languages/translator${suffix}.html`)
+];
+
+test('all 56 Classical Languages Atlas routes load with four-way language navigation', async ({ page }) => {
+  expect(atlasRoutes).toHaveLength(56);
+  for (const route of atlasRoutes) {
+    const response = await page.goto(route);
+    expect(response, `no response for Atlas route ${route}`).not.toBeNull();
+    expect(response.status(), `HTTP status for Atlas route ${route}`).toBeLessThan(400);
+    await expect(page.locator('body')).toBeVisible();
+    await expect(page.locator('a.lang-btn')).toHaveCount(4);
+    await expect(page.locator('a.lang-btn.active')).toHaveCount(1);
+    await expect(page.locator('a.home')).toHaveCount(1);
+    const lang = await page.locator('html').getAttribute('lang');
+    expect(lang, `missing document language on ${route}`).toBeTruthy();
+  }
+});
+
+test('homepage dropdowns open exclusively and close with Escape or outside click', async ({ page }) => {
+  await page.goto('/');
+  const menus = page.locator('.home-nav details');
+  await expect(menus).toHaveCount(6);
+  await menus.nth(0).locator('summary').click();
+  await expect(menus.nth(0)).toHaveAttribute('open', '');
+  await menus.nth(1).locator('summary').click();
+  await expect(menus.nth(1)).toHaveAttribute('open', '');
+  await expect(menus.nth(0)).not.toHaveAttribute('open', '');
+  await page.keyboard.press('Escape');
+  await expect(menus.nth(1)).not.toHaveAttribute('open', '');
+  await menus.nth(2).locator('summary').click();
+  await page.locator('body').click({ position: { x: 8, y: 700 } });
+  await expect(menus.nth(2)).not.toHaveAttribute('open', '');
+});
+
+test('homepage search submits to the local search page', async ({ page }, testInfo) => {
+  test.setTimeout(180000);
+  test.skip(testInfo.project.name !== 'desktop-chromium', 'Run the full sitemap-indexing interaction once on desktop Chromium');
+  await page.goto('/');
+  await page.locator('.home-search input[name="q"]').fill('astronomy');
+  await page.locator('.home-search button[type="submit"]').click();
+  await expect(page).toHaveURL(/\/search\.html\?q=astronomy/);
+  await expect(page.locator('#site-search-query')).toHaveValue('astronomy');
+  await expect(page.locator('#search-status')).toContainText(/found across|indexing website pages|Preparing the site search index/i, { timeout: 120000 });
+  await expect(page.locator('#search-results')).not.toBeEmpty({ timeout: 120000 });
+});
+
+test('core question pages expose all four language controls', async ({ page }) => {
+  for (const route of ['/what-is-all-this.html','/am-i-connected.html','/i-am-that.html','/what-is-truth.html','/what-is-bliss.html']) {
+    await page.goto(route);
+    const buttons = page.locator('[data-lang]');
+    await expect(buttons).toHaveCount(4);
+    for (const lang of ['en','hi','ta','es']) {
+      await expect(page.locator(`[data-lang="${lang}"]`)).toHaveCount(1);
+    }
+  }
+});

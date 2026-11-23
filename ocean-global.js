@@ -3,9 +3,9 @@
 if(document.getElementById('oow-global-brand'))return;
 const canvas=document.createElement('canvas');canvas.id='oow-starfield';canvas.setAttribute('aria-hidden','true');document.body.prepend(canvas);
 const header=document.createElement('div');header.id='oow-global-brand';
-header.innerHTML='<div class="oow-brandbar"><a class="oow-brand-home" href="/" aria-label="Ocean of Wisdom home"><img src="/ocean-wisdom-logo.png" alt="Ocean of Wisdom logo"></a><a class="oow-brand-homebtn" href="/" aria-label="Go to home">⌂ HOME</a></div>';
+header.innerHTML='<div class="oow-brandbar"><a class="oow-brand-home" href="/" aria-label="Ocean of Wisdom home"><img src="/logo.png" alt="Ocean of Wisdom logo"></a><a class="oow-brand-homebtn" href="/" aria-label="Go to home">⌂ HOME</a></div>';
 document.body.insertBefore(header,canvas.nextSibling);
-const hero=document.createElement('section');hero.id='oow-cinematic-hero';hero.innerHTML='<img src="/ocean-wisdom-hero.webp" alt="A meditator overlooking a luminous cosmic ocean at sunrise, with the words Explore the Ocean of Wisdom"><div class="oow-star-gap" aria-hidden="true"></div>';
+const hero=document.createElement('section');hero.id='oow-cinematic-hero';hero.innerHTML='<img src="/ocean-wisdom-hero.webp" alt="A meditator overlooking a luminous cosmic ocean at sunrise, with the words Explore the Ocean of Wisdom"><div class="oow-star-gap" aria-hidden="true"></div>';const heroImage=hero.querySelector('img');heroImage.addEventListener('error',()=>{if(!heroImage.dataset.fallback){heroImage.dataset.fallback='1';heroImage.src='/ocean-wisdom-hero.svg';}else{heroImage.hidden=true;}},{once:false});
 header.insertAdjacentElement('afterend',hero);
 if(location.pathname==='/'||location.pathname.endsWith('/index.html'))document.body.classList.add('oow-homepage');
 const ctx=canvas.getContext('2d');if(!ctx)return;

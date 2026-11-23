@@ -316,6 +316,34 @@ function collectHtml(dir = root, prefix = "") {
   return files;
 }
 
+// Repository-wide image integrity gate: catch broken local image paths and mislabeled shared assets.
+let checkedImages = 0;
+for (const file of collectHtml()) {
+  const html = readFileSync(path.join(root, file), "utf8");
+  for (const match of html.matchAll(/<img\b[^>]*\bsrc=["']([^"']+)["']/gi)) {
+    const src = match[1];
+    const target = resolveLocal(file, src);
+    if (!target) continue;
+    checkedImages++;
+    if (!existsSync(path.join(root, target))) fail(file + ": missing local image: " + src + " -> " + target);
+  }
+}
+const sharedImages = [
+  ["logo.png", "png"],
+  ["ocean-wisdom-hero.webp", "webp"],
+  ["ocean-wisdom-hero.svg", "svg"]
+];
+for (const [file, type] of sharedImages) {
+  const full = path.join(root, file);
+  if (!existsSync(full)) { fail("Shared image missing: " + file); continue; }
+  const bytes = readFileSync(full);
+  const valid = type === "png" ? bytes.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10]))
+    : type === "webp" ? bytes.toString("ascii",0,4) === "RIFF" && bytes.toString("ascii",8,12) === "WEBP"
+    : /<svg[\s>]/i.test(bytes.toString("utf8",0,300));
+  if (!valid) fail("Shared image has an invalid " + type.toUpperCase() + " file signature: " + file);
+}
+if (errors.length === 0) ok("images: " + checkedImages + " local HTML image references resolve; shared logo/hero assets have valid file signatures");
+
 // Repository-wide technical SEO gate.
 // Batch 3: keep the metadata contract enforced on every content route. Google Search Console's verification
 // document is a token endpoint, not an indexable content page, so it is excluded.
@@ -339,6 +367,31 @@ for (const file of seoPages) {
 }
 if (missingTitle + missingDescription + missingCanonical + missingJsonLd === 0) {
   ok("repository-wide SEO: " + seoPages.length + " active HTML pages have title, description, self-canonical and parseable JSON-LD (0 missing)");
+}
+
+
+const homepage = read("index.html");
+const searchPage = read("search.html");
+if (homepage) {
+  const dropdowns = [...homepage.matchAll(/<details\b/g)].length;
+  if (dropdowns !== 6) fail("Homepage: expected six compact dropdown navigation groups; got " + dropdowns);
+  if (!/action=["']\/search\.html["']/.test(homepage) || !/name=["']q["']/.test(homepage)) fail("Homepage: search must submit query to local search page");
+  for (const target of ["/calendar/","/ancient-indian-tools.html","/ancient-world-tools.html","/ancient-water-engineering.html","/library/","/classical-languages.html"]) {
+    if (!homepage.includes('href="' + target + '"')) fail("Homepage: missing featured route " + target);
+  }
+  if (!homepage.includes('id="free-tools"') || !homepage.includes('id="knowledge"')) fail("Homepage: tool-first and knowledge sections must be present");
+  if (errors.length === 0) ok("homepage: six dropdown groups, tool-first cards, knowledge highlights and local search entry point");
+}
+if (searchPage) {
+  if (!/fetch\(['"]\/sitemap\.xml['"]/.test(searchPage)) fail("Search page: local sitemap index is missing");
+  if (!/aria-live=["']polite["']/.test(searchPage)) fail("Search page: results status must be announced accessibly");
+  if (!/google\.com\/search/.test(searchPage)) fail("Search page: broad-search fallback is missing");
+  if (!/name=["']robots["'][^>]+noindex/.test(searchPage)) fail("Search page: utility results page should remain noindex");
+  if (errors.length === 0) ok("search: local sitemap-based page indexing, accessible status, external fallback and noindex");
+  const blocks = [...searchPage.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/gi)].filter((m) => m[2].trim() && !/application\/ld\+json/i.test(m[1]));
+  for (let i = 0; i < blocks.length; i++) {
+    try { new Function(blocks[i][2]); } catch (e) { fail("search.html: inline script syntax error: " + e.message); }
+  }
 }
 
 if (errors.length) {

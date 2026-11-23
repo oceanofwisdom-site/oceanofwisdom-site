@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+<title id="title">Durga Puja pandal — original illustration</title>
+<desc id="desc">An original illustration of a decorated Durga Puja festival pavilion with an illuminated entrance, floral patterns and festive lights.</desc>
+<defs><linearGradient id="night" x2="0" y2="1"><stop stop-color="#172849"/><stop offset="1" stop-color="#4d243b"/></linearGradient><linearGradient id="gold" x2="1" y2="1"><stop stop-color="#fff0b1"/><stop offset="1" stop-color="#d58c32"/></linearGradient><linearGradient id="red" x2="1" y2="1"><stop stop-color="#c63b4d"/><stop offset="1" stop-color="#74253e"/></linearGradient></defs>
+<rect width="1200" height="760" fill="url(#night)"/>
+<g fill="#ffd985"><circle cx="105" cy="105" r="5"/><circle cx="250" cy="180" r="4"/><circle cx="1020" cy="105" r="5"/><circle cx="1110" cy="210" r="4"/><circle cx="850" cy="75" r="4"/></g>
+<path d="M0 630Q300 570 600 630T1200 620V760H0Z" fill="#171e32"/>
+<path d="M230 630V300L600 105L970 300V630Z" fill="url(#red)" stroke="url(#gold)" stroke-width="18"/>
+<path d="M295 630V330L600 170L905 330V630Z" fill="#f1c66c" stroke="#fff0b1" stroke-width="12"/>
+<path d="M365 630V385L600 245L835 385V630Z" fill="#702c43" stroke="#d88c38" stroke-width="10"/>
+<path d="M445 630V440Q600 330 755 440V630Z" fill="#f3d28b" stroke="#fff0b1" stroke-width="10"/>
+<path d="M480 630V470Q600 390 720 470V630Z" fill="#74263d"/>
+<g fill="none" stroke="#f8d77e" stroke-width="9"><path d="M230 300L600 105L970 300"/><path d="M295 330L600 170L905 330"/><path d="M365 385L600 245L835 385"/></g>
+<g fill="#fff0b1"><circle cx="230" cy="300" r="12"/><circle cx="600" cy="105" r="13"/><circle cx="970" cy="300" r="12"/><circle cx="295" cy="330" r="9"/><circle cx="905" cy="330" r="9"/></g>
+<g transform="translate(600 530)"><circle r="75" fill="#d9a34d" stroke="#fff0b1" stroke-width="8"/><path d="M0-58L15-20L55-18L23 8L34 48L0 25L-34 48L-23 8L-55-18L-15-20Z" fill="#8f263e"/><circle r="22" fill="#fff0b1"/></g>
+<text x="600" y="710" text-anchor="middle" fill="#fff0b1" font-family="Georgia,serif" font-size="34" letter-spacing="4">DURGA PUJA · WEST BENGAL</text>
+</svg>

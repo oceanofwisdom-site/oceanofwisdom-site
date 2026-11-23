@@ -1,0 +1,11 @@
+{
+  "name": "ocean-of-wisdom-site",
+  "private": true,
+  "scripts": {
+    "test:browser": "playwright test",
+    "test:browser:report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.1"
+  }
+}

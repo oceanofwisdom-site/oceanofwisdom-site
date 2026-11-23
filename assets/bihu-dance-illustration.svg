@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+<title id="title">Bihu dance in Assam</title><desc id="desc">Original decorative illustration of Bihu folk dancers celebrating with traditional drums and flowing Assamese attire, against a warm festival backdrop.</desc>
+<defs><linearGradient id="bg" x2="0" y2="1"><stop stop-color="#172c49"/><stop offset="1" stop-color="#7b3b2c"/></linearGradient><linearGradient id="cloth" x2="1" y2="1"><stop stop-color="#f4d47b"/><stop offset="1" stop-color="#c34b35"/></linearGradient></defs>
+<rect width="1200" height="760" rx="28" fill="url(#bg)"/>
+<circle cx="970" cy="145" r="74" fill="#f4d47b" opacity=".9"/>
+<path d="M0 560 Q230 470 440 565 T860 550 T1200 535 V760 H0Z" fill="#1a2538" opacity=".7"/>
+<g fill="none" stroke="#f4d47b" stroke-width="8" opacity=".8"><path d="M80 180q90-95 180 0t180 0t180 0"/><path d="M100 230q80-70 160 0t160 0"/></g>
+<g transform="translate(330 220)">
+<circle cx="0" cy="0" r="42" fill="#b8754b"/><path d="M-43-8q5-65 48-60 37 3 45 54l-18-10-12-27-38 12-14 31Z" fill="#201b20"/>
+<path d="M-18 45q-70 75-98 210l115 52 116-52Q90 112 18 45Z" fill="url(#cloth)" stroke="#f4d47b" stroke-width="8"/>
+<path d="M-90 95Q-180 30-215 85M90 95q105-65 150-10" fill="none" stroke="#b8754b" stroke-width="24" stroke-linecap="round"/>
+<path d="M-90 250l-45 145m225-145 48 145" stroke="#b8754b" stroke-width="28" stroke-linecap="round"/>
+<path d="M-100 110q100 60 200 0" fill="none" stroke="#fff0c0" stroke-width="20"/>
+<path d="M-100 220q100 55 200 0" fill="none" stroke="#8d2f2a" stroke-width="12"/>
+</g>
+<g transform="translate(790 245)">
+<circle cx="0" cy="0" r="40" fill="#a96843"/><path d="M-42-10q10-58 50-56 35 2 40 52l-20-12-10-23-42 10-10 29Z" fill="#201b20"/>
+<path d="M-18 42q-70 70-90 205l108 60 112-60Q90 110 18 42Z" fill="#d54c35" stroke="#f4d47b" stroke-width="8"/>
+<path d="M-90 90Q-180 30-210 72M90 90q100-50 145 0" fill="none" stroke="#a96843" stroke-width="24" stroke-linecap="round"/>
+<path d="M-95 245l-40 145m225-145 45 145" stroke="#a96843" stroke-width="28" stroke-linecap="round"/>
+<path d="M-100 105q100 60 200 0" fill="none" stroke="#fff0c0" stroke-width="18"/>
+<path d="M-95 220q95 55 190 0" fill="none" stroke="#f4d47b" stroke-width="12"/>
+</g>
+<g transform="translate(560 565) rotate(-8)"><ellipse rx="82" ry="34" fill="#a65b31" stroke="#f4d47b" stroke-width="9"/><path d="M-82 0v-65q82-45 164 0V0" fill="#c77a3c" stroke="#f4d47b" stroke-width="9"/><path d="M-65-48q65-30 130 0" fill="none" stroke="#713a2d" stroke-width="8"/></g>
+<text x="600" y="690" text-anchor="middle" fill="#fff0c0" font-family="Georgia,serif" font-size="30" letter-spacing="5">BIHU • ASSAM</text>
+</svg>
