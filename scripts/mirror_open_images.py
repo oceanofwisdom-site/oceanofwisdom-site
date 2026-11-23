@@ -100,7 +100,7 @@ def main():
             page.write_text(updated, encoding="utf-8")
             changed.append(page.relative_to(ROOT).as_posix())
     ASSET_DIR.mkdir(parents=True, exist_ok=True)
-    CREDITS_FILE.write_text(json.dumps(credits, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
+    CREDITS_FILE.write_text(json.dumps(credits, ensure_ascii=False, indent=2), encoding="utf-8")
     print(json.dumps({"pages_scanned":len(pages),"commons_images_mirrored":len(seen),
                       "pages_rewritten":changed,"asset_count":len(credits)}, indent=2))
     if not seen:
