@@ -38,23 +38,24 @@ h2{text-align:center;color:#f0d58d;font-size:clamp(26px,4vw,36px);margin:45px 0 
 @media(max-width:480px){.site-search{gap:7px}.site-search button{padding:10px 13px}}
 
 /* Homepage discovery navigation and tool-first layout */
-.home-nav{max-width:1180px;margin:0 auto 18px;padding:0 22px;display:flex;justify-content:center;gap:10px;flex-wrap:wrap;position:relative;z-index:5}
+.home-nav{max-width:1180px;margin:0 auto 14px;padding:0 22px;display:flex;align-items:flex-start;justify-content:center;gap:10px;flex-wrap:wrap;position:relative;z-index:30}
 .home-nav details{position:relative}
 .home-nav summary{list-style:none;cursor:pointer;border:1px solid #d8ad43;border-radius:999px;padding:9px 16px;color:#f0d58d;background:#172b49;font-size:14px;font-weight:700;white-space:nowrap}
 .home-nav summary::-webkit-details-marker{display:none}
 .home-nav summary:after{content:" ▾";color:#55d5e2}
 .home-nav details[open] summary{background:#d8ad43;color:#101d35}
-.home-nav .menu-panel{position:absolute;top:calc(100% + 8px);left:0;min-width:230px;max-width:min(88vw,320px);max-height:70vh;overflow:auto;padding:9px;background:#142744;border:1px solid #d8ad43;border-radius:13px;box-shadow:0 14px 34px #0008;display:grid;gap:3px;z-index:20}
+.home-nav details[open]{order:-1;flex:1 0 100%;display:grid;justify-items:center;min-width:0}
+.home-nav details[open] .menu-panel{position:static;inset:auto;width:min(100%,640px);min-width:0;max-width:640px;max-height:min(42vh,340px);overflow:auto;margin:9px auto 3px;padding:9px;background:#142744;border:1px solid #d8ad43;border-radius:13px;box-shadow:0 14px 34px #0008;display:grid;gap:3px;z-index:auto}
 .home-nav .menu-panel a{display:block;padding:9px 11px;border-radius:8px;color:#e8eef7;text-decoration:none;font-size:14px}
 .home-nav .menu-panel a:hover,.home-nav .menu-panel a:focus-visible{background:#203c61;color:#f0d58d;outline:2px solid #55d5e2}
-.home-search{max-width:850px;margin:10px auto 28px;padding:0 18px}
+.home-search{max-width:850px;margin:18px auto 30px;padding:0 18px;position:relative;z-index:1}
 .home-search form{display:flex;gap:9px}
 .home-search input{flex:1;min-width:0;padding:15px 17px;border:2px solid #55d5e2;border-radius:13px;background:#172b49;color:#f6f1e7;font:inherit}
 .home-search button{padding:13px 22px;border:1px solid #d8ad43;border-radius:13px;background:#d8ad43;color:#101d35;font-weight:800;cursor:pointer}
 .home-search .search-hint{text-align:center;color:#bdc9d8;font-size:12px;margin:7px 0 0}
-.home-language-switch{max-width:680px;margin:12px auto 16px;gap:9px}
+.home-language-switch{max-width:680px;margin:16px auto 20px;gap:9px}
 .home-language-switch a{min-height:48px;border-width:1px;border-radius:14px;font-size:16px}
-main{padding-top:12px}
+main{padding-top:10px}
 .home-intro{text-align:center;color:#d2dce9;max-width:860px;margin:8px auto 26px}
 .home-section{margin:24px 0 34px}
 .home-section h2{margin:0 0 15px}
@@ -71,7 +72,7 @@ main{padding-top:12px}
 .home-compact-links{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:12px auto 0}
 .home-compact-links a{color:#73d9df;text-decoration:none;border:1px solid #d8ad4366;border-radius:999px;padding:7px 12px;font-size:13px}
 @media(max-width:900px){.home-tool-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.home-knowledge-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:600px){.home-nav{padding:0 12px;gap:7px}.home-nav summary{padding:8px 11px;font-size:12px}.home-nav .menu-panel{position:absolute;left:0;right:auto;top:calc(100% + 8px);min-width:220px;max-width:88vw;max-height:60vh;overflow:auto}.home-nav details:nth-last-child(-n+2) .menu-panel{left:auto;right:0}.home-search{padding:0 14px}.home-search form{gap:7px}.home-search input{padding:12px 11px;font-size:15px}.home-search button{padding:10px 13px}.home-tool-grid,.home-knowledge-grid,.home-questions-grid{grid-template-columns:1fr}.home-tool-grid .card{min-height:0}.home-section{margin:22px 0 28px}main{padding:8px 14px 45px}.home-intro{font-size:14px;margin:8px auto 18px}}
+@media(max-width:600px){.home-nav{padding:0 12px;gap:7px;margin-bottom:12px}.home-nav summary{padding:8px 11px;font-size:12px}.home-nav details[open] .menu-panel{width:100%;max-width:100%;max-height:42vh;margin-top:8px}.home-search{padding:0 14px;margin:14px auto 22px}.home-search form{gap:7px}.home-search input{padding:12px 11px;font-size:15px}.home-search button{padding:10px 13px}.home-tool-grid,.home-knowledge-grid,.home-questions-grid{grid-template-columns:1fr}.home-tool-grid .card{min-height:0}.home-section{margin:22px 0 28px}main{padding:8px 14px 45px}.home-intro{font-size:14px;margin:8px auto 18px}}
 
 </style><link rel="canonical" href="https://www.oceanofwisdom.site/index.html">
 <link rel="alternate" hreflang="en" href="https://www.oceanofwisdom.site/">
@@ -180,9 +181,11 @@ main{padding-top:12px}
 (()=>{'use strict';
 const nav=document.querySelector('.home-nav');if(!nav)return;
 const menus=[...nav.querySelectorAll('details')];
+const closeMenus=()=>menus.forEach(menu=>{menu.open=false});
 menus.forEach(menu=>menu.addEventListener('toggle',()=>{if(menu.open)menus.forEach(other=>{if(other!==menu)other.open=false})}));
-document.addEventListener('click',event=>{if(!nav.contains(event.target))menus.forEach(menu=>menu.open=false)});
-document.addEventListener('keydown',event=>{if(event.key==='Escape'){const open=menus.find(menu=>menu.open);if(open){open.open=false;open.querySelector('summary')?.focus()}}});
+document.addEventListener('pointerdown',event=>{if(!nav.contains(event.target))closeMenus()});
+document.addEventListener('click',event=>{if(!nav.contains(event.target))closeMenus()});
+document.addEventListener('keydown',event=>{if(event.key==='Escape'){const open=menus.find(menu=>menu.open);if(open){closeMenus();open.querySelector('summary')?.focus()}}});
 })();
 </script>
 </body></html>
