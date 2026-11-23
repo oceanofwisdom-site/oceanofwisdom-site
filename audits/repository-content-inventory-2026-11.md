@@ -242,7 +242,15 @@ Mobile and desktop remain **STATIC CHECK ONLY / NOT PASSED** until real browser/
 
 1. Real browser/mobile and desktop interaction testing is not available in this execution environment. Source inspection is not a substitute for testing responsive layout, touch menus, keyboard focus, language navigation and search in actual browser viewports.
 2. External reference-link audit is partial. Some publisher/repository endpoints previously returned access errors or timeouts and require confirmation in a normal browser; all links cannot yet be certified as freely readable full text.
-3. Three English-only content pages in this PR — `ancient-world-wisdom.html`, `world-literature.html` and `vedic-rishis.html` — need an explicit multilingual scope decision or translated counterparts before claiming full site language parity.
+3. Hindi, Tamil and Spanish companion pages have now been added for `ancient-world-wisdom.html`, `world-literature.html` and `vedic-rishis.html` (nine new routes), with reciprocal language navigation, canonical URLs, hreflang alternates, JSON-LD and sitemap entries. These are first editorial translations and still require independent native-language review before claiming publication-quality translation parity.
 4. The recent translations have not had independent native-language editorial review. Structural/navigation spot checks do not establish translation quality.
 
 **Release decision: NOT CLEARED.** Automated audit is green, but the above release blockers remain open. No merge or deployment has been performed.
+
+
+### Follow-up update — 23 November 2026
+
+- Added nine translated companion routes for Ancient World Wisdom, World Literature and Vedic Rishis in Hindi, Tamil and Spanish.
+- Added all nine routes to `sitemap.xml`; each page has reciprocal four-language navigation, self-canonical metadata, hreflang alternates and localized Article JSON-LD.
+- GitHub Actions site audit passed on commit `0f1195fa39c2a87724ee019b279f7d9b59c0e2b2` (Run #130).
+- Remaining release evidence: independent native-language review, complete external-link/full-text access review, and real desktop/mobile browser interaction testing. Automated source checks do not certify these items.
