@@ -54,7 +54,7 @@ for (const file of atlasPages) {
   if (!/<title>\s*[^<]+<\/title>/i.test(html)) fail(file + ": missing title");
   if (!/<!doctype html>/i.test(html)) fail(file + ": missing HTML5 doctype");
   for (const tag of ["html","head","body"]) {
-    const opens = (html.match(new RegExp("<" + tag + "\b", "gi")) || []).length;
+    const opens = (html.match(new RegExp("<" + tag + "\\b", "gi")) || []).length;
     const closes = (html.match(new RegExp("</" + tag + ">", "gi")) || []).length;
     if (opens !== 1 || closes !== 1) fail(`${file}: expected one opening and closing ${tag} tag; got ${opens}/${closes}`);
   }
