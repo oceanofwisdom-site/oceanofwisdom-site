@@ -16,7 +16,7 @@ module.exports = defineConfig({
     { name: 'desktop-chromium', use: { ...devices['Desktop Chrome'], viewport: { width: 1440, height: 900 } } },
     { name: 'laptop-chromium', use: { ...devices['Desktop Chrome'], viewport: { width: 1366, height: 768 } } },
     { name: 'android-pixel-chrome', use: { ...devices['Pixel 5'] } },
-    { name: 'ios-iphone-webkit', use: { ...devices['iPhone 13'], defaultBrowserType: 'webkit' } }
+    { name: 'ios-iphone-webkit', use: { ...devices['iPhone 13'], browserName: 'webkit' } }
   ],
   webServer: {
     command: 'python3 -m http.server 4173 --bind 127.0.0.1',
