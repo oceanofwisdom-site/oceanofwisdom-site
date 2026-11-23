@@ -188,3 +188,20 @@ This is the **baseline inventory and ranked expansion plan**, not a claim that t
 6. Confirm the calendar and existing visual identity remain unchanged, then deploy only after every gate passes.
 
 **Current status:** branch work only; no merge and no production deployment. The English content batch and static syntax checks have passed their initial checks. Translation parity, full repository tests and visual mobile testing remain open.
+
+
+## 10. Release-gate verification (23 November 2026)
+
+### Translation parity — FAIL / BLOCKED
+A spot-check of the first priority page batch demonstrates that the new English expansions have not been carried into the translated counterparts. Example: `sacred-geography.html` contains approximately 719 words of main content, while the current Hindi, Tamil and Spanish counterparts contain approximately 125, 81 and 115 words respectively. `lost-knowledge.html` contains approximately 945 words, while the corresponding Hindi, Tamil and Spanish pages contain approximately 126, 87 and 113 words. These are materially different content depths. The translated pages must be brought into parity or the release must be explicitly scoped and labelled as English-only; the current multilingual release must not be published as if parity were complete.
+
+### Reference integrity — PARTIAL / BLOCKED
+Direct verification confirmed the following resources load and provide free reading or open access: UNESCO Nalanda, Sanchi and Dholavira; the two PubMed Central Indus studies; MDPI's Hemakuta pilgrimage study; the University of Central Florida Ancient Near East OER; NASA Universe; Internet Encyclopedia of Philosophy's Ancient Greek Philosophy; Stanford Encyclopedia of Philosophy's Daoism entry; Encyclopaedia Iranica's Zoroastrianism and Avesta entries; Quranic Arabic Corpus documentation; and Oregon State University's Ancient Civilizations open textbook. The Durham University repository record provides the open-access accepted/published copies for Davis and Coningham's pilgrimage paper, and the sacred-geography link has been changed to that institutional record.
+
+The browser verification environment returned 403/502/timeout for some publisher/repository endpoints (including Taylor & Francis direct pages and the SOAS/DRDO PDF endpoints). A failed fetch in this environment does not prove the URL is broken, but those links cannot be certified by this check. Morrison's Taylor & Francis page is identified as open access in search results; the SOAS cosmogony PDF is indexed with full text. These endpoints should be checked from an ordinary browser/device before release. Do not describe a publisher abstract or landing page as full text.
+
+### Mobile and desktop — STATIC CHECK ONLY / NOT PASSED
+The homepage has a viewport declaration, six responsive media-query blocks, a mobile single-column card layout and dropdown menu positioning rules. The search page has a viewport declaration and a small-screen media query at 560px. These are source-level checks only. No real browser/device automation or physical Android/iOS interaction test is available in this run, so touch behaviour, dropdown clipping, search result layout, keyboard navigation and language switching have not been verified on a real mobile viewport.
+
+### Combined audit and deployment decision
+The previous automated audit passed on commit `4a630cbbc1d14a8fc26e0a8a0305ed2d6dc8b376`. A subsequent source-link change has been committed as `7f8dfc3f229912353d7af272b75f8e1f7e15aef6`; the audit must be rerun against that exact commit. The release PR has been returned to **Draft** while the gates above remain open. No merge or production deployment is authorised or performed.
