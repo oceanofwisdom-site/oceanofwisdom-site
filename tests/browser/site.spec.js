@@ -51,16 +51,22 @@ for (const route of routes) {
 test('all rendered image elements on key pages resolve', async ({ page }) => {
   for (const route of ['/', '/ancient-indian-tools.html', '/ancient-world-tools.html', '/classical-languages.html']) {
     await page.goto(route);
-    await page.locator('img').evaluateAll(images => Promise.all(images.map(img => {
-      if (img.complete) return Promise.resolve();
-      return new Promise(resolve => {
-        img.addEventListener('load', resolve, { once: true });
-        img.addEventListener('error', resolve, { once: true });
-        setTimeout(resolve, 8000);
-      });
-    })));
-    const broken = await page.locator('img').evaluateAll(images =>
-      images.filter(img => img.getAttribute('src') && img.naturalWidth === 0).map(img => img.src)
+    const images = page.locator('img[src]');
+    const imageCount = await images.count();
+
+    // Lazy-loaded gallery images must be brought into view before their
+    // load state can be judged. Otherwise a valid loading="lazy" image can
+    // still have naturalWidth === 0 simply because it has not been requested.
+    for (let index = 0; index < imageCount; index++) {
+      const image = images.nth(index);
+      await image.scrollIntoViewIfNeeded();
+      await expect.poll(
+        () => image.evaluate(img => img.complete && img.naturalWidth > 0),
+        { message: `image failed to load: ${await image.getAttribute('src')}`, timeout: 15000 }
+      ).toBe(true);
+    }
+    const broken = await images.evaluateAll(elements =>
+      elements.filter(img => !img.complete || img.naturalWidth === 0).map(img => img.currentSrc || img.src)
     );
     expect(broken, `broken images on ${route}`).toEqual([]);
   }
