@@ -105,6 +105,20 @@ def main():
             changed.append(page.relative_to(ROOT).as_posix())
     ASSET_DIR.mkdir(parents=True, exist_ok=True)
     CREDITS_FILE.write_text(json.dumps(credits, ensure_ascii=False, indent=2), encoding="utf-8")
+    entries = []
+    for key, item in sorted(credits.items()):
+        entries.append(
+            "<article class=\"credit\"><img src=\"" + html.escape(item["file"]) + "\" alt=\"" + html.escape(item["title"]) + "\" loading=\"lazy\">"
+            "<div><h2>" + html.escape(item["title"]) + "</h2><p>Creator: " + html.escape(item.get("creator", "Not stated")) + "</p>"
+            "<p>Licence: " + html.escape(item.get("license", "Not stated")) + " — <a href=\"" + html.escape(item.get("license_url", ""), quote=True) + "\">licence terms</a></p>"
+            "<p><a href=\"" + html.escape(item.get("source_page", ""), quote=True) + "\">Original source record</a></p></div></article>"
+        )
+    credits_page = """<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Image Credits | Ocean of Wisdom</title><style>body{margin:0;background:#14233d;color:#edf1f7;font:16px/1.6 Georgia,serif}.wrap{max-width:1000px;margin:auto;padding:28px 20px}h1,h2{color:#d4a843}a{color:#6dd6df}.credit{display:flex;gap:18px;padding:18px 0;border-bottom:1px solid #ffffff30}.credit img{width:180px;height:120px;object-fit:contain;background:#ffffff0c;border-radius:8px}@media(max-width:600px){.credit{display:block}.credit img{width:100%;height:auto;max-height:220px}}</style></head>
+    <body><main class="wrap"><h1>Image Credits & Licences</h1><p>Images listed here are locally hosted for reliability. Their original creators and licence terms remain with the respective rights holders.</p>"""
+    credits_page += "".join(entries) if entries else "<p>No third-party image assets are currently registered.</p>"
+    credits_page += "</main></body></html>"
+    (ROOT / "image-credits.html").write_text(credits_page, encoding="utf-8")
     print(json.dumps({"pages_scanned":len(pages),"commons_images_mirrored":len(seen),
                       "pages_rewritten":changed,"asset_count":len(credits)}, indent=2))
     if not seen:
