@@ -7,20 +7,6 @@ header.innerHTML='<div class="oow-brandbar"><a class="oow-brand-home" href="/" a
 document.body.insertBefore(header,canvas.nextSibling);
 const hero=document.createElement('section');hero.id='oow-cinematic-hero';hero.innerHTML='<img src="/ocean-wisdom-hero.webp" alt="A meditator overlooking a luminous cosmic ocean at sunrise, with the words Explore the Ocean of Wisdom"><div class="oow-star-gap" aria-hidden="true"></div>';const heroImage=hero.querySelector('img');heroImage.addEventListener('error',()=>{if(!heroImage.dataset.fallback){heroImage.dataset.fallback='1';heroImage.src='/ocean-wisdom-hero.svg';}else{heroImage.hidden=true;}},{once:false});
 header.insertAdjacentElement('afterend',hero);
-const pageLanguage=(document.documentElement.lang||'en').toLowerCase().split('-')[0];
-const translationDisclaimer={
-hi:'यह गैर-अंग्रेज़ी पृष्ठ अधिक पाठकों तक Ocean of Wisdom की सामग्री पहुँचाने का हमारा AI-निर्मित प्रयास है। वर्तनी या व्याकरण की त्रुटियों के लिए कृपया क्षमा करें; आपके सुधारों का स्वागत है।',
-ta:'ஆங்கிலமல்லாத இந்தப் பக்கம் Ocean of Wisdom உள்ளடக்கத்தை மேலும் பல வாசகர்களிடம் கொண்டு சேர்க்கும் எங்கள் AI-உருவாக்கிய முயற்சியாகும். எழுத்துப் பிழைகள் அல்லது இலக்கணப் பிழைகள் இருந்தால் தயவுசெய்து பொறுத்தருளுங்கள்; உங்கள் திருத்தங்களை வரவேற்கிறோம்.',
-es:'Esta página en otro idioma es un esfuerzo generado por IA para acercar Ocean of Wisdom a más lectores. Disculpen cualquier error ortográfico o gramatical; agradecemos sus correcciones.'
-};
-if(translationDisclaimer[pageLanguage]){
- const note=document.createElement('p');
- note.id='oow-translation-disclaimer';
- note.textContent=translationDisclaimer[pageLanguage];
- note.setAttribute('role','note');
- note.style.cssText='max-width:1100px;margin:10px auto 14px;padding:0 18px;text-align:center;color:#cbd5e1;font:12px/1.5 Arial,sans-serif;opacity:.88;';
- hero.insertAdjacentElement('afterend',note);
-}
 if(location.pathname==='/'||location.pathname.endsWith('/index.html'))document.body.classList.add('oow-homepage');
 const ctx=canvas.getContext('2d');if(!ctx)return;
 const reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
