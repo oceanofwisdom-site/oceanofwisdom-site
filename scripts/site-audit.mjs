@@ -315,7 +315,8 @@ function collectHtml(dir = root, prefix = "") {
   return files;
 }
 
-// Repository-wide technical SEO gate. Google Search Console's verification
+// Repository-wide technical SEO gate.
+// Batch 3: keep the metadata contract enforced on every content route. Google Search Console's verification
 // document is a token endpoint, not an indexable content page, so it is excluded.
 const seoPages = collectHtml().filter((file) => file !== "googlefc697bcb5c73cf72.html");
 let missingTitle = 0, missingDescription = 0, missingCanonical = 0, missingJsonLd = 0;
