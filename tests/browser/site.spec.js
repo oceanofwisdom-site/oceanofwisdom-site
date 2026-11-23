@@ -111,7 +111,7 @@ test('homepage dropdowns open exclusively and close with Escape or outside click
   await page.keyboard.press('Escape');
   await expect(menus.nth(1)).not.toHaveAttribute('open', '');
   await menus.nth(2).locator('summary').click();
-  await page.locator('.home-intro').click();
+  await page.locator('body').click({ position: { x: 8, y: 700 } });
   await expect(menus.nth(2)).not.toHaveAttribute('open', '');
 });
 
