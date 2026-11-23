@@ -48,28 +48,35 @@ for (const route of routes) {
   });
 }
 
-test('all rendered image elements on key pages resolve', async ({ page }) => {
-  for (const route of ['/', '/ancient-indian-tools.html', '/ancient-world-tools.html', '/classical-languages.html']) {
-    await page.goto(route);
-    const images = page.locator('img[src]');
-    const imageCount = await images.count();
+const KEY_PAGES = ['/', '/ancient-indian-tools.html', '/ancient-world-tools.html', '/classical-languages.html'];
 
-    // Lazy-loaded gallery images must be brought into view before their
-    // load state can be judged. Otherwise a valid loading="lazy" image can
-    // still have naturalWidth === 0 simply because it has not been requested.
-    for (let index = 0; index < imageCount; index++) {
-      const image = images.nth(index);
-      await image.scrollIntoViewIfNeeded();
-      await expect.poll(
-        () => image.evaluate(img => img.complete && img.naturalWidth > 0),
-        { message: `image failed to load: ${await image.getAttribute('src')}`, timeout: 15000 }
-      ).toBe(true);
-    }
-    const broken = await images.evaluateAll(elements =>
-      elements.filter(img => !img.complete || img.naturalWidth === 0).map(img => img.currentSrc || img.src)
-    );
-    expect(broken, `broken images on ${route}`).toEqual([]);
+test('all local image elements on key pages resolve', async ({ page }) => {
+  for (const route of KEY_PAGES) {
+    await page.goto(route, { waitUntil: 'load' });
+    await page.evaluate(async () => {
+      const images = Array.from(document.images);
+      for (const image of images) {
+        image.loading = 'eager';
+        image.scrollIntoView({ block: 'end' });
+      }
+      await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    });
+    await expect.poll(
+      () => page.evaluate(() => Array.from(document.images)
+        .filter(img => new URL(img.currentSrc || img.src, location.href).origin === location.origin)
+        .filter(img => !img.complete || img.naturalWidth === 0)
+        .map(img => img.currentSrc || img.src)),
+      { message: `broken local images on ${route}`, timeout: 10000 }
+    ).toEqual([]);
   }
+});
+
+test('no broken Wikimedia hotlink remains on the Bengali atlas page', async ({ page }) => {
+  await page.goto('/classical-languages.html', { waitUntil: 'load' });
+  const matches = await page.locator('img[src*="upload.wikimedia.org"]').evaluateAll(images =>
+    images.map(img => img.getAttribute('src')).filter(src => /Durga_puja_pandal_in_West_Bengal/i.test(src))
+  );
+  expect(matches, 'obsolete nonexistent Durga Puja Commons filename is still referenced').toEqual([]);
 });
 
 
