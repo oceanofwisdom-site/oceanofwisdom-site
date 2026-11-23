@@ -109,8 +109,8 @@ def main():
     for key, item in sorted(credits.items()):
         entries.append(
             "<article class=\"credit\"><img src=\"" + html.escape(item["file"]) + "\" alt=\"" + html.escape(item["title"]) + "\" loading=\"lazy\">"
-            "<div><h2>" + html.escape(item["title"]) + "</h2><p>Creator: " + html.escape(item.get("creator", "Not stated")) + "</p>"
-            "<p>Licence: " + html.escape(item.get("license", "Not stated")) + " — <a href=\"" + html.escape(item.get("license_url", ""), quote=True) + "\">licence terms</a></p>"
+            "<div><h2>" + html.escape(item["title"]) + "</h2><p>Creator: " + html.escape(item.get("creator", "Not stated")) + "</p>" +
+            "<p>Licence: " + html.escape(item.get("license", "Not stated")) + " — <a href=\"" + html.escape(item.get("license_url", ""), quote=True) + "\">licence terms</a></p>" +
             "<p><a href=\"" + html.escape(item.get("source_page", ""), quote=True) + "\">Original source record</a></p></div></article>"
         )
     credits_page = """<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
