@@ -116,13 +116,10 @@ Priority considers topical importance, current depth, search intent, opportunity
 
 | Rank | Page | Approx. words | Required editorial work |
 |---:|---|---:|---|
-| 12 | `classical-languages/translator.html` | 262 | Clarify the current prototype's limits, supported language pairs, source basis and confidence; never present a small lexicon as unrestricted machine translation. |
-| 13 | `wisdom-feed.html` | 397 | Make article summaries and internal links specific; ensure each article has a distinct search intent and evidence trail. |
-| 14 | `vedic-rishis.html` | 432 | Add careful distinctions between Vedic seers, later sages, textual attribution and historical uncertainty; cite primary texts and scholarship. |
-| 15 | `world-literature.html` | 492 | Add representative texts, periods, languages, open-access editions and cross-links to Indian classics. |
-| 16 | `classical-languages.html` | 842 | Improve Atlas orientation and explain how the 11 profiles, connections and translator differ; avoid repeated boilerplate. |
-| 17 | `explore.html` | 209 | Convert into a concise, useful discovery hub with clear routes to tools, major collections and search. |
-| 18 | `ancient-world-tools.html` | 540 | Make tool descriptions, limitations, input/output examples and free/external status clear; test every control. |
+| 12 | `classical-languages/translator.html` | 262 | Clarify the prototype's limited concept dictionary, missing language coverage, source basis and confidence; never present it as unrestricted machine translation. |
+| 13 | `world-literature.html` | 492 | Add representative open editions, primary-text collections, reading guidance and cross-links to Indian classics. |
+| 14 | `ancient-world-tools.html` | 540 | Improve tool descriptions, assumptions, input/output examples and free/external status; test every control. |
+| 15 | `classical-languages.html` | 842 | Improve Atlas orientation and explain how the 11 profiles, connections and translator differ; avoid repeated boilerplate. |
 
 ### P3 — Targeted improvement rather than bulk expansion
 
@@ -131,6 +128,8 @@ Priority considers topical importance, current depth, search intent, opportunity
 - **Library category pages:** 498–876 words; prioritise distinct curated sources and examples rather than padding.
 - **Ancient Indian tools (651) and Ancient Indian Wisdom (928):** improve tool-by-tool descriptions, citations, functional status and links to relevant original explanations.
 - **Forgotten Books (637):** add specific open editions/manuscript catalogues and explain access conditions.
+- **Vedic Rishis (432):** already has contextual sections on Lopamudra, Ashtavakra and Shankara, with appropriate caveats; improve primary-source access rather than add bulk. Added a VedaWeb research link.
+- **Wisdom Feed (397) and Explore (209):** keep these as concise discovery/index pages. Improve article summaries, internal links and navigation rather than padding them with general prose.
 - **Lapis Lazuli (1,209), architectural marvels (2,777), water engineering (1,790), world civilisations (1,830):** depth is not the primary issue; audit evidence quality, attribution, internal links and unique metadata.
 - **Long-form question and comparative essays (1,200–2,400 words):** do not expand indiscriminately. Check argument structure, references, balance, originality and duplication.
 - **Sanatana Dharma (17,857 words):** do not add bulk. Review structure, navigation, factual sourcing, duplication, page performance and whether the content should be better segmented with internal anchors.
@@ -168,3 +167,24 @@ The homepage will be rebuilt as a **tool-first, knowledge-rich discovery page**,
 ## 7. Status and limitations
 
 This is the **baseline inventory and ranked expansion plan**, not a claim that the pages have already been rewritten or that all links/translations have passed. Visible word counts are diagnostic; translated-page content quality and all reference destinations still require page-by-page validation. No production files have been changed in this inventory step.
+
+
+## 8. Work completed in the controlled release branch
+
+- Homepage reorganised into six compact dropdown groups, a prominent search entry point, a tool-first section and knowledge highlights. Existing brand, banner, colour system and typography are retained.
+- Search page now builds a local index from the site's sitemap, ranks matches across page titles, descriptions and visible page text, and offers a Google site-search fallback when there is no strong local match.
+- **P1 content expansion completed in English for 11 pages:** Sacred Geography, Lost Knowledge, Ancient Cosmology, World Philosophies, Indian Philosophies, Christianity, Islam, Taoism, Zoroastrianism, Ancient World Wisdom and Ancient Solutions.
+- Added targeted open-access resource pathways to World Literature and Vedic Rishis.
+- Added regression checks for the homepage dropdowns, tool-first sections and local search page.
+- First-pass source-link checks confirmed that key research references (including the Indus settlement study, Hemakuta pilgrimage study, HESS water-history article, Stanford Encyclopedia Daoism entry, Encyclopaedia Iranica Zoroastrianism entry, Quranic Arabic Corpus and Oregon State primary-source reader) are reachable and offer free reading access.
+
+## 9. Remaining release blockers
+
+1. Reconcile and translate the new English expansions into the matching Hindi, Tamil and Spanish routes; do not release a mixed-depth multilingual experience.
+2. Complete the P2 content work and page-specific metadata cleanup.
+3. Verify every external reference on every substantive page, including whether it is full-text free access or only an abstract/landing page; replace weak or broken links.
+4. Run the complete repository audit on the release branch, including all 56 Atlas routes, language buttons, translation dictionaries, sitemap, SEO metadata and local links.
+5. Perform real desktop and mobile interaction testing for dropdowns, search, tool controls and language switching.
+6. Confirm the calendar and existing visual identity remain unchanged, then deploy only after every gate passes.
+
+**Current status:** branch work only; no merge and no production deployment. The English content batch and static syntax checks have passed their initial checks. Translation parity, full repository tests and visual mobile testing remain open.
