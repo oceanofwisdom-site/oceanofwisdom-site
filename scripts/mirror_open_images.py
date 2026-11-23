@@ -54,7 +54,8 @@ def mirror(source_url: str):
     normalized = license_name.lower()
     allowed = (
         "public domain" in normalized or "cc0" in normalized or
-        normalized.startswith("cc by") or normalized.startswith("cc-by")
+        normalized.startswith("cc by ") or normalized.startswith("cc by-sa ") or
+        normalized.startswith("cc-by ") or normalized.startswith("cc-by-sa ")
     )
     if not allowed:
         raise RuntimeError(f"Rejected non-open/unclear license for {title}: {license_name or 'missing license'}")
