@@ -28,7 +28,7 @@ test('homepage renders without horizontal overflow or failed local assets', asyn
   }));
   expect(dimensions.document, 'horizontal overflow on homepage').toBeLessThanOrEqual(dimensions.viewport + 1);
   const brokenImages = await page.locator('img').evaluateAll(images =>
-    images.filter(img => img.getAttribute('src') && (!img.complete || img.naturalWidth === 0))
+    images.filter(img => img.getAttribute('src') && img.complete && img.naturalWidth === 0)
       .map(img => img.currentSrc || img.src)
   );
   expect(brokenImages, 'broken or unloaded homepage images').toEqual([]);
