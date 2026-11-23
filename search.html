@@ -47,7 +47,7 @@ async function loadIndex(){
   }
   if(!docs.length)throw new Error('No pages could be indexed. Try the external search fallback below.');
   return docs;
- })();
+ })().catch(error=>{indexPromise=null;throw error});
  return indexPromise;
 }
 function addResult(item,query,terms){
