@@ -122,6 +122,46 @@ test('homepage dropdowns open exclusively and close with Escape or outside click
   await expect(menus.nth(2)).not.toHaveAttribute('open', '');
 });
 
+test('homepage dropdowns stay in document flow across desktop, tablet and mobile', async ({ page }) => {
+  const sizes = [
+    { width: 1440, height: 900, name: 'desktop' },
+    { width: 1024, height: 768, name: 'laptop' },
+    { width: 768, height: 1024, name: 'tablet' },
+    { width: 390, height: 844, name: 'mobile' }
+  ];
+  await page.goto('/');
+  const menus = page.locator('.home-nav details');
+  for (const size of sizes) {
+    await page.setViewportSize({ width: size.width, height: size.height });
+    for (let index = 0; index < await menus.count(); index++) {
+      const menu = menus.nth(index);
+      await menu.locator('summary').click();
+      await expect(menu).toHaveAttribute('open', '');
+      const layout = await page.evaluate(() => {
+        const panel = document.querySelector('.home-nav details[open] .menu-panel');
+        const search = document.querySelector('.home-search');
+        const intro = document.querySelector('.home-intro');
+        const rect = element => {
+          const r = element.getBoundingClientRect();
+          return { top: r.top, bottom: r.bottom, left: r.left, right: r.right };
+        };
+        return { panel: rect(panel), search: rect(search), intro: rect(intro),
+          viewport: document.documentElement.clientWidth,
+          document: document.documentElement.scrollWidth };
+      });
+      expect(layout.search.top, `${size.name}: search must follow the open menu panel`).toBeGreaterThanOrEqual(layout.panel.bottom - 1);
+      expect(layout.intro.top, `${size.name}: introduction must follow search`).toBeGreaterThanOrEqual(layout.search.bottom - 1);
+      expect(layout.document, `${size.name}: horizontal overflow while menu open`).toBeLessThanOrEqual(layout.viewport + 1);
+      await page.keyboard.press('Escape');
+      await expect(menu).not.toHaveAttribute('open', '');
+    }
+  }
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await menus.nth(1).locator('summary').click();
+  await page.locator('.home-intro').click({ position: { x: 10, y: 10 } });
+  await expect(menus.nth(1)).not.toHaveAttribute('open', '');
+});
+
 test('homepage search submits to the local search page', async ({ page }, testInfo) => {
   test.setTimeout(180000);
   test.skip(testInfo.project.name !== 'desktop-chromium', 'Run the full sitemap-indexing interaction once on desktop Chromium');
