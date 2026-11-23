@@ -36,6 +36,43 @@ h2{text-align:center;color:#f0d58d;font-size:clamp(26px,4vw,36px);margin:45px 0 
 .site-search button{padding:12px 20px;border:1px solid #d8ad43;border-radius:12px;background:#d8ad43;color:#101d35;font-weight:700;cursor:pointer}
 .site-search input:focus-visible,.site-search button:focus-visible{outline:3px solid #55d5e2;outline-offset:3px}
 @media(max-width:480px){.site-search{gap:7px}.site-search button{padding:10px 13px}}
+
+/* Homepage discovery navigation and tool-first layout */
+.home-nav{max-width:1180px;margin:0 auto 18px;padding:0 22px;display:flex;justify-content:center;gap:10px;flex-wrap:wrap;position:relative;z-index:5}
+.home-nav details{position:relative}
+.home-nav summary{list-style:none;cursor:pointer;border:1px solid #d8ad43;border-radius:999px;padding:9px 16px;color:#f0d58d;background:#172b49;font-size:14px;font-weight:700;white-space:nowrap}
+.home-nav summary::-webkit-details-marker{display:none}
+.home-nav summary:after{content:" ▾";color:#55d5e2}
+.home-nav details[open] summary{background:#d8ad43;color:#101d35}
+.home-nav .menu-panel{position:absolute;top:calc(100% + 8px);left:0;min-width:230px;max-width:min(88vw,320px);padding:9px;background:#142744;border:1px solid #d8ad43;border-radius:13px;box-shadow:0 14px 34px #0008;display:grid;gap:3px;z-index:20}
+.home-nav .menu-panel a{display:block;padding:9px 11px;border-radius:8px;color:#e8eef7;text-decoration:none;font-size:14px}
+.home-nav .menu-panel a:hover,.home-nav .menu-panel a:focus-visible{background:#203c61;color:#f0d58d;outline:2px solid #55d5e2}
+.home-search{max-width:850px;margin:10px auto 28px;padding:0 18px}
+.home-search form{display:flex;gap:9px}
+.home-search input{flex:1;min-width:0;padding:15px 17px;border:2px solid #55d5e2;border-radius:13px;background:#172b49;color:#f6f1e7;font:inherit}
+.home-search button{padding:13px 22px;border:1px solid #d8ad43;border-radius:13px;background:#d8ad43;color:#101d35;font-weight:800;cursor:pointer}
+.home-search .search-hint{text-align:center;color:#bdc9d8;font-size:12px;margin:7px 0 0}
+.home-language-switch{max-width:680px;margin:12px auto 16px;gap:9px}
+.home-language-switch a{min-height:48px;border-width:1px;border-radius:14px;font-size:16px}
+main{padding-top:12px}
+.home-intro{text-align:center;color:#d2dce9;max-width:860px;margin:8px auto 26px}
+.home-section{margin:24px 0 34px}
+.home-section h2{margin:0 0 15px}
+.home-section .section-lead{color:#cbd7e6;text-align:center;max-width:780px;margin:0 auto 17px;font-size:14px}
+.home-tool-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.home-tool-grid .card{min-height:174px;padding:19px}
+.home-tool-grid .card h3{font-size:18px}
+.home-badge{display:inline-block;margin-top:10px;padding:3px 8px;border:1px solid #55d5e277;border-radius:999px;color:#75e0e5;font-size:11px;font-weight:700;letter-spacing:.03em}
+.home-knowledge-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.home-knowledge-grid .card{min-height:142px}
+.home-questions-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.home-questions-grid .card{padding:16px}
+.home-questions-grid .card h3{font-size:17px}
+.home-compact-links{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:12px auto 0}
+.home-compact-links a{color:#73d9df;text-decoration:none;border:1px solid #d8ad4366;border-radius:999px;padding:7px 12px;font-size:13px}
+@media(max-width:900px){.home-tool-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.home-knowledge-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.home-nav{padding:0 12px;gap:7px}.home-nav summary{padding:8px 11px;font-size:12px}.home-nav .menu-panel{position:fixed;left:6vw;right:6vw;top:auto;min-width:0;max-width:none}.home-search{padding:0 14px}.home-search form{gap:7px}.home-search input{padding:12px 11px;font-size:15px}.home-search button{padding:10px 13px}.home-tool-grid,.home-knowledge-grid,.home-questions-grid{grid-template-columns:1fr}.home-tool-grid .card{min-height:0}.home-section{margin:22px 0 28px}main{padding:8px 14px 45px}.home-intro{font-size:14px;margin:8px auto 18px}}
+
 </style><link rel="canonical" href="https://www.oceanofwisdom.site/index.html">
 <link rel="alternate" hreflang="en" href="https://www.oceanofwisdom.site/">
 <link rel="alternate" hreflang="ta" href="https://www.oceanofwisdom.site/index-ta.html">
@@ -71,42 +108,72 @@ h2{text-align:center;color:#f0d58d;font-size:clamp(26px,4vw,36px);margin:45px 0 
   ]
 }
 </script>
-</head><body>
+</head>
+<body>
 <section class="hero"><div><div style="letter-spacing:.24em;color:#f0d58d;font-size:12px;font-weight:700">A JOURNEY THROUGH KNOWLEDGE</div><h1>Explore Ocean<br>of Wisdom</h1><p>Questions, philosophies, literature, tools and the living knowledge of civilisations.</p></div></section>
 <nav class="home-language-switch" aria-label="Choose homepage language">
 <a href="/" lang="en" aria-current="page">EN</a>
-<a href="https://translate.google.com/translate?sl=en&tl=hi&u=https%3A%2F%2Fwww.oceanofwisdom.site%2F" lang="hi" target="_blank" rel="noopener" aria-label="हिन्दी — machine translation">हिन्दी</a>
+<a href="https://translate.google.com/translate?sl=en&amp;tl=hi&amp;u=https%3A%2F%2Fwww.oceanofwisdom.site%2F" lang="hi" target="_blank" rel="noopener" aria-label="हिन्दी — machine translation">हिन्दी</a>
 <a href="/index-ta.html" lang="ta" aria-label="தமிழ் — முகப்புப் பக்கம்">தமிழ்</a>
-<a href="https://translate.google.com/translate?sl=en&tl=es&u=https%3A%2F%2Fwww.oceanofwisdom.site%2F" lang="es" target="_blank" rel="noopener" aria-label="Español — machine translation">ES</a>
+<a href="https://translate.google.com/translate?sl=en&amp;tl=es&amp;u=https%3A%2F%2Fwww.oceanofwisdom.site%2F" lang="es" target="_blank" rel="noopener" aria-label="Español — machine translation">ES</a>
 </nav>
-<form class="site-search" role="search" action="https://www.google.com/search" method="get" onsubmit="this.querySelector('[name=q]').value='site:www.oceanofwisdom.site '+this.querySelector('[name=site_query]').value">
-<input type="search" name="site_query" placeholder="Search Ocean of Wisdom…" aria-label="Search Ocean of Wisdom" required>
-<input type="hidden" name="q" value="site:www.oceanofwisdom.site">
+<nav class="home-nav" aria-label="Main navigation">
+<details><summary>Explore</summary><div class="menu-panel"><a href="/who-am-i.html">Who Am I?</a><a href="/what-is-all-this.html">What Is All This?</a><a href="/am-i-connected.html">Am I Connected?</a><a href="/what-is-truth.html">What Is Truth?</a><a href="/indian-philosophies.html">Indian Philosophies</a><a href="/world-philosophies.html">World Philosophies</a></div></details>
+<details><summary>Free Tools</summary><div class="menu-panel"><a href="/calendar/">Surya Siddhanta Calendar</a><a href="/ancient-indian-tools.html">Indian &amp; Global Research Tools</a><a href="/ancient-world-tools.html">World Interactive Tools</a><a href="/classical-languages/translator.html">Classical Language Prototype</a><a href="/ancient-water-engineering.html">Water Engineering</a></div></details>
+<details><summary>Knowledge</summary><div class="menu-panel"><a href="/ancient-indian-wisdom.html">Ancient Indian Knowledge</a><a href="/ancient-world-wisdom.html">World Civilisations</a><a href="/sacred-geography.html">Sacred Geography</a><a href="/lost-knowledge.html">Lost Knowledge</a><a href="/sanatana-dharma.html">Sanatana Dharma</a></div></details>
+<details><summary>Languages &amp; Literature</summary><div class="menu-panel"><a href="/classical-languages.html">11 Classical Languages Atlas</a><a href="/indian-classic-wisdom-literature.html">Indian Classic Wisdom &amp; Literature</a><a href="/world-literature.html">World Literature</a><a href="/forgotten-books.html">Forgotten Books</a></div></details>
+<details><summary>Research</summary><div class="menu-panel"><a href="/library/">Global Knowledge Atlas</a><a href="/open-access-library.html">Open Access Library</a><a href="/open-access-research.html">Open Access Research</a><a href="/methodology.html">Research Methodology</a></div></details>
+<details><summary>About</summary><div class="menu-panel"><a href="/about.html">About Ocean of Wisdom</a><a href="/editorial-policy.html">Editorial Policy</a><a href="/contact.html">Contact &amp; Corrections</a></div></details>
+</nav>
+<section class="home-search" aria-label="Search the website">
+<form action="/search.html" method="get" role="search">
+<input type="search" name="q" placeholder="Search topics, tools, languages, texts or questions…" aria-label="Search all Ocean of Wisdom pages" required>
 <button type="submit">Search</button>
 </form>
-<main><p class="intro">A meeting place for timeless questions and the many ways humanity has explored existence. Discover original explanations, historical sources, philosophical traditions and practical tools with curiosity, care and respect for evidence.</p>
-<h2>The Six Questions</h2><div class="grid questions-grid">
-<a class="card" href="/who-am-i.html"><div class="icon">🔍</div><h3>Who Am I?</h3><p>Beyond name, body and mind — what is the self?</p></a>
-<a class="card" href="/what-is-all-this.html"><div class="icon">🌌</div><h3>What Is All This?</h3><p>The universe, existence and reality — what do we know?</p></a>
-<a class="card" href="/am-i-connected.html"><div class="icon">🔗</div><h3>Am I Connected?</h3><p>Explore the relationship between the individual and the whole.</p></a>
-<a class="card" href="/i-am-that.html"><div class="icon">✨</div><h3>Tat Tvam Asi — I Am That</h3><p>Explore the observer, the observed and the nature of being.</p></a>
-<a class="card" href="/what-is-truth.html"><div class="icon">🕉️</div><h3>What Is Truth?</h3><p>How do we investigate what is real and reliable?</p></a>
-<a class="card" href="/what-is-bliss.html"><div class="icon">☀️</div><h3>What Is Bliss?</h3><p>Explore fulfilment, peace and lasting happiness.</p></a></div>
-<h2>Philosophies & Traditions</h2><div class="grid">
-<a class="card" href="/indian-philosophies.html"><div class="icon">🪷</div><h3>Indian Philosophies</h3><p>Vedanta, Yoga, Jainism, Buddhism, Charvaka and Sikh thought.</p></a>
-<a class="card" href="/world-philosophies.html"><div class="icon">🌍</div><h3>World Philosophies</h3><p>Explore philosophical traditions across cultures.</p></a>
-<a class="card" href="/sanatana-dharma.html"><div class="icon">ॐ</div><h3>Sanatana Dharma</h3><p>Concepts, schools, practices and historical context.</p></a></div>
-<h2>Ancient Knowledge & Interactive Tools</h2><div class="grid dice-tools-grid">
-<a class="card" href="/ancient-indian-wisdom.html"><div class="icon">🏛️</div><h3>Ancient Indian Knowledge &amp; Techniques</h3><p>Statecraft, mathematics, astronomy, medicine, architecture, water engineering and ecology.</p></a>
-<a class="card" href="/ancient-world-wisdom.html"><div class="icon">🧭</div><h3>Wisdom of Other Civilisations</h3><p>Knowledge and technologies from societies around the world.</p></a>
-<a class="card" href="/ancient-indian-tools.html"><div class="icon">📐</div><h3>Indian &amp; Global Research Tools</h3><p>Original Indian calculators plus curated digital libraries, language tools and international astronomy resources.</p></a>
-<a class="card" href="/ancient-world-tools.html"><div class="icon">🌐</div><h3>World Interactive Tools</h3><p>Explore calculation methods from world civilisations.</p></a>
-<a class="card" href="/calendar/"><div class="icon">🌙</div><h3>Astronomical Calendar</h3><p>Explore celestial cycles and traditional calendrical calculations.</p></a></div>
-<h2>Classical Languages Atlas</h2><div class="grid"><a class="card" href="/classical-languages.html"><div class="icon">🔤</div><h3>Bharata Bhasha — 11 Classical Languages</h3><p>Explore scripts, Aksharamala, literature, cultural traditions, language connections and the simultaneous language tool.</p></a></div>
-<h2>Literature & Research</h2><div class="grid">
-<a class="card" href="/library/"><div class="icon">📚</div><h3>Global Knowledge Atlas</h3><p>Browse 50 research records across history, science, philosophy and ecology.</p></a>
-<a class="card" href="/indian-classic-wisdom-literature.html"><div class="icon">📚</div><h3>Indian Classic Wisdom and Literature</h3><p>Vedas, Upanishads, epics, Tamil classics, Sanskrit works and knowledge treatises.</p></a>
-<a class="card" href="/world-literature.html"><div class="icon">🌍</div><h3>World Literature & Classical Texts</h3><p>Explore literary traditions beyond the Indian subcontinent.</p></a>
-<a class="card" href="/wisdom-feed.html"><div class="icon">✍️</div><h3>Wisdom Articles</h3><p>Essays connecting enduring questions with contemporary life.</p></a>
-<a class="card" href="/open-access-library.html"><div class="icon">🔓</div><h3>Open Access Research Library</h3><p>Free books, research papers, manuscripts, theses and trusted academic resources.</p></a></div>
-</main><footer style="text-align:center;padding:25px;color:#bdc9d8;border-top:1px solid #d8ad4377;font-size:13px"><p>© 2026 Ocean of Wisdom · Original explanations and research, with respect for other authors and institutions.</p><p style="margin:12px 0"><a href="/about.html" style="color:#f0d58d">About</a> · <a href="/methodology.html" style="color:#f0d58d">Methodology</a> · <a href="/contact.html" style="color:#f0d58d">Contact & Corrections</a> · <a href="/search.html" style="color:#f0d58d">Search</a> · <a href="/editorial-policy.html" style="color:#f0d58d">Editorial Policy</a></p><p style="display:block!important;visibility:visible!important;opacity:1!important;margin:12px 0 0!important;padding:0!important;color:#f0d58d!important;font-size:15px!important;line-height:1.6!important;font-weight:600!important">Founded and curated by <strong style="color:#f0d58d!important;letter-spacing:.06em">PRASHOB RAJAMOHAN</strong></p></footer></body></html>
+<p class="search-hint">Search across the website's knowledge pages, research library and interactive tools.</p>
+</section>
+<main>
+<p class="home-intro">A meeting place for timeless questions and the many ways humanity has explored existence. Discover original explanations, historical sources, philosophical traditions and practical tools with curiosity, care and respect for evidence.</p>
+<section class="home-section" id="free-tools">
+<h2>Explore Free Tools</h2><p class="section-lead">Start with a practical tool. Explore calculations, calendars and research resources—clearly labelled so you know what works directly on this site and what opens an external resource.</p>
+<div class="home-tool-grid">
+<a class="card" href="/calendar/"><div class="icon">🌙</div><h3>Surya Siddhanta Calendar</h3><p>Explore dates, lunar phases, nakshatras, sunrise, sunset and astronomical calculations.</p><span class="home-badge">Interactive calendar</span></a>
+<a class="card" href="/ancient-indian-tools.html"><div class="icon">📐</div><h3>Indian &amp; Global Research Tools</h3><p>Use original calculators and discover curated astronomy, language and digital research resources.</p><span class="home-badge">Calculators + research links</span></a>
+<a class="card" href="/ancient-world-tools.html"><div class="icon">🌍</div><h3>World Mathematics &amp; Calendar Tools</h3><p>Try historical number-system and calendar converters with their assumptions explained.</p><span class="home-badge">Interactive calculators</span></a>
+<a class="card" href="/ancient-water-engineering.html"><div class="icon">💧</div><h3>Water Engineering &amp; Ecology</h3><p>Explore historical systems, engineering principles and practical educational resources.</p><span class="home-badge">Knowledge &amp; calculations</span></a>
+</div>
+<div class="home-compact-links"><a href="/classical-languages.html">Explore 11 Classical Languages</a><a href="/classical-languages/translator.html">Language tool prototype</a><a href="/ancient-world-tools.html">All world tools</a></div>
+</section>
+<section class="home-section" id="knowledge">
+<h2>Discover Knowledge</h2><p class="section-lead">Follow a subject into its history, sources and connections across cultures.</p>
+<div class="home-knowledge-grid">
+<a class="card" href="/library/"><div class="icon">📚</div><h3>Global Knowledge Atlas</h3><p>Explore 50 curated records across history, science, philosophy and ecology.</p></a>
+<a class="card" href="/ancient-indian-wisdom.html"><div class="icon">🏛️</div><h3>Ancient Indian Knowledge</h3><p>Statecraft, mathematics, astronomy, medicine, architecture and ecological practice.</p></a>
+<a class="card" href="/ancient-world-wisdom.html"><div class="icon">🧭</div><h3>Knowledge Across Civilisations</h3><p>Compare technologies, ideas and traditions across the ancient world.</p></a>
+<a class="card" href="/indian-classic-wisdom-literature.html"><div class="icon">📜</div><h3>Indian Classic Wisdom &amp; Literature</h3><p>Explore Vedic, Sanskrit, Tamil and other classical works and knowledge traditions.</p></a>
+<a class="card" href="/world-literature.html"><div class="icon">🌐</div><h3>World Literature</h3><p>Discover literature, philosophy and scientific writing from global traditions.</p></a>
+<a class="card" href="/open-access-library.html"><div class="icon">🔓</div><h3>Open Access Research</h3><p>Find freely readable books, papers, manuscripts and academic collections.</p></a>
+</div>
+</section>
+<section class="home-section" id="six-questions">
+<h2>Six Fundamental Questions</h2><p class="section-lead">Begin with the questions that have shaped philosophy, science and spiritual inquiry.</p>
+<div class="home-questions-grid">
+<a class="card" href="/who-am-i.html"><div class="icon">🔍</div><h3>Who Am I?</h3><p>What is the self?</p></a>
+<a class="card" href="/what-is-all-this.html"><div class="icon">🌌</div><h3>What Is All This?</h3><p>What is reality?</p></a>
+<a class="card" href="/am-i-connected.html"><div class="icon">🔗</div><h3>Am I Connected?</h3><p>How are we related?</p></a>
+<a class="card" href="/i-am-that.html"><div class="icon">✨</div><h3>Tat Tvam Asi — I Am That</h3><p>What is the nature of being?</p></a>
+<a class="card" href="/what-is-truth.html"><div class="icon">🕉️</div><h3>What Is Truth?</h3><p>How do we know?</p></a>
+<a class="card" href="/what-is-bliss.html"><div class="icon">☀️</div><h3>What Is Bliss?</h3><p>What is lasting fulfilment?</p></a>
+</div>
+</section>
+<section class="home-section" id="languages">
+<h2>Languages, Traditions &amp; Literature</h2>
+<div class="home-knowledge-grid">
+<a class="card" href="/classical-languages.html"><div class="icon">🔤</div><h3>Bharata Bhasha — 11 Classical Languages</h3><p>Scripts, language profiles, literary traditions and connections.</p></a>
+<a class="card" href="/indian-philosophies.html"><div class="icon">🪷</div><h3>Indian Philosophies</h3><p>Explore diverse schools, arguments and paths of inquiry.</p></a>
+<a class="card" href="/world-philosophies.html"><div class="icon">🌍</div><h3>World Philosophies</h3><p>Discover philosophical traditions across regions and periods.</p></a>
+</div>
+</section>
+</main>
+<footer style="text-align:center;padding:25px;color:#bdc9d8;border-top:1px solid #d8ad4377;font-size:13px"><p>© 2026 Ocean of Wisdom · Original explanations and research, with respect for other authors and institutions.</p><p style="margin:12px 0"><a href="/about.html" style="color:#f0d58d">About</a> · <a href="/methodology.html" style="color:#f0d58d">Methodology</a> · <a href="/contact.html" style="color:#f0d58d">Contact &amp; Corrections</a> · <a href="/search.html" style="color:#f0d58d">Search</a> · <a href="/editorial-policy.html" style="color:#f0d58d">Editorial Policy</a></p><p style="display:block!important;visibility:visible!important;opacity:1!important;margin:12px 0 0!important;padding:0!important;color:#f0d58d!important;font-size:15px!important;line-height:1.6!important;font-weight:600!important">Founded and curated by <strong style="color:#f0d58d!important;letter-spacing:.06em">PRASHOB RAJAMOHAN</strong></p></footer>
+</body></html>
