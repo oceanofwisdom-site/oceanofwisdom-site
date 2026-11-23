@@ -31,6 +31,7 @@ const atlasSet = new Set(atlasPages);
 
 function resolveLocal(fromFile, href) {
   if (!href || /\$\{|^(?:https?:|mailto:|tel:|data:|javascript:|#)/i.test(href)) return null;
+  if (/\$\{[^}]+\}/.test(href)) return null;
   const raw = href.split(/[?#]/, 1)[0];
   if (!raw) return null;
   let rel = raw.startsWith("/")
