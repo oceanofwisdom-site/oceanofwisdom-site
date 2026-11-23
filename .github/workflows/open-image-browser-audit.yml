@@ -1,7 +1,7 @@
 name: Open image hosting and cross-browser audit
 on:
   push:
-    branches: [main]
+    branches: [main, release/homepage-content-quality-2026-11]
     paths:
       - '.github/workflows/open-image-browser-audit.yml'
       - 'scripts/mirror_open_images.py'
