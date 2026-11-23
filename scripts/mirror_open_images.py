@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 ASSET_DIR = ROOT / "assets" / "open-images"
 CREDITS_FILE = ASSET_DIR / "credits.json"
 USER_AGENT = "OceanOfWisdomOpenImageMirror/1.0 (website image reliability audit)"
-SRC_RE = re.compile(r'(?P<prefix>\\bsrc\\s*=\\s*)(?P<q>["\\'])(?P<url>https?://commons\\.wikimedia\\.org/wiki/Special:FilePath/[^"\\']+)(?P=q)', re.I)
+SRC_RE = re.compile(r'(?P<prefix>\bsrc\s*=\s*)(?P<q>["\'])(?P<url>https?://commons\.wikimedia\.org/wiki/Special:FilePath/[^"\']+)(?P=q)', re.I)
 CACHE = {}
 
 def get_json(url: str):
