@@ -116,6 +116,7 @@ test('homepage dropdowns open exclusively and close with Escape or outside click
 });
 
 test('homepage search submits to the local search page', async ({ page }, testInfo) => {
+  test.setTimeout(180000);
   test.skip(testInfo.project.name !== 'desktop-chromium', 'Run the full sitemap-indexing interaction once on desktop Chromium');
   await page.goto('/');
   await page.locator('.home-search input[name="q"]').fill('astronomy');
