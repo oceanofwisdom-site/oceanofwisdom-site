@@ -54,7 +54,7 @@ for (const file of atlasPages) {
   if (!/<title>\s*[^<]+<\/title>/i.test(html)) fail(file + ": missing title");
   if (!/<!doctype html>/i.test(html)) fail(file + ": missing HTML5 doctype");
   for (const tag of ["html","head","body"]) {
-    const opens = (html.match(new RegExp("<" + tag + "\\b", "gi")) || []).length;
+    const opens = (html.match(new RegExp("<" + tag + "\b", "gi")) || []).length;
     const closes = (html.match(new RegExp("</" + tag + ">", "gi")) || []).length;
     if (opens !== 1 || closes !== 1) fail(`${file}: expected one opening and closing ${tag} tag; got ${opens}/${closes}`);
   }
@@ -320,7 +320,7 @@ function collectHtml(dir = root, prefix = "") {
 let checkedImages = 0;
 for (const file of collectHtml()) {
   const html = readFileSync(path.join(root, file), "utf8");
-  for (const match of html.matchAll(/<img\\b[^>]*\\bsrc=["']([^"']+)["']/gi)) {
+  for (const match of html.matchAll(/<img\b[^>]*\bsrc=["']([^"']+)["']/gi)) {
     const src = match[1];
     const target = resolveLocal(file, src);
     if (!target) continue;
@@ -339,7 +339,7 @@ for (const [file, type] of sharedImages) {
   const bytes = readFileSync(full);
   const valid = type === "png" ? bytes.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10]))
     : type === "webp" ? bytes.toString("ascii",0,4) === "RIFF" && bytes.toString("ascii",8,12) === "WEBP"
-    : /<svg[\\s>]/i.test(bytes.toString("utf8",0,300));
+    : /<svg[\s>]/i.test(bytes.toString("utf8",0,300));
   if (!valid) fail("Shared image has an invalid " + type.toUpperCase() + " file signature: " + file);
 }
 if (errors.length === 0) ok("images: " + checkedImages + " local HTML image references resolve; shared logo/hero assets have valid file signatures");
