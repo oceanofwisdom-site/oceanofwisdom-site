@@ -13,18 +13,36 @@ from urllib.request import Request, urlopen
 ROOT = Path(__file__).resolve().parents[1]
 ASSET_DIR = ROOT / "assets" / "open-images"
 CREDITS_FILE = ASSET_DIR / "credits.json"
-USER_AGENT = "OceanOfWisdomOpenImageMirror/1.0 (website image reliability audit)"
+USER_AGENT = "OceanOfWisdomOpenImageMirror/1.1 (https://www.oceanofwisdom.site/; open-image attribution and reliability audit)"
+RETRYABLE_HTTP = {429, 500, 502, 503, 504}
+
+def open_with_retry(req: Request, timeout: int):
+    """Retry Wikimedia throttling and transient gateway errors with backoff."""
+    for attempt in range(6):
+        try:
+            return urlopen(req, timeout=timeout)
+        except Exception as exc:
+            code = getattr(exc, "code", None)
+            if code not in RETRYABLE_HTTP or attempt == 5:
+                raise
+            retry_after = getattr(exc, "headers", {}).get("Retry-After")
+            try:
+                delay = min(120, max(3, int(retry_after))) if retry_after else min(120, 3 * (2 ** attempt))
+            except (TypeError, ValueError):
+                delay = min(120, 3 * (2 ** attempt))
+            print(f"Wikimedia returned HTTP {code}; retry {attempt + 1}/5 after {delay}s", flush=True)
+            time.sleep(delay)
 SRC_RE = re.compile(r'(?P<prefix>\bsrc\s*=\s*)(?P<q>["\'])(?P<url>https?://(?:commons\.wikimedia\.org/wiki/Special:FilePath/|upload\.wikimedia\.org/wikipedia/commons/)[^"\']+)(?P=q)', re.I)
 CACHE = {}
 
 def get_json(url: str):
     req = Request(url, headers={"User-Agent": USER_AGENT})
-    with urlopen(req, timeout=35) as response:
+    with open_with_retry(req, timeout=35) as response:
         return json.loads(response.read().decode("utf-8"))
 
 def download(url: str, path: Path):
     req = Request(url, headers={"User-Agent": USER_AGENT})
-    with urlopen(req, timeout=60) as response:
+    with open_with_retry(req, timeout=60) as response:
         data = response.read()
         content_type = response.headers.get("Content-Type", "")
     if not data or len(data) < 512 or not content_type.startswith("image/"):
