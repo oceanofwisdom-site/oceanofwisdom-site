@@ -22,11 +22,14 @@ h2{text-align:center;color:#f0d58d;font-size:clamp(26px,4vw,36px);margin:45px 0 
 .home-language-switch a[aria-current="page"]{background:#d9ad43;color:#101d35;border-color:#d9ad43}
 @media(max-width:900px){.questions-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){.home-language-switch{gap:9px;padding:0 14px;margin:18px auto 22px}.home-language-switch a{min-height:76px;border-radius:20px;border-width:2px;font-size:clamp(17px,4vw,23px)}.grid,.questions-grid,.grid.dice-tools-grid{grid-template-columns:1fr}.dice-tools-grid>.card:nth-child(n){grid-column:1;grid-row:auto}.hero{padding:32px 16px 26px}main{padding:16px 15px 50px}}
+
+.site-search{max-width:760px;margin:8px auto 28px;padding:0 18px;display:flex;gap:10px;justify-content:center}.site-search input{flex:1;min-width:0;padding:14px 16px;border:1px solid #55d5e2;border-radius:12px;background:#172b49;color:#f6f1e7;font:inherit}.site-search button{padding:12px 20px;border:1px solid #d8ad43;border-radius:12px;background:#d8ad43;color:#101d35;font-weight:700;cursor:pointer}@media(max-width:480px){.site-search{gap:7px}.site-search button{padding:10px 13px}}
 </style></head><body>
 <section class="hero"><div><div style="letter-spacing:.12em;color:#f0d58d;font-size:12px;font-weight:700">அறிவை நோக்கிய பயணம்</div><h1>அறிவின் பெருங்கடலை<br>ஆராயுங்கள்</h1><p>கேள்விகள், தத்துவங்கள், இலக்கியம், கருவிகள் மற்றும் நாகரிகங்களின் வாழும் அறிவு.</p></div></section>
 <nav class="home-language-switch" aria-label="மொழியைத் தேர்ந்தெடுக்கவும்">
 <a href="/" lang="en">EN</a><a href="https://translate.google.com/translate?sl=en&amp;tl=hi&amp;u=https%3A%2F%2Fwww.oceanofwisdom.site%2F" lang="hi" target="_blank" rel="noopener">हिन्दी</a><a href="/index-ta.html" lang="ta" aria-current="page">தமிழ்</a><a href="https://translate.google.com/translate?sl=en&amp;tl=es&amp;u=https%3A%2F%2Fwww.oceanofwisdom.site%2F" lang="es" target="_blank" rel="noopener">ES</a>
 </nav>
+<form class="site-search" role="search" action="https://www.google.com/search" method="get" onsubmit="this.querySelector('[name=q]').value='site:www.oceanofwisdom.site '+this.querySelector('[name=site_query]').value"><input type="search" name="site_query" placeholder="Ocean of Wisdom-இல் தேடுங்கள்…" aria-label="Ocean of Wisdom-இல் தேடுங்கள்" required><input type="hidden" name="q" value="site:www.oceanofwisdom.site"><button type="submit">தேடுக</button></form>
 <main>
 <p class="intro">காலத்தைக் கடந்த கேள்விகளையும், மனிதகுலம் இருப்பைப் புரிந்துகொள்ள மேற்கொண்ட பல்வேறு முயற்சிகளையும் ஆராயும் சந்திப்பு இடம் இது. ஆதாரங்கள், தத்துவ மரபுகள், வரலாற்று மூலங்கள் மற்றும் நடைமுறைக் கருவிகளை ஆர்வத்துடனும் பொறுப்புடனும் அறிந்துகொள்ளுங்கள்.</p>
 <h2>ஆறு அடிப்படைக் கேள்விகள்</h2><div class="grid questions-grid">
@@ -51,5 +54,5 @@ h2{text-align:center;color:#f0d58d;font-size:clamp(26px,4vw,36px);margin:45px 0 
 <a class="card" href="/world-literature.html"><div class="icon">📜</div><h3>உலக இலக்கியமும் செவ்வியல் நூல்களும்</h3><p>காப்பியங்கள், புனித நூல்கள், தத்துவ மற்றும் அறிவியல் படைப்புகளை அறியுங்கள்.</p></a>
 <a class="card" href="/wisdom-feed.html"><div class="icon">✍️</div><h3>அறிவுக் கட்டுரைகள்</h3><p>நிலையான கேள்விகளை இன்றைய வாழ்வுடன் இணைக்கும் கட்டுரைகள்.</p></a></div>
 </main>
-<footer style="text-align:center;padding:25px;color:#bdc9d8;border-top:1px solid #d8ad4377;font-size:13px"><p>© 2026 Ocean of Wisdom · பிற ஆசிரியர்களின் உரிமைகளையும் நிறுவனங்களையும் மதித்து உருவாக்கப்பட்ட விளக்கங்களும் ஆய்வுகளும்.</p><p style="color:#f0d58d;font-size:15px;font-weight:600">நிறுவி, தொகுத்தவர்: <strong>PRASHOB RAJAMOHAN</strong></p></footer>
+<footer style="text-align:center;padding:25px;color:#bdc9d8;border-top:1px solid #d8ad4377;font-size:13px"><p>© 2026 Ocean of Wisdom · பிற ஆசிரியர்களின் உரிமைகளையும் நிறுவனங்களையும் மதித்து உருவாக்கப்பட்ட விளக்கங்களும் ஆய்வுகளும்.</p><p style="margin:12px 0"><a href="/about.html" style="color:#f0d58d">எங்களைப் பற்றி</a> · <a href="/methodology.html" style="color:#f0d58d">ஆய்வு முறை</a> · <a href="/contact.html" style="color:#f0d58d">தொடர்பு / திருத்தங்கள்</a> · <a href="/search.html" style="color:#f0d58d">தேடல்</a> · <a href="/editorial-policy.html" style="color:#f0d58d">தொகுப்புக் கொள்கை</a></p><p style="color:#f0d58d;font-size:15px;font-weight:600">நிறுவி, தொகுத்தவர்: <strong>PRASHOB RAJAMOHAN</strong></p></footer>
 </body></html>
