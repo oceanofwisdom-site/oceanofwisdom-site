@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 ASSET_DIR = ROOT / "assets" / "open-images"
 CREDITS_FILE = ASSET_DIR / "credits.json"
 USER_AGENT = "OceanOfWisdomOpenImageMirror/1.0 (website image reliability audit)"
-SRC_RE = re.compile(r'(?P<prefix>\bsrc\s*=\s*)(?P<q>["\'])(?P<url>https?://commons\.wikimedia\.org/wiki/Special:FilePath/[^"\']+)(?P=q)', re.I)
+SRC_RE = re.compile(r'(?P<prefix>\bsrc\s*=\s*)(?P<q>["\'])(?P<url>https?://(?:commons\.wikimedia\.org/wiki/Special:FilePath/|upload\.wikimedia\.org/wikipedia/commons/)[^"\']+)(?P=q)', re.I)
 CACHE = {}
 
 def get_json(url: str):
@@ -35,7 +35,11 @@ def mirror(source_url: str):
     if source_url in CACHE:
         return CACHE[source_url]
     parsed = urlparse(source_url)
-    filename = unquote(parsed.path.split("/Special:FilePath/", 1)[-1])
+    if "/Special:FilePath/" in parsed.path:
+        filename = unquote(parsed.path.split("/Special:FilePath/", 1)[-1])
+    else:
+        filename = unquote(parsed.path.rsplit("/", 1)[-1])
+        filename = re.sub(r"^\\d+px-", "", filename)
     title = "File:" + filename
     api = "https://commons.wikimedia.org/w/api.php?" + urlencode({
         "action":"query","format":"json","titles":title,"prop":"imageinfo",
