@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 
 const root = process.cwd();
@@ -280,6 +280,42 @@ if (library) {
       if (errors.length === 0) ok("Knowledge Library: source-access and rights notice available in four languages");
     } catch (e) { fail("Knowledge Library: UI translation parse error: " + e.message); }
   }
+}
+
+
+function collectHtml(dir = root, prefix = "") {
+  const files = [];
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    if (entry.name === ".git" || entry.name === "node_modules") continue;
+    const rel = path.posix.join(prefix, entry.name);
+    if (entry.isDirectory()) files.push(...collectHtml(path.join(dir, entry.name), rel));
+    else if (entry.isFile() && entry.name.toLowerCase().endsWith(".html")) files.push(rel);
+  }
+  return files;
+}
+
+// Repository-wide technical SEO gate. Google Search Console's verification
+// document is a token endpoint, not an indexable content page, so it is excluded.
+const seoPages = collectHtml().filter((file) => file !== "googlefc697bcb5c73cf72.html");
+let missingTitle = 0, missingDescription = 0, missingCanonical = 0, missingJsonLd = 0;
+for (const file of seoPages) {
+  const html = readFileSync(path.join(root, file), "utf8");
+  const title = (html.match(/<title\\b[^>]*>([\\s\\S]*?)<\\/title>/i) || [])[1] || "";
+  const description = (html.match(/<meta\\b[^>]*name=["']description["'][^>]*content=["']([^"']*)["'][^>]*>/i) || [])[1] || "";
+  const canonical = (html.match(/<link\\b[^>]*rel=["']canonical["'][^>]*href=["']([^"']*)["'][^>]*>/i) || [])[1] || "";
+  const expectedCanonical = "https://www.oceanofwisdom.site/" + file;
+  const jsonBlocks = [...html.matchAll(/<script\\b[^>]*type=["']application\\/ld\\+json["'][^>]*>([\\s\\S]*?)<\\/script>/gi)];
+  if (!title.trim()) { missingTitle++; fail(file + ": missing title"); }
+  if (!description.trim()) { missingDescription++; fail(file + ": missing meta description"); }
+  if (canonical !== expectedCanonical) { missingCanonical++; fail(file + ": canonical missing or not self-referencing (expected " + expectedCanonical + ", got " + (canonical || "none") + ")"); }
+  if (!jsonBlocks.length) { missingJsonLd++; fail(file + ": missing JSON-LD block"); }
+  else for (const block of jsonBlocks) {
+    try { JSON.parse(block[1]); }
+    catch (e) { fail(file + ": invalid JSON-LD: " + e.message); }
+  }
+}
+if (missingTitle + missingDescription + missingCanonical + missingJsonLd === 0) {
+  ok("repository-wide SEO: " + seoPages.length + " active HTML pages have title, description, self-canonical and parseable JSON-LD (0 missing)");
 }
 
 if (errors.length) {
