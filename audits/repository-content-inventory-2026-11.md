@@ -205,3 +205,27 @@ The homepage has a viewport declaration, six responsive media-query blocks, a mo
 
 ### Combined audit and deployment decision
 The previous automated audit passed on commit `4a630cbbc1d14a8fc26e0a8a0305ed2d6dc8b376`. A subsequent source-link change has been committed as `7f8dfc3f229912353d7af272b75f8e1f7e15aef6`; the audit must be rerun against that exact commit. The release PR has been returned to **Draft** while the gates above remain open. No merge or production deployment is authorised or performed.
+
+
+## 23 November 2026 — follow-on multilingual expansion
+
+The following P1 topic pages now have substantive additions in Hindi, Tamil and Spanish, alongside the English expansions already recorded above:
+
+- Sacred Geography
+- Lost Knowledge
+- Ancient Cosmology
+- World Philosophies
+- Indian Philosophies
+- Ancient Solutions
+- Christianity
+- Islam
+- Taoism
+- Zoroastrianism
+
+The new material adds topic-specific explanations, historical context, key concepts and research cautions rather than merely duplicating the English page headings. This is a content expansion record, not a certification of translation equivalence or factual peer review. The three language versions of each page still require editorial review for terminology, consistency, language-switch links and rendering.
+
+### Current release status
+
+PR #20 remains **open and Draft**. No merge or production deployment has been performed. The latest content commit is `52dac3b18acb60cc3d724bae68b517656324acb9`. A fresh combined audit and current-commit CI result are still required; the previously recorded audit result applies only to its earlier commit and must not be treated as validation of these new changes.
+
+Mobile and desktop remain **STATIC CHECK ONLY / NOT PASSED** until real browser/device interaction is tested. Open-access links that previously returned access errors or timeouts remain unverified from a normal browser. The release gates therefore remain open.
