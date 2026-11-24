@@ -304,11 +304,11 @@ const requestedLanguageChecks = [
 for (const language of requestedLanguageChecks) {
   test(`Google Translate proxy serves the live homepage in ${language.name}`, async ({ page }) => {
     const url = `https://www-oceanofwisdom-site.translate.goog/?_x_tr_sl=en&_x_tr_tl=${encodeURIComponent(language.code)}&_x_tr_hl=en&_x_tr_pto=wapp`;
-    const response = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
+    const response = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
     expect(response, `${language.name} proxy should return a document`).not.toBeNull();
     expect(response.status(), `${language.name} proxy HTTP response`).toBeLessThan(400);
     await expect(page.locator('main')).not.toBeEmpty();
-    await page.waitForFunction(({ source, flags }) => new RegExp(source, flags).test(document.querySelector('main')?.innerText || ''), { source: language.pattern.source, flags: language.pattern.flags }, { timeout: 30000 }).catch(async () => {
+    await page.waitForFunction(({ source, flags }) => new RegExp(source, flags).test(document.querySelector('main')?.innerText || ''), { source: language.pattern.source, flags: language.pattern.flags }, { timeout: 15000 }).catch(async () => {
       const sample = await page.locator('main').innerText();
       throw new Error(`${language.name}: target-language marker not detected in main content. Sample: ${sample.slice(0, 700)}`);
     });
