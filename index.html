@@ -88,6 +88,20 @@ main{padding-top:10px}
 .home-questions-grid .card p{margin-top:4px}
 @media(max-width:900px){.home-rishi-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:600px){.home-rishi-strip{padding:0 14px 4px;margin:8px auto 12px}.home-rishi-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.home-rishi-grid a{min-height:66px;padding:8px}.home-rishi-grid strong{font-size:15px}.home-rishi-grid span{font-size:11px}.home-questions-grid .card{min-height:112px;padding:17px}}
+
+/* Single-button homepage translation prototype */
+.home-language-switch{display:flex;justify-content:center;max-width:100%;margin:16px auto 20px;padding:0 16px}
+.home-translate-menu{position:relative;z-index:35}
+.home-translate-menu>summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;padding:11px 21px;border:1px solid #d8ad43;border-radius:999px;background:#172b49;color:#f0d58d;font-size:16px;font-weight:800;box-shadow:0 5px 18px #0003}
+.home-translate-menu>summary::-webkit-details-marker{display:none}
+.home-translate-menu>summary:after{content:'▾';color:#55d5e2}
+.home-translate-menu[open]>summary{background:#d8ad43;color:#101d35}
+.home-translate-panel{position:absolute;top:calc(100% + 9px);left:50%;transform:translateX(-50%);width:min(330px,calc(100vw - 32px));padding:16px;border:1px solid #d8ad43;border-radius:14px;background:#142744;box-shadow:0 14px 34px #0009;display:grid;gap:9px}
+.home-translate-panel label{color:#f0d58d;font-size:14px;font-weight:700}
+.home-translate-panel select{width:100%;min-height:44px;padding:9px 12px;border:1px solid #55d5e2;border-radius:9px;background:#172b49;color:#f6f1e7;font:inherit}
+.home-translate-panel select:focus-visible,.home-translate-menu>summary:focus-visible{outline:3px solid #55d5e2;outline-offset:3px}
+.home-translate-note{margin:0;color:#cbd7e6;font-size:11px;line-height:1.45}
+@media(max-width:600px){.home-language-switch{margin:12px auto 16px}.home-translate-menu>summary{padding:10px 18px;font-size:15px}}
 </style><link rel="canonical" href="https://www.oceanofwisdom.site/index.html">
 <link rel="alternate" hreflang="en" href="https://www.oceanofwisdom.site/">
 <link rel="alternate" hreflang="ta" href="https://www.oceanofwisdom.site/index-ta.html">
@@ -140,11 +154,18 @@ main{padding-top:10px}
   <a class="home-rishi-more" href="/sanatana-dharma.html">Explore all Rishis in Sanatana Dharma →</a>
 </section>
 
-<nav class="home-language-switch" aria-label="Choose homepage language">
-<a href="/" lang="en" aria-current="page">EN</a>
-<a href="https://translate.google.com/translate?sl=en&amp;tl=hi&amp;u=https%3A%2F%2Fwww.oceanofwisdom.site%2F" lang="hi" target="_blank" rel="noopener" aria-label="हिन्दी — machine translation">हिन्दी</a>
-<a href="/index-ta.html" lang="ta" aria-label="தமிழ் — முகப்புப் பக்கம்">தமிழ்</a>
-<a href="https://translate.google.com/translate?sl=en&amp;tl=es&amp;u=https%3A%2F%2Fwww.oceanofwisdom.site%2F" lang="es" target="_blank" rel="noopener" aria-label="Español — machine translation">ES</a>
+<nav class="home-language-switch" aria-label="Homepage translation">
+<details class="home-translate-menu">
+<summary>🌐 Translate</summary>
+<div class="home-translate-panel">
+<label for="home-translate-language">Choose your language</label>
+<select id="home-translate-language" name="language">
+<option value="">Select a language…</option>
+<option value="af">Afrikaans</option><option value="sq">Albanian</option><option value="am">Amharic</option><option value="ar">Arabic</option><option value="hy">Armenian</option><option value="az">Azerbaijani</option><option value="eu">Basque</option><option value="be">Belarusian</option><option value="bn">Bengali</option><option value="bs">Bosnian</option><option value="bg">Bulgarian</option><option value="ca">Catalan</option><option value="ceb">Cebuano</option><option value="zh-CN">Chinese (Simplified)</option><option value="zh-TW">Chinese (Traditional)</option><option value="co">Corsican</option><option value="hr">Croatian</option><option value="cs">Czech</option><option value="da">Danish</option><option value="nl">Dutch</option><option value="eo">Esperanto</option><option value="et">Estonian</option><option value="fi">Finnish</option><option value="fr">French</option><option value="fy">Frisian</option><option value="gl">Galician</option><option value="ka">Georgian</option><option value="de">German</option><option value="el">Greek</option><option value="gu">Gujarati</option><option value="ht">Haitian Creole</option><option value="ha">Hausa</option><option value="haw">Hawaiian</option><option value="he">Hebrew</option><option value="hi">Hindi</option><option value="hmn">Hmong</option><option value="hu">Hungarian</option><option value="is">Icelandic</option><option value="ig">Igbo</option><option value="id">Indonesian</option><option value="ga">Irish</option><option value="it">Italian</option><option value="ja">Japanese</option><option value="jv">Javanese</option><option value="kn">Kannada</option><option value="kk">Kazakh</option><option value="km">Khmer</option><option value="rw">Kinyarwanda</option><option value="ko">Korean</option><option value="ku">Kurdish</option><option value="ky">Kyrgyz</option><option value="lo">Lao</option><option value="la">Latin</option><option value="lv">Latvian</option><option value="lt">Lithuanian</option><option value="lb">Luxembourgish</option><option value="mk">Macedonian</option><option value="mg">Malagasy</option><option value="ms">Malay</option><option value="ml">Malayalam</option><option value="mt">Maltese</option><option value="mi">Maori</option><option value="mr">Marathi</option><option value="mn">Mongolian</option><option value="my">Myanmar (Burmese)</option><option value="ne">Nepali</option><option value="no">Norwegian</option><option value="ny">Nyanja</option><option value="or">Odia</option><option value="ps">Pashto</option><option value="fa">Persian</option><option value="pl">Polish</option><option value="pt">Portuguese</option><option value="pa">Punjabi</option><option value="ro">Romanian</option><option value="ru">Russian</option><option value="sm">Samoan</option><option value="gd">Scots Gaelic</option><option value="sr">Serbian</option><option value="st">Sesotho</option><option value="sn">Shona</option><option value="sd">Sindhi</option><option value="si">Sinhala</option><option value="sk">Slovak</option><option value="sl">Slovenian</option><option value="so">Somali</option><option value="es">Spanish</option><option value="su">Sundanese</option><option value="sw">Swahili</option><option value="sv">Swedish</option><option value="tl">Filipino</option><option value="tg">Tajik</option><option value="ta">Tamil</option><option value="tt">Tatar</option><option value="te">Telugu</option><option value="th">Thai</option><option value="tr">Turkish</option><option value="tk">Turkmen</option><option value="uk">Ukrainian</option><option value="ur">Urdu</option><option value="ug">Uyghur</option><option value="uz">Uzbek</option><option value="vi">Vietnamese</option><option value="cy">Welsh</option><option value="xh">Xhosa</option><option value="yi">Yiddish</option><option value="yo">Yoruba</option><option value="zu">Zulu</option>
+</select>
+<p class="home-translate-note">Machine-translated view. The English original remains Ocean of Wisdom’s editorial source.</p>
+</div>
+</details>
 </nav>
 <nav class="home-nav" aria-label="Main navigation">
 <details><summary>Explore</summary><div class="menu-panel"><a href="/who-am-i.html">Who Am I?</a><a href="/what-is-all-this.html">What Is All This?</a><a href="/am-i-connected.html">Am I Connected?</a><a href="/i-am-that.html">Tat Tvam Asi — I Am That</a><a href="/what-is-truth.html">What Is Truth?</a><a href="/what-is-bliss.html">What Is Bliss?</a><a href="/indian-philosophies.html">Indian Philosophies</a><a href="/world-philosophies.html">World Philosophies</a></div></details>
@@ -214,6 +235,25 @@ menus.forEach(menu=>menu.addEventListener('toggle',()=>{if(menu.open)menus.forEa
 document.addEventListener('pointerdown',event=>{if(!nav.contains(event.target))closeMenus()});
 document.addEventListener('click',event=>{if(!nav.contains(event.target))closeMenus()});
 document.addEventListener('keydown',event=>{if(event.key==='Escape'){const open=menus.find(menu=>menu.open);if(open){closeMenus();open.querySelector('summary')?.focus()}}});
+})();
+</script>
+
+<script>
+(()=>{'use strict';
+const chooser=document.getElementById('home-translate-language');
+if(!chooser)return;
+chooser.addEventListener('change',()=>{
+ const language=chooser.value;
+ if(!language)return;
+ const source=new URL(window.location.href);
+ source.hash='';
+ source.search='';
+ const target=new URL('https://translate.google.com/translate');
+ target.searchParams.set('sl','en');
+ target.searchParams.set('tl',language);
+ target.searchParams.set('u',source.href);
+ window.location.assign(target.href);
+});
 })();
 </script>
 </body></html>
