@@ -237,3 +237,14 @@ test('homepage has one accessible language selector and routes chosen language t
   expect(target.searchParams.get('_x_tr_pto')).toBe('wapp');
 });
 
+
+test('Google Translate proxy serves the live homepage in Hindi', async ({ page }) => {
+  const url = 'https://www-oceanofwisdom-site.translate.goog/?_x_tr_sl=en&_x_tr_tl=hi&_x_tr_hl=en&_x_tr_pto=wapp';
+  const response = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 45000 });
+  expect(response, 'Google Translate proxy should return a document').not.toBeNull();
+  expect(response.status(), 'Google Translate proxy HTTP response').toBeLessThan(400);
+  await expect(page.locator('body')).not.toBeEmpty();
+  const bodyText = await page.locator('body').innerText();
+  expect(bodyText.length, 'translated page should contain readable content').toBeGreaterThan(100);
+  expect(bodyText, 'translated homepage should contain Devanagari output').toMatch(/[\\u0900-\\u097F]/);
+});
