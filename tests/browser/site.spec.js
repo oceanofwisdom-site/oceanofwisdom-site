@@ -91,7 +91,7 @@ const atlasRoutes = [
   ...['', '-hi', '-ta', '-es'].map(suffix => `/classical-languages/translator${suffix}.html`)
 ];
 
-test('all 56 Classical Languages Atlas routes load with four-way language navigation', async ({ page }) => {
+test('all 56 Classical Languages Atlas routes load with unified Translate control and protected Bhasha tool', async ({ page }) => {
   test.setTimeout(180000);
   expect(atlasRoutes).toHaveLength(56);
   for (const route of atlasRoutes) {
@@ -99,14 +99,29 @@ test('all 56 Classical Languages Atlas routes load with four-way language naviga
     expect(response, `no response for Atlas route ${route}`).not.toBeNull();
     expect(response.status(), `HTTP status for Atlas route ${route}`).toBeLessThan(400);
     await expect(page.locator('body')).toBeVisible();
-    await expect(page.locator('a.lang-btn')).toHaveCount(4);
-    await expect(page.locator('a.lang-btn.active')).toHaveCount(1);
     await expect(page.locator('a.home')).toHaveCount(1);
     const lang = await page.locator('html').getAttribute('lang');
     expect(lang, `missing document language on ${route}`).toBeTruthy();
+    if (/\/classical-languages\/translator(?:-(?:hi|ta|es))?\.html$/.test(route)) {
+      await expect(page.locator('.oow-translate')).toHaveCount(0);
+      await expect(page.locator('.lang-switcher')).toHaveCount(1);
+      await expect(page.locator('#text')).toHaveCount(1);
+    } else {
+      await expect(page.locator('.oow-translate__button')).toHaveCount(1);
+      await expect(page.locator('.lang-btn')).toHaveCount(0);
+      await page.locator('.oow-translate__button').click();
+      const selector = page.locator('.oow-translate__select');
+      await expect(selector).toBeVisible();
+      for (const code of ['hi','ta','es','fr','de','it','ru','ja','ko','zh-CN','zh-TW','th','ms','id','sl','ur','ps','ar','he','pt','pt-PT','nl']) {
+        await expect(selector.locator(`option[value="${code}"]`)).toHaveCount(1);
+      }
+      if (route.includes('/classical-languages/')) {
+        await expect(page.locator('.letters').first()).toHaveAttribute('translate', 'no');
+        await expect(page.locator('.letters').first()).toHaveClass(/notranslate/);
+      }
+    }
   }
 });
-
 test('homepage dropdowns open exclusively and close with Escape or outside click', async ({ page }) => {
   await page.goto('/');
   const menus = page.locator('.home-nav details');
@@ -184,17 +199,19 @@ test('homepage search submits to the local search page', async ({ page }, testIn
   await expect(page.locator('#search-results')).not.toBeEmpty({ timeout: 120000 });
 });
 
-test('core question pages expose all four language controls', async ({ page }) => {
+test('core question pages expose one Translate control with all supported languages', async ({ page }) => {
   for (const route of ['/what-is-all-this.html','/am-i-connected.html','/what-is-truth.html','/what-is-bliss.html']) {
     await page.goto(route);
-    const buttons = page.locator('[data-lang]');
-    await expect(buttons).toHaveCount(4);
-    for (const lang of ['en','hi','ta','es']) {
-      await expect(page.locator(`[data-lang="${lang}"]`)).toHaveCount(1);
+    await expect(page.locator('.oow-translate__button')).toHaveCount(1);
+    await expect(page.locator('[data-lang]')).toHaveCount(0);
+    await page.locator('.oow-translate__button').click();
+    const selector = page.locator('.oow-translate__select');
+    await expect(selector).toBeVisible();
+    for (const code of ['hi','ta','es','fr','de','it','ru','ja','ko','zh-CN','zh-TW','th','ms','id','sl','ur','ps','ar','he','pt','pt-PT','nl']) {
+      await expect(selector.locator(`option[value="${code}"]`)).toHaveCount(1);
     }
   }
 });
-
 test('Explore menu contains all six fundamental questions', async ({ page }) => {
   await page.goto('/');
   const explore = page.locator('.home-nav details').filter({ has: page.locator('summary', { hasText: 'Explore' }) });
