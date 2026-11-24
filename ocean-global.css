@@ -201,3 +201,26 @@ html body{top:0!important;}
  .oow-article h2{margin-top:30px;padding-top:20px}
  .oow-keyfacts{grid-template-columns:1fr 1fr;gap:10px}
 }
+
+/* ============================================================
+   Compact on-demand translator (.oow-translate-widget)
+   Added 2026-11-24 — replaces the old 24-button language grid
+   ============================================================ */
+.oow-translate-widget{position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;max-width:820px;margin:16px auto 4px;padding:0 16px}
+.oow-translate-toggle{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:9px 20px;border:1px solid #55d5e2;border-radius:999px;background:rgba(23,43,73,.72);color:#eaf3fb;font:600 14px/1 'Noto Sans',sans-serif;cursor:pointer;transition:background .2s,color .2s}
+.oow-translate-toggle:hover,.oow-translate-toggle:focus-visible{background:#55d5e2;color:#101d35;outline:none}
+.oow-translate-widget.open .oow-translate-toggle{background:#d8ad43;border-color:#d8ad43;color:#101d35}
+.oow-translate-panel{width:100%;max-width:760px;margin-top:10px}
+.oow-translate-panel .otp-inner{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:8px;padding:12px;background:#142744;border:1px solid #d8ad4355;border-radius:14px}
+.oow-lang-btn{min-height:42px;padding:9px 8px;border:1px solid #55d5e233;border-radius:10px;background:#101d35;color:#9fe3ea;font:600 14px/1.15 'Noto Sans','Noto Sans Devanagari','Noto Sans Tamil','Noto Sans Arabic',sans-serif;cursor:pointer;transition:background .15s,color .15s}
+.oow-lang-btn:hover,.oow-lang-btn:focus-visible{background:#d8ad43;color:#101d35;border-color:#d8ad43;outline:none}
+.oow-lang-original{grid-column:1/-1;color:#f0d58d;border-color:#d8ad4366}
+.oow-translate-hint{margin:10px auto 0;max-width:620px;color:#9fb2c8;font-size:12px;line-height:1.5;text-align:center}
+.oow-translate-status{margin:8px auto 0;color:#f0d58d;font-size:13px;text-align:center}
+#oow-gt-host,.goog-te-banner-frame,.goog-te-balloon-frame,#goog-gt-tt,.goog-text-highlight{position:fixed!important;left:-10000px!important;top:0!important;width:1px!important;height:1px!important;overflow:hidden!important;opacity:0!important;pointer-events:none!important}
+html body{top:0!important}
+@media(max-width:600px){
+ .oow-translate-widget{margin:12px auto 2px}
+ .oow-translate-panel .otp-inner{grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:7px;padding:10px}
+ .oow-lang-btn{min-height:40px;font-size:13px}
+}

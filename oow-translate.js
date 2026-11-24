@@ -1,126 +1,163 @@
-/* Ocean of Wisdom — shared same-page translation controller
-   Language controls are deliberately excluded from translation. */
-(()=>{'use strict';
-if(window.__oowTranslationController)return;
-window.__oowTranslationController=true;
-const LANGS={
- en:'English',hi:'हिन्दी',ta:'தமிழ்',es:'Español',
- fr:'Français',de:'Deutsch',it:'Italiano',ru:'Русский',
- ja:'日本語',ko:'한국어','zh-CN':'简体中文','zh-TW':'繁體中文',
- th:'ไทย',ms:'Bahasa Melayu',id:'Bahasa Indonesia',sl:'Slovenščina',
- ur:'اردو',ps:'پښتو',fa:'دری',ar:'العربية',he:'עברית',
- pt:'Português','pt-PT':'Português (Portugal)',nl:'Nederlands'
-};
-const SWITCHERS='.home-language-switch,.lang-switcher,.langs,.page-language,.lang-sw,.language-switcher,.language-buttons,.lang-buttons,.lang-btn,.lb,button[data-lang],a[data-lang],[aria-label*="language" i],[aria-label*="idioma" i]';
-const BUTTONS='a,button,[role="button"]';
-let readyResolve,readyReject;
-const ready=new Promise((resolve,reject)=>{readyResolve=resolve;readyReject=reject});
-ready.catch(()=>{});
-let initialized=false,waitTimer=null;
-function protectControls(){
- document.querySelectorAll(SWITCHERS).forEach(box=>{
-  box.classList.add('notranslate');
-  box.setAttribute('translate','no');
-  box.querySelectorAll(BUTTONS).forEach(button=>{
-   button.classList.add('notranslate');
-   button.setAttribute('translate','no');
-   button.setAttribute('data-oow-language-control','true');
-  });
- });
-}
-function addSwitcherIfMissing(){
- if(document.querySelector(SWITCHERS))return;
- const nav=document.createElement('nav');
- nav.className='oow-universal-language-switcher notranslate';
- nav.setAttribute('aria-label','Page language');
- nav.setAttribute('translate','no');
- Object.entries(LANGS).forEach(([code,label])=>{
-  const button=document.createElement('button');
-  button.type='button';button.className='oow-language-button notranslate';
-  button.dataset.lang=code;button.lang=code;button.translate='no';
-  button.textContent=label;button.setAttribute('aria-label','Translate page to '+label);
-  nav.appendChild(button);
- });
- const anchor=document.querySelector('#oow-cinematic-hero,main,body>*:not(#oow-starfield):not(#oow-global-brand)');
- if(anchor&&anchor.parentNode)anchor.parentNode.insertBefore(nav,anchor.nextSibling);
- else document.body.insertBefore(nav,document.body.firstChild);
-}
-function ensureGoogleWidget(){
- if(initialized)return;
- initialized=true;
- let host=document.getElementById('oow-google-translate');
- if(!host){host=document.createElement('div');host.id='oow-google-translate';host.className='notranslate';host.setAttribute('translate','no');host.setAttribute('aria-hidden','true');document.body.appendChild(host);}
- window.googleTranslateElementInit=function(){
-  try{
-   const source=(document.documentElement.getAttribute('lang')||'en').split('-')[0].toLowerCase();
-   const included=Object.keys(LANGS).filter(code=>code!=='en').join(',');
-   new google.translate.TranslateElement({pageLanguage:source,includedLanguages:included,autoDisplay:false,multilanguagePage:true},'oow-google-translate');
-   const started=Date.now();
-   waitTimer=setInterval(()=>{
-    const combo=document.querySelector('.goog-te-combo');
-    if(combo){clearInterval(waitTimer);waitTimer=null;readyResolve(combo);}
-    else if(Date.now()-started>15000){clearInterval(waitTimer);waitTimer=null;readyReject(new Error('Translation control did not initialise.'));}
-   },100);
-  }catch(error){readyReject(error);}
- };
- const script=document.createElement('script');
- script.src='https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
- script.async=true;script.onerror=()=>readyReject(new Error('Translation service could not be loaded.'));
- document.head.appendChild(script);
-}
-function normalizeLanguage(value){
- const raw=String(value||'').trim();
- if(Object.prototype.hasOwnProperty.call(LANGS,raw))return raw;
- const lower=raw.toLowerCase();
- return Object.keys(LANGS).find(code=>code.toLowerCase()===lower)||null;
-}
-function targetLanguage(control){
- const direct=normalizeLanguage(control.dataset.lang||control.getAttribute('lang'));
- if(direct)return direct;
- const click=control.getAttribute('onclick')||'';
- const match=click.match(/(?:switchLang|setLanguage|changeLanguage)\s*\(\s*['"]([a-z]{2}(?:-[a-z]{2})?)['"]/i);
- if(match)return normalizeLanguage(match[1]);
- const href=control.getAttribute('href')||'';
- const query=href.match(/[?&]tl=([a-z]{2}(?:-[a-z]{2})?)/i);
- if(query)return normalizeLanguage(query[1]);
- const path=href.match(/(?:-|_)(en|hi|ta|es|fr|de|it|ru|ja|ko|zh-cn|zh-tw|th|ms|id|sl|ur|ps|fa|ar|he|pt|nl)(?:\.html)?(?:$|[?#])/i);
- if(path)return normalizeLanguage(path[1]);
- return null;
-}
-async function translateTo(lang){
- lang=normalizeLanguage(lang);
- if(!lang||lang==='en')return;
- protectControls();
- const combo=await ready;
- const option=Array.from(combo.options).find(item=>normalizeLanguage(item.value)===lang);
- if(!option)throw new Error('Language is not offered by the translation provider: '+lang);
- combo.value=option.value;
- combo.dispatchEvent(new Event('change',{bubbles:true}));
- document.documentElement.dataset.oowLanguage=lang;
-}
-function showFailure(){
- let status=document.getElementById('oow-translation-status');
- if(!status){
-  status=document.createElement('p');status.id='oow-translation-status';status.className='oow-translation-status';
-  status.setAttribute('role','status');status.setAttribute('aria-live','polite');
-  const nav=document.querySelector(SWITCHERS);if(nav)nav.insertAdjacentElement('afterend',status);
- }
- if(status)status.textContent='This language is not available in the site translator. Use your browser’s built-in Translate feature (Chrome: address-bar Translate icon or right-click → Translate).';
-}
-function onClick(event){
- const control=event.target.closest(BUTTONS);
- if(!control)return;
- const box=control.closest(SWITCHERS);
- if(!box)return;
- const lang=targetLanguage(control);
- if(!lang)return;
- if(/switchLang\s*\(/.test(control.getAttribute('onclick')||'')&&window.translations&&window.translations[lang]){event.preventDefault();return;}
- event.preventDefault();event.stopImmediatePropagation();
- translateTo(lang).catch(showFailure);
-}
-function start(){
- protectControls();addSwitcherIfMissing();protectControls();ensureGoogleWidget();
- document.addEventListener('click',onClick,true);
-}
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
+/* Ocean of Wisdom — compact on-demand page translator.
+   English-first: pages are English; non-English readers tap one button to
+   translate the whole page via Google Translate. The control itself is never
+   translated. Google Translate is loaded lazily, only when the panel is first
+   opened, so ordinary visits load nothing extra. */
+(() => {
+  'use strict';
+  if (window.__oowTranslate) return;
+  window.__oowTranslate = true;
+
+  const LANGS = {
+    hi:'हिन्दी', ta:'தமிழ்', te:'తెలుగు', kn:'ಕನ್ನಡ', ml:'മലയാളം',
+    bn:'বাংলা', mr:'मराठी', gu:'ગુજરાતી', pa:'ਪੰਜਾਬੀ', ur:'اردو',
+    es:'Español', fr:'Français', de:'Deutsch', it:'Italiano', pt:'Português',
+    ru:'Русский', ar:'العربية', fa:'فارسی', zh:'中文', ja:'日本語',
+    ko:'한국어', th:'ไทย', id:'Bahasa Indonesia', nl:'Nederlands'
+  };
+
+  let ready, readyResolve, readyReject, loading = false;
+
+  function buildWidget() {
+    const wrap = document.createElement('div');
+    wrap.className = 'oow-translate-widget notranslate';
+    wrap.setAttribute('translate', 'no');
+
+    const toggle = document.createElement('button');
+    toggle.type = 'button';
+    toggle.className = 'oow-translate-toggle';
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-controls', 'oow-translate-panel');
+    toggle.innerHTML = '<span aria-hidden="true">🌐</span> Translate this page';
+
+    const panel = document.createElement('div');
+    panel.className = 'oow-translate-panel';
+    panel.id = 'oow-translate-panel';
+    panel.hidden = true;
+
+    const inner = document.createElement('div');
+    inner.className = 'otp-inner';
+
+    const original = document.createElement('button');
+    original.type = 'button';
+    original.className = 'oow-lang-btn oow-lang-original';
+    original.textContent = 'English (original)';
+    original.setAttribute('data-lang', 'en');
+    inner.appendChild(original);
+
+    Object.entries(LANGS).forEach(([code, label]) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'oow-lang-btn';
+      b.setAttribute('data-lang', code);
+      b.setAttribute('lang', code);
+      b.textContent = label;
+      b.setAttribute('aria-label', 'Translate this page to ' + label);
+      inner.appendChild(b);
+    });
+
+    const hint = document.createElement('p');
+    hint.className = 'oow-translate-hint';
+    hint.innerHTML = 'Translations are provided automatically and may be imperfect. ' +
+      'Your browser’s own Translate feature (Chrome: the address-bar icon or right-click → Translate; ' +
+      'Safari: the translate icon in the address bar) often works well too.';
+
+    const status = document.createElement('p');
+    status.className = 'oow-translate-status';
+    status.setAttribute('role', 'status');
+    status.setAttribute('aria-live', 'polite');
+    status.hidden = true;
+
+    panel.appendChild(inner);
+    panel.appendChild(hint);
+    panel.appendChild(status);
+    wrap.appendChild(toggle);
+    wrap.appendChild(panel);
+
+    toggle.addEventListener('click', () => {
+      const open = wrap.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      panel.hidden = !open;
+      if (open) loadGoogle();
+    });
+
+    inner.addEventListener('click', (e) => {
+      const btn = e.target.closest('.oow-lang-btn');
+      if (!btn) return;
+      const lang = btn.getAttribute('data-lang');
+      setStatus(status, lang === 'en' ? 'Restoring English…' : 'Translating…');
+      translateTo(lang)
+        .then(() => setStatus(status, ''))
+        .catch(() => setStatus(status,
+          'This language could not be loaded. Please try your browser’s built-in Translate feature.'));
+    });
+
+    return wrap;
+  }
+
+  function setStatus(el, msg) {
+    if (!el) return;
+    el.textContent = msg || '';
+    el.hidden = !msg;
+  }
+
+  function loadGoogle() {
+    if (ready) return ready;
+    ready = new Promise((resolve, reject) => { readyResolve = resolve; readyReject = reject; });
+    ready.catch(() => {});
+    let host = document.getElementById('oow-gt-host');
+    if (!host) {
+      host = document.createElement('div');
+      host.id = 'oow-gt-host';
+      host.className = 'notranslate';
+      host.setAttribute('translate', 'no');
+      host.setAttribute('aria-hidden', 'true');
+      document.body.appendChild(host);
+    }
+    window.googleTranslateElementInit = function () {
+      try {
+        const src = (document.documentElement.getAttribute('lang') || 'en').split('-')[0].toLowerCase();
+        new google.translate.TranslateElement(
+          { pageLanguage: src, autoDisplay: false }, 'oow-gt-host');
+        const started = Date.now();
+        const t = setInterval(() => {
+          const combo = document.querySelector('.goog-te-combo');
+          if (combo) { clearInterval(t); readyResolve(combo); }
+          else if (Date.now() - started > 15000) { clearInterval(t); readyReject(new Error('timeout')); }
+        }, 120);
+      } catch (err) { readyReject(err); }
+    };
+    const s = document.createElement('script');
+    s.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    s.async = true;
+    s.onerror = () => readyReject(new Error('load-failed'));
+    document.head.appendChild(s);
+    return ready;
+  }
+
+  async function translateTo(lang) {
+    const combo = await loadGoogle();
+    const want = lang === 'en' ? '' : lang;
+    const opt = Array.from(combo.options).find(o => (o.value || '') === want)
+             || Array.from(combo.options).find(o => (o.value || '').toLowerCase().startsWith(want.toLowerCase()));
+    if (lang !== 'en' && !opt) throw new Error('not-offered');
+    combo.value = opt ? opt.value : '';
+    combo.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+
+  function place(widget) {
+    const anchor = document.getElementById('oow-cinematic-hero')
+                || document.querySelector('main')
+                || document.getElementById('oow-global-brand');
+    if (anchor && anchor.parentNode) anchor.parentNode.insertBefore(widget, anchor.nextSibling);
+    else document.body.insertBefore(widget, document.body.firstChild);
+  }
+
+  function start() {
+    if (document.querySelector('.oow-translate-widget')) return;
+    place(buildWidget());
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true });
+  else start();
 })();
