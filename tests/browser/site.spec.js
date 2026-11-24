@@ -273,6 +273,8 @@ test('one-pass language verification: report provider-backed languages', async (
     if (code !== LANGUAGE_CANDIDATES[LANGUAGE_CANDIDATES.length - 1][0]) {
       await page.reload({ waitUntil: 'domcontentloaded' });
       await expect(page.locator('main')).toBeVisible();
+      await page.locator('.oow-translate__button').click();
+      await expect(selector).toBeVisible();
     }
   }
   console.log('LANGUAGE_SUMMARY ' + JSON.stringify(outcomes));
