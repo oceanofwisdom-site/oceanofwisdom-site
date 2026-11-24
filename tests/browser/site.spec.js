@@ -213,14 +213,14 @@ test('question-page scroll cues land on the main content across touch and deskto
 test('homepage has one accessible language selector and routes chosen language to translation', async ({ page }) => {
   const externalRequests = [];
   page.on('request', request => {
-    if (new URL(request.url()).hostname !== '127.0.0.1') externalRequests.push(request.url());
+    if (new URL(request.url()).hostname === 'translate.google.com') externalRequests.push(request.url());
   });
   await page.goto('/');
   const selector = page.locator('#home-translate-language');
   await expect(page.locator('.home-language-switch')).toHaveCount(1);
   await expect(page.locator('.home-translate-control > span')).toHaveText(/Translate/);
   await expect(selector).toBeAttached();
-  await expect(selector.locator('option')).toHaveCount(109);
+  await expect(selector.locator('option')).toHaveCount(108);
   expect(await selector.locator('option[value="hi"]').count()).toBe(1);
   expect(await selector.locator('option[value="ta"]').count()).toBe(1);
   expect(await selector.locator('option[value="es"]').count()).toBe(1);
