@@ -457,6 +457,14 @@
             .sd-divider, #stars-canvas { display: none !important; }
             .rishi-card, .content-box, .mantra-box, .story-box, .subsection { background: #f6f5f1 !important; border-color: #ccc !important; }
         }
+    
+        .saptarishi-chart{max-width:760px;margin:1.5rem auto 2rem;overflow:hidden;border-radius:18px;box-shadow:0 12px 34px rgba(0,0,0,.24)}
+        .saptarishi-chart svg{display:block;width:100%;height:auto}
+        .rishi-sources{max-width:760px;margin:1rem auto;padding-left:1.5rem;color:var(--text-dim)}
+        .rishi-sources li{margin:.45rem 0}
+        .rishi-sources a{color:var(--cyan);text-decoration:underline;text-underline-offset:3px}
+        @media(max-width:560px){.rishi-grid{grid-template-columns:1fr;gap:1rem}.rishi-card{padding:1.2rem}.saptarishi-chart{margin-left:-.25rem;margin-right:-.25rem}}
+
     </style>
     <style id="oow-theme-unification">
         /* Match the shared Ocean of Wisdom deep-navy page background. */
@@ -544,72 +552,58 @@
                 <h2 class="section-title" data-i18n="rishis-title">The Vedic Rishis: Seers of Truth</h2>
                 <p class="section-intro" data-i18n="rishis-intro">
                     The Rishis were not authors but receivers — channels through which eternal truths flowed into human language. 
-                    They heard the cosmic vibrations and translated them into the Vedas. Here are four of the most revered sages.
+                    They heard the cosmic vibrations and translated them into the Vedas. A few of the most revered Rishis are:
                 </p>
                 
                 <div class="rishi-grid">
-                    <div class="rishi-card">
-                        <h3 class="rishi-name" data-i18n="rishi1-name">Vishwamitra</h3>
-                        <p class="rishi-sanskrit">विश्वामित्र</p>
-                        <p class="rishi-desc" data-i18n="rishi1-desc">
-                            Born a Kshatriya king, Vishwamitra's fierce tapas (austerities) elevated him to Brahmarishi — 
-                            the highest order of sages. He is credited with composing the Gayatri Mantra (Rigveda 3.62.10), 
-                            the most sacred verse in Hinduism. His story teaches that spiritual realization transcends birth.
-                        </p>
-                    </div>
-                    
-                    <div class="rishi-card">
-                        <h3 class="rishi-name" data-i18n="rishi2-name">Vasishta</h3>
-                        <p class="rishi-sanskrit">वसिष्ठ</p>
-                        <p class="rishi-desc" data-i18n="rishi2-desc">
-                            The family priest of the Solar dynasty and guru to Lord Rama. Vasishta composed many hymns in 
-                            Rigveda Mandala 7. His debates with Vishwamitra symbolize the tension between worldly power and 
-                            spiritual authority. He possessed the divine cow Nandini and represents supreme spiritual wisdom.
-                        </p>
-                    </div>
-                    
-                    <div class="rishi-card">
-                        <h3 class="rishi-name" data-i18n="rishi3-name">Bhrigu</h3>
-                        <p class="rishi-sanskrit">भृगु</p>
-                        <p class="rishi-desc" data-i18n="rishi3-desc">
-                            One of the seven great sages (Saptarishi), Bhrigu was born from Brahma's mind. He is the father of 
-                            Shukracharya (guru of demons) and author of Bhrigu Samhita, an astrological classic. His lineage 
-                            (Bhargavas) includes Parashurama. Bhrigu tested the Trinity to determine the greatest deity.
-                        </p>
-                    </div>
-                    
-                    <div class="rishi-card">
-                        <h3 class="rishi-name" data-i18n="rishi4-name">Agastya</h3>
-                        <p class="rishi-sanskrit">अगस्त्य</p>
-                        <p class="rishi-desc" data-i18n="rishi4-desc">
-                            The sage who brought Vedic wisdom to South India and is revered in Tamil tradition as one of the 
-                            18 Siddhars. Agastya drank the ocean to expose demons hiding in its depths. He composed hymns in 
-                            Rigveda Mandala 1 and is credited with systematizing Tamil grammar and Siddha medicine.
-                        </p>
-                    </div>
-                    
-                    <div class="rishi-card">
-                        <h3 class="rishi-name" data-i18n="rishi5-name">Atri</h3>
-                        <p class="rishi-sanskrit">अत्रि</p>
-                        <p class="rishi-desc" data-i18n="rishi5-desc">
-                            One of the Saptarishis born from Brahma's mind, Atri composed the hymns of Rigveda Mandala 5 
-                            with his lineage. With his wife Anasuya, the embodiment of devotion, he fathered three divine 
-                            sons — Dattatreya, Durvasa, and Chandra (the Moon) — born of the grace of the Trinity itself. 
-                            His hymns invoke Agni, Indra, and the Vishvadevas with rare tenderness.
-                        </p>
-                    </div>
-                    
-                    <div class="rishi-card">
-                        <h3 class="rishi-name" data-i18n="rishi6-name">Bharadwaja</h3>
-                        <p class="rishi-sanskrit">भरद्वाज</p>
-                        <p class="rishi-desc" data-i18n="rishi6-desc">
-                            The tireless seeker of knowledge who composed Rigveda Mandala 6. Granted three lifetimes to 
-                            study the Vedas, he was shown that the Vedas are infinite — three mountains, of which he had 
-                            grasped mere handfuls. His ashram near Prayag welcomed Rama during exile. He is also the father 
-                            of Drona, the great teacher of the Mahabharata.
-                        </p>
-                    </div>
+                    <div class="rishi-card"><h3 class="rishi-name" data-i18n="rishi-kashyapa-name">Rishi Kashyapa</h3><p class="rishi-sanskrit">कश्यप</p><p class="rishi-desc" data-i18n="rishi-kashyapa-desc">A revered Vedic and Puranic sage associated with the lineage of many beings and with the transmission of sacred knowledge. Later traditions remember Kashyapa as one of the Prajapatis and a progenitor of several divine and earthly lineages.</p></div>
+                    <div class="rishi-card"><h3 class="rishi-name" data-i18n="rishi-durvasa-name">Rishi Durvasa</h3><p class="rishi-sanskrit">दुर्वासा</p><p class="rishi-desc" data-i18n="rishi-durvasa-desc">A celebrated sage in the epic and Puranic traditions, remembered for intense ascetic power and uncompromising demands on those who received him. His stories explore hospitality, self-restraint and the consequences of anger.</p></div>
+                    <div class="rishi-card"><h3 class="rishi-name" data-i18n="rishi-angiras-name">Rishi Angiras</h3><p class="rishi-sanskrit">अङ्गिरस्</p><p class="rishi-desc" data-i18n="rishi-angiras-desc">A Vedic seer whose name is associated with several Rigvedic hymns and a major lineage of seers. Angiras is also remembered in later tradition among the ancient sages who preserve sacred knowledge.</p></div>
+                    <div class="rishi-card"><h3 class="rishi-name" data-i18n="rishi-marichi-name">Rishi Marichi</h3><p class="rishi-sanskrit">मरीचि</p><p class="rishi-desc" data-i18n="rishi-marichi-desc">One of the primordial sages in Puranic cosmology and traditionally counted among Brahma’s mind-born sons. In Varahamihira’s description of the Saptarishi stars, Marichi is named first in the sequence.</p></div>
+                    <div class="rishi-card"><h3 class="rishi-name" data-i18n="rishi-pulastya-name">Rishi Pulastya</h3><p class="rishi-sanskrit">पुलस्त्य</p><p class="rishi-desc" data-i18n="rishi-pulastya-desc">A primordial sage in the Puranic genealogies and one of the sages associated with the Saptarishi constellation in Varahamihira’s account. Later texts connect Pulastya with the lineage of Vishrava.</p></div>
+                    <div class="rishi-card"><h3 class="rishi-name" data-i18n="rishi-kratu-name">Rishi Kratu</h3><p class="rishi-sanskrit">क्रतु</p><p class="rishi-desc" data-i18n="rishi-kratu-desc">A primordial sage named in Puranic lists and in the traditional seven-star arrangement described in the Brihat Samhita. In that text, Kratu is the final sage in the stated sequence.</p></div>
+                    <div class="rishi-card"><h3 class="rishi-name" data-i18n="rishi-pulaha-name">Rishi Pulaha</h3><p class="rishi-sanskrit">पुलह</p><p class="rishi-desc" data-i18n="rishi-pulaha-desc">A primordial sage included in Puranic accounts and in Varahamihira’s Saptarishi star sequence. The Brihat Samhita also assigns symbolic associations to the stars named for Pulaha and Kratu.</p></div>
+                    <div class="rishi-card"><h3 class="rishi-name" data-i18n="rishi-parashara-name">Rishi Parashara</h3><p class="rishi-sanskrit">पराशर</p><p class="rishi-desc" data-i18n="rishi-parashara-desc">A major sage in the epic and Puranic traditions, remembered as the father of Krishna Dvaipayana Vyasa. The Vishnu Purana is traditionally attributed to Parashara and is framed as his teaching to Maitreya.</p></div>
+                    <div class="rishi-card"><h3 class="rishi-name" data-i18n="rishi-yajnavalkya-name">Rishi Yajnavalkya</h3><p class="rishi-sanskrit">याज्ञवल्क्य</p><p class="rishi-desc" data-i18n="rishi-yajnavalkya-desc">A central philosopher of the Brihadaranyaka Upanishad. His dialogues explore the Self (Atman), ultimate reality (Brahman) and the limits of ordinary knowledge; he also debates the learned Gargi Vachaknavi.</p></div>
+                    <div class="rishi-card"><h3 class="rishi-name" data-i18n="rishi-lopamudra-name">Lopamudra</h3><p class="rishi-sanskrit">लोपामुद्रा</p><p class="rishi-desc" data-i18n="rishi-lopamudra-desc">A woman seer associated with Rigveda 1.179, a dialogue hymn in which Lopamudra and the sage Agastya speak. The Rigvedic tradition explicitly names Lopamudra as the seer of verses 1, 2 and 4 of this hymn.</p></div>
+                    <div class="rishi-card"><h3 class="rishi-name" data-i18n="rishi-gargi-name">Gargi Vachaknavi</h3><p class="rishi-sanskrit">गार्गी वाचक्नवी</p><p class="rishi-desc" data-i18n="rishi-gargi-desc">A renowned woman philosopher in the Brihadaranyaka Upanishad. Gargi questions Yajnavalkya about what underlies the world and presses the inquiry toward the imperishable ground of reality.</p></div>
                 </div>
+                <section class="section" aria-labelledby="saptarishi-heading" style="padding:2rem 0 1rem">
+                    <h3 class="subsection-title" id="saptarishi-heading" data-i18n="saptarishi-title">The Saptarishi Mandala: Seven Sages in the Northern Sky</h3>
+                    <p class="section-intro" data-i18n="saptarishi-intro">The seven bright stars of Ursa Major are traditionally associated with seven sages. Varahamihira’s Brihat Samhita (Chapter 13, verses 5–6) gives their order and places Arundhati beside Vasishtha. The modern star-name correspondences shown here are the commonly used identifications.</p>
+                    <div class="saptarishi-chart" role="img" aria-label="Diagram of the seven Saptarishi stars in Ursa Major, with sage names">
+                      <svg viewBox="0 0 760 360" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <rect x="1" y="1" width="758" height="358" rx="18" fill="#101d35" stroke="#d4a843" stroke-opacity=".45"/>
+                        <g stroke="#8ca9c9" stroke-width="3" stroke-linecap="round" fill="none" opacity=".85"><path d="M585 90 L535 205 L440 225 L370 155 L270 115 L170 155 L100 65"/></g>
+                        <g fill="#ffe7a0" stroke="#fff4d6" stroke-width="1.5">
+                          <circle cx="585" cy="90" r="8"/><circle cx="535" cy="205" r="7"/><circle cx="440" cy="225" r="7"/><circle cx="370" cy="155" r="6"/><circle cx="270" cy="115" r="8"/><circle cx="170" cy="155" r="7"/><circle cx="100" cy="65" r="8"/>
+                        </g>
+                        <g fill="#f5f0e3" font-family="Arial,sans-serif" font-size="17">
+                          <text x="600" y="83">Dubhe</text><text x="548" y="230">Merak</text><text x="450" y="253">Phecda</text><text x="380" y="145">Megrez</text><text x="280" y="98">Alioth</text><text x="180" y="183">Mizar</text><text x="110" y="43">Alkaid</text>
+                        </g>
+                        <g fill="#58dce7" font-family="Arial,sans-serif" font-size="14">
+                          <text x="600" y="108">Kratu</text><text x="548" y="251">Pulaha</text><text x="450" y="274">Pulastya</text><text x="380" y="173">Atri</text><text x="280" y="137">Angiras</text><text x="180" y="205">Vasishtha</text><text x="110" y="87">Marichi</text>
+                        </g>
+                        <circle cx="194" cy="150" r="3.8" fill="#d9e8ff"/><text x="208" y="145" fill="#d9e8ff" font-family="Arial,sans-serif" font-size="13">Alcor · Arundhati</text>
+                        <text x="24" y="330" fill="#b8c5d8" font-family="Arial,sans-serif" font-size="13">Schematic star pattern · not to angular scale</text>
+                      </svg>
+                    </div>
+                    <div class="content-box">
+                      <p data-i18n="saptarishi-starlist">Dubhe — Kratu · Merak — Pulaha · Phecda — Pulastya · Megrez — Atri · Alioth — Angiras · Mizar — Vasishtha · Alkaid — Marichi.</p>
+                    </div>
+                    <div class="rishi-grid">
+                      <div class="rishi-card"><h3 class="rishi-name" data-i18n="agastya-star-title">Agastya Tara — Canopus</h3><p class="rishi-sanskrit">अगस्त्य तारा</p><p class="rishi-desc" data-i18n="agastya-star-desc">Agastya is traditionally identified with Canopus, the brilliant southern star in Carina. Varahamihira treats Canopus as Agastya in Chapter 12 of the Brihat Samhita. This is a separate southern-sky marker, not one of the seven stars of Ursa Major.</p></div>
+                      <div class="rishi-card"><h3 class="rishi-name" data-i18n="arundhati-star-title">Arundhati — Alcor</h3><p class="rishi-sanskrit">अरुन्धती</p><p class="rishi-desc" data-i18n="arundhati-star-desc">Arundhati is associated with the faint companion star Alcor, seen close to Mizar, the star identified with Vasishtha. In the traditional wedding observance Arundhati Darshan, the couple are shown this close stellar pair as a symbol of partnership. Arundhati is Vasishtha’s wife—not Agastya’s.</p></div>
+                    </div>
+                    <p class="section-intro" data-i18n="rishi-sources-label">Open-access textual references:</p>
+                    <ul class="rishi-sources">
+                      <li><a href="https://www.wisdomlib.org/hinduism/book/brihat-samhita/d/doc226731.html" target="_blank" rel="noopener">Varahamihira, Brihat Samhita, Chapter 13 — Saptarishi constellation</a></li>
+                      <li><a href="https://www.wisdomlib.org/hinduism/book/brihat-samhita/d/doc226730.html" target="_blank" rel="noopener">Varahamihira, Brihat Samhita, Chapter 12 — Agastya / Canopus</a></li>
+                      <li><a href="https://vmlt.in/rigveda/01/179/1" target="_blank" rel="noopener">Rigveda 1.179 — Lopamudra and Agastya</a></li>
+                      <li><a href="https://heritage.iitk.ac.in/BRU/3.6.1" target="_blank" rel="noopener">Brihadaranyaka Upanishad 3.6 — Gargi’s questions to Yajnavalkya</a></li>
+                      <li><a href="https://www.vedantaiowa.org/Upanishads_PDF/BrihadaranyakaUp.pdf" target="_blank" rel="noopener">Brihadaranyaka Upanishad — open-access English translation</a></li>
+                    </ul>
+                </section>
             </section>
             
             <!-- SECTION 2: WAR OF TEN KINGS -->
