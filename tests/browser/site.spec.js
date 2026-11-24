@@ -209,3 +209,113 @@ test('question-page scroll cues land on the main content across touch and deskto
     await expect(target).toHaveCount(1);
   }
 });
+
+test('homepage has one accessible language selector and routes chosen language to translation', async ({ page }) => {
+  const externalRequests = [];
+  page.on('request', request => {
+    if (new URL(request.url()).hostname === 'translate.google.com') externalRequests.push(request.url());
+  });
+  await page.goto('/');
+  const selector = page.locator('#home-translate-language');
+  await expect(page.locator('.home-language-switch')).toHaveCount(1);
+  await expect(page.locator('.home-translate-control > span:first-child')).toHaveText(/Translate/);
+  await expect(selector).toBeAttached();
+  await expect(selector.locator('option')).toHaveCount(109);
+  await expect(selector.locator('option[value]:not([value=""])')).toHaveCount(108);
+  expect(await selector.locator('option[value="hi"]').count()).toBe(1);
+  expect(await selector.locator('option[value="ta"]').count()).toBe(1);
+  expect(await selector.locator('option[value="es"]').count()).toBe(1);
+  expect(externalRequests, 'translation provider must not load before visitor opts in').toEqual([]);
+  await page.route('https://translate.google.com/**', route => route.fulfill({
+    status: 200, contentType: 'text/html', body: '<title>Translation hand-off test</title>'
+  }));
+  await selector.selectOption('hi');
+  await expect(page).toHaveURL(/www-oceanofwisdom-site\.translate\.goog/);
+  const target = new URL(page.url());
+  expect(target.searchParams.get('_x_tr_sl')).toBe('en');
+  expect(target.searchParams.get('_x_tr_tl')).toBe('hi');
+  expect(target.searchParams.get('_x_tr_hl')).toBe('en');
+  expect(target.searchParams.get('_x_tr_pto')).toBe('wapp');
+});
+
+
+test('Google Translate proxy serves the live homepage in Hindi', async ({ page }) => {
+  const url = 'https://www-oceanofwisdom-site.translate.goog/?_x_tr_sl=en&_x_tr_tl=hi&_x_tr_hl=en&_x_tr_pto=wapp';
+  const response = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 45000 });
+  expect(response, 'Google Translate proxy should return a document').not.toBeNull();
+  expect(response.status(), 'Google Translate proxy HTTP response').toBeLessThan(400);
+  await expect(page.locator('main .home-intro')).not.toBeEmpty();
+  await page.waitForFunction(() => /[\u0900-\u097F]/.test(document.querySelector('main .home-intro')?.innerText || ''), { timeout: 20000 });
+  const bodyText = await page.locator('main .home-intro').innerText();
+  expect(bodyText.length, 'translated page should contain readable content').toBeGreaterThan(100);
+  expect(bodyText, 'translated homepage should contain Devanagari output').toMatch(/[\u0900-\u097F]/);
+});
+
+test('Google Translate proxy serves the live homepage in Tamil', async ({ page }) => {
+  const url = 'https://www-oceanofwisdom-site.translate.goog/?_x_tr_sl=en&_x_tr_tl=ta&_x_tr_hl=en&_x_tr_pto=wapp';
+  const response = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 45000 });
+  expect(response, 'Google Translate proxy should return a document').not.toBeNull();
+  expect(response.status(), 'Tamil proxy HTTP response').toBeLessThan(400);
+  await expect(page.locator('main .home-intro')).not.toBeEmpty();
+  await page.waitForFunction(() => /[\u0B80-\u0BFF]/.test(document.querySelector('main .home-intro')?.innerText || ''), { timeout: 20000 });
+  const bodyText = await page.locator('main .home-intro').innerText();
+  expect(bodyText.length, 'Tamil homepage should contain readable content').toBeGreaterThan(100);
+  expect(bodyText, 'Tamil homepage should contain Tamil-script output').toMatch(/[\u0B80-\u0BFF]/);
+  console.log('Tamil homepage sample:', bodyText.slice(0, 1400));
+});
+
+test('Google Translate proxy serves the live homepage in Spanish', async ({ page }) => {
+  const url = 'https://www-oceanofwisdom-site.translate.goog/?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp';
+  const response = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 45000 });
+  expect(response, 'Google Translate proxy should return a document').not.toBeNull();
+  expect(response.status(), 'Spanish proxy HTTP response').toBeLessThan(400);
+  await expect(page.locator('main .home-intro')).not.toBeEmpty();
+  await page.waitForFunction(() => /¿|¡|á|é|í|ó|ú|ñ|quién|qué|cómo|explorar|sabiduría|herramientas|conocimiento/i.test(document.querySelector('main .home-intro')?.innerText || ''), { timeout: 20000 });
+  const bodyText = await page.locator('main .home-intro').innerText();
+  expect(bodyText.length, 'Spanish homepage should contain readable content').toBeGreaterThan(100);
+  expect(bodyText, 'Spanish homepage should contain Spanish translation markers').toMatch(/¿|¡|á|é|í|ó|ú|ñ|quién|qué|cómo|explorar|sabiduría|herramientas|conocimiento/i);
+  console.log('Spanish homepage sample:', bodyText.slice(0, 1400));
+});
+
+const requestedLanguageChecks = [
+  { name: 'Portuguese (Portugal)', code: 'pt-PT', pattern: /\b(um ponto de encontro|questões atemporais|humanidade|existência)\b/i },
+  { name: 'Portuguese', code: 'pt', pattern: /\b(um ponto de encontro|questões atemporais|humanidade|existência)\b/i },
+  { name: 'Dutch', code: 'nl', pattern: /\b(een ontmoetingsplaats|tijdloze vragen|mensheid|bestaan)\b/i },
+  { name: 'French', code: 'fr', pattern: /\b(un lieu de rencontre|questions intemporelles|humanité|existence)\b/i },
+  { name: 'German', code: 'de', pattern: /\b(ein ort der begegnung|zeitlosen fragen|menschheit|existenz)\b/i },
+  { name: 'Italian', code: 'it', pattern: /\b(un luogo d'incontro|domande senza tempo|umanità|esistenza)\b/i },
+  { name: 'Russian', code: 'ru', pattern: /[А-Яа-яЁё]/ },
+  { name: 'Japanese', code: 'ja', pattern: /[ぁ-ヿ]/ },
+  { name: 'Korean', code: 'ko', pattern: /[가-힣]/ },
+  { name: 'Mandarin (Simplified Chinese)', code: 'zh-CN', pattern: /(这里是探讨|永恒问题|人类探索|交汇之地)/ },
+  { name: 'Thai', code: 'th', pattern: /[ก-๛]/ },
+  { name: 'Malay', code: 'ms', pattern: /\b(tempat pertemuan|persoalan abadi|manusia|kewujudan|meneroka)\b/i },
+  { name: 'Indonesian', code: 'id', pattern: /\b(tempat pertemuan|pertanyaan abadi|umat manusia|menjelajahi eksistensi)\b/i },
+  { name: 'Slovenian', code: 'sl', pattern: /\b(stičišče|brezčasna vprašanja|človeštvo|obstoj)\b/i },
+  { name: 'Urdu', code: 'ur', pattern: /[؀-ۿ]/ },
+  { name: 'Dari (Afghanistan)', code: 'fa', pattern: /(مکانی|پرسش|جاودانه|بشریت)/ },
+  { name: 'Pashto (Afghanistan)', code: 'ps', pattern: /(د تل پاتې پوښتنو|انسانانو|شتون)/ },
+  { name: 'Arabic', code: 'ar', pattern: /(ملتقى|الأسئلة الخالدة|البشرية|الوجود)/ },
+  { name: 'Hebrew', code: 'he', pattern: /(מקום מפגש|שאלות נצחיות|האנושות|קיומ)/ },
+  { name: 'Hungarian', code: 'hu', pattern: /(találkozóhely|időtlen kérdések|emberiség|létezés)/i },
+  { name: 'Turkish', code: 'tr', pattern: /(buluşma noktası|zamansız sorular|insanlığın|varoluş)/i },
+  { name: 'Chinese (Traditional)', code: 'zh-TW', pattern: /(這裡是探討|永恆議題|人類探索|交會之地)/ },
+];
+
+for (const language of requestedLanguageChecks) {
+  test(`Google Translate proxy serves the live homepage in ${language.name}`, async ({ page }) => {
+    const url = `https://www-oceanofwisdom-site.translate.goog/?_x_tr_sl=en&_x_tr_tl=${encodeURIComponent(language.code)}&_x_tr_hl=en&_x_tr_pto=wapp`;
+    const response = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 15000 });
+    expect(response, `${language.name} proxy should return a document`).not.toBeNull();
+    expect(response.status(), `${language.name} proxy HTTP response`).toBeLessThan(400);
+    await expect(page.locator('main .home-intro')).not.toBeEmpty();
+    await page.waitForFunction(({ source, flags }) => new RegExp(source, flags).test(document.querySelector('main .home-intro')?.innerText || ''), { source: language.pattern.source, flags: language.pattern.flags }, { timeout: 8000 }).catch(async () => {
+      const sample = await page.locator('main .home-intro').innerText();
+      throw new Error(`${language.name}: target-language marker not detected in main content. Sample: ${sample.slice(0, 700)}`);
+    });
+    const mainText = await page.locator('main .home-intro').innerText();
+    expect(mainText.length, `${language.name} homepage should contain readable main content`).toBeGreaterThan(100);
+    expect(mainText, `${language.name} main content should show target-language output`).toMatch(language.pattern);
+    console.log(`${language.name} homepage sample:`, mainText.slice(0, 350));
+  });
+}
