@@ -278,3 +278,5 @@ test('one-pass language verification: report provider-backed languages', async (
   }
   console.log('LANGUAGE_SUMMARY ' + JSON.stringify(outcomes));
 });
+
+// CI retrigger: execute the one-pass language verification on the updated PR head.
