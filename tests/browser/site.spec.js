@@ -124,12 +124,21 @@ test('homepage dropdowns open exclusively and close with Escape or outside click
 });
 
 test('homepage dropdowns stay in document flow across desktop, tablet and mobile', async ({ page }) => {
-  const sizes = [
+  const allSizes = [
     { width: 1440, height: 900, name: 'desktop' },
     { width: 1024, height: 768, name: 'laptop' },
     { width: 768, height: 1024, name: 'tablet' },
     { width: 390, height: 844, name: 'mobile' }
   ];
+  // Exercise the full responsive range once on desktop Chromium. Touch projects
+  // test their actual device viewport; repeatedly resizing WebKit emulation
+  // during native summary activation creates unstable, non-user-realistic taps.
+  const project = test.info().project.name;
+  const sizes = project === 'desktop-chromium' || project === 'laptop-chromium'
+    ? allSizes
+    : project === 'ios-ipad-webkit' || project === 'android-tablet-chromium'
+      ? [allSizes[2]]
+      : [allSizes[3]];
   await page.goto('/');
   const menus = page.locator('.home-nav details');
   for (const size of sizes) {
