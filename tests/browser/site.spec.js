@@ -256,10 +256,11 @@ test('Google Translate proxy serves the live homepage in Tamil', async ({ page }
   expect(response, 'Google Translate proxy should return a document').not.toBeNull();
   expect(response.status(), 'Tamil proxy HTTP response').toBeLessThan(400);
   await expect(page.locator('body')).not.toBeEmpty();
+  await page.waitForFunction(() => /[\u0B80-\u0BFF]/.test(document.body?.innerText || ''), { timeout: 20000 });
   const bodyText = await page.locator('body').innerText();
   expect(bodyText.length, 'Tamil homepage should contain readable content').toBeGreaterThan(100);
   expect(bodyText, 'Tamil homepage should contain Tamil-script output').toMatch(/[\u0B80-\u0BFF]/);
-  console.log('Tamil homepage sample:', bodyText.slice(0, 700));
+  console.log('Tamil homepage sample:', bodyText.slice(0, 1400));
 });
 
 test('Google Translate proxy serves the live homepage in Spanish', async ({ page }) => {
@@ -268,8 +269,9 @@ test('Google Translate proxy serves the live homepage in Spanish', async ({ page
   expect(response, 'Google Translate proxy should return a document').not.toBeNull();
   expect(response.status(), 'Spanish proxy HTTP response').toBeLessThan(400);
   await expect(page.locator('body')).not.toBeEmpty();
+  await page.waitForFunction(() => /¿|¡|á|é|í|ó|ú|ñ|quién|qué|cómo|explorar|sabiduría|herramientas|conocimiento/i.test(document.body?.innerText || ''), { timeout: 20000 });
   const bodyText = await page.locator('body').innerText();
   expect(bodyText.length, 'Spanish homepage should contain readable content').toBeGreaterThan(100);
   expect(bodyText, 'Spanish homepage should contain Spanish translation markers').toMatch(/¿|¡|á|é|í|ó|ú|ñ|quién|qué|cómo|explorar|sabiduría|herramientas|conocimiento/i);
-  console.log('Spanish homepage sample:', bodyText.slice(0, 700));
+  console.log('Spanish homepage sample:', bodyText.slice(0, 1400));
 });
