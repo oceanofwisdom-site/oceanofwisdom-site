@@ -252,23 +252,13 @@ test('one-pass language verification: report provider-backed languages', async (
   test.setTimeout(480000);
   await page.goto('/');
   await expect(page.locator('main')).toBeVisible();
-  const selector = page.locator('.home-language-switch').first();
+  const selector = page.locator('.oow-translate__select');
+  await page.locator('.oow-translate__button').click();
+  await expect(selector).toBeVisible();
   const baseline = await page.locator('main').innerText();
   const outcomes = [];
   for (const [code, label] of LANGUAGE_CANDIDATES) {
-    await page.evaluate(({ code, label }) => {
-      const nav = document.querySelector('.home-language-switch');
-      let button = nav.querySelector('[data-oow-test-lang="' + code + '"]');
-      if (!button) {
-        button = document.createElement('button');
-        button.type = 'button';
-        button.dataset.lang = code;
-        button.dataset.oowTestLang = code;
-        button.textContent = label;
-        nav.appendChild(button);
-      }
-    }, { code, label });
-    await page.locator('[data-oow-test-lang="' + code + '"]').click();
+    await selector.selectOption(code);
     const signal = LANGUAGE_SIGNALS[code];
     try {
       await expect.poll(async () => {
