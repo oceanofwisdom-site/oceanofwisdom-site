@@ -258,7 +258,7 @@ test('Google Translate proxy serves the live homepage in Tamil', async ({ page }
   await expect(page.locator('body')).not.toBeEmpty();
   const bodyText = await page.locator('body').innerText();
   expect(bodyText.length, 'Tamil homepage should contain readable content').toBeGreaterThan(100);
-  expect(bodyText, 'Tamil homepage should contain Tamil-script output').toMatch(/[\\u0B80-\\u0BFF]/);
+  expect(bodyText, 'Tamil homepage should contain Tamil-script output').toMatch(/[\u0B80-\u0BFF]/);
   console.log('Tamil homepage sample:', bodyText.slice(0, 700));
 });
 
@@ -270,6 +270,6 @@ test('Google Translate proxy serves the live homepage in Spanish', async ({ page
   await expect(page.locator('body')).not.toBeEmpty();
   const bodyText = await page.locator('body').innerText();
   expect(bodyText.length, 'Spanish homepage should contain readable content').toBeGreaterThan(100);
-  expect(bodyText, 'Spanish homepage should contain Spanish translation markers').toMatch(/¿|¡|á|é|í|ó|ú|ñ|quién|qué|cómo|filosofía|sabiduría/i);
+  expect(bodyText, 'Spanish homepage should contain Spanish translation markers').toMatch(/¿|¡|á|é|í|ó|ú|ñ|quién|qué|cómo|explorar|sabiduría|herramientas|conocimiento/i);
   console.log('Spanish homepage sample:', bodyText.slice(0, 700));
 });
