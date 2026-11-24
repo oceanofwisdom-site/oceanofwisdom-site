@@ -12,7 +12,7 @@ const LANGS={
 const CODES=Object.keys(LANGS).join(',');
 const EXCLUDED=()=>/^\/calendar(?:\/|$)/.test(location.pathname)||
  /^\/classical-languages\/translator(?:-(?:hi|ta|es))?\.html$/.test(location.pathname);
-const OLD_CONTROLS='.home-language-switch,.lang-switcher,.oow-universal-language-switcher,.language-switcher,.language-buttons,.lang-buttons,.langs,.page-language,.lang-sw';
+const OLD_CONTROLS='.oow-translate,.home-language-switch,.lang-switcher,.oow-universal-language-switcher,.language-switcher,.language-buttons,.lang-buttons,.langs,.page-language,.lang-sw';
 const css=`
 .oow-translate{box-sizing:border-box;position:relative;z-index:35;display:flex;align-items:center;justify-content:center;gap:9px;flex-wrap:wrap;width:max-content;max-width:calc(100% - 28px);margin:14px auto 20px;padding:8px 10px;border:1px solid #d8ad43;border-radius:14px;background:#142744;color:#f0d58d;font:600 14px/1.4 Arial,sans-serif}
 .oow-translate *{box-sizing:border-box}
@@ -24,6 +24,10 @@ const css=`
 @media(max-width:600px){.oow-translate{gap:6px;margin:10px auto 14px;padding:7px}.oow-translate__button,.oow-translate__select{min-height:40px}.oow-translate__select{min-width:0;max-width:64vw}}
 `;
 function protectAksharamala(){
+ document.querySelectorAll('.letters').forEach(letters=>{
+  const panel=letters.closest('.panel,section')||letters.parentElement;
+  [panel, ...panel.querySelectorAll('*')].forEach(el=>{el.classList.add('notranslate','oow-aksharamala-protected');el.setAttribute('translate','no')});
+ });
  document.querySelectorAll('h1,h2,h3').forEach(heading=>{
   if(!/aksharamala|alphabet/i.test(heading.textContent||''))return;
   let node=heading.nextElementSibling;
