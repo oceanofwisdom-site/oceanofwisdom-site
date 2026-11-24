@@ -220,11 +220,14 @@ test('homepage has one accessible language selector and routes chosen language t
   await expect(page.locator('.home-language-switch')).toHaveCount(1);
   await expect(page.locator('.home-translate-menu > summary')).toHaveText(/Translate/);
   await expect(selector).toBeAttached();
-  await expect(selector.locator('option')).toHaveCount(100);
+  await expect(selector.locator('option')).toHaveCount(109);
   expect(await selector.locator('option[value="hi"]').count()).toBe(1);
   expect(await selector.locator('option[value="ta"]').count()).toBe(1);
   expect(await selector.locator('option[value="es"]').count()).toBe(1);
   expect(externalRequests, 'translation provider must not load before visitor opts in').toEqual([]);
+  await page.route('https://translate.google.com/**', route => route.fulfill({
+    status: 200, contentType: 'text/html', body: '<title>Translation hand-off test</title>'
+  }));
   await selector.selectOption('hi');
   await expect(page).toHaveURL(/translate\\.google\\.com\\/translate\\?/);
   const target = new URL(page.url());
