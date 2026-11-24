@@ -299,9 +299,15 @@
         
         .rishi-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1.25rem;
+            margin: 1.5rem 0;
+        }
+        @media (max-width: 900px) {
+            .rishi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+        @media (max-width: 600px) {
+            .rishi-grid { grid-template-columns: 1fr; gap: 1rem; }
         }
         
         /* A lone card in the last row stretches across the full width */
@@ -564,6 +570,13 @@
                     <div class="rishi-card"><h3 class="rishi-name" data-i18n="rishi-kratu-name">Rishi Kratu</h3><p class="rishi-sanskrit">क्रतु</p><p class="rishi-desc" data-i18n="rishi-kratu-desc">A primordial sage named in Puranic lists and in the traditional seven-star arrangement described in the Brihat Samhita. In that text, Kratu is the final sage in the stated sequence.</p></div>
                     <div class="rishi-card"><h3 class="rishi-name" data-i18n="rishi-pulaha-name">Rishi Pulaha</h3><p class="rishi-sanskrit">पुलह</p><p class="rishi-desc" data-i18n="rishi-pulaha-desc">A primordial sage included in Puranic accounts and in Varahamihira’s Saptarishi star sequence. The Brihat Samhita also assigns symbolic associations to the stars named for Pulaha and Kratu.</p></div>
                     <div class="rishi-card"><h3 class="rishi-name" data-i18n="rishi-parashara-name">Rishi Parashara</h3><p class="rishi-sanskrit">पराशर</p><p class="rishi-desc" data-i18n="rishi-parashara-desc">A major sage in the epic and Puranic traditions, remembered as the father of Krishna Dvaipayana Vyasa. The Vishnu Purana is traditionally attributed to Parashara and is framed as his teaching to Maitreya.</p></div>
+                    
+                    <div class="rishi-card" id="rishi-vashishta"><h3 class="rishi-name" data-i18n="rishi-vashishta-name">Rishi Vashishta</h3><p class="rishi-sanskrit">वसिष्ठ</p><p class="rishi-desc" data-i18n="rishi-vashishta-desc">Vashishta is a major Vedic seer traditionally associated with many hymns of Rigveda Mandala 7. Later epic traditions remember him as the royal priest and teacher of the Ikshvaku line, including Rama. His celebrated dialogue and rivalry with Vishwamitra became a lasting reflection on spiritual discipline and authority.</p></div>
+                    <div class="rishi-card" id="rishi-vishwamitra"><h3 class="rishi-name" data-i18n="rishi-vishwamitra-name">Rishi Vishwamitra</h3><p class="rishi-sanskrit">विश्वामित्र</p><p class="rishi-desc" data-i18n="rishi-vishwamitra-desc">Tradition remembers Vishwamitra as a king who attained the stature of a Brahmarishi through intense tapas. Rigveda 3.62.10 is the celebrated Gāyatrī (Sāvitrī) verse addressed to Savitṛ, found in Mandala 3, traditionally known as the Viśvāmitra family book; later tradition widely associates the mantra with Vishwamitra. Some Rigvedic verse indices give a more specific seer attribution for 3.62.10, so the broader traditional association should not be mistaken for an uncontested verse-level authorship claim.</p><p class="rishi-desc"><a href="https://vedshala.org/rigveda/3/62/10" target="_blank" rel="noopener" data-i18n="rishi-vishwamitra-source">Read Rigveda 3.62.10: the Gayatri/Savitri verse (Sanskrit text and translation)</a></p></div>
+                    <div class="rishi-card" id="rishi-agastya"><h3 class="rishi-name" data-i18n="rishi-agastya-name">Rishi Agastya</h3><p class="rishi-sanskrit">अगस्त्य</p><p class="rishi-desc" data-i18n="rishi-agastya-desc">Agastya is a Vedic seer associated with hymns in the Rigveda, including the dialogue hymn Rigveda 1.179 with Lopamudra. Later traditions honour him as a transmitter of Vedic learning in the south and as an important figure in Tamil literary and Siddha traditions. The stories of his southern journey belong to the wider traditional record.</p></div>
+                    <div class="rishi-card" id="rishi-gautama"><h3 class="rishi-name" data-i18n="rishi-gautama-name">Rishi Gautama</h3><p class="rishi-sanskrit">गौतम</p><p class="rishi-desc" data-i18n="rishi-gautama-desc">Gautama is the name of an important Vedic seer-lineage associated with Rigvedic hymns. In later philosophical history, Gautama Akṣapāda is traditionally named as the founding teacher of the Nyāya school, known for its systematic study of logic, valid knowledge and debate. These Vedic and philosophical associations belong to distinct textual settings.</p></div>
+                    <div class="rishi-card" id="rishi-atri"><h3 class="rishi-name" data-i18n="rishi-atri-name">Rishi Atri</h3><p class="rishi-sanskrit">अत्रि</p><p class="rishi-desc" data-i18n="rishi-atri-desc">Atri is a Vedic seer whose family is traditionally associated with Rigveda Mandala 5. The Atri hymns invoke deities including Agni, Indra and the Vishvadevas; later Puranic traditions remember Atri and his wife Anasuya among the revered ancient sages and their families.</p></div>
+
                     <div class="rishi-card"><h3 class="rishi-name" data-i18n="rishi-yajnavalkya-name">Rishi Yajnavalkya</h3><p class="rishi-sanskrit">याज्ञवल्क्य</p><p class="rishi-desc" data-i18n="rishi-yajnavalkya-desc">A central philosopher of the Brihadaranyaka Upanishad. His dialogues explore the Self (Atman), ultimate reality (Brahman) and the limits of ordinary knowledge; he also debates the learned Gargi Vachaknavi.</p></div>
                     <div class="rishi-card"><h3 class="rishi-name" data-i18n="rishi-lopamudra-name">Lopamudra</h3><p class="rishi-sanskrit">लोपामुद्रा</p><p class="rishi-desc" data-i18n="rishi-lopamudra-desc">A woman seer associated with Rigveda 1.179, a dialogue hymn in which Lopamudra and the sage Agastya speak. The Rigvedic tradition explicitly names Lopamudra as the seer of verses 1, 2 and 4 of this hymn.</p></div>
                     <div class="rishi-card"><h3 class="rishi-name" data-i18n="rishi-gargi-name">Gargi Vachaknavi</h3><p class="rishi-sanskrit">गार्गी वाचक्नवी</p><p class="rishi-desc" data-i18n="rishi-gargi-desc">A renowned woman philosopher in the Brihadaranyaka Upanishad. Gargi questions Yajnavalkya about what underlies the world and presses the inquiry toward the imperishable ground of reality.</p></div>
