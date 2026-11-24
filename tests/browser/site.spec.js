@@ -229,7 +229,7 @@ test('homepage has one accessible language selector and routes chosen language t
     status: 200, contentType: 'text/html', body: '<title>Translation hand-off test</title>'
   }));
   await selector.selectOption('hi');
-  await expect(page).toHaveURL(/translate\\.google\\.com\\/translate\\?/);
+  await expect(page).toHaveURL(/translate\.google\.com\/translate\?/);
   const target = new URL(page.url());
   expect(target.searchParams.get('sl')).toBe('en');
   expect(target.searchParams.get('tl')).toBe('hi');
