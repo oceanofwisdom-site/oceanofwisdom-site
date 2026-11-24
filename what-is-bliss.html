@@ -846,5 +846,20 @@ document.querySelectorAll('.lang-switcher .lang-btn').forEach(function(btn) {
   ]
 }
 </script>
+
+<script>
+(function(){
+  var cue=document.querySelector('.oow-scroll-cue[href="#main-content-start"]');
+  var target=document.getElementById('main-content-start');
+  if(!cue||!target)return;
+  cue.addEventListener('click',function(event){
+    event.preventDefault();
+    var top=target.getBoundingClientRect().top+window.pageYOffset;
+    var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({top:top,behavior:reduced?'auto':'smooth'});
+    if(window.location.hash!=='#main-content-start')history.pushState(null,'','#main-content-start');
+  });
+})();
+</script>
 </body>
 </html>
