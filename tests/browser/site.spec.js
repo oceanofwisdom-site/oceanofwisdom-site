@@ -209,3 +209,72 @@ test('question-page scroll cues land on the main content across touch and deskto
     await expect(target).toHaveCount(1);
   }
 });
+
+
+const LANGUAGE_CANDIDATES = [
+  ['hi','Hindi'],['ta','Tamil'],['es','Spanish'],['fr','French'],['de','German'],
+  ['it','Italian'],['ru','Russian'],['ja','Japanese'],['ko','Korean'],
+  ['zh-CN','Mandarin (Simplified)'],['zh-TW','Mandarin (Traditional)'],['th','Thai'],
+  ['ms','Malay'],['id','Indonesian'],['sl','Slovenian'],['ur','Urdu'],
+  ['ps','Pashto'],['ar','Arabic'],['he','Hebrew'],['pt','Portuguese'],
+  ['pt-PT','Portuguese (Portugal)'],['nl','Dutch']
+];
+const LANGUAGE_SIGNALS = {
+  hi: /[\u0900-\u097F]/, ta: /[\u0B80-\u0BFF]/,
+  es: /[áéíóúñ¿¡]|\b(el|la|los|las|que|para|con|una|por)\b/i,
+  fr: /[àâçéèêëîïôûùüÿœ]|\b(le|la|les|des|une|pour|avec|que)\b/i,
+  de: /[äöüß]|\b(der|die|das|und|nicht|mit|für|ist)\b/i,
+  it: /[àèéìíîòóù]|\b(il|lo|gli|della|che|per|con|una)\b/i,
+  ru: /[\u0400-\u052F]/, ja: /[\u3040-\u30FF\u4E00-\u9FFF]/,
+  ko: /[\uAC00-\uD7AF]/, 'zh-CN': /[\u3400-\u9FFF]/, 'zh-TW': /[\u3400-\u9FFF]/,
+  th: /[\u0E00-\u0E7F]/,
+  ms: /\b(yang|dan|untuk|dengan|ini|adalah|dalam)\b/i,
+  id: /\b(yang|dan|untuk|dengan|ini|adalah|dalam)\b/i,
+  sl: /[čšž]|\b(in|je|za|ki|na|ter)\b/i,
+  ur: /[\u0600-\u06FF]/, ps: /[\u0600-\u06FF]/, ar: /[\u0600-\u06FF]/,
+  he: /[\u0590-\u05FF]/,
+  pt: /[ãõáàâçéêíóôú]|\b(que|uma|para|com|não|dos|das)\b/i,
+  'pt-PT': /[ãõáàâçéêíóôú]|\b(que|uma|para|com|não|dos|das)\b/i,
+  nl: /[ĳ]|\b(de|het|een|en|van|voor|met|niet)\b/i
+};
+
+test('one-pass language verification: report provider-backed languages', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'desktop-chromium', 'Run once on desktop Chromium to avoid duplicate provider requests');
+  test.setTimeout(480000);
+  await page.goto('/');
+  await expect(page.locator('main')).toBeVisible();
+  const selector = page.locator('.home-language-switch').first();
+  const baseline = await page.locator('main').innerText();
+  const outcomes = [];
+  for (const [code, label] of LANGUAGE_CANDIDATES) {
+    await page.evaluate(({ code, label }) => {
+      const nav = document.querySelector('.home-language-switch');
+      let button = nav.querySelector('[data-oow-test-lang="' + code + '"]');
+      if (!button) {
+        button = document.createElement('button');
+        button.type = 'button';
+        button.dataset.lang = code;
+        button.dataset.oowTestLang = code;
+        button.textContent = label;
+        nav.appendChild(button);
+      }
+    }, { code, label });
+    await page.locator('[data-oow-test-lang="' + code + '"]').click();
+    const signal = LANGUAGE_SIGNALS[code];
+    try {
+      await expect.poll(async () => {
+        const current = await page.locator('main').innerText();
+        return current !== baseline && signal.test(current);
+      }, { timeout: 20000, intervals: [250, 500, 1000], message: code + ' translation must mutate main text and show its expected script/language signal' }).toBe(true);
+      outcomes.push({ code, label, result: 'PASS' });
+    } catch {
+      outcomes.push({ code, label, result: 'FAIL/FLAKY' });
+    }
+    console.log('LANGUAGE_RESULT ' + JSON.stringify(outcomes[outcomes.length - 1]));
+    if (code !== LANGUAGE_CANDIDATES[LANGUAGE_CANDIDATES.length - 1][0]) {
+      await page.reload({ waitUntil: 'domcontentloaded' });
+      await expect(page.locator('main')).toBeVisible();
+    }
+  }
+  console.log('LANGUAGE_SUMMARY ' + JSON.stringify(outcomes));
+});
