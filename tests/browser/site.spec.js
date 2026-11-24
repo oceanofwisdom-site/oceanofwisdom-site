@@ -218,7 +218,7 @@ test('homepage has one accessible language selector and routes chosen language t
   await page.goto('/');
   const selector = page.locator('#home-translate-language');
   await expect(page.locator('.home-language-switch')).toHaveCount(1);
-  await expect(page.locator('.home-translate-menu > summary')).toHaveText(/Translate/);
+  await expect(page.locator('.home-translate-control > span')).toHaveText(/Translate/);
   await expect(selector).toBeAttached();
   await expect(selector.locator('option')).toHaveCount(109);
   expect(await selector.locator('option[value="hi"]').count()).toBe(1);
