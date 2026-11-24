@@ -4,7 +4,7 @@
 if(window.__oowTranslationController)return;
 window.__oowTranslationController=true;
 const LANGS={en:'English',hi:'हिन्दी',ta:'தமிழ்',es:'Español'};
-const SWITCHERS='.home-language-switch,.lang-switcher,.langs,.page-language,.lang-sw,.language-switcher,.language-buttons,.lang-buttons,[aria-label*="language" i],[aria-label*="idioma" i]';
+const SWITCHERS='.home-language-switch,.lang-switcher,.langs,.page-language,.lang-sw,.language-switcher,.language-buttons,.lang-buttons,.lang-btn,.lb,button[data-lang],a[data-lang],[aria-label*="language" i],[aria-label*="idioma" i]';
 const BUTTONS='a,button,[role="button"]';
 let readyResolve,readyReject;
 const ready=new Promise((resolve,reject)=>{readyResolve=resolve;readyReject=reject});
