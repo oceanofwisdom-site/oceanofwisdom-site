@@ -278,7 +278,6 @@ test('Google Translate proxy serves the live homepage in Spanish', async ({ page
 });
 
 const requestedLanguageChecks = [
-  { name: 'Spanish', code: 'es', pattern: /\b(un punto de encuentro|descubra|sabiduría|conocimiento)\b/i },
   { name: 'Portuguese', code: 'pt', pattern: /\b(um ponto de encontro|descubra|sabedoria|conhecimento)\b/i },
   { name: 'Dutch', code: 'nl', pattern: /\b(een ontmoetingsplek|ontdek|kennis|geschiedenis)\b/i },
   { name: 'French', code: 'fr', pattern: /\b(un lieu de rencontre|découvrez|connaissance|sagesse)\b/i },
