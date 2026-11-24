@@ -249,3 +249,27 @@ test('Google Translate proxy serves the live homepage in Hindi', async ({ page }
   expect(bodyText.length, 'translated page should contain readable content').toBeGreaterThan(100);
   expect(bodyText, 'translated homepage should contain Devanagari output').toMatch(/[\u0900-\u097F]/);
 });
+
+test('Google Translate proxy serves the live homepage in Tamil', async ({ page }) => {
+  const url = 'https://www-oceanofwisdom-site.translate.goog/?_x_tr_sl=en&_x_tr_tl=ta&_x_tr_hl=en&_x_tr_pto=wapp';
+  const response = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 45000 });
+  expect(response, 'Google Translate proxy should return a document').not.toBeNull();
+  expect(response.status(), 'Tamil proxy HTTP response').toBeLessThan(400);
+  await expect(page.locator('body')).not.toBeEmpty();
+  const bodyText = await page.locator('body').innerText();
+  expect(bodyText.length, 'Tamil homepage should contain readable content').toBeGreaterThan(100);
+  expect(bodyText, 'Tamil homepage should contain Tamil-script output').toMatch(/[\\u0B80-\\u0BFF]/);
+  console.log('Tamil homepage sample:', bodyText.slice(0, 700));
+});
+
+test('Google Translate proxy serves the live homepage in Spanish', async ({ page }) => {
+  const url = 'https://www-oceanofwisdom-site.translate.goog/?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp';
+  const response = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 45000 });
+  expect(response, 'Google Translate proxy should return a document').not.toBeNull();
+  expect(response.status(), 'Spanish proxy HTTP response').toBeLessThan(400);
+  await expect(page.locator('body')).not.toBeEmpty();
+  const bodyText = await page.locator('body').innerText();
+  expect(bodyText.length, 'Spanish homepage should contain readable content').toBeGreaterThan(100);
+  expect(bodyText, 'Spanish homepage should contain Spanish translation markers').toMatch(/¿|¡|á|é|í|ó|ú|ñ|quién|qué|cómo|filosofía|sabiduría/i);
+  console.log('Spanish homepage sample:', bodyText.slice(0, 700));
+});
