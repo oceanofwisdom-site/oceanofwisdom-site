@@ -16,4 +16,5 @@ function draw(staticFrame){ctx.clearRect(0,0,w,h);for(const s of stars){const tw
 function start(){if(!reduced&&!raf)raf=requestAnimationFrame(draw)}
 function stop(){if(raf){cancelAnimationFrame(raf);raf=0}}
 document.addEventListener('visibilitychange',()=>document.hidden?stop():start());window.addEventListener('resize',resize,{passive:true});resize();if(!reduced)start();
+const translationScript=document.createElement('script');translationScript.src='/oow-translate.js';translationScript.defer=true;document.head.appendChild(translationScript);
 })();

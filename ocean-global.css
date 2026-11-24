@@ -139,3 +139,14 @@ body.oow-homepage .home-language-switch{position:relative;z-index:3;margin:24px 
  .langs a{min-height:clamp(76px,22vw,116px)!important;border-width:2px!important;border-radius:clamp(16px,5vw,26px)!important;padding:8px 3px!important;font-size:clamp(1rem,4.4vw,1.65rem)!important}
  .langs a[href$="-es.html"]{font-size:clamp(.82rem,3.3vw,1.25rem)!important;letter-spacing:-.055em!important}
 }
+
+/* Shared one-click, same-page language controls. Keep their labels untranslated. */
+.oow-universal-language-switcher{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(8px,2.5vw,28px);width:min(94%,980px);margin:18px auto 24px;padding:0;}
+.oow-universal-language-switcher .oow-language-button{min-width:0;min-height:clamp(58px,9vw,94px);padding:9px 5px;border:2px solid #55d5e2;border-radius:18px;background:#101d35;color:#55d5e2;font:700 clamp(15px,2.1vw,23px)/1.15 'Noto Sans','Noto Sans Devanagari','Noto Sans Tamil',sans-serif;cursor:pointer;white-space:nowrap;}
+.oow-universal-language-switcher .oow-language-button:hover,.oow-universal-language-switcher .oow-language-button:focus-visible{background:#d8ad43;color:#101d35;border-color:#d8ad43;}
+.oow-universal-language-switcher,.oow-universal-language-switcher *,.home-language-switch,.home-language-switch *,.lang-switcher,.lang-switcher *,.langs,.langs *,.page-language,.page-language *,.lang-sw,.lang-sw *,.language-switcher,.language-switcher *,.language-buttons,.language-buttons *,.lang-buttons,.lang-buttons *{translate:no;}
+#oow-google-translate{position:fixed!important;left:-10000px!important;top:0!important;width:1px!important;height:1px!important;overflow:hidden!important;opacity:0!important;pointer-events:none!important;}
+.goog-te-banner-frame,.goog-te-balloon-frame,#goog-gt-tt,.goog-text-highlight{display:none!important;}
+html body{top:0!important;}
+.oow-translation-status{max-width:980px;margin:0 auto 12px;padding:0 12px;color:#f0d58d;text-align:center;font-size:13px;}
+@media(max-width:600px){.oow-universal-language-switcher{gap:7px;margin:14px auto 18px}.oow-universal-language-switcher .oow-language-button{min-height:58px;border-radius:13px;font-size:clamp(14px,3.8vw,18px);}}
