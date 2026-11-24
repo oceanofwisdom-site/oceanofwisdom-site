@@ -210,7 +210,7 @@ main{padding-top:10px}
 const nav=document.querySelector('.home-nav');if(!nav)return;
 const menus=[...nav.querySelectorAll('details')];
 const closeMenus=()=>menus.forEach(menu=>{menu.open=false});
-menus.forEach(menu=>menu.addEventListener('toggle',()=>{if(menu.open)menus.forEach(other=>{if(other!==menu)other.open=false})}));
+menus.forEach(menu=>{const summary=menu.querySelector('summary');if(!summary)return;summary.addEventListener('click',()=>{menus.forEach(other=>{if(other!==menu&&other.open)other.removeAttribute('open')})})});
 document.addEventListener('pointerdown',event=>{if(!nav.contains(event.target))closeMenus()});
 document.addEventListener('click',event=>{if(!nav.contains(event.target))closeMenus()});
 document.addEventListener('keydown',event=>{if(event.key==='Escape'){const open=menus.find(menu=>menu.open);if(open){closeMenus();open.querySelector('summary')?.focus()}}});
