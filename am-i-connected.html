@@ -388,6 +388,16 @@
 <link rel="stylesheet" href="/language-buttons.css">
   <link rel="stylesheet" href="/ocean-global.css">
   <script src="/ocean-global.js" defer></script>
+<style id="oow-question-journey">
+.question-order{font-family:Georgia,serif;font-size:clamp(1rem,2.1vw,1.35rem);font-weight:600;letter-spacing:.045em;line-height:1.45;color:#f0d58d;margin:0 auto 1rem;text-align:center;text-wrap:balance}
+.oow-scroll-cue{display:flex;flex-direction:column;align-items:center;gap:.2rem;width:max-content;max-width:100%;margin:1.35rem auto 0;padding:.35rem .8rem;color:#f0d58d;text-decoration:none;text-align:center;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;position:relative;z-index:3}
+.oow-scroll-cue .cue-arrow{font-size:2.1rem;line-height:1;color:#55d5e2;animation:oow-cue-bob 1.7s ease-in-out infinite}
+.oow-scroll-cue .cue-label{font-size:.72rem;color:#d9dfeb}
+@keyframes oow-cue-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+html{scroll-behavior:smooth;scroll-padding-top:22px}
+@media(prefers-reduced-motion:reduce){.oow-scroll-cue .cue-arrow{animation:none}html{scroll-behavior:auto}}
+@media(max-width:600px){.question-order{padding:0 10px;margin-bottom:.65rem}.oow-scroll-cue{margin-top:1rem}}
+</style>
 </head>
 <body>
 <a class="oow-home-button" href="index.html" aria-label="Return to Ocean of Wisdom home">⌂ <span>HOME</span></a><style>.oow-home-button{position:sticky;top:0;z-index:1001;display:flex;align-items:center;justify-content:center;gap:9px;width:max-content;min-height:44px;margin:12px 16px 0 auto;padding:9px 20px;border:1px solid #d4a843;border-radius:999px;background:#10203a;color:#f5f0e6;text-decoration:none;font:600 14px/1.2 Arial,sans-serif;letter-spacing:.08em;box-shadow:0 5px 18px #07142633}.oow-home-button:first-letter{font-size:20px;color:#d4a843}.oow-home-button:focus-visible{outline:3px solid #4dd9e8;outline-offset:3px}@media(max-width:600px){.oow-home-button{margin:10px 14px 0 auto;min-height:46px;padding:10px 22px}}</style>
@@ -405,11 +415,14 @@
     <main>
         <div class="container">
             <section class="hero">
-                <h1 data-i18n="page-title">Am I Connected?</h1>
+                <div class="question-order" data-i18n="question-order">Third Question Every Human Soul Asks</div>
+  <h1 data-i18n="page-title">Am I Connected?</h1>
                 <p class="subtitle" data-i18n="page-subtitle">Separate self, or joined to all — the unity beneath every being</p>
-            </section>
             
-            <section class="central-teaching">
+  <a class="oow-scroll-cue" href="#main-content-start" aria-label="Scroll to explore the main content"><span class="cue-arrow" aria-hidden="true">↓</span><span class="cue-label" data-i18n="scroll-cue">Scroll to Explore</span></a>
+</section>
+            
+            <section class="central-teaching" id="main-content-start">
                 <div class="sanskrit">सर्वं खल्विदं ब्रह्म</div>
                 <div class="translation" data-i18n="teaching-translation">Sarvam Khalvidam Brahma — All This Is Verily Brahman</div>
                 <p class="explanation" data-i18n="teaching-explanation">
@@ -553,6 +566,8 @@
             en: {
                 "breadcrumb-home": "Cosmos",
                 "breadcrumb-current": "Am I Connected?",
+                "question-order": "Third Question Every Human Soul Asks",
+                "scroll-cue": "Scroll to Explore",
                 "page-title": "Am I Connected?",
                 "page-subtitle": "Separate self, or joined to all — the unity beneath every being",
                 "teaching-translation": "Sarvam Khalvidam Brahma — All This Is Verily Brahman",
@@ -580,6 +595,8 @@
             hi: {
                 "breadcrumb-home": "ब्रह्मांड",
                 "breadcrumb-current": "क्या मैं जुड़ा हुआ हूँ?",
+                "question-order": "तीसरा प्रश्न जो हर मानव आत्मा पूछती है",
+                "scroll-cue": "आगे जानने के लिए नीचे जाएँ",
                 "page-title": "क्या मैं जुड़ा हुआ हूँ?",
                 "page-subtitle": "अलग सत्ता, या सबसे जुड़ा हुआ — हर प्राणी के नीचे की एकता",
                 "teaching-translation": "सर्वं खल्विदं ब्रह्म — यह सब कुछ ब्रह्म ही है",
@@ -607,6 +624,8 @@
             ta: {
                 "breadcrumb-home": "காஸ்மாஸ்",
                 "breadcrumb-current": "நான் இணைந்திருக்கிறேனா?",
+                "question-order": "ஒவ்வொரு மனித ஆன்மாவும் கேட்கும் மூன்றாவது கேள்வி",
+                "scroll-cue": "மேலும் அறிய கீழே செல்லவும்",
                 "page-title": "நான் இணைந்திருக்கிறேனா?",
                 "page-subtitle": "தனிச் சுயமா, அல்லது அனைத்துடனும் இணைந்ததா — ஒவ்வொரு உயிருக்கும் அடியில் ஒருமை",
                 "teaching-translation": "சர்வம் கல்விதம் பிரம்ம — இவை அனைத்தும் பிரம்மமே",
@@ -634,6 +653,8 @@
             es: {
                 "breadcrumb-home": "Cosmos",
                 "breadcrumb-current": "¿Estoy conectado?",
+                "question-order": "Tercera pregunta que se hace toda alma humana",
+                "scroll-cue": "Desplázate para explorar",
                 "page-title": "¿Estoy conectado?",
                 "page-subtitle": "Un yo separado, o unido a todo — la unidad bajo cada ser",
                 "teaching-translation": "Sarvam Khalvidam Brahma — Todo esto es verdaderamente Brahman",
