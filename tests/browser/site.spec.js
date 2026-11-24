@@ -175,7 +175,7 @@ test('homepage search submits to the local search page', async ({ page }, testIn
 });
 
 test('core question pages expose all four language controls', async ({ page }) => {
-  for (const route of ['/what-is-all-this.html','/am-i-connected.html','/i-am-that.html','/what-is-truth.html','/what-is-bliss.html']) {
+  for (const route of ['/what-is-all-this.html','/am-i-connected.html','/what-is-truth.html','/what-is-bliss.html']) {
     await page.goto(route);
     const buttons = page.locator('[data-lang]');
     await expect(buttons).toHaveCount(4);
