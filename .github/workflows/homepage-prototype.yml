@@ -1,0 +1,25 @@
+name: Homepage translation prototype
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'ocean-global.js'
+      - 'tests/browser/site.spec.js'
+      - '.github/workflows/homepage-prototype.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  homepage-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install
+      - run: npx playwright install --with-deps chromium webkit
+      - name: Test only the homepage translation control
+        run: npx playwright test --grep "homepage has one accessible language selector" --project=desktop-chromium --project=android-pixel-chrome --project=ios-iphone-webkit
