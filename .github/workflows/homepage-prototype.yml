@@ -20,6 +20,6 @@ jobs:
         with:
           node-version: 20
       - run: npm install
-      - run: npx playwright install --with-deps chromium
+      - run: npx playwright install chromium
       - name: Test only the homepage translation control
         run: npx playwright test --grep "homepage has one accessible language selector|Google Translate proxy serves the live homepage" --project=desktop-chromium
