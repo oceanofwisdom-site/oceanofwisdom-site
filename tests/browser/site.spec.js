@@ -218,7 +218,7 @@ test('homepage has one accessible language selector and routes chosen language t
   await page.goto('/');
   const selector = page.locator('#home-translate-language');
   await expect(page.locator('.home-language-switch')).toHaveCount(1);
-  await expect(page.locator('.home-translate-control > span')).toHaveText(/Translate/);
+  await expect(page.locator('.home-translate-control > span:first-child')).toHaveText(/Translate/);
   await expect(selector).toBeAttached();
   await expect(selector.locator('option')).toHaveCount(108);
   expect(await selector.locator('option[value="hi"]').count()).toBe(1);
@@ -229,10 +229,11 @@ test('homepage has one accessible language selector and routes chosen language t
     status: 200, contentType: 'text/html', body: '<title>Translation hand-off test</title>'
   }));
   await selector.selectOption('hi');
-  await expect(page).toHaveURL(/translate\.google\.com\/translate\?/);
+  await expect(page).toHaveURL(/www-oceanofwisdom-site\.translate\.goog/);
   const target = new URL(page.url());
-  expect(target.searchParams.get('sl')).toBe('en');
-  expect(target.searchParams.get('tl')).toBe('hi');
-  expect(target.searchParams.get('u')).toBe('http://127.0.0.1:4173/');
+  expect(target.searchParams.get('_x_tr_sl')).toBe('en');
+  expect(target.searchParams.get('_x_tr_tl')).toBe('hi');
+  expect(target.searchParams.get('_x_tr_hl')).toBe('en');
+  expect(target.searchParams.get('_x_tr_pto')).toBe('wapp');
 });
 
