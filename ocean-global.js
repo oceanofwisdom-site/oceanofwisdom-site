@@ -1,5 +1,10 @@
-/* Shared Ocean of Wisdom starfield and identity header */
+/* Shared Ocean of Wisdom starfield, identity header and language control */
 (()=>{'use strict';
+const path=location.pathname;
+const translationExcluded=/^\\/calendar(?:\\/|$)/.test(path)||/^\\/classical-languages\\/translator(?:-(?:hi|ta|es))?\\.html$/.test(path);
+if(!translationExcluded&&!document.querySelector('script[data-oow-translation-loader]')){
+ const translationScript=document.createElement('script');translationScript.src='/oow-translate.js';translationScript.defer=true;translationScript.dataset.oowTranslationLoader='true';document.head.appendChild(translationScript);
+}
 if(document.getElementById('oow-global-brand'))return;
 const canvas=document.createElement('canvas');canvas.id='oow-starfield';canvas.setAttribute('aria-hidden','true');document.body.prepend(canvas);
 const header=document.createElement('div');header.id='oow-global-brand';
@@ -19,5 +24,4 @@ function draw(staticFrame){ctx.clearRect(0,0,w,h);for(const s of stars){const tw
 function start(){if(!reduced&&!raf)raf=requestAnimationFrame(draw)}
 function stop(){if(raf){cancelAnimationFrame(raf);raf=0}}
 document.addEventListener('visibilitychange',()=>document.hidden?stop():start());window.addEventListener('resize',resize,{passive:true});resize();if(!reduced)start();
-const translationScript=document.createElement('script');translationScript.src='/oow-translate.js';translationScript.defer=true;document.head.appendChild(translationScript);
 })();
