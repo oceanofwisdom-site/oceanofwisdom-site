@@ -184,3 +184,27 @@ test('core question pages expose all four language controls', async ({ page }) =
     }
   }
 });
+
+test('Explore menu contains all six fundamental questions', async ({ page }) => {
+  await page.goto('/');
+  const explore = page.locator('.home-nav details').filter({ has: page.locator('summary', { hasText: 'Explore' }) });
+  await explore.locator('summary').click();
+  for (const href of ['/who-am-i.html','/what-is-all-this.html','/am-i-connected.html','/i-am-that.html','/what-is-truth.html','/what-is-bliss.html']) {
+    await expect(explore.locator(`.menu-panel a[href="${href}"]`), `missing Explore link ${href}`).toHaveCount(1);
+  }
+});
+
+test('question-page scroll cues land on the main content across touch and desktop viewports', async ({ page }) => {
+  for (const route of ['/who-am-i.html','/what-is-all-this.html','/am-i-connected.html','/i-am-that.html','/what-is-truth.html','/what-is-bliss.html','/eternal-now.html','/sanatana-dharma.html']) {
+    await page.goto(route);
+    const cue = page.locator('.oow-scroll-cue[href="#main-content-start"]');
+    const target = page.locator('#main-content-start');
+    if (await cue.count()) {
+      await cue.click();
+      await expect.poll(() => page.evaluate(() => Math.abs(
+        document.getElementById('main-content-start').getBoundingClientRect().top
+      )), { message: `scroll cue did not land at main content on ${route}` }).toBeLessThan(4);
+    }
+    await expect(target).toHaveCount(1);
+  }
+});
