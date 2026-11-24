@@ -140,12 +140,7 @@ main{padding-top:10px}
   <a class="home-rishi-more" href="/sanatana-dharma.html">Explore all Rishis in Sanatana Dharma →</a>
 </section>
 
-<nav class="home-language-switch" aria-label="Choose homepage language">
-<a href="/" lang="en" aria-current="page">EN</a>
-<a href="https://translate.google.com/translate?sl=en&amp;tl=hi&amp;u=https%3A%2F%2Fwww.oceanofwisdom.site%2F" lang="hi" target="_blank" rel="noopener" aria-label="हिन्दी — machine translation">हिन्दी</a>
-<a href="/index-ta.html" lang="ta" aria-label="தமிழ் — முகப்புப் பக்கம்">தமிழ்</a>
-<a href="https://translate.google.com/translate?sl=en&amp;tl=es&amp;u=https%3A%2F%2Fwww.oceanofwisdom.site%2F" lang="es" target="_blank" rel="noopener" aria-label="Español — machine translation">ES</a>
-</nav>
+<nav class="oow-translate notranslate" aria-label="Translate this page" translate="no"><button type="button" class="oow-translate__button notranslate" translate="no" aria-expanded="false">Translate</button></nav>
 <nav class="home-nav" aria-label="Main navigation">
 <details><summary>Explore</summary><div class="menu-panel"><a href="/who-am-i.html">Who Am I?</a><a href="/what-is-all-this.html">What Is All This?</a><a href="/am-i-connected.html">Am I Connected?</a><a href="/i-am-that.html">Tat Tvam Asi — I Am That</a><a href="/what-is-truth.html">What Is Truth?</a><a href="/what-is-bliss.html">What Is Bliss?</a><a href="/indian-philosophies.html">Indian Philosophies</a><a href="/world-philosophies.html">World Philosophies</a></div></details>
 <details><summary>Free Tools</summary><div class="menu-panel"><a href="/calendar/">Surya Siddhanta Calendar</a><a href="/ancient-indian-tools.html">Indian &amp; Global Research Tools</a><a href="/ancient-world-tools.html">World Interactive Tools</a><a href="/classical-languages/translator.html">Classical Language Prototype</a><a href="/ancient-water-engineering.html">Water Engineering</a></div></details>
@@ -211,8 +206,8 @@ const nav=document.querySelector('.home-nav');if(!nav)return;
 const menus=[...nav.querySelectorAll('details')];
 const closeMenus=()=>menus.forEach(menu=>{menu.open=false});
 menus.forEach(menu=>{const summary=menu.querySelector('summary');if(!summary)return;summary.addEventListener('click',()=>{menus.forEach(other=>{if(other!==menu&&other.open)other.removeAttribute('open')})})});
-document.addEventListener('pointerdown',event=>{if(!nav.contains(event.target))closeMenus()});
-document.addEventListener('click',event=>{if(!nav.contains(event.target))closeMenus()});
+document.addEventListener('pointerdown',event=>{const open=menus.find(menu=>menu.open);if(open&&!open.contains(event.target))closeMenus()});
+document.addEventListener('click',event=>{const open=menus.find(menu=>menu.open);if(open&&!open.contains(event.target))closeMenus()});
 document.addEventListener('keydown',event=>{if(event.key==='Escape'){const open=menus.find(menu=>menu.open);if(open){closeMenus();open.querySelector('summary')?.focus()}}});
 })();
 </script>
