@@ -8,6 +8,9 @@ const SWITCHERS='.home-language-switch,.lang-switcher,.langs,.page-language,.lan
 const BUTTONS='a,button,[role="button"]';
 let readyResolve,readyReject;
 const ready=new Promise((resolve,reject)=>{readyResolve=resolve;readyReject=reject});
+// A blocked third-party translation service must not create an unhandled rejection
+// on pages where the visitor has not requested translation.
+ready.catch(()=>{});
 let initialized=false,waitTimer=null;
 function protectControls(){
  document.querySelectorAll(SWITCHERS).forEach(box=>{
