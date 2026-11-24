@@ -209,3 +209,27 @@ test('question-page scroll cues land on the main content across touch and deskto
     await expect(target).toHaveCount(1);
   }
 });
+
+test('homepage has one accessible language selector and routes chosen language to translation', async ({ page }) => {
+  const externalRequests = [];
+  page.on('request', request => {
+    if (new URL(request.url()).hostname !== '127.0.0.1') externalRequests.push(request.url());
+  });
+  await page.goto('/');
+  const selector = page.locator('#home-translate-language');
+  await expect(page.locator('.home-language-switch')).toHaveCount(1);
+  await expect(page.locator('.home-translate-menu > summary')).toHaveText(/Translate/);
+  await expect(selector).toBeAttached();
+  await expect(selector.locator('option')).toHaveCount(100);
+  expect(await selector.locator('option[value="hi"]').count()).toBe(1);
+  expect(await selector.locator('option[value="ta"]').count()).toBe(1);
+  expect(await selector.locator('option[value="es"]').count()).toBe(1);
+  expect(externalRequests, 'translation provider must not load before visitor opts in').toEqual([]);
+  await selector.selectOption('hi');
+  await expect(page).toHaveURL(/translate\\.google\\.com\\/translate\\?/);
+  const target = new URL(page.url());
+  expect(target.searchParams.get('sl')).toBe('en');
+  expect(target.searchParams.get('tl')).toBe('hi');
+  expect(target.searchParams.get('u')).toBe('http://127.0.0.1:4173/');
+});
+
