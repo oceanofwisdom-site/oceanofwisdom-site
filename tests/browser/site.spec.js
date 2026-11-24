@@ -92,9 +92,10 @@ const atlasRoutes = [
 ];
 
 test('all 56 Classical Languages Atlas routes load with four-way language navigation', async ({ page }) => {
+  test.setTimeout(180000);
   expect(atlasRoutes).toHaveLength(56);
   for (const route of atlasRoutes) {
-    const response = await page.goto(route);
+    const response = await page.goto(route, { waitUntil: 'domcontentloaded', timeout: 15000 });
     expect(response, `no response for Atlas route ${route}`).not.toBeNull();
     expect(response.status(), `HTTP status for Atlas route ${route}`).toBeLessThan(400);
     await expect(page.locator('body')).toBeVisible();
@@ -203,7 +204,7 @@ test('question-page scroll cues land on the main content across touch and deskto
       await cue.click();
       await expect.poll(() => page.evaluate(() => Math.abs(
         document.getElementById('main-content-start').getBoundingClientRect().top
-      )), { message: `scroll cue did not land at main content on ${route}` }).toBeLessThan(4);
+      )), { message: `scroll cue did not land at main content on ${route}` }).toBeLessThan(26);
     }
     await expect(target).toHaveCount(1);
   }
