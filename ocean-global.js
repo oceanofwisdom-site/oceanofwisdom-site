@@ -1,7 +1,7 @@
 /* Shared Ocean of Wisdom starfield, identity header and language control */
 (()=>{'use strict';
 const path=location.pathname;
-const translationExcluded=/^\\/calendar(?:\\/|$)/.test(path)||/^\\/classical-languages\\/translator(?:-(?:hi|ta|es))?\\.html$/.test(path);
+const translationExcluded=path==='/calendar'||path.startsWith('/calendar/')||path.startsWith('/classical-languages/translator');
 if(!translationExcluded&&!document.querySelector('script[data-oow-translation-loader]')){
  const translationScript=document.createElement('script');translationScript.src='/oow-translate.js';translationScript.defer=true;translationScript.dataset.oowTranslationLoader='true';document.head.appendChild(translationScript);
 }
