@@ -93,7 +93,7 @@ function onClick(event){
  const lang=targetLanguage(control);
  if(!lang)return;
  // Preserve page-authored dictionaries where they exist (e.g. Sanatana Dharma).
- if(/switchLang\s*\(/.test(control.getAttribute('onclick')||'')&&window.translations&&window.translations[lang])return;
+ if(/switchLang\s*\(/.test(control.getAttribute('onclick')||'')&&window.translations&&window.translations[lang]){event.preventDefault();return;}
  event.preventDefault();
  event.stopImmediatePropagation();
  translateTo(lang).catch(showFailure);
