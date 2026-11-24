@@ -232,13 +232,11 @@ if(!chooser)return;
 chooser.addEventListener('change',()=>{
  const language=chooser.value;
  if(!language)return;
- const source=new URL(window.location.href);
- source.hash='';
- source.search='';
- const target=new URL('https://translate.google.com/translate');
- target.searchParams.set('sl','en');
- target.searchParams.set('tl',language);
- target.searchParams.set('u',source.href);
+ const target=new URL('https://www-oceanofwisdom-site.translate.goog/');
+ target.searchParams.set('_x_tr_sl','en');
+ target.searchParams.set('_x_tr_tl',language);
+ target.searchParams.set('_x_tr_hl','en');
+ target.searchParams.set('_x_tr_pto','wapp');
  window.location.assign(target.href);
 });
 })();
