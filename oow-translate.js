@@ -95,6 +95,7 @@ function onClick(event){
  // Preserve page-authored dictionaries where they exist (e.g. Sanatana Dharma).
  if(/switchLang\s*\(/.test(control.getAttribute('onclick')||'')&&window.translations&&window.translations[lang])return;
  event.preventDefault();
+ event.stopImmediatePropagation();
  translateTo(lang).catch(showFailure);
 }
 function start(){
