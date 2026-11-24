@@ -246,5 +246,5 @@ test('Google Translate proxy serves the live homepage in Hindi', async ({ page }
   await expect(page.locator('body')).not.toBeEmpty();
   const bodyText = await page.locator('body').innerText();
   expect(bodyText.length, 'translated page should contain readable content').toBeGreaterThan(100);
-  expect(bodyText, 'translated homepage should contain Devanagari output').toMatch(/[\\u0900-\\u097F]/);
+  expect(bodyText, 'translated homepage should contain Devanagari output').toMatch(/[\u0900-\u097F]/);
 });
