@@ -220,7 +220,8 @@ test('homepage has one accessible language selector and routes chosen language t
   await expect(page.locator('.home-language-switch')).toHaveCount(1);
   await expect(page.locator('.home-translate-control > span:first-child')).toHaveText(/Translate/);
   await expect(selector).toBeAttached();
-  await expect(selector.locator('option')).toHaveCount(108);
+  await expect(selector.locator('option')).toHaveCount(109);
+  await expect(selector.locator('option[value]:not([value=""])')).toHaveCount(108);
   expect(await selector.locator('option[value="hi"]').count()).toBe(1);
   expect(await selector.locator('option[value="ta"]').count()).toBe(1);
   expect(await selector.locator('option[value="es"]').count()).toBe(1);
