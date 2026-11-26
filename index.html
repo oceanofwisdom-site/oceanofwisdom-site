@@ -1,210 +1,180 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101d35"><meta name="description" content="Explore timeless questions, philosophies, literature, ancient knowledge and interactive tools at Ocean of Wisdom."><title>Ocean of Wisdom | Comparative Philosophy, World Traditions & Ancient Knowledge</title><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/ocean-global.css"><script src="/ocean-global.js" defer></script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101d35">
+<meta name="color-scheme" content="dark">
+<title>Ocean of Wisdom — Working Tools & a Pilgrimage Atlas of the Ancient World</title>
+<meta name="description" content="Interactive, offline-computing tools and a living pilgrimage atlas for exploring the ancient world — built on evidence, honest about what is known. Astronomy, mathematics, water engineering and sacred places across faiths.">
+<link rel="canonical" href="https://www.oceanofwisdom.site/">
+<link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/ocean-global.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Ocean of Wisdom","url":"https://www.oceanofwisdom.site/","description":"Interactive tools and a living pilgrimage atlas for exploring the ancient world, built on evidence."}</script>
 <style>
-body{margin:0;color:#f6f1e7;background:#101d35;font:17px/1.65 'Noto Sans',sans-serif}
-.hero{min-height:0;display:grid;place-items:center;text-align:center;padding:42px 20px 34px;background:linear-gradient(180deg,#101d35,#142744)}
-.hero h1{font-size:clamp(34px,5vw,58px);line-height:1.12;color:#f0d58d;margin:12px auto}.hero p{font-size:clamp(16px,2vw,22px);max-width:750px;margin:auto}
-main{max-width:1200px;margin:auto;padding:30px 22px 65px}.intro{text-align:center;color:#d2dce9;max-width:800px;margin:12px auto 45px}
-h2{text-align:center;color:#f0d58d;font-size:clamp(26px,4vw,36px);margin:45px 0 22px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:16px}
-/* Five-card dice layout: override the generic auto-fit grid on desktop */
-.grid.dice-tools-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(3,minmax(170px,auto));gap:20px;max-width:1180px;margin:0 auto}
-.grid.dice-tools-grid>.card:nth-child(1){grid-column:1;grid-row:1}
-.grid.dice-tools-grid>.card:nth-child(2){grid-column:3;grid-row:1}
-.grid.dice-tools-grid>.card:nth-child(3){grid-column:2;grid-row:2}
-.grid.dice-tools-grid>.card:nth-child(4){grid-column:1;grid-row:3}
-.grid.dice-tools-grid>.card:nth-child(5){grid-column:3;grid-row:3}
-.questions-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
-.dice-tools-grid{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(3,minmax(170px,auto));gap:20px;max-width:1120px;margin:0 auto}
-.dice-tools-grid>.card:nth-child(1){grid-column:1;grid-row:1}
-.dice-tools-grid>.card:nth-child(2){grid-column:3;grid-row:1}
-.dice-tools-grid>.card:nth-child(3){grid-column:2;grid-row:2}
-.dice-tools-grid>.card:nth-child(4){grid-column:1;grid-row:3}
-.dice-tools-grid>.card:nth-child(5){grid-column:3;grid-row:3}
-@media(max-width:900px){.questions-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-.card{display:block;text-decoration:none;color:#f6f1e7;background:#172b49dd;border:1px solid #d8ad4377;border-radius:15px;padding:22px;transition:.2s}
-.card:hover{transform:translateY(-3px);border-color:#f0d58d}.card .icon{font-size:26px}.card h3{color:#73d9df;font-size:20px;margin:8px 0}.card p{color:#d2dce9;margin:0;font-size:15px}
-@media(max-width:600px){.grid.dice-tools-grid{grid-template-columns:1fr;grid-template-rows:none;max-width:none}.grid.dice-tools-grid>.card:nth-child(n){grid-column:1;grid-row:auto}.hero{min-height:0;padding:32px 16px 26px}.grid,.questions-grid{grid-template-columns:1fr}main{padding:16px 15px 50px}}
+:root{--navy:#101d35;--navy2:#152743;--gold:#f0d58d;--gold2:#d8ad43;--teal:#73d9df;--ink:#e8edf5;--muted:#9fb2c8}
+.home-wrap{position:relative;z-index:1;max-width:1120px;margin:0 auto;padding:0 clamp(16px,4vw,32px);color:var(--ink);font-family:'Noto Sans',system-ui,sans-serif}
+.home-intro{text-align:center;max-width:720px;margin:clamp(22px,4vw,40px) auto 0}
+.home-intro p{font-size:clamp(16px,1.5vw,19px);line-height:1.6;color:#d3deec;margin:0 0 20px}
+.home-cta{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-bottom:8px}
+.home-cta a{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;font:700 15px/1 'Noto Sans',sans-serif;text-decoration:none;min-height:50px;box-sizing:border-box}
+.home-cta .cta-primary{background:var(--gold2);color:var(--navy)}
+.home-cta .cta-primary:hover,.home-cta .cta-primary:focus-visible{background:var(--gold);outline:none}
+.home-cta .cta-ghost{background:rgba(23,43,73,.7);color:var(--gold);border:1px solid var(--gold2)}
+.home-cta .cta-ghost:hover,.home-cta .cta-ghost:focus-visible{background:rgba(85,213,226,.14);border-color:var(--teal);color:#fff;outline:none}
 
-.home-language-switch{max-width:920px;margin:26px auto 30px;padding:0 22px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
-.home-language-switch a{min-height:104px;display:flex;align-items:center;justify-content:center;border:3px solid #55d4df;border-radius:28px;color:#55d4df;text-decoration:none;font-size:clamp(22px,3vw,34px);font-weight:800;line-height:1.1;background:#101d35;transition:background .2s,color .2s,transform .2s}
-.home-language-switch a:hover,.home-language-switch a:focus-visible{background:#d9ad43;color:#101d35;transform:translateY(-2px);outline:3px solid #f0d58d;outline-offset:3px}
-.home-language-switch a[aria-current="page"]{background:#d9ad43;color:#101d35;border-color:#d9ad43}
-@media(max-width:600px){.home-language-switch{gap:9px;padding:0 14px;margin:18px auto 22px}.home-language-switch a{min-height:76px;border-radius:20px;border-width:2px;font-size:clamp(17px,4vw,23px)}}
+.home-today{max-width:760px;margin:30px auto 0;background:linear-gradient(135deg,#17304f,#13243d);border:1px solid rgba(85,213,226,.3);border-radius:16px;padding:16px 20px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px;justify-content:center;text-align:center}
+.home-today .ht-label{color:var(--teal);font:700 11px/1 'Noto Sans';letter-spacing:.12em;text-transform:uppercase;width:100%}
+.home-today .ht-item{font-size:15px}.home-today .ht-item strong{color:var(--gold);display:block;font-size:17px;margin-top:2px}
+.home-today a{color:var(--teal);text-decoration:none;font-weight:600}.home-today a:hover{text-decoration:underline}
 
-.site-search{max-width:760px;margin:8px auto 28px;padding:0 18px;display:flex;gap:10px;justify-content:center}
-.site-search input{flex:1;min-width:0;padding:14px 16px;border:1px solid #55d5e2;border-radius:12px;background:#172b49;color:#f6f1e7;font:inherit}
-.site-search button{padding:12px 20px;border:1px solid #d8ad43;border-radius:12px;background:#d8ad43;color:#101d35;font-weight:700;cursor:pointer}
-.site-search input:focus-visible,.site-search button:focus-visible{outline:3px solid #55d5e2;outline-offset:3px}
-@media(max-width:480px){.site-search{gap:7px}.site-search button{padding:10px 13px}}
+.home-section{margin:clamp(42px,6vw,66px) auto 0}
+.home-section>h2{text-align:center;color:var(--gold);font:700 clamp(23px,3.2vw,34px)/1.2 'Noto Serif',serif;margin:0 0 6px}
+.home-section>.hs-sub{text-align:center;color:var(--muted);max-width:620px;margin:0 auto 26px;font-size:15px;line-height:1.55}
+.card-grid{display:grid;gap:18px}
+.grid-4{grid-template-columns:repeat(4,1fr)}
+.grid-2{grid-template-columns:repeat(2,1fr)}
+.ocard{display:flex;flex-direction:column;background:var(--navy2);border:1px solid rgba(216,173,67,.26);border-radius:16px;padding:20px 18px;text-decoration:none;color:var(--ink);transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease}
+.ocard:hover,.ocard:focus-visible{transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,.4);border-color:rgba(85,213,226,.5);outline:none}
+.ocard .ic{font-size:26px;line-height:1;margin-bottom:10px}
+.ocard h3{color:var(--gold);font:700 clamp(16px,1.6vw,18px)/1.25 'Noto Sans';margin:0 0 6px}
+.ocard p{margin:0;color:#c6d3e4;font-size:13.5px;line-height:1.5}
+.ocard .ic-tag{color:var(--teal);font:700 10.5px/1 'Noto Sans';letter-spacing:.07em;text-transform:uppercase;margin-bottom:7px}
+.group-head{grid-column:1/-1;color:var(--teal);font:700 12px/1 'Noto Sans';letter-spacing:.14em;text-transform:uppercase;margin:6px 2px -4px}
 
-/* Homepage discovery navigation and tool-first layout */
-.home-nav{box-sizing:border-box;width:100%;max-width:1180px;margin:0 auto 14px;padding:0 22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(0,max-content));align-items:start;justify-content:center;gap:10px;position:relative;z-index:30}
-.home-nav details{position:relative;min-width:0;max-width:100%;box-sizing:border-box}
-.home-nav summary{position:relative;z-index:2;list-style:none;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;border:1px solid #d8ad43;border-radius:999px;padding:9px 16px;color:#f0d58d;background:#172b49;font-size:14px;font-weight:700;white-space:nowrap}
-.home-nav summary::-webkit-details-marker{display:none}
-.home-nav summary:after{content:" ▾";color:#55d5e2}
-.home-nav details[open] summary{background:#d8ad43;color:#101d35}
-.home-nav details[open]{display:block;min-width:0}
-.home-nav details[open] .menu-panel{position:static;inset:auto;box-sizing:border-box;width:100%;min-width:0;max-width:640px;max-height:min(42vh,340px);overflow:auto;overflow-wrap:anywhere;margin:9px auto 3px;padding:9px;background:#142744;border:1px solid #d8ad43;border-radius:13px;box-shadow:0 14px 34px #0008;display:grid;gap:3px;z-index:auto}
-.home-nav .menu-panel a{display:block;min-width:0;max-width:100%;box-sizing:border-box;overflow-wrap:anywhere;padding:9px 11px;border-radius:8px;color:#e8eef7;text-decoration:none;font-size:14px}
-.home-nav .menu-panel a:hover,.home-nav .menu-panel a:focus-visible{background:#203c61;color:#f0d58d;outline:2px solid #55d5e2}
-.home-search{max-width:850px;margin:18px auto 30px;padding:0 18px;position:relative;z-index:1}
-.home-search form{display:flex;gap:9px}
-.home-search input{flex:1;min-width:0;padding:15px 17px;border:2px solid #55d5e2;border-radius:13px;background:#172b49;color:#f6f1e7;font:inherit}
-.home-search button{padding:13px 22px;border:1px solid #d8ad43;border-radius:13px;background:#d8ad43;color:#101d35;font-weight:800;cursor:pointer}
-.home-search .search-hint{text-align:center;color:#bdc9d8;font-size:12px;margin:7px 0 0}
-.home-language-switch{max-width:680px;margin:16px auto 20px;gap:9px}
-.home-language-switch a{min-height:48px;border-width:1px;border-radius:14px;font-size:16px}
-main{padding-top:10px}
-.home-intro{text-align:center;color:#d2dce9;max-width:860px;margin:8px auto 26px}
-.home-section{margin:24px 0 34px}
-.home-section h2{margin:0 0 15px}
-.home-section .section-lead{color:#cbd7e6;text-align:center;max-width:780px;margin:0 auto 17px;font-size:14px}
-.home-tool-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
-.home-tool-grid .card{min-height:174px;padding:19px}
-.home-tool-grid .card h3{font-size:18px}
-.home-badge{display:inline-block;margin-top:10px;padding:3px 8px;border:1px solid #55d5e277;border-radius:999px;color:#75e0e5;font-size:11px;font-weight:700;letter-spacing:.03em}
-.home-knowledge-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.home-knowledge-grid .card{min-height:142px}
-.home-questions-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-.home-questions-grid .card{padding:16px}
-.home-questions-grid .card h3{font-size:17px}
-.home-compact-links{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:12px auto 0}
-.home-compact-links a{color:#73d9df;text-decoration:none;border:1px solid #d8ad4366;border-radius:999px;padding:7px 12px;font-size:13px}
-@media(max-width:900px){.home-tool-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.home-knowledge-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:600px){.home-nav{grid-template-columns:repeat(2,minmax(0,1fr));padding:0 12px;gap:7px;margin-bottom:12px;justify-content:stretch}.home-nav summary{padding:8px 11px;font-size:12px}.home-nav details[open] .menu-panel{width:100%;max-width:100%;max-height:42vh;margin-top:8px}.home-search{padding:0 14px;margin:14px auto 22px}.home-search form{gap:7px}.home-search input{padding:12px 11px;font-size:15px}.home-search button{padding:10px 13px}.home-tool-grid,.home-knowledge-grid,.home-questions-grid{grid-template-columns:1fr}.home-tool-grid .card{min-height:0}.home-section{margin:22px 0 28px}main{padding:8px 14px 45px}.home-intro{font-size:14px;margin:8px auto 18px}}
+.atlas-feature{margin:clamp(42px,6vw,66px) auto 0;background:linear-gradient(135deg,#17304f 0%,#142742 60%,#1a2d49 100%);border:1px solid rgba(216,173,67,.35);border-radius:20px;padding:clamp(24px,4vw,40px);display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:center}
+.atlas-feature .af-text h2{color:var(--gold);font:700 clamp(22px,3vw,32px)/1.2 'Noto Serif',serif;margin:0 0 12px}
+.atlas-feature .af-text p{color:#d3deec;font-size:15.5px;line-height:1.65;margin:0 0 18px}
+.atlas-feature .af-text a{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:999px;background:var(--gold2);color:var(--navy);text-decoration:none;font-weight:700;min-height:48px}
+.atlas-feature .af-text a:hover{background:var(--gold)}
+.atlas-feature .af-art{font-size:clamp(90px,16vw,150px);text-align:center;line-height:1;filter:drop-shadow(0 8px 24px rgba(0,0,0,.4))}
 
-.home-rishi-strip{max-width:1160px;margin:12px auto 18px;padding:0 22px 8px;position:relative;z-index:1}
-.home-rishi-heading{text-align:center;color:#f0d58d;font:600 16px Georgia,serif;letter-spacing:.04em;margin:0 auto 12px}
-.home-rishi-heading span{color:#73d9df;padding:0 8px}
-.home-rishi-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-.home-rishi-grid a{display:flex;flex-direction:column;justify-content:center;min-height:72px;padding:10px 12px;text-align:center;text-decoration:none;background:#172b49cc;border:1px solid #d8ad4370;border-radius:11px;color:#f6f1e7;transition:.2s}
-.home-rishi-grid a:hover{border-color:#73d9df;transform:translateY(-2px)}
-.home-rishi-grid strong{color:#73d9df;font:600 17px Georgia,serif}
-.home-rishi-grid span{color:#cbd7e6;font-size:12px;line-height:1.35;margin-top:4px}
-.home-rishi-more{display:block;width:max-content;max-width:100%;margin:9px auto 0;color:#f0d58d;text-decoration:none;font-size:12px}
-.home-questions-grid .card{min-height:138px;padding:20px;display:flex;flex-direction:column;justify-content:center}
-.home-questions-grid .card p{margin-top:4px}
-@media(max-width:900px){.home-rishi-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(max-width:600px){.home-rishi-strip{padding:0 14px 4px;margin:8px auto 12px}.home-rishi-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.home-rishi-grid a{min-height:66px;padding:8px}.home-rishi-grid strong{font-size:15px}.home-rishi-grid span{font-size:11px}.home-questions-grid .card{min-height:112px;padding:17px}}
-</style><link rel="canonical" href="https://www.oceanofwisdom.site/index.html">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      "@id": "https://www.oceanofwisdom.site/#organization",
-      "name": "Ocean of Wisdom",
-      "url": "https://www.oceanofwisdom.site/",
-      "founder": {
-        "@type": "Person",
-        "name": "Prashob Rajamohan"
-      }
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://www.oceanofwisdom.site/#website",
-      "url": "https://www.oceanofwisdom.site/",
-      "name": "Ocean of Wisdom",
-      "description": "Comparative philosophy, world traditions, classical literature and ancient knowledge.",
-      "publisher": {
-        "@id": "https://www.oceanofwisdom.site/#organization"
-      },
-      "inLanguage": [
-        "en",
-        "ta"
-      ]
-    }
-  ]
-}
-</script>
+.trust-strip{margin:clamp(42px,6vw,66px) auto 0;text-align:center;padding:26px 20px;border-top:1px solid rgba(85,213,226,.2);border-bottom:1px solid rgba(85,213,226,.2)}
+.trust-strip p{font:400 clamp(16px,1.8vw,20px)/1.5 'Noto Serif',serif;color:var(--gold);margin:0 0 12px}
+.trust-strip .ts-links a{color:var(--teal);text-decoration:none;font-size:14px;font-weight:600;margin:0 8px}
+.trust-strip .ts-links a:hover{text-decoration:underline}
+
+.home-footer{position:relative;z-index:1;margin-top:clamp(42px,6vw,64px);background:#0b192e;border-top:1px solid rgba(216,173,67,.3);padding:34px clamp(16px,4vw,32px) 28px;color:var(--muted)}
+.home-footer .hf-cols{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.home-footer h4{color:var(--gold);font:700 13px/1 'Noto Sans';letter-spacing:.06em;text-transform:uppercase;margin:0 0 12px}
+.home-footer a{display:block;color:#c6d3e4;text-decoration:none;font-size:14px;padding:4px 0}
+.home-footer a:hover{color:var(--teal)}
+.home-footer .hf-base{max-width:1120px;margin:24px auto 0;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);text-align:center;font-size:13px;line-height:1.6}
+
+@media(max-width:900px){.grid-4{grid-template-columns:repeat(2,1fr)}.atlas-feature{grid-template-columns:1fr;text-align:center}.atlas-feature .af-art{order:-1}.home-footer .hf-cols{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.grid-4,.grid-2{grid-template-columns:1fr}.home-footer .hf-cols{grid-template-columns:1fr 1fr}}
+</style>
+<script src="/ocean-global.js" defer></script>
 </head>
 <body>
-<section class="hero"><div><div style="letter-spacing:.24em;color:#f0d58d;font-size:12px;font-weight:700">A JOURNEY THROUGH KNOWLEDGE</div><h1>Explore Ocean<br>of Wisdom</h1><p>Questions, philosophies, literature, tools and the living knowledge of civilisations.</p></div></section>
+<div class="home-wrap" id="oow-page-content">
 
-<section class="home-rishi-strip" aria-label="Featured Vedic Rishis">
-  <div class="home-rishi-heading"><span>✦</span> The Rishis — Voices of Vedic Wisdom <span>✦</span></div>
-  <div class="home-rishi-grid">
-    <a href="/sanatana-dharma.html#rishi-vashishta"><strong>Vashishta</strong><span>Vedic seer · Rigveda Mandala 7</span></a>
-    <a href="/sanatana-dharma.html#rishi-vishwamitra"><strong>Vishwamitra</strong><span>Gayatri Mantra · Rigveda 3.62.10</span></a>
-    <a href="/sanatana-dharma.html#rishi-agastya"><strong>Agastya</strong><span>Rigvedic seer · Tamil traditions</span></a>
-    <a href="/sanatana-dharma.html#rishi-gautama"><strong>Gautama</strong><span>Vedic lineage · Nyaya tradition</span></a>
-    <a href="/sanatana-dharma.html#rishi-atri"><strong>Atri</strong><span>Vedic seer · Rigveda Mandala 5</span></a>
-    <a href="/sanatana-dharma.html#rishi-kashyapa"><strong>Kashyapa</strong><span>Vedic and Puranic sage · Prajapati tradition</span></a>
+  <div class="home-intro">
+    <p>Interactive, <strong>working</strong> tools and a living pilgrimage atlas for exploring the ancient world — built on evidence, not embellishment.</p>
+    <div class="home-cta">
+      <a class="cta-primary" href="/tools.html">⚙ Explore the Tools</a>
+      <a class="cta-ghost" href="/sacred-india-pilgrimage-map.html">🗺 Open the Pilgrimage Atlas</a>
+    </div>
   </div>
-  <a class="home-rishi-more" href="/sanatana-dharma.html">Explore all Rishis in Sanatana Dharma →</a>
-</section>
 
-<nav class="home-nav" aria-label="Main navigation">
-<details><summary>Explore</summary><div class="menu-panel"><a href="/who-am-i.html">Who Am I?</a><a href="/what-is-all-this.html">What Is All This?</a><a href="/am-i-connected.html">Am I Connected?</a><a href="/i-am-that.html">Tat Tvam Asi — I Am That</a><a href="/what-is-truth.html">What Is Truth?</a><a href="/what-is-bliss.html">What Is Bliss?</a><a href="/indian-philosophies.html">Indian Philosophies</a><a href="/world-philosophies.html">World Philosophies</a></div></details>
-<details><summary>Free Tools</summary><div class="menu-panel"><a href="/calendar/">Surya Siddhanta Calendar</a><a href="/ancient-indian-tools.html">Indian &amp; Global Research Tools</a><a href="/ancient-world-tools.html">World Interactive Tools</a><a href="/classical-languages/translator.html">Classical Language Prototype</a><a href="/ancient-water-engineering.html">Water Engineering</a></div></details>
-<details><summary>Knowledge</summary><div class="menu-panel"><a href="/ancient-indian-wisdom.html">Ancient Indian Knowledge</a><a href="/ancient-world-wisdom.html">World Civilisations</a><a href="/sacred-geography.html">Sacred Geography</a><a href="/sacred-india-pilgrimage-map.html">Sacred India Pilgrimage Map</a><a href="/lost-knowledge.html">Lost Knowledge</a><a href="/sanatana-dharma.html">Sanatana Dharma</a></div></details>
-<details><summary>Languages &amp; Literature</summary><div class="menu-panel"><a href="/classical-languages.html">11 Classical Languages Atlas</a><a href="/indian-classic-wisdom-literature.html">Indian Classic Wisdom &amp; Literature</a><a href="/world-literature.html">World Literature</a><a href="/forgotten-books.html">Forgotten Books</a></div></details>
-<details><summary>Research</summary><div class="menu-panel"><a href="/library/">Global Knowledge Atlas</a><a href="/open-access-library.html">Open Access Library</a><a href="/open-access-research.html">Open Access Research</a><a href="/methodology.html">Research Methodology</a></div></details>
-<details><summary>About</summary><div class="menu-panel"><a href="/about.html">About Ocean of Wisdom</a><a href="/editorial-policy.html">Editorial Policy</a><a href="/contact.html">Contact &amp; Corrections</a></div></details>
-</nav>
-<section class="home-search" aria-label="Search the website">
-<form action="/search.html" method="get" role="search">
-<input type="search" name="q" placeholder="Search topics, tools, languages, texts or questions…" aria-label="Search all Ocean of Wisdom pages" required>
-<button type="submit">Search</button>
-</form>
-<p class="search-hint">Search across the website's knowledge pages, research library and interactive tools.</p>
-</section>
-<main>
-<p class="home-intro">A meeting place for timeless questions and the many ways humanity has explored existence. Discover original explanations, historical sources, philosophical traditions and practical tools with curiosity, care and respect for evidence.</p>
-<section class="home-section" id="free-tools">
-<h2>Explore Free Tools</h2><p class="section-lead">Start with a practical tool. Ocean of Wisdom tools and articles are free to access. External research services may have their own registration, access and reuse terms.</p>
-<div class="home-tool-grid">
-<a class="card" href="/calendar/"><div class="icon">🌙</div><h3>Surya Siddhanta Calendar</h3><p>Explore dates, lunar phases, nakshatras, sunrise, sunset and astronomical calculations.</p><span class="home-badge">Free to use</span></a>
-<a class="card" href="/ancient-indian-tools.html"><div class="icon">📐</div><h3>Indian &amp; Global Research Tools</h3><p>Use original calculators and discover curated astronomy, language and digital research resources.</p><span class="home-badge">Free calculators · external links</span></a>
-<a class="card" href="/ancient-world-tools.html"><div class="icon">🌍</div><h3>World Mathematics &amp; Calendar Tools</h3><p>Try historical number-system and calendar converters with their assumptions explained.</p><span class="home-badge">Free to use</span></a>
-<a class="card" href="/ancient-water-engineering.html"><div class="icon">💧</div><h3>Water Engineering &amp; Ecology</h3><p>Explore historical systems, engineering principles and practical educational resources.</p><span class="home-badge">Free learning resource</span></a>
+  <div class="home-today" id="home-today" aria-live="polite">
+    <span class="ht-label">Today in the sky</span>
+    <span class="ht-item">Date<strong id="ht-date">—</strong></span>
+    <span class="ht-item">Day<strong id="ht-day">—</strong></span>
+    <span class="ht-item">Moon (approx.)<strong id="ht-moon">—</strong></span>
+    <span class="ht-item"><a href="/calendar/">Full panchanga & sky →</a></span>
+  </div>
+
+  <section class="home-section">
+    <h2>Interactive Tools</h2>
+    <p class="hs-sub">Working models that compute live in your browser — no internet needed. From ancient India and the wider world.</p>
+    <div class="card-grid grid-4">
+      <div class="group-head">Ancient India</div>
+      <a class="ocard" href="/calendar/"><div class="ic">🌙</div><span class="ic-tag">Astronomy</span><h3>Surya Siddhanta Calendar</h3><p>Tithi, nakshatra, sunrise and the moving sky.</p></a>
+      <a class="ocard" href="/tools.html#top"><div class="ic">🔢</div><span class="ic-tag">Number theory</span><h3>Kuttaka Solver</h3><p>Solve a·x ≡ b (mod m), with every solution verified.</p></a>
+      <a class="ocard" href="/tools.html#top"><div class="ic">📐</div><span class="ic-tag">Geometry</span><h3>Śulbasūtra Geometry</h3><p>Right-triangle altar geometry — diagonal, area, perimeter.</p></a>
+      <a class="ocard" href="/tools.html#top"><div class="ic">💧</div><span class="ic-tag">Water</span><h3>Rainwater Harvesting</h3><p>Model runoff, storage and days of demand covered.</p></a>
+      <div class="group-head">The wider ancient world</div>
+      <a class="ocard" href="/tools.html#top"><div class="ic">🧮</div><span class="ic-tag">Mesopotamia</span><h3>Babylonian Base-60</h3><p>Convert to and from the sexagesimal system.</p></a>
+      <a class="ocard" href="/tools.html#top"><div class="ic">🗿</div><span class="ic-tag">Mesoamerica</span><h3>Maya Long Count</h3><p>Gregorian dates ↔ the Maya Long Count.</p></a>
+      <a class="ocard" href="/tools.html#top"><div class="ic">📅</div><span class="ic-tag">Calendars</span><h3>Julian ↔ Gregorian</h3><p>Watch the calendar gap grow across centuries.</p></a>
+      <a class="ocard" href="/tools.html#top"><div class="ic">⚖</div><span class="ic-tag">Greek mechanics</span><h3>Archimedes' Lever</h3><p>Balance a load by the law of the lever.</p></a>
+    </div>
+  </section>
+
+  <section class="atlas-feature">
+    <div class="af-text">
+      <h2>The Pilgrimage Atlas</h2>
+      <p>Sacred sites across faiths — Hindu, Buddhist, Jain, Sikh, Christian, Muslim and Parsi — mapped from Kashmir to Kanyakumari, with how to reach them, their rituals, and the stories told about them.</p>
+      <a href="/sacred-india-pilgrimage-map.html">Open the Atlas →</a>
+    </div>
+    <div class="af-art" aria-hidden="true">🗺️</div>
+  </section>
+
+  <section class="home-section">
+    <h2>Traditions</h2>
+    <p class="hs-sub">Each faith told through its living sacred landscape — linked to its places on the map.</p>
+    <div class="card-grid grid-4">
+      <a class="ocard" href="/hinduism.html"><div class="ic">🕉️</div><h3>Hinduism</h3><p>Sanatana Dharma — rishis, Vedas, darśanas and sacred geography.</p></a>
+      <a class="ocard" href="/buddhism.html"><div class="ic">☸️</div><h3>Buddhism</h3><p>The Buddha, the path, and the places of awakening.</p></a>
+      <a class="ocard" href="/jainism.html"><div class="ic">🤲</div><h3>Jainism</h3><p>The Jinas, ahimsa, and the hill-temple pilgrimages.</p></a>
+      <a class="ocard" href="/sikhism.html"><div class="ic">🪯</div><h3>Sikhism</h3><p>The Gurus, the Granth, and the great gurdwaras.</p></a>
+      <a class="ocard" href="/islam.html"><div class="ic">☪️</div><h3>Islam</h3><p>The Prophet, the Qur'an, and India's dargahs and mosques.</p></a>
+      <a class="ocard" href="/christianity.html"><div class="ic">✝️</div><h3>Christianity</h3><p>Jesus, the Gospels, and India's ancient churches.</p></a>
+      <a class="ocard" href="/zoroastrianism.html"><div class="ic">🔥</div><h3>Zoroastrianism</h3><p>Zarathustra, Ahura Mazda, and the Parsi fire temples.</p></a>
+      <a class="ocard" href="/sacred-india-pilgrimage-map.html"><div class="ic">🧭</div><h3>All on the map →</h3><p>See every tradition's sites together in the Atlas.</p></a>
+    </div>
+  </section>
+
+  <section class="home-section">
+    <h2>Deep Dives</h2>
+    <p class="hs-sub">Evidence-led research, each wired to a tool you can use.</p>
+    <div class="card-grid grid-2">
+      <a class="ocard" href="/ancient-water-engineering.html"><div class="ic">🏞️</div><h3>Ancient Water Engineering</h3><p>Dholavira, stepwells and reservoirs — paired with the rainwater tool.</p></a>
+      <a class="ocard" href="/architectural-marvels.html"><div class="ic">🏛️</div><h3>Architectural Marvels</h3><p>Temples and monuments — the geometry and mechanics behind them.</p></a>
+      <a class="ocard" href="/ancient-cosmology.html"><div class="ic">🌌</div><h3>Ancient Cosmology</h3><p>How civilisations mapped the cosmos — paired with the calendar.</p></a>
+      <a class="ocard" href="/lapis-lazuli.html"><div class="ic">💎</div><h3>Lapis Lazuli & Ancient Trade</h3><p>The blue stone that linked Badakhshan to Egypt and Sumer.</p></a>
+    </div>
+  </section>
+
+  <div class="trust-strip">
+    <p>Evidence-led. Original, working tools. Honest about what is known — and what isn't.</p>
+    <div class="ts-links"><a href="/about.html">About</a>·<a href="/editorial-policy.html">Editorial Policy</a>·<a href="/methodology.html">Methodology</a></div>
+  </div>
+
 </div>
-<div class="home-compact-links"><a href="/classical-languages.html">Explore 11 Classical Languages</a><a href="/classical-languages/translator.html">Language tool prototype</a><a href="/ancient-world-tools.html">All world tools</a></div>
-</section>
-<section class="home-section" id="knowledge">
-<h2>Discover Knowledge</h2><p class="section-lead">Follow a subject into its history, sources and connections across cultures.</p>
-<div class="home-knowledge-grid">
-<a class="card" href="/sacred-india-pilgrimage-map.html"><div class="icon">🗺️</div><h3>Sacred India Pilgrimage Map</h3><p>An interactive map of major Hindu, Muslim, Sikh, Christian, Jain and Buddhist pilgrimage sites, with how to reach, rituals and folklore.</p></a>
-<a class="card" href="/library/"><div class="icon">📚</div><h3>Global Knowledge Atlas</h3><p>Explore 50 curated records across history, science, philosophy and ecology.</p></a>
-<a class="card" href="/ancient-indian-wisdom.html"><div class="icon">🏛️</div><h3>Ancient Indian Knowledge</h3><p>Statecraft, mathematics, astronomy, medicine, architecture and ecological practice.</p></a>
-<a class="card" href="/ancient-world-wisdom.html"><div class="icon">🧭</div><h3>Knowledge Across Civilisations</h3><p>Compare technologies, ideas and traditions across the ancient world.</p></a>
-<a class="card" href="/indian-classic-wisdom-literature.html"><div class="icon">📜</div><h3>Indian Classic Wisdom &amp; Literature</h3><p>Explore Vedic, Sanskrit, Tamil and other classical works and knowledge traditions.</p></a>
-<a class="card" href="/world-literature.html"><div class="icon">🌐</div><h3>World Literature</h3><p>Discover literature, philosophy and scientific writing from global traditions.</p></a>
-<a class="card" href="/open-access-library.html"><div class="icon">🔓</div><h3>Open Access Research</h3><p>Find freely readable books, papers, manuscripts and academic collections.</p></a>
-</div>
-</section>
-<section class="home-section" id="six-questions">
-<h2>Six Fundamental Questions</h2><p class="section-lead">Begin with the questions that have shaped philosophy, science and spiritual inquiry.</p>
-<div class="home-questions-grid">
-<a class="card" href="/who-am-i.html"><div class="icon">🔍</div><h3>Who Am I?</h3><p>What is the self?</p></a>
-<a class="card" href="/what-is-all-this.html"><div class="icon">🌌</div><h3>What Is All This?</h3><p>What is reality?</p></a>
-<a class="card" href="/am-i-connected.html"><div class="icon">🔗</div><h3>Am I Connected?</h3><p>How are we related?</p></a>
-<a class="card" href="/i-am-that.html"><div class="icon">✨</div><h3>Tat Tvam Asi — I Am That</h3><p>What is the nature of being?</p></a>
-<a class="card" href="/what-is-truth.html"><div class="icon">🕉️</div><h3>What Is Truth?</h3><p>How do we know?</p></a>
-<a class="card" href="/what-is-bliss.html"><div class="icon">☀️</div><h3>What Is Bliss?</h3><p>What is lasting fulfilment?</p></a>
-</div>
-</section>
-<section class="home-section" id="languages">
-<h2>Languages, Traditions &amp; Literature</h2>
-<div class="home-knowledge-grid">
-<a class="card" href="/classical-languages.html"><div class="icon">🔤</div><h3>Bharata Bhasha — 11 Classical Languages</h3><p>Scripts, language profiles, literary traditions and connections.</p></a>
-<a class="card" href="/indian-philosophies.html"><div class="icon">🪷</div><h3>Indian Philosophies</h3><p>Explore diverse schools, arguments and paths of inquiry.</p></a>
-<a class="card" href="/world-philosophies.html"><div class="icon">🌍</div><h3>World Philosophies</h3><p>Discover philosophical traditions across regions and periods.</p></a>
-</div>
-</section>
-</main>
-<footer style="text-align:center;padding:25px;color:#bdc9d8;border-top:1px solid #d8ad4377;font-size:13px"><p>© 2026 Ocean of Wisdom · Original explanations and research, with respect for other authors and institutions.</p><p style="margin:12px 0"><a href="/about.html" style="color:#f0d58d">About</a> · <a href="/methodology.html" style="color:#f0d58d">Methodology</a> · <a href="/contact.html" style="color:#f0d58d">Contact &amp; Corrections</a> · <a href="/search.html" style="color:#f0d58d">Search</a> · <a href="/editorial-policy.html" style="color:#f0d58d">Editorial Policy</a></p><p style="display:block!important;visibility:visible!important;opacity:1!important;margin:12px 0 0!important;padding:0!important;color:#f0d58d!important;font-size:15px!important;line-height:1.6!important;font-weight:600!important">Founded and curated by <strong style="color:#f0d58d!important;letter-spacing:.06em">PRASHOB RAJAMOHAN</strong></p></footer>
+
+<footer class="home-footer">
+  <div class="hf-cols">
+    <div><h4>Tools</h4><a href="/tools.html">All tools</a><a href="/calendar/">Surya Siddhanta Calendar</a></div>
+    <div><h4>Atlas</h4><a href="/sacred-india-pilgrimage-map.html">Pilgrimage Atlas</a></div>
+    <div><h4>Traditions</h4><a href="/hinduism.html">Hinduism</a><a href="/buddhism.html">Buddhism</a><a href="/sikhism.html">Sikhism</a><a href="/zoroastrianism.html">Zoroastrianism</a></div>
+    <div><h4>About</h4><a href="/about.html">About</a><a href="/editorial-policy.html">Editorial Policy</a><a href="/methodology.html">Methodology</a><a href="/contact.html">Contact</a></div>
+  </div>
+  <div class="hf-base">© 2026 Ocean of Wisdom · Original explanations and research, with respect for other authors and traditions.<br>Founded and curated by Prashob Rajamohan.</div>
+</footer>
+
 <script>
-(()=>{'use strict';
-const nav=document.querySelector('.home-nav');if(!nav)return;
-const menus=[...nav.querySelectorAll('details')];
-const closeMenus=()=>menus.forEach(menu=>{menu.open=false});
-menus.forEach(menu=>{const summary=menu.querySelector('summary');if(!summary)return;summary.addEventListener('click',()=>{menus.forEach(other=>{if(other!==menu&&other.open)other.removeAttribute('open')})})});
-document.addEventListener('pointerdown',event=>{if(!nav.contains(event.target))closeMenus()});
-document.addEventListener('click',event=>{if(!nav.contains(event.target))closeMenus()});
-document.addEventListener('keydown',event=>{if(event.key==='Escape'){const open=menus.find(menu=>menu.open);if(open){closeMenus();open.querySelector('summary')?.focus()}}});
+(function(){
+  // Offline "today" panel: date, weekday, approximate moon phase (no network).
+  var now=new Date();
+  var days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var d=document.getElementById('ht-date'); if(d) d.textContent=now.getDate()+' '+months[now.getMonth()]+' '+now.getFullYear();
+  var wd=document.getElementById('ht-day'); if(wd) wd.textContent=days[now.getDay()];
+  // moon phase: synodic month from a known new moon (2000-01-06 18:14 UTC)
+  var synodic=29.530588853, knownNew=Date.UTC(2000,0,6,18,14);
+  var age=(((Date.now()-knownNew)/86400000)%synodic+synodic)%synodic;
+  var illum=Math.round((1-Math.cos(2*Math.PI*age/synodic))/2*100);
+  var name;
+  if(age<1.5||age>synodic-1.5)name='New';else if(age<6.5)name='Waxing crescent';
+  else if(age<8.5)name='First quarter';else if(age<13.5)name='Waxing gibbous';
+  else if(age<16.0)name='Full';else if(age<21.0)name='Waning gibbous';
+  else if(age<23.0)name='Last quarter';else name='Waning crescent';
+  var mn=document.getElementById('ht-moon'); if(mn) mn.textContent=name+' · '+illum+'%';
 })();
 </script>
-</body></html>
+</body>
+</html>

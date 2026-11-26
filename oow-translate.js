@@ -146,6 +146,8 @@
   }
 
   function place(widget) {
+    const slot = document.getElementById('oow-header-translate');
+    if (slot) { slot.appendChild(widget); return; }
     const anchor = document.getElementById('oow-cinematic-hero')
                 || document.querySelector('main')
                 || document.getElementById('oow-global-brand');
