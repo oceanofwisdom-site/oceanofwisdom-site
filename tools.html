@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101d35">
+<meta name="color-scheme" content="dark">
+<title>Working Tools of the Ancient World | Ocean of Wisdom</title>
+<meta name="description" content="Interactive, offline-computing tools from ancient India and the wider world — a Kuttaka solver, Śulbasūtra geometry, rainwater harvesting, Babylonian base-60, the Maya Long Count and more.">
+<link rel="canonical" href="https://www.oceanofwisdom.site/tools.html">
+<link rel="icon" href="/favicon.png">
+<link rel="stylesheet" href="/ocean-global.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Working Tools of the Ancient World","description":"Interactive, offline-computing tools from ancient India and the wider world.","url":"https://www.oceanofwisdom.site/tools.html","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"Ocean of Wisdom","url":"https://www.oceanofwisdom.site/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.oceanofwisdom.site/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://www.oceanofwisdom.site/tools.html"}]}</script>
+<style>
+.tools-intro{max-width:880px;margin:0 auto}
+.tool-group-label{max-width:900px;margin:34px auto 2px;color:#73d9df;font:700 13px/1 'Noto Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;padding:0 4px}
+.tool-grid{max-width:900px;margin:12px auto 0;display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.tool-card{background:#152743;border:1px solid #d8ad4340;border-radius:16px;padding:20px 20px 18px;display:flex;flex-direction:column}
+.tool-card h2{color:#f0d58d;font-size:clamp(18px,2vw,22px);margin:0 0 4px;border:0;padding:0}
+.tool-card .tc-tag{color:#73d9df;font:700 11px/1 'Noto Sans',sans-serif;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+.tool-card p.tc-desc{color:#cdd9e8;font-size:14.5px;line-height:1.55;margin:0 0 14px}
+.tc-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.tc-field{display:flex;flex-direction:column;gap:4px}
+.tc-field.full{grid-column:1/-1}
+.tc-field label{color:#9fb2c8;font-size:12px;letter-spacing:.02em}
+.tc-field input,.tc-field select{background:#0d1b31;border:1px solid #2f4a6e;border-radius:9px;color:#eef3fa;padding:10px 11px;font:500 15px/1.2 'Noto Sans',sans-serif;min-height:44px;width:100%;box-sizing:border-box}
+.tc-field input:focus,.tc-field select:focus{outline:none;border-color:#55d5e2}
+.tc-btn{align-self:flex-start;background:#d8ad43;color:#101d35;border:0;border-radius:999px;padding:11px 22px;font:700 14px/1 'Noto Sans',sans-serif;cursor:pointer;min-height:44px}
+.tc-btn:hover,.tc-btn:focus-visible{background:#f0d58d;outline:none}
+.tc-out{margin-top:12px;padding:12px 14px;background:#0d1b31;border:1px solid #55d5e233;border-radius:10px;color:#eaf3fb;font-size:14.5px;line-height:1.6;min-height:20px}
+.tc-out strong{color:#f3e4b8}
+.tc-out .err{color:#ff9a8f}
+.tc-note{margin-top:10px;color:#92a4b8;font-size:12px;line-height:1.5}
+.tool-card.calendar-card{background:linear-gradient(145deg,#17304f,#152743);justify-content:space-between}
+.tool-card.calendar-card .tc-btn{text-decoration:none;display:inline-flex;align-items:center;gap:7px;margin-top:6px}
+@media(max-width:620px){
+ .tool-grid{grid-template-columns:1fr}
+ .tc-fields{grid-template-columns:1fr}
+}
+</style>
+<script src="/ocean-global.js" defer></script>
+</head>
+<body>
+<main id="oow-page-content" class="oow-article">
+<nav class="oow-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> <span aria-hidden="true">›</span> <span aria-current="page">Tools</span></nav>
+<h1>Working Tools of the Ancient World</h1>
+<p class="oow-lead">Not descriptions of old techniques — working models. Every tool here computes live, in your browser, from the numbers you enter. Nothing is sent anywhere, and they keep working with no internet connection.</p>
+
+<div class="oow-callout tools-intro">
+<h3>How these work</h3>
+<p>Each calculator is an <strong>original, transparent implementation</strong> of a historical mathematical idea — it does not claim to reproduce every ancient worked procedure verbatim, and it never confuses the historical setting with the modern formula it uses. The mathematics is exact; the history is handled honestly.</p>
+</div>
+
+<p class="tool-group-label">Ancient India</p>
+<div class="tool-grid">
+
+  <div class="tool-card">
+    <span class="tc-tag">Number theory</span>
+    <h2>Aryabhata's Kuttaka</h2>
+    <p class="tc-desc">Solve the linear congruence a·x ≡ b (mod m). The extended Euclidean algorithm checks solvability and returns every distinct residue solution.</p>
+    <div class="tc-fields">
+      <div class="tc-field"><label for="ka">Coefficient a</label><input id="ka" type="text" inputmode="numeric" value="26"></div>
+      <div class="tc-field"><label for="kb">Value b</label><input id="kb" type="text" inputmode="numeric" value="1"></div>
+      <div class="tc-field"><label for="km">Modulus m</label><input id="km" type="text" inputmode="numeric" value="7"></div>
+    </div>
+    <button class="tc-btn" id="kbtn" type="button">Solve</button>
+    <div class="tc-out" id="kout">Enter a, b and m, then Solve.</div>
+    <p class="tc-note">The kuṭṭaka ("pulveriser") is Aryabhata's method for indeterminate equations of this kind.</p>
+  </div>
+
+  <div class="tool-card">
+    <span class="tc-tag">Geometry</span>
+    <h2>Śulbasūtra Geometry</h2>
+    <p class="tc-desc">Enter the two perpendicular sides of a right triangle to get its diagonal, area and perimeter — the geometry behind Vedic altar construction.</p>
+    <div class="tc-fields">
+      <div class="tc-field"><label for="sb">Base</label><input id="sb" type="text" inputmode="decimal" value="3"></div>
+      <div class="tc-field"><label for="sh">Height</label><input id="sh" type="text" inputmode="decimal" value="4"></div>
+    </div>
+    <button class="tc-btn" id="sbtn" type="button">Calculate</button>
+    <div class="tc-out" id="sout">Enter base and height.</div>
+    <p class="tc-note">The diagonal uses the Pythagorean relation, stated in the Śulbasūtras for building fire-altars.</p>
+  </div>
+
+  <div class="tool-card">
+    <span class="tc-tag">Water engineering</span>
+    <h2>Rainwater Harvesting</h2>
+    <p class="tc-desc">Estimate runoff from rainfall, catchment area and runoff coefficient, and compare it with tank capacity and household demand.</p>
+    <div class="tc-fields">
+      <div class="tc-field"><label for="rain">Rainfall (mm)</label><input id="rain" type="text" inputmode="decimal" value="800"></div>
+      <div class="tc-field"><label for="area">Catchment (m²)</label><input id="area" type="text" inputmode="decimal" value="100"></div>
+      <div class="tc-field"><label for="coef">Runoff coeff (0–1)</label><input id="coef" type="text" inputmode="decimal" value="0.8"></div>
+      <div class="tc-field"><label for="tank">Tank (litres)</label><input id="tank" type="text" inputmode="decimal" value="20000"></div>
+      <div class="tc-field"><label for="ppl">People</label><input id="ppl" type="text" inputmode="numeric" value="4"></div>
+      <div class="tc-field"><label for="daily">Litres/person/day</label><input id="daily" type="text" inputmode="decimal" value="135"></div>
+    </div>
+    <button class="tc-btn" id="wbtn" type="button">Estimate</button>
+    <div class="tc-out" id="wout">Enter the values above.</div>
+    <p class="tc-note">Harvest = rainfall × area × coefficient. An educational estimate; it ignores first-flush loss, evaporation and leaks.</p>
+  </div>
+
+  <div class="tool-card calendar-card">
+    <div>
+      <span class="tc-tag">Astronomy</span>
+      <h2>Surya Siddhanta Calendar</h2>
+      <p class="tc-desc">The classical Indian astronomical calendar — tithi, nakshatra, sunrise, moon and planetary sky. Opens as its own full application.</p>
+    </div>
+    <a class="tc-btn" href="/calendar/">Open the calendar →</a>
+  </div>
+
+</div>
+
+<p class="tool-group-label">The wider ancient world</p>
+<div class="tool-grid">
+
+  <div class="tool-card">
+    <span class="tc-tag">Mesopotamia</span>
+    <h2>Babylonian Base-60</h2>
+    <p class="tc-desc">Convert a whole number to and from the Babylonian sexagesimal (base-60) place-value system that still shapes our hours and degrees.</p>
+    <div class="tc-fields">
+      <div class="tc-field full"><label for="bdec">Decimal number</label><input id="bdec" type="text" inputmode="numeric" value="3661"></div>
+      <div class="tc-field full"><label for="bsex">…or base-60 digits (comma-separated, each 0–59)</label><input id="bsex" type="text" value="1, 1, 1"></div>
+    </div>
+    <button class="tc-btn" id="bbtn" type="button">Convert both ways</button>
+    <div class="tc-out" id="bout">Enter a decimal number, or base-60 digits.</div>
+    <p class="tc-note">Base-60 is why an hour has 60 minutes and a circle 360 degrees.</p>
+  </div>
+
+  <div class="tool-card">
+    <span class="tc-tag">Mesoamerica</span>
+    <h2>Maya Long Count</h2>
+    <p class="tc-desc">Convert a Gregorian date to the Maya Long Count (baktun.katun.tun.winal.kin), using the standard GMT correlation.</p>
+    <div class="tc-fields">
+      <div class="tc-field"><label for="mdate">Date</label><input id="mdate" type="date" value="2012-12-21"></div>
+      <div class="tc-field"><label for="mlc">…or Long Count (b.k.t.w.k)</label><input id="mlc" type="text" value="13.0.0.0.0"></div>
+    </div>
+    <button class="tc-btn" id="mbtn" type="button">Convert both ways</button>
+    <div class="tc-out" id="mout">Pick a date, or enter a Long Count.</div>
+    <p class="tc-note">GMT correlation: Long Count day 0 = Julian Day 584283.</p>
+  </div>
+
+  <div class="tool-card">
+    <span class="tc-tag">Calendars</span>
+    <h2>Julian ↔ Gregorian</h2>
+    <p class="tc-desc">See how a date shifts between the Julian and Gregorian calendars — the gap that grew to days over the centuries.</p>
+    <div class="tc-fields">
+      <div class="tc-field"><label for="jdate">Date (Y-M-D)</label><input id="jdate" type="text" inputmode="numeric" value="1582-10-15"></div>
+      <div class="tc-field"><label for="jfrom">Entered as</label><select id="jfrom"><option value="greg">Gregorian</option><option value="jul">Julian</option></select></div>
+    </div>
+    <button class="tc-btn" id="jbtn" type="button">Convert</button>
+    <div class="tc-out" id="jout">Enter a date and its calendar.</div>
+    <p class="tc-note">Both calendars are converted through the Julian Day Number.</p>
+  </div>
+
+  <div class="tool-card">
+    <span class="tc-tag">Greek mechanics</span>
+    <h2>Archimedes' Lever</h2>
+    <p class="tc-desc">"Give me a place to stand and I will move the Earth." Balance a load with an effort using the law of the lever.</p>
+    <div class="tc-fields">
+      <div class="tc-field"><label for="aeff">Effort (force)</label><input id="aeff" type="text" inputmode="decimal" value="50"></div>
+      <div class="tc-field"><label for="aea">Effort arm</label><input id="aea" type="text" inputmode="decimal" value="4"></div>
+      <div class="tc-field"><label for="ala">Load arm</label><input id="ala" type="text" inputmode="decimal" value="1"></div>
+    </div>
+    <button class="tc-btn" id="abtn" type="button">Compute</button>
+    <div class="tc-out" id="aout">Enter effort and the two arm lengths.</div>
+    <p class="tc-note">Law of the lever: effort × effort-arm = load × load-arm.</p>
+  </div>
+
+</div>
+</main>
+
+<nav class="oow-related" aria-label="Related">
+<h2>See these ideas in place</h2>
+<p><a href="/ancient-water-engineering.html">Ancient water engineering</a> · <a href="/architectural-marvels.html">Architectural marvels</a> · <a href="/ancient-cosmology.html">Ancient cosmology</a> · <a href="/sacred-india-pilgrimage-map.html">Pilgrimage Atlas</a></p>
+</nav>
+<nav class="oow-pagenav" aria-label="Page navigation">
+<a href="/">⌂ Home</a><a href="/sacred-india-pilgrimage-map.html">Pilgrimage Atlas</a>
+</nav>
+
+<script>
+(function(){
+  "use strict";
+  var $=function(id){return document.getElementById(id);};
+  function num(v){ v=String(v).trim(); return v!==""&&isFinite(Number(v))?Number(v):NaN; }
+  function err(el,msg){ el.innerHTML='<span class="err">'+msg+'</span>'; }
+
+  // ---- Kuttaka: a·x ≡ b (mod m) ----
+  function bgcd(a,b){ a=a<0n?-a:a; b=b<0n?-b:b; while(b){ [a,b]=[b,a%b]; } return a; }
+  function egcd(a,b){ if(b===0n) return [a,1n,0n]; var [g,x,y]=egcd(b,a%b); return [g,y,x-(a/b)*y]; }
+  function mod(a,m){ return ((a%m)+m)%m; }
+  $("kbtn").onclick=function(){
+    var o=$("kout"), A=$("ka").value.trim(),B=$("kb").value.trim(),M=$("km").value.trim();
+    if(!/^[-+]?\d+$/.test(A)||!/^[-+]?\d+$/.test(B)||!/^\d+$/.test(M)||BigInt(M)<=0n){ return err(o,"Enter whole numbers; the modulus must be a positive integer."); }
+    var a=BigInt(A),b=BigInt(B),m=BigInt(M),g=bgcd(a,m);
+    if(mod(b,g)!==0n){ return o.innerHTML="<strong>No solution.</strong> gcd(a,m) = "+g+" does not divide b."; }
+    var mm=m/g, x;
+    if(mm===1n){ x=0n; } else { var inv=mod(egcd(mod(a/g,mm),mm)[1],mm); x=mod(inv*mod(b/g,mm),mm); }
+    var sols=[]; for(var k=0n;k<g;k++) sols.push((x+k*mm).toString());
+    var ok=sols.every(function(v){ return mod(a*BigInt(v)-b,m)===0n; });
+    o.innerHTML="<strong>x ≡ "+sols.join(", ")+"</strong> (mod "+m+")<br>gcd(a,m) = "+g+" · "+sols.length+" solution"+(sols.length>1?"s":"")+" · verified "+(ok?"✓":"✗");
+  };
+
+  // ---- Śulbasūtra right triangle ----
+  $("sbtn").onclick=function(){
+    var o=$("sout"),b=num($("sb").value),h=num($("sh").value);
+    if(!(b>0&&h>0)) return err(o,"Base and height must be positive numbers.");
+    var d=Math.hypot(b,h);
+    o.innerHTML="<strong>Diagonal:</strong> "+d.toFixed(5)+"<br><strong>Area:</strong> "+(b*h/2).toFixed(5)+"<br><strong>Perimeter:</strong> "+(b+h+d).toFixed(5);
+  };
+
+  // ---- Rainwater harvesting ----
+  $("wbtn").onclick=function(){
+    var o=$("wout");
+    var r=num($("rain").value),a=num($("area").value),c=num($("coef").value),t=num($("tank").value),p=num($("ppl").value),d=num($("daily").value);
+    if([r,a,c,t,p,d].some(function(x){return isNaN(x)||x<0;})||p<1) return err(o,"Enter valid non-negative values (at least 1 person).");
+    if(c>1) return err(o,"Runoff coefficient must be between 0 and 1.");
+    var harvest=r*a*c, stored=Math.min(harvest,t), overflow=Math.max(0,harvest-t), need=p*d, days=need?stored/need:Infinity;
+    o.innerHTML="<strong>Potential harvest:</strong> "+Math.round(harvest).toLocaleString()+" L"
+      +"<br><strong>Held in tank:</strong> "+Math.round(stored).toLocaleString()+" L"
+      +"<br><strong>Overflow:</strong> "+Math.round(overflow).toLocaleString()+" L"
+      +"<br><strong>Daily demand:</strong> "+Math.round(need).toLocaleString()+" L"
+      +"<br><strong>Days of demand covered:</strong> "+(isFinite(days)?days.toFixed(1):"—");
+  };
+
+  // ---- Babylonian base-60 ----
+  $("bbtn").onclick=function(){
+    var o=$("bout"), dec=$("bdec").value.trim(), sex=$("bsex").value.trim(), out=[];
+    if(/^\d+$/.test(dec)){
+      var n=BigInt(dec), digits=[]; if(n===0n) digits=[0n];
+      while(n>0n){ digits.unshift(n%60n); n=n/60n; }
+      out.push("<strong>"+dec+"</strong> in base-60 = <strong>"+digits.join(", ")+"</strong>");
+    }
+    if(/^\s*\d+(\s*,\s*\d+)*\s*$/.test(sex)){
+      var parts=sex.split(",").map(function(s){return BigInt(s.trim());});
+      if(parts.every(function(d){return d>=0n&&d<60n;})){
+        var val=0n; parts.forEach(function(d){ val=val*60n+d; });
+        out.push("base-60 ["+parts.join(", ")+"] = <strong>"+val.toString()+"</strong> in decimal");
+      } else { out.push('<span class="err">Each base-60 digit must be 0–59.</span>'); }
+    }
+    o.innerHTML = out.length? out.join("<br>") : '<span class="err">Enter a decimal number or valid base-60 digits.</span>';
+  };
+
+  // ---- Julian Day Number helpers ----
+  function gregToJDN(y,m,d){ var a=Math.floor((14-m)/12),Y=y+4800-a,M=m+12*a-3;
+    return d+Math.floor((153*M+2)/5)+365*Y+Math.floor(Y/4)-Math.floor(Y/100)+Math.floor(Y/400)-32045; }
+  function julToJDN(y,m,d){ var a=Math.floor((14-m)/12),Y=y+4800-a,M=m+12*a-3;
+    return d+Math.floor((153*M+2)/5)+365*Y+Math.floor(Y/4)-32083; }
+  function jdnToGreg(j){ var a=j+32044,b=Math.floor((4*a+3)/146097),c=a-Math.floor(146097*b/4),
+    dd=Math.floor((4*c+3)/1461),e=c-Math.floor(1461*dd/4),m=Math.floor((5*e+2)/153);
+    return {d:e-Math.floor((153*m+2)/5)+1,m:m+3-12*Math.floor(m/10),y:100*b+dd-4800+Math.floor(m/10)}; }
+  function jdnToJul(j){ var c=j+32082,dd=Math.floor((4*c+3)/1461),e=c-Math.floor(1461*dd/4),m=Math.floor((5*e+2)/153);
+    return {d:e-Math.floor((153*m+2)/5)+1,m:m+3-12*Math.floor(m/10),y:dd-4800+Math.floor(m/10)}; }
+  function fmt(o){ return o.y+"-"+String(o.m).padStart(2,"0")+"-"+String(o.d).padStart(2,"0"); }
+
+  // ---- Maya Long Count ----
+  var GMT=584283;
+  $("mbtn").onclick=function(){
+    var o=$("mout"), ds=$("mdate").value.trim(), lc=$("mlc").value.trim(), out=[];
+    var dm=ds.match(/^(-?\d+)-(\d{1,2})-(\d{1,2})$/);
+    if(dm){ var j=gregToJDN(+dm[1],+dm[2],+dm[3]), day=j-GMT;
+      if(day<0){ out.push('<span class="err">Date is before the Maya epoch (11 Aug 3114 BCE).</span>'); }
+      else { var r=day,bk=Math.floor(r/144000);r%=144000;var kt=Math.floor(r/7200);r%=7200;var tn=Math.floor(r/360);r%=360;var wn=Math.floor(r/20);var kn=r%20;
+        out.push("<strong>"+ds+"</strong> = Long Count <strong>"+bk+"."+kt+"."+tn+"."+wn+"."+kn+"</strong>"); } }
+    var lm=lc.match(/^(\d+)\.(\d+)\.(\d+)\.(\d+)\.(\d+)$/);
+    if(lm){ var days=+lm[1]*144000+ +lm[2]*7200+ +lm[3]*360+ +lm[4]*20+ +lm[5];
+      out.push("Long Count "+lc+" = <strong>"+fmt(jdnToGreg(days+GMT))+"</strong> (Gregorian)"); }
+    o.innerHTML = out.length? out.join("<br>") : '<span class="err">Enter a valid date or Long Count (e.g. 13.0.0.0.0).</span>';
+  };
+
+  // ---- Julian ↔ Gregorian ----
+  $("jbtn").onclick=function(){
+    var o=$("jout"), m=$("jdate").value.trim().match(/^(-?\d+)-(\d{1,2})-(\d{1,2})$/), from=$("jfrom").value;
+    if(!m) return err(o,"Enter the date as Y-M-D, e.g. 1582-10-15.");
+    var y=+m[1],mo=+m[2],d=+m[3];
+    if(mo<1||mo>12||d<1||d>31) return err(o,"Enter a valid month and day.");
+    var j = from==="greg"? gregToJDN(y,mo,d) : julToJDN(y,mo,d);
+    var g=fmt(jdnToGreg(j)), ju=fmt(jdnToJul(j));
+    o.innerHTML="<strong>Gregorian:</strong> "+g+"<br><strong>Julian:</strong> "+ju+"<br>Julian Day Number: "+j;
+  };
+
+  // ---- Archimedes lever ----
+  $("abtn").onclick=function(){
+    var o=$("aout"),e=num($("aeff").value),ea=num($("aea").value),la=num($("ala").value);
+    if(!(e>0&&ea>0&&la>0)) return err(o,"Effort and both arm lengths must be positive.");
+    var load=e*ea/la, ma=ea/la;
+    o.innerHTML="<strong>Load you can balance:</strong> "+load.toFixed(3)
+      +"<br><strong>Mechanical advantage:</strong> "+ma.toFixed(3)+"×"
+      +"<br><span style='color:#9fb2c8'>A "+e+"-unit effort on a "+ea+"-unit arm balances "+load.toFixed(2)+" units on a "+la+"-unit arm.</span>";
+  };
+})();
+</script>
+</body>
+</html>
