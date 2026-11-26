@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101d35">
+<meta name="color-scheme" content="dark">
+<title>The Surya Siddhanta Engine — Classical vs Modern Astronomy | Ocean of Wisdom</title>
+<meta name="description" content="Compute the Sun, Moon and tithi by the Surya Siddhanta's own ~1,500-year-old algorithm and compare it, side by side, with modern astronomy — all offline, in your browser. See where the classical model agrees and where it has drifted.">
+<link rel="canonical" href="https://www.oceanofwisdom.site/surya-siddhanta.html">
+<link rel="icon" href="/favicon.png">
+<link rel="stylesheet" href="/ocean-global.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"The Surya Siddhanta Engine","applicationCategory":"EducationApplication","operatingSystem":"Any (runs offline in the browser)","description":"Computes the Sun, Moon and tithi by the Surya Siddhanta algorithm and compares with modern astronomy, offline.","url":"https://www.oceanofwisdom.site/surya-siddhanta.html","isPartOf":{"@type":"WebSite","name":"Ocean of Wisdom","url":"https://www.oceanofwisdom.site/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.oceanofwisdom.site/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://www.oceanofwisdom.site/tools.html"},{"@type":"ListItem","position":3,"name":"Surya Siddhanta Engine","item":"https://www.oceanofwisdom.site/surya-siddhanta.html"}]}</script>
+<style>
+.ss-controls{max-width:760px;margin:16px auto 0;display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;justify-content:center}
+.ss-field{display:flex;flex-direction:column;gap:4px}
+.ss-field label{color:#9fb2c8;font-size:12px}
+.ss-field input{background:#0d1b31;border:1px solid #2f4a6e;border-radius:9px;color:#eef3fa;padding:11px 12px;font:500 15px/1.2 'Noto Sans',sans-serif;min-height:46px}
+.ss-btn{background:#d8ad43;color:#101d35;border:0;border-radius:999px;padding:12px 26px;font:700 15px/1 'Noto Sans',sans-serif;cursor:pointer;min-height:46px}
+.ss-btn:hover,.ss-btn:focus-visible{background:#f0d58d;outline:none}
+.ss-cols{max-width:880px;margin:22px auto 0;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.ss-col{background:#152743;border:1px solid #d8ad4340;border-radius:16px;padding:18px 20px}
+.ss-col.classical{border-color:#d8ad4388}
+.ss-col h2{margin:0 0 3px;font-size:clamp(17px,2vw,20px);border:0;padding:0}
+.ss-col.classical h2{color:#f0d58d}.ss-col.modern h2{color:#73d9df}
+.ss-col .sub{color:#9fb2c8;font-size:12px;margin:0 0 12px;line-height:1.45}
+.ss-row{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-top:1px solid rgba(85,213,226,.14);font-size:14.5px}
+.ss-row:first-of-type{border-top:0}
+.ss-row .k{color:#aebccd}.ss-row .v{color:#eef3fa;font-weight:600;text-align:right}
+.ss-compare{max-width:880px;margin:16px auto 0;padding:16px 20px;border:1px solid #d8ad4366;border-left:4px solid #d8ad43;border-radius:0 12px 12px 0;background:rgba(23,43,73,.6)}
+.ss-compare h3{margin:0 0 8px;color:#f0d58d}
+.ss-compare .verdict{font-size:16px;color:#eaf3fb;line-height:1.6}
+.ss-compare .agree{color:#8fe39a;font-weight:700}.ss-compare .drift{color:#f3e4b8;font-weight:700}
+@media(max-width:620px){.ss-cols{grid-template-columns:1fr}.ss-controls{flex-direction:column;align-items:stretch}}
+</style>
+<script src="/ocean-global.js" defer></script>
+</head>
+<body>
+<main id="oow-page-content" class="oow-article">
+<nav class="oow-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> <span aria-hidden="true">›</span> <a href="/tools.html">Tools</a> <span aria-hidden="true">›</span> <span aria-current="page">Surya Siddhanta Engine</span></nav>
+<h1>The Surya Siddhanta Engine</h1>
+<p class="oow-lead">Compute the Sun, the Moon and the tithi by the <strong>Surya Siddhanta's own method</strong> — the ahargana day-count from the start of the Kali Yuga, its sidereal mean motions, and its manda (epicycle) corrections — and set it beside modern astronomy. Everything runs in your browser, with no internet. See where a roughly 1,500-year-old model agrees with today's sky, and where it has drifted.</p>
+
+<div class="ss-controls">
+  <div class="ss-field"><label for="ss-date">Date</label><input id="ss-date" type="date"></div>
+  <div class="ss-field"><label for="ss-time">Time (your local)</label><input id="ss-time" type="time" value="12:00"></div>
+  <button class="ss-btn" id="ss-go" type="button">Compute</button>
+</div>
+
+<div class="ss-cols">
+  <div class="ss-col classical">
+    <h2>By the Surya Siddhanta</h2>
+    <p class="sub">Its own mean motions + manda epicycle, sidereal. Sun &amp; Moon.</p>
+    <div class="ss-row"><span class="k">Sun (sidereal)</span><span class="v" id="c-sun">—</span></div>
+    <div class="ss-row"><span class="k">Moon (sidereal)</span><span class="v" id="c-moon">—</span></div>
+    <div class="ss-row"><span class="k">Moon − Sun (elongation)</span><span class="v" id="c-elong">—</span></div>
+    <div class="ss-row"><span class="k">Tithi</span><span class="v" id="c-tithi">—</span></div>
+    <div class="ss-row"><span class="k">Nakshatra</span><span class="v" id="c-nak">—</span></div>
+    <div class="ss-row"><span class="k">Paksha</span><span class="v" id="c-paksha">—</span></div>
+  </div>
+  <div class="ss-col modern">
+    <h2>By modern astronomy</h2>
+    <p class="sub">Low-precision offline formulas, tropical longitudes.</p>
+    <div class="ss-row"><span class="k">Sun (tropical)</span><span class="v" id="m-sun">—</span></div>
+    <div class="ss-row"><span class="k">Moon (tropical)</span><span class="v" id="m-moon">—</span></div>
+    <div class="ss-row"><span class="k">Moon − Sun (elongation)</span><span class="v" id="m-elong">—</span></div>
+    <div class="ss-row"><span class="k">Tithi</span><span class="v" id="m-tithi">—</span></div>
+    <div class="ss-row"><span class="k">—</span><span class="v">&nbsp;</span></div>
+    <div class="ss-row"><span class="k">—</span><span class="v">&nbsp;</span></div>
+  </div>
+</div>
+
+<div class="ss-compare">
+  <h3>Classical vs modern</h3>
+  <p class="verdict" id="ss-verdict">Pick a date and press Compute.</p>
+</div>
+
+<div class="oow-callout" style="max-width:880px;margin:26px auto">
+<h3>How to read this honestly</h3>
+<p>The <strong>elongation</strong> (Moon minus Sun) and the <strong>tithi</strong> it gives are <em>frame-independent</em> — they do not depend on where each system puts the zodiac's zero point — so comparing them is a fair test of the Surya Siddhanta's theory against modern astronomy. The individual Sun and Moon longitudes are shown in each system's own frame (the Surya Siddhanta is sidereal; the modern figures are tropical), so a direct number-for-number match is not expected there. This engine currently covers the <strong>Sun and Moon</strong> — the heart of the panchanga. The five planets, which need the Surya Siddhanta's additional śīghra (synodic) correction, are a planned addition. The modern side uses compact low-precision formulas (good to a fraction of a degree), not a full ephemeris, so that it too runs entirely offline.</p>
+</div>
+</main>
+
+<nav class="oow-related" aria-label="Related">
+<h2>Keep exploring</h2>
+<p><a href="/tools.html">All working tools</a> · <a href="/calendar/">Full panchanga calendar</a> · <a href="/hinduism.html">Hinduism &amp; jyotiṣa</a> · <a href="/ancient-cosmology.html">Ancient cosmology</a></p>
+</nav>
+<nav class="oow-pagenav" aria-label="Page navigation"><a href="/">⌂ Home</a><a href="/tools.html">Tools</a></nav>
+
+<script>
+(function(){
+  "use strict";
+  // ===== Surya Siddhanta core (authentic constants) =====
+  var D=1577917828, KALI_JD=588465.5;
+  var REV={sun:4320000, moon:57753336, moonApogee:488203};
+  var SUN_APOGEE=77.283, SUN_PERI=14, MOON_PERI=32;
+  function n360(x){return((x%360)+360)%360;}
+  function julianDay(y,m,d,hourUT){ if(m<=2){y-=1;m+=12;} var A=Math.floor(y/100),B=2-A+Math.floor(A/4);
+    return Math.floor(365.25*(y+4716))+Math.floor(30.6001*(m+1))+d+B-1524.5+(hourUT||0)/24; }
+  function meanLong(body,A){return n360(REV[body]*A/D*360);}
+  function manda(meanL,apogee,peri){ var k=n360(meanL-apogee)*Math.PI/180;
+    return n360(meanL - Math.asin((peri/360)*Math.sin(k))*180/Math.PI); }
+  function ss(jd){ var A=jd-KALI_JD;
+    var sunT=manda(meanLong('sun',A),SUN_APOGEE,SUN_PERI);
+    var moonT=manda(meanLong('moon',A),meanLong('moonApogee',A),MOON_PERI);
+    return {sun:sunT,moon:moonT,elong:n360(moonT-sunT)}; }
+  // ===== Modern low-precision (offline) =====
+  function modSun(jd){ var n=jd-2451545.0, L=n360(280.460+0.9856474*n), g=(357.528+0.9856003*n)*Math.PI/180;
+    return n360(L+1.915*Math.sin(g)+0.020*Math.sin(2*g)); }
+  function modMoon(jd){ var d=jd-2451545.0, L=218.316+13.176396*d,M=134.963+13.064993*d,Mp=357.529+0.985600*d,
+    F=93.272+13.229350*d,Dd=297.850+12.190749*d, R=Math.PI/180;
+    return n360(L+6.289*Math.sin(M*R)-1.274*Math.sin((2*Dd-M)*R)+0.658*Math.sin(2*Dd*R)-0.186*Math.sin(Mp*R)
+      -0.059*Math.sin((2*M-2*Dd)*R)-0.057*Math.sin((M-2*Dd+Mp)*R)+0.053*Math.sin((M+2*Dd)*R)); }
+
+  var TITHI=['Pratipada','Dvitiya','Tritiya','Chaturthi','Panchami','Shashthi','Saptami','Ashtami','Navami','Dashami','Ekadashi','Dvadashi','Trayodashi','Chaturdashi'];
+  var NAK=['Ashwini','Bharani','Krittika','Rohini','Mrigashira','Ardra','Punarvasu','Pushya','Ashlesha','Magha','Purva Phalguni','Uttara Phalguni','Hasta','Chitra','Swati','Vishakha','Anuradha','Jyeshtha','Mula','Purva Ashadha','Uttara Ashadha','Shravana','Dhanishta','Shatabhisha','Purva Bhadrapada','Uttara Bhadrapada','Revati'];
+  function tithiNum(e){return Math.floor(e/12);} // 0..29
+  function tithiName(e){ var t=tithiNum(e); if(t<15){ return (t===14?'Purnima':TITHI[t])+' (Shukla)'; } var k=t-15; return (k===14?'Amavasya':TITHI[k])+' (Krishna)'; }
+  function nakName(moonSid){ return NAK[Math.floor(n360(moonSid)/(360/27))]; }
+  function deg(x){ var d=Math.floor(x), m=Math.round((x-d)*60); if(m===60){d+=1;m=0;} return d+'° '+String(m).padStart(2,'0')+"'"; }
+  function $(id){return document.getElementById(id);}
+
+  function compute(){
+    var dv=$('ss-date').value, tv=$('ss-time').value||'12:00';
+    if(!dv) return;
+    var dp=dv.split('-').map(Number), tp=tv.split(':').map(Number);
+    var local=new Date(dp[0],dp[1]-1,dp[2],tp[0],tp[1]);
+    var hourUT=(local.getUTCHours()+local.getUTCMinutes()/60);
+    var jd=julianDay(local.getUTCFullYear(),local.getUTCMonth()+1,local.getUTCDate(),hourUT);
+    var c=ss(jd), mSun=modSun(jd), mMoon=modMoon(jd), mElong=n360(mMoon-mSun);
+    $('c-sun').textContent=deg(c.sun); $('c-moon').textContent=deg(c.moon); $('c-elong').textContent=deg(c.elong);
+    $('c-tithi').textContent=tithiName(c.elong); $('c-nak').textContent=nakName(c.moon);
+    $('c-paksha').textContent=c.elong<180?'Shukla (waxing)':'Krishna (waning)';
+    $('m-sun').textContent=deg(mSun); $('m-moon').textContent=deg(mMoon); $('m-elong').textContent=deg(mElong);
+    $('m-tithi').textContent=tithiName(mElong);
+    var drift=n360(c.elong-mElong+180)-180;
+    var sameTithi=tithiNum(c.elong)===tithiNum(mElong);
+    $('ss-verdict').innerHTML = (sameTithi
+        ? 'The two methods give the <span class="agree">same tithi</span> — '+tithiName(c.elong).split(' (')[0]+'.'
+        : 'The methods give <span class="drift">different tithis</span> here ('+tithiName(c.elong).split(' (')[0]+' vs '+tithiName(mElong).split(' (')[0]+').')
+      +' Their Moon−Sun elongation differs by <span class="drift">'+Math.abs(drift).toFixed(2)+'°</span>'
+      +' — a measure of how far the Surya Siddhanta’s theory sits from modern astronomy for this moment.';
+  }
+  function init(){
+    var now=new Date();
+    $('ss-date').value=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0');
+    $('ss-time').value=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
+    $('ss-go').addEventListener('click',compute);
+    compute();
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+</body>
+</html>
